@@ -1,0 +1,88 @@
+import { PortfolioPiece } from "@/types";
+
+export const portfolioData: PortfolioPiece[] = [
+  {
+    id: "port-1",
+    title: "Botanical Garden Wedding Suite",
+    slug: "botanical-garden-wedding-suite",
+    category: "weddings",
+    categoryLabel: "Wedding Stationery",
+    clientOrProject: "Private Commission",
+    description:
+      "Deep olive green letterpress impression paired with delicate matte champagne hot foil on 600gsm pure cotton rag paper. Completed with hand-torn deckled edges and botanical illustrated envelope liner.",
+    techniques: ["Letterpress 1-color (Olive)", "Matte Champagne Foil", "Deckled Edges"],
+    paperStock: "Crane Lettra 600gsm Pearl White & Handmade Cotton",
+    featuredImage: "/images/portfolio/wedding-botanical-1.jpg",
+    featured: true,
+  },
+  {
+    id: "port-2",
+    title: "Atelier Architecture Business Cards",
+    slug: "atelier-architecture-business-cards",
+    category: "business-cards",
+    categoryLabel: "Business Cards",
+    clientOrProject: "Studio K Architecture",
+    description:
+      "Minimalist typographic identity pressed with deep mechanical bite on 600gsm fluorescent white cotton stock. Finished with reflective gold edge gilding.",
+    techniques: ["Deep Letterpress Impression", "Gold Foil Edge Gilding"],
+    paperStock: "100% Cotton 600gsm Fluorescent White",
+    featuredImage: "/images/portfolio/business-architecture-1.jpg",
+    featured: true,
+  },
+  {
+    id: "port-3",
+    title: "Heritage Monogram Correspondence Set",
+    slug: "heritage-monogram-correspondence-set",
+    category: "personalised",
+    categoryLabel: "Personalised Stationery",
+    clientOrProject: "Personal Commission",
+    description:
+      "Bespoke intertwined cipher blind debossed deeply into heavyweight 500gsm laid writing paper, paired with bespoke tissue-lined envelopes.",
+    techniques: ["Sculpted Blind Deboss", "Letterpress Nameplate", "Handmade Envelope Liners"],
+    paperStock: "500gsm Laid Cotton Board & 120gsm Laid Writing Sheets",
+    featuredImage: "/images/portfolio/stationery-monogram-1.jpg",
+    featured: true,
+  },
+  {
+    id: "port-4",
+    title: "Himalayan Destination Wedding Suite",
+    slug: "himalayan-destination-wedding-suite",
+    category: "weddings",
+    categoryLabel: "Wedding Stationery",
+    clientOrProject: "Private Wedding",
+    description:
+      "A four-piece celebration suite featuring custom topographical blind deboss map, rose gold foil details, and sage green letterpressed RSVP cards.",
+    techniques: ["Rose Gold Foil Stamping", "Topographical Blind Deboss", "Two-color Letterpress"],
+    paperStock: "Handmade Deckled Cotton 450gsm & Colorplan Sage",
+    featuredImage: "/images/portfolio/wedding-himalayan-1.jpg",
+    featured: true,
+  },
+  {
+    id: "port-5",
+    title: "Highland Reserve Executive Cards",
+    slug: "highland-reserve-executive-cards",
+    category: "business-cards",
+    categoryLabel: "Business Cards",
+    clientOrProject: "Highland Capital Partners",
+    description:
+      "Duplexed card featuring deep navy Colorplan reverse with white pigment foil, and white cotton obverse with charcoal letterpress impression.",
+    techniques: ["Duplexing (700gsm finished)", "Pigment White Foil", "Deep Charcoal Letterpress"],
+    paperStock: "GF Smith Colorplan Imperial Blue 350gsm + Cotton 350gsm",
+    featuredImage: "/images/portfolio/business-executive-1.jpg",
+    featured: true,
+  },
+  {
+    id: "port-6",
+    title: "Artisanal Olive Branch Wedding Suite",
+    slug: "artisanal-olive-branch-wedding-suite",
+    category: "weddings",
+    categoryLabel: "Wedding Stationery",
+    clientOrProject: "Private Wedding",
+    description:
+      "Single-color deep letterpress on natural deckle-edge artisan paper with hand-dyed raw silk ribbon binding and custom wax seal closures.",
+    techniques: ["Single-color Letterpress", "Raw Silk Ribbon Binding", "Hand-stamped Wax Seals"],
+    paperStock: "Handmade 100% Cotton 500gsm Natural Cream",
+    featuredImage: "/images/portfolio/wedding-olive-1.jpg",
+    featured: false,
+  },
+];

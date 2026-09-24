@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+/* ========================================================================
+   FAMOUS LETTERPRESS — DESIGN SYSTEM
+   Minimal · Luxurious · Feminine · Editorial · Tactile · Premium
+   ======================================================================== */
+
+:root {
+  /* ── Brand Colors ── */
+  --color-ivory:       #FAF8F5;
+  --color-cream:       #F5F0EA;
+  --color-warm-white:  #FDFCFA;
+  --color-sand:        #E8E0D5;
+  --color-stone:       #C4B8A9;
+  --color-taupe:       #9C8E7E;
+  --color-charcoal:    #2C2C2C;
+  --color-ink:         #1A1A1A;
+  --color-sage:        #6B7C6B;
+  --color-sage-dark:   #4A5C4A;
+  --color-gold:        #B8963E;
+  --color-gold-light:  #D4B86A;
+  --color-blush:       #E8D5CC;
+  --color-rose:        #C9A99A;
+
+  /* ── Semantic Colors ── */
+  --background:        var(--color-ivory);
+  --foreground:        var(--color-ink);
+  --muted:             var(--color-taupe);
+  --border:            var(--color-sand);
+  --accent:            var(--color-sage);
+  --accent-dark:       var(--color-sage-dark);
+  --highlight:         var(--color-gold);
+
+  /* ── Motion ── */
+  --ease-out-expo:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart:    cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out:       cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast:     150ms;
+  --duration-normal:   300ms;
+  --duration-slow:     600ms;
+  --duration-reveal:   900ms;
+}
+
+@theme inline {
+  /* ── Color tokens for Tailwind ── */
+  --color-background:   var(--background);
+  --color-foreground:   var(--foreground);
+  --color-ivory:        var(--color-ivory);
+  --color-cream:        var(--color-cream);
+  --color-warm-white:   var(--color-warm-white);
+  --color-sand:         var(--color-sand);
+  --color-stone:        var(--color-stone);
+  --color-taupe:        var(--color-taupe);
+  --color-charcoal:     var(--color-charcoal);
+  --color-ink:          var(--color-ink);
+  --color-sage:         var(--color-sage);
+  --color-sage-dark:    var(--color-sage-dark);
+  --color-gold:         var(--color-gold);
+  --color-gold-light:   var(--color-gold-light);
+  --color-blush:        var(--color-blush);
+  --color-rose:         var(--color-rose);
+
+  /* ── Fonts ── */
+  --font-serif:   var(--font-cormorant-garamond);
+  --font-sans:    var(--font-inter);
+
+  /* ── Spacing scale ── */
+  --spacing-section:     clamp(4rem, 8vw, 8rem);
+  --spacing-section-lg:  clamp(6rem, 12vw, 12rem);
+}
+
+/* ========================================================================
+   BASE STYLES
+   ======================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Typography ── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), 'Georgia', serif;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 3.5vw + 0.5rem, 3.25rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 2.5vw + 0.25rem, 2.25rem);
+}
+
+h4 {
+  font-size: clamp(1.25rem, 1.5vw + 0.25rem, 1.5rem);
+}
+
+p {
+  max-width: 65ch;
+  color: var(--color-charcoal);
+}
+
+/* ── Selection ── */
+
+::selection {
+  background-color: var(--color-blush);
+  color: var(--color-ink);
+}
+
+/* ── Focus ── */
+
+:focus-visible {
+  outline: 2px solid var(--color-sage);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Links ── */
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-normal) var(--ease-out-quart);
+}
+
+/* ── Images ── */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========================================================================
+   UTILITY CLASSES
+   ======================================================================== */
+
+/* Section spacing */
+.section {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+.section-lg {
+  padding-top: var(--spacing-section-lg);
+  padding-bottom: var(--spacing-section-lg);
+}
+
+/* Container */
+.container-wide {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 4vw, 3rem);
+  padding-right: clamp(1.25rem, 4vw, 3rem);
+}
+
+.container-narrow {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 4vw, 3rem);
+  padding-right: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Label / eyebrow text */
+.eyebrow {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-taupe);
+}
+
+/* Divider */
+.divider {
+  width: 3rem;
+  height: 1px;
+  background-color: var(--color-sand);
+  border: none;
+}
+
+/* ========================================================================
+   REDUCED MOTION
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================================================
+   SCROLLBAR
+   ======================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stone);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-taupe);
+}

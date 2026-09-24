@@ -1,0 +1,287 @@
+// Prisma Schema for Famous Letterpress
+// Matches Specification Section 42 & 10 (Lightweight CMS + Order/Lead Tracking)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+}
+
+enum LeadType {
+  GENERAL_ENQUIRY
+  EARLY_BRIDE
+  CHANNEL_PARTNER
+  CUSTOM_ORDER
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  IN_DISCUSSION
+  PROPOSAL_SENT
+  CONVERTED
+  ARCHIVED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  AUTHORIZED
+  CAPTURED
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role     @default(ADMIN)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Service {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  tagline         String?
+  shortDesc       String
+  fullDescription String   @db.Text
+  materials       String[] // e.g. ["100% Cotton Paper (300-600gsm)", "Handmade Deckled Paper"]
+  techniques      String[] // e.g. ["Letterpress", "Foil Stamping", "Blind Debossing"]
+  leadTime        String?  // e.g. "3-4 weeks from final proof approval"
+  featuredImage   String?
+  galleryImages   String[]
+  metaTitle       String?
+  metaDescription String?
+  published       Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model PortfolioItem {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  category        String   // "weddings" | "business-cards" | "personalised"
+  clientOrProject String?
+  description     String   @db.Text
+  techniques      String[] // ["Letterpress 1-color", "Matte Gold Foil"]
+  paperStock      String?  // "Crane Lettra 600gsm Fluorescent White"
+  featuredImage   String
+  galleryImages   String[]
+  featured        Boolean  @default(false)
+  metaTitle       String?
+  metaDescription String?
+  published       Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model SampleKit {
+  id              String      @id @default(uuid())
+  name            String      // "Wedding Sample Kit" | "Business Card Sample Kit"
+  slug            String      @unique
+  tagline         String?
+  price           Int         // In INR (e.g. 1500)
+  description     String      @db.Text
+  includedItems   String[]    // List of swatches, invitation cards, paper weights
+  materials       String[]
+  shippingInfo    String?     @db.Text
+  featuredImage   String
+  galleryImages   String[]
+  stockAvailable  Boolean     @default(true)
+  featured        Boolean     @default(true)
+  metaTitle       String?
+  metaDescription String?
+  orderItems      OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model FAQ {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String   @db.Text
+  category  String   // "weddings" | "business-cards" | "sample-kits" | "process" | "shipping" | "general"
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Article {
+  id              String   @id @default(uuid())
+  title           String
+  slug            String   @unique
+  excerpt         String   @db.Text
+  content         String   @db.Text
+  category        String   // "Craft & Techniques" | "Wedding Planning" | "Paper & Stock"
+  featuredImage   String?
+  authorName      String   @default("Famous Letterpress")
+  published       Boolean  @default(false)
+  publishedAt     DateTime?
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Offer {
+  id          String    @id @default(uuid())
+  title       String
+  description String?   @db.Text
+  code        String?
+  discountPct Int?
+  startDate   DateTime?
+  endDate     DateTime?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Lead {
+  id             String     @id @default(uuid())
+  type           LeadType   @default(GENERAL_ENQUIRY)
+  status         LeadStatus @default(NEW)
+  name           String
+  email          String
+  phone          String?
+  city           String?
+  serviceNeeded  String?    // e.g. "Wedding Suite", "Business Cards"
+  eventDate      String?    // For brides/couples
+  estimatedQty   String?
+  budget         String?
+  timeline       String?
+  notes          String?    @db.Text
+  sourceUrl      String?
+  internalNotes  String?    @db.Text
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Consultation {
+  id                 String     @id @default(uuid())
+  status             LeadStatus @default(NEW)
+  coupleNames        String     // e.g. "Rongsen & Arenla"
+  email              String
+  phone              String
+  weddingDate        String
+  weddingLocation    String?
+  estimatedGuestCount String?
+  stationeryNeeds    String[]   // ["Save the Dates", "Invitations", "Day-Of Paper", "Thank You Cards"]
+  designStatus       String?    // "We have a designer", "Need Famous Letterpress design", "Ready artwork"
+  estimatedBudget    String?
+  aestheticVision    String?    @db.Text
+  preferredContact   String     @default("WhatsApp") // "WhatsApp" | "Email" | "Phone"
+  internalNotes      String?    @db.Text
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+}
+
+model Order {
+  id                  String      @id @default(uuid())
+  orderNumber         String      @unique // e.g. "FLP-2026-0001"
+  status              OrderStatus @default(PENDING)
+  customerName        String
+  customerEmail       String
+  customerPhone       String
+  shippingAddressLine1 String
+  shippingAddressLine2 String?
+  shippingCity        String
+  shippingState       String
+  shippingPostalCode  String
+  shippingCountry     String      @default("India")
+  subtotalAmount      Int         // In INR
+  shippingAmount      Int         @default(0)
+  totalAmount         Int         // In INR
+  razorpayOrderId     String?     @unique
+  payment             Payment?
+  orderItems          OrderItem[]
+  trackingNumber      String?
+  courierPartner      String?
+  notes               String?     @db.Text
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+
+model OrderItem {
+  id          String     @id @default(uuid())
+  orderId     String
+  order       Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  sampleKitId String?
+  sampleKit   SampleKit? @relation(fields: [sampleKitId], references: [id], onDelete: SetNull)
+  title       String
+  price       Int
+  quantity    Int        @default(1)
+}
+
+model Payment {
+  id                 String        @id @default(uuid())
+  orderId            String        @unique
+  order              Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  razorpayPaymentId  String?       @unique
+  razorpaySignature  String?
+  status             PaymentStatus @default(PENDING)
+  amount             Int           // in INR
+  currency           String        @default("INR")
+  paymentMethod      String?       // "upi", "card", "netbanking"
+  rawWebhookPayload  String?       @db.Text
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+}
+
+model Media {
+  id           String   @id @default(uuid())
+  publicId     String   @unique
+  url          String
+  secureUrl    String
+  originalName String
+  format       String
+  width        Int?
+  height       Int?
+  sizeBytes    Int?
+  altText      String?
+  caption      String?
+  folder       String?  @default("general")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteSettings {
+  id                 String   @id @default("default")
+  studioName         String   @default("Famous Letter Press")
+  tagline            String   @default("Designers Turned Printers · Handcrafted in Nagaland")
+  contactEmail       String   @default("hello@famousletterpress.com")
+  contactPhone       String   @default("+91 98628 00000")
+  whatsappNumber     String   @default("+91 98628 00000")
+  studioAddress      String   @default("Nagaland, India")
+  businessHours      String   @default("Mon – Sat: 9:30 AM – 6:00 PM IST")
+  instagramUrl       String   @default("https://www.instagram.com/famousletterpress")
+  facebookUrl        String   @default("https://www.facebook.com/famousletterpress")
+  metaTitleDefault   String   @default("Famous Letterpress — Handcrafted Letterpress & Foil Printing | Nagaland, India")
+  metaDescDefault    String   @default("India's boutique letterpress studio. Handcrafted bespoke wedding stationery, luxurious business cards, and personalized paper goods on 100% cotton stock.")
+  announcementBarText String?
+  announcementActive Boolean  @default(false)
+  updatedAt          DateTime @updatedAt
+}
