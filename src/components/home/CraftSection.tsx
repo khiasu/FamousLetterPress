@@ -66,13 +66,20 @@ export function CraftSection() {
             </Reveal>
           </div>
 
-          {/* Image placeholder */}
+          {/* Craft photography — live studio craft close-up */}
           <Reveal delay={0.2} direction="right">
-            <div className="aspect-square bg-charcoal rounded-sm overflow-hidden relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-sm text-ivory/30 text-center px-8">
-                  Craft / materials photography — close-up of letterpress
-                  impression, foil detail, or paper texture
+            <div className="aspect-square bg-charcoal rounded-sm overflow-hidden relative shadow-2xl group border border-ivory/10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3749-2500x2500.jpg"
+                alt="Tactile letterpress impression and foil detail close-up"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-6 left-6 right-6 text-ivory">
+                <p className="font-serif text-lg italic text-ivory">Cast-Iron Bite & Foil Luster</p>
+                <p className="text-xs text-ivory/60 font-light mt-1">
+                  Pressed sheet-by-sheet on 100% cotton boards in our Nagaland pressroom
                 </p>
               </div>
             </div>

@@ -53,7 +53,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
+            <Link href="/" className="inline-flex items-center gap-3 mb-6">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://famousletterpress.com/wp-content/uploads/2022/06/FMS-new-logo-1-100x100.png"
+                alt="Famous Letterpress Seal"
+                className="w-8 h-8 object-contain rounded-full bg-ivory/10 p-0.5"
+              />
               <span className="font-serif text-xl text-ivory tracking-wide">
                 <span className="font-light">Famous</span>{" "}
                 <span className="font-semibold">Letterpress</span>

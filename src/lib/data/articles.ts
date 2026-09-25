@@ -8,6 +8,7 @@ export interface JournalArticle {
   publishedAt: string;
   readTime: string;
   author: string;
+  image: string;
   metaTitle: string;
   metaDescription: string;
   sections: {
@@ -34,6 +35,7 @@ export const journalArticles: JournalArticle[] = [
     publishedAt: "September 15, 2026",
     readTime: "6 min read",
     author: "Famous Letterpress Studio",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3671-2500x1250.jpg",
     metaTitle: "What is Letterpress Printing? Mechanics & Craft Guide | Famous Letterpress",
     metaDescription:
       "Understand what letterpress printing is, how vintage platen presses work, and why deep relief impression on cotton paper creates irreplaceable physical luxury.",
@@ -81,6 +83,7 @@ export const journalArticles: JournalArticle[] = [
     publishedAt: "September 10, 2026",
     readTime: "7 min read",
     author: "Famous Letterpress Studio",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg",
     metaTitle: "Letterpress vs Digital Printing: Comparison & Guide | Famous Letterpress",
     metaDescription:
       "Compare letterpress and digital printing on tactile relief, cotton paper compatibility, setup costs, turnaround times, and aesthetic value.",
@@ -133,6 +136,7 @@ export const journalArticles: JournalArticle[] = [
     publishedAt: "September 02, 2026",
     readTime: "8 min read",
     author: "Famous Letterpress Studio",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-3-pics-1200x1200.jpg",
     metaTitle: "How to Choose Wedding Invitation Paper | Weight, Stock & Deckle Guide",
     metaDescription:
       "Expert guide on selecting wedding invitation paper. Understand 300gsm vs 600gsm cotton, handmade deckled edges, Colorplan, and envelope pairings.",
@@ -178,6 +182,7 @@ export const journalArticles: JournalArticle[] = [
     publishedAt: "August 28, 2026",
     readTime: "7 min read",
     author: "Famous Letterpress Studio",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4405-2000x2500.jpg",
     metaTitle: "Anatomy of a Wedding Invitation Suite: Complete Checklist & Etiquette",
     metaDescription:
       "Learn what pieces belong in a luxury wedding invitation suite. Checklist for Save the Dates, invitation cards, RSVP inserts, and day-of reception paper.",

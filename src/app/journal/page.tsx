@@ -40,29 +40,44 @@ export default function JournalIndexPage() {
       <section className="py-16 md:py-20 bg-ivory border-b border-sand">
         <div className="container-wide">
           <Reveal>
-            <div className="card-warm p-8 md:p-12 bg-cream hover:border-terracotta/40 transition-colors">
-              <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-warm-stone mb-4">
-                <span className="text-terracotta font-semibold uppercase tracking-wider">
-                  Featured Guide · {featuredArticle.category}
-                </span>
-                <span>•</span>
-                <span>{featuredArticle.readTime}</span>
-                <span>•</span>
-                <span>{featuredArticle.publishedAt}</span>
-              </div>
+            <div className="card-warm p-8 md:p-10 bg-cream hover:border-terracotta/40 transition-colors">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-7">
+                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-warm-stone mb-4">
+                    <span className="text-terracotta font-semibold uppercase tracking-wider">
+                      Featured Guide · {featuredArticle.category}
+                    </span>
+                    <span>•</span>
+                    <span>{featuredArticle.readTime}</span>
+                    <span>•</span>
+                    <span>{featuredArticle.publishedAt}</span>
+                  </div>
 
-              <Link href={`/journal/${featuredArticle.slug}`}>
-                <h2 className="heading-xl text-charcoal mb-4 hover:text-terracotta transition-colors">
-                  {featuredArticle.title}
-                </h2>
-              </Link>
-              <p className="body-md text-warm-stone max-w-3xl font-light leading-relaxed mb-6">
-                {featuredArticle.excerpt}
-              </p>
-              <div className="flex items-center gap-4">
-                <Button href={`/journal/${featuredArticle.slug}`} variant="primary" size="md">
-                  Read Full Guide &rarr;
-                </Button>
+                  <Link href={`/journal/${featuredArticle.slug}`}>
+                    <h2 className="heading-xl text-charcoal mb-4 hover:text-terracotta transition-colors">
+                      {featuredArticle.title}
+                    </h2>
+                  </Link>
+                  <p className="body-md text-warm-stone font-light leading-relaxed mb-6">
+                    {featuredArticle.excerpt}
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <Button href={`/journal/${featuredArticle.slug}`} variant="primary" size="md">
+                      Read Full Guide &rarr;
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5">
+                  <div className="aspect-[4/3] rounded-sm overflow-hidden shadow-md border border-sand group">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={featuredArticle.image}
+                      alt={featuredArticle.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -82,33 +97,46 @@ export default function JournalIndexPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {regularArticles.map((art, idx) => (
               <Reveal key={art.id} delay={idx * 0.1} className="h-full">
-                <div className="card-warm p-8 h-full flex flex-col justify-between group hover:border-terracotta/40 transition-colors">
+                <div className="card-warm overflow-hidden h-full flex flex-col justify-between group hover:border-terracotta/40 transition-colors">
                   <div>
-                    <div className="flex items-center justify-between text-[11px] font-mono text-warm-stone mb-3">
-                      <span className="text-terracotta font-medium uppercase tracking-wider">
-                        {art.category}
-                      </span>
-                      <span>{art.readTime}</span>
+                    <div className="aspect-[16/10] bg-sand/40 overflow-hidden relative border-b border-sand">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={art.image}
+                        alt={art.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
                     </div>
 
-                    <Link href={`/journal/${art.slug}`}>
-                      <h3 className="font-serif text-xl text-charcoal mb-3 group-hover:text-terracotta transition-colors">
-                        {art.title}
-                      </h3>
-                    </Link>
-                    <p className="body-sm text-warm-stone font-light leading-relaxed mb-6">
-                      {art.excerpt}
-                    </p>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between text-[11px] font-mono text-warm-stone mb-3">
+                        <span className="text-terracotta font-medium uppercase tracking-wider">
+                          {art.category}
+                        </span>
+                        <span>{art.readTime}</span>
+                      </div>
+
+                      <Link href={`/journal/${art.slug}`}>
+                        <h3 className="font-serif text-lg text-charcoal mb-3 group-hover:text-terracotta transition-colors">
+                          {art.title}
+                        </h3>
+                      </Link>
+                      <p className="body-sm text-warm-stone font-light leading-relaxed">
+                        {art.excerpt}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="pt-4 border-t border-sand flex items-center justify-between">
-                    <span className="text-[11px] text-warm-stone font-mono">{art.publishedAt}</span>
-                    <Link
-                      href={`/journal/${art.slug}`}
-                      className="text-xs uppercase tracking-wider font-mono font-medium text-terracotta hover:underline"
-                    >
-                      Read Article &rarr;
-                    </Link>
+                  <div className="p-6 pt-0">
+                    <div className="pt-4 border-t border-sand flex items-center justify-between">
+                      <span className="text-[11px] text-warm-stone font-mono">{art.publishedAt}</span>
+                      <Link
+                        href={`/journal/${art.slug}`}
+                        className="text-xs uppercase tracking-wider font-mono font-medium text-terracotta hover:underline"
+                      >
+                        Read Article &rarr;
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </Reveal>

@@ -63,23 +63,31 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Hero image placeholder — to be replaced with real portfolio imagery */}
+          {/* Hero image — authentic Famous Letterpress photography */}
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="relative aspect-[4/5] lg:aspect-[3/4] bg-sand/40 rounded-sm overflow-hidden"
+            className="relative aspect-[4/5] lg:aspect-[3/4] bg-sand/40 rounded-sm overflow-hidden shadow-2xl group border border-sand/60"
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center p-8">
-                <p className="eyebrow mb-2">Hero Image</p>
-                <p className="text-sm text-taupe">
-                  Featured wedding invitation or stationery photography
-                </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg"
+              alt="Handcrafted letterpress wedding stationery by Famous Letterpress"
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+            {/* Elegant credit badge */}
+            <div className="absolute bottom-4 left-4 right-4 bg-ivory/95 backdrop-blur-md border border-sand/80 px-4 py-3 rounded-sm flex items-center justify-between shadow-md">
+              <div>
+                <p className="font-serif text-sm text-charcoal font-medium">Bespoke 600gsm Cotton Suite</p>
+                <p className="text-[11px] text-taupe font-light">Deep mechanical impression & matte gold foil</p>
               </div>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-terracotta bg-terracotta/10 px-2 py-1 rounded">
+                Nagaland Atelier
+              </span>
             </div>
             {/* Subtle grain overlay */}
-            <div className="absolute inset-0 opacity-5 mix-blend-multiply" style={{
+            <div className="absolute inset-0 opacity-5 mix-blend-multiply pointer-events-none" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E")`,
             }} />
           </motion.div>

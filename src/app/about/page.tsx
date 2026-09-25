@@ -79,6 +79,19 @@ export default function AboutPage() {
 
             <div className="lg:col-span-6 space-y-6">
               <Reveal delay={0.1}>
+                <div className="card-warm overflow-hidden bg-cream border-sand shadow-sm">
+                  <div className="aspect-[16/10] relative overflow-hidden bg-sand/40">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3671-2500x1250.jpg"
+                      alt="Famous Letterpress vintage cast iron platen printing press in Nagaland"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.15}>
                 <div className="card-warm p-8 bg-cream border-sand">
                   <span className="eyebrow text-terracotta">Our Physical Pressroom</span>
                   <h3 className="font-serif text-2xl text-charcoal mt-2 mb-4">

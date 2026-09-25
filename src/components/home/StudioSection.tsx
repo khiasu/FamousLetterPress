@@ -6,14 +6,17 @@ export function StudioSection() {
     <section className="section bg-cream" aria-label="Our studio">
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image placeholder */}
+          {/* Studio photograph — live pressroom in Nagaland */}
           <Reveal direction="left">
-            <div className="aspect-[4/3] bg-sand/40 rounded-sm overflow-hidden relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-sm text-taupe text-center px-8">
-                  Studio / team photograph — letterpress machine, hands at work,
-                  or studio interior
-                </p>
+            <div className="aspect-[4/3] bg-sand/40 rounded-sm overflow-hidden relative shadow-lg group border border-sand/60">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://famousletterpress.com/wp-content/uploads/2026/04/banner-01-1365x600.jpg"
+                alt="Famous Letterpress studio pressroom and craft workspace in Nagaland"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute bottom-3 left-3 bg-ivory/90 backdrop-blur-sm px-3 py-1.5 rounded-sm text-[10px] font-mono uppercase tracking-widest text-charcoal border border-sand/60">
+                Nagaland Pressroom · Vintage Platen Press
               </div>
             </div>
           </Reveal>

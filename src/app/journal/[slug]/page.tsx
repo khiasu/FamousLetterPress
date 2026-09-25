@@ -102,6 +102,22 @@ export default async function JournalArticlePage({ params }: ArticlePageProps) {
         </div>
       </header>
 
+      {/* Featured Editorial Image */}
+      {article.image && (
+        <div className="container-wide -mt-6 mb-12">
+          <Reveal>
+            <div className="aspect-[21/9] md:aspect-[24/9] rounded-sm overflow-hidden shadow-xl border border-sand/80">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={article.image}
+                alt={article.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </Reveal>
+        </div>
+      )}
+
       {/* Main Reading Flow */}
       <section className="py-16 md:py-24 bg-ivory border-b border-sand">
         <div className="container-narrow">

@@ -1,36 +1,10 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-
-// Placeholder portfolio items — will be replaced with CMS data
-const selectedWork = [
-  {
-    id: "1",
-    title: "Wedding Invitation Suite",
-    category: "Weddings",
-    slug: "#",
-  },
-  {
-    id: "2",
-    title: "Letterpress Business Cards",
-    category: "Business",
-    slug: "#",
-  },
-  {
-    id: "3",
-    title: "Foil Stamped Wedding Suite",
-    category: "Weddings",
-    slug: "#",
-  },
-  {
-    id: "4",
-    title: "Custom Stationery Set",
-    category: "Personalised",
-    slug: "#",
-  },
-];
+import { portfolioData } from "@/lib/data/portfolio";
 
 export function SelectedWorkSection() {
+  const selectedWork = portfolioData.slice(0, 4);
   return (
     <section className="section bg-ivory" aria-label="Selected work">
       <div className="container-wide">
@@ -57,17 +31,18 @@ export function SelectedWorkSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {selectedWork.map((item, index) => (
             <Reveal key={item.id} delay={0.1 + index * 0.08}>
-              <Link href={`/work/${item.slug}`} className="group block">
-                <div className="aspect-[3/4] bg-sand/30 rounded-sm mb-4 overflow-hidden relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="text-xs text-taupe text-center px-4">
-                      {item.title}
-                    </p>
-                  </div>
+              <Link href="/work" className="group block">
+                <div className="aspect-[3/4] bg-sand/30 rounded-sm mb-4 overflow-hidden relative shadow-sm group-hover:shadow-md transition-all">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.featuredImage}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/5 transition-colors duration-500" />
                 </div>
-                <p className="eyebrow text-[0.65rem] mb-1">{item.category}</p>
-                <h4 className="text-base font-serif group-hover:text-sage-dark transition-colors duration-300">
+                <p className="eyebrow text-[0.65rem] mb-1">{item.categoryLabel}</p>
+                <h4 className="text-base font-serif group-hover:text-terracotta transition-colors duration-300">
                   {item.title}
                 </h4>
               </Link>

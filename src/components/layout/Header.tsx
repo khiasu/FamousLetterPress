@@ -65,9 +65,15 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="relative z-10 group"
+              className="relative z-10 group flex items-center gap-3"
               aria-label="Famous Letterpress — Home"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://famousletterpress.com/wp-content/uploads/2022/06/FMS-new-logo-1-100x100.png"
+                alt="Famous Letterpress Seal"
+                className="w-8 h-8 lg:w-9 lg:h-9 object-contain rounded-full shadow-xs group-hover:scale-105 transition-transform"
+              />
               <span className="font-serif text-xl lg:text-2xl tracking-wide text-ink">
                 <span className="font-light">Famous</span>{" "}
                 <span className="font-semibold">Letterpress</span>

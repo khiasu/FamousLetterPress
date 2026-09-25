@@ -153,23 +153,37 @@ export default function PersonalisedStationeryPage() {
                 <h2 className="heading-lg text-charcoal mt-2">Bespoke Monogram Commission</h2>
               </div>
             </Reveal>
-            <div className="max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {pieces.map((piece) => (
                 <Reveal key={piece.id}>
-                  <div className="card-warm p-8 text-center bg-cream">
-                    <span className="font-mono text-xs uppercase tracking-widest text-warm-stone mb-2 block">
-                      {piece.paperStock}
-                    </span>
-                    <h3 className="font-serif text-2xl text-charcoal mb-4">{piece.title}</h3>
-                    <p className="body-sm text-warm-stone leading-relaxed mb-6 font-light">
-                      {piece.description}
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-2">
-                      {piece.techniques.map((t) => (
-                        <span key={t} className="text-xs bg-sand px-3 py-1 rounded-sm text-charcoal">
-                          {t}
+                  <div className="card-warm overflow-hidden bg-cream group h-full flex flex-col justify-between">
+                    <div>
+                      <div className="aspect-[4/3] bg-sand/40 relative overflow-hidden border-b border-sand">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={piece.featuredImage}
+                          alt={piece.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-6 text-center">
+                        <span className="font-mono text-xs uppercase tracking-widest text-warm-stone mb-2 block">
+                          {piece.paperStock}
                         </span>
-                      ))}
+                        <h3 className="font-serif text-2xl text-charcoal mb-3">{piece.title}</h3>
+                        <p className="body-sm text-warm-stone leading-relaxed mb-4 font-light">
+                          {piece.description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="p-6 pt-0">
+                      <div className="flex flex-wrap justify-center gap-1.5 pt-4 border-t border-sand">
+                        {piece.techniques.map((t) => (
+                          <span key={t} className="text-[10px] bg-sand px-2.5 py-1 rounded-sm text-charcoal font-mono">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </Reveal>

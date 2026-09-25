@@ -43,7 +43,35 @@ export default function WeddingSampleKitPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Kit Details & Inclusions */}
             <div className="lg:col-span-7 space-y-8">
+              {/* Product Visual Showcase */}
               <Reveal>
+                <div className="card-warm overflow-hidden shadow-sm">
+                  <div className="aspect-[16/10] relative overflow-hidden bg-sand/40">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={kit.featuredImage}
+                      alt={kit.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {kit.galleryImages && kit.galleryImages.length > 0 && (
+                    <div className="grid grid-cols-4 gap-2 p-3 bg-cream border-t border-sand">
+                      {kit.galleryImages.map((img, i) => (
+                        <div key={i} className="aspect-square rounded overflow-hidden border border-sand/60 shadow-xs">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={img}
+                            alt={`${kit.name} preview ${i + 1}`}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.05}>
                 <div className="card-warm p-8">
                   <h2 className="heading-md text-charcoal mb-4">Why Order a Sample Kit?</h2>
                   <p className="text-sm text-warm-stone leading-relaxed mb-6 font-light">

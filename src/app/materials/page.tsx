@@ -16,6 +16,7 @@ const materialCategories = [
     desc: "Unlike standard wood-pulp paper that yellows and degrades over time, our cotton stocks are crafted from recycled textile linters. Soft to the touch yet incredibly resilient, cotton paper absorbs heavy mechanical impression without tearing.",
     weights: "Available in 300gsm, 450gsm, 600gsm, and custom triplexed 900gsm board.",
     accent: "text-forest",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-3-pics-1200x1200.jpg",
   },
   {
     title: "Handmade Deckled Edge Paper",
@@ -23,6 +24,7 @@ const materialCategories = [
     desc: "Formed sheet-by-sheet on traditional wire moulds. The water slurry naturally recedes at the edges, creating romantic, organic, feathered deckle margins that give wedding invitations an ancient, tactile majesty.",
     weights: "Handcrafted 400–500gsm natural ivory and soft blush tones.",
     accent: "text-terracotta",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3741-1-2500x2500.jpg",
   },
   {
     title: "European Colorplan Boards",
@@ -30,6 +32,7 @@ const materialCategories = [
     desc: "Milled by GF Smith in the United Kingdom, Colorplan is the benchmark for dyed-through premium paper. Available in deep forest, rich navy, warm terracotta, charcoal, and muted sage—providing impeccable contrast when duplexed with cotton.",
     weights: "350gsm to 700gsm duplexed boards.",
     accent: "text-charcoal",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-02-1200x1200.jpg",
   },
 ];
 
@@ -104,16 +107,28 @@ export default function MaterialsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {materialCategories.map((mat, idx) => (
               <Reveal key={mat.title} delay={idx * 0.1}>
-                <div className="card-warm p-8 h-full flex flex-col justify-between">
+                <div className="card-warm overflow-hidden h-full flex flex-col justify-between group">
                   <div>
-                    <span className={`text-xs font-mono uppercase tracking-widest font-semibold block mb-2 ${mat.accent}`}>
-                      {mat.subtitle}
-                    </span>
-                    <h3 className="heading-md text-charcoal mb-4">{mat.title}</h3>
-                    <p className="body-sm text-warm-stone font-light leading-relaxed mb-6">{mat.desc}</p>
+                    <div className="aspect-[16/10] bg-sand/40 overflow-hidden relative border-b border-sand">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={mat.image}
+                        alt={mat.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-8 pb-4">
+                      <span className={`text-xs font-mono uppercase tracking-widest font-semibold block mb-2 ${mat.accent}`}>
+                        {mat.subtitle}
+                      </span>
+                      <h3 className="heading-md text-charcoal mb-3">{mat.title}</h3>
+                      <p className="body-sm text-warm-stone font-light leading-relaxed mb-4">{mat.desc}</p>
+                    </div>
                   </div>
-                  <div className="pt-4 border-t border-sand text-xs text-charcoal font-mono">
-                    {mat.weights}
+                  <div className="px-8 pb-8 pt-0">
+                    <div className="pt-4 border-t border-sand text-xs text-charcoal font-mono">
+                      {mat.weights}
+                    </div>
                   </div>
                 </div>
               </Reveal>

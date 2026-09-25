@@ -12,7 +12,7 @@ export const portfolioData: PortfolioPiece[] = [
       "Deep olive green letterpress impression paired with delicate matte champagne hot foil on 600gsm pure cotton rag paper. Completed with hand-torn deckled edges and botanical illustrated envelope liner.",
     techniques: ["Letterpress 1-color (Olive)", "Matte Champagne Foil", "Deckled Edges"],
     paperStock: "Crane Lettra 600gsm Pearl White & Handmade Cotton",
-    featuredImage: "/images/portfolio/wedding-botanical-1.jpg",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg",
     featured: true,
   },
   {
@@ -26,7 +26,7 @@ export const portfolioData: PortfolioPiece[] = [
       "Minimalist typographic identity pressed with deep mechanical bite on 600gsm fluorescent white cotton stock. Finished with reflective gold edge gilding.",
     techniques: ["Deep Letterpress Impression", "Gold Foil Edge Gilding"],
     paperStock: "100% Cotton 600gsm Fluorescent White",
-    featuredImage: "/images/portfolio/business-architecture-1.jpg",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-01-1200x1200.jpg",
     featured: true,
   },
   {
@@ -40,7 +40,7 @@ export const portfolioData: PortfolioPiece[] = [
       "Bespoke intertwined cipher blind debossed deeply into heavyweight 500gsm laid writing paper, paired with bespoke tissue-lined envelopes.",
     techniques: ["Sculpted Blind Deboss", "Letterpress Nameplate", "Handmade Envelope Liners"],
     paperStock: "500gsm Laid Cotton Board & 120gsm Laid Writing Sheets",
-    featuredImage: "/images/portfolio/stationery-monogram-1.jpg",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/03/march_2026_6-1826x2500.jpg",
     featured: true,
   },
   {
@@ -54,7 +54,7 @@ export const portfolioData: PortfolioPiece[] = [
       "A four-piece celebration suite featuring custom topographical blind deboss map, rose gold foil details, and sage green letterpressed RSVP cards.",
     techniques: ["Rose Gold Foil Stamping", "Topographical Blind Deboss", "Two-color Letterpress"],
     paperStock: "Handmade Deckled Cotton 450gsm & Colorplan Sage",
-    featuredImage: "/images/portfolio/wedding-himalayan-1.jpg",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3741-1-2500x2500.jpg",
     featured: true,
   },
   {
@@ -68,7 +68,7 @@ export const portfolioData: PortfolioPiece[] = [
       "Duplexed card featuring deep navy Colorplan reverse with white pigment foil, and white cotton obverse with charcoal letterpress impression.",
     techniques: ["Duplexing (700gsm finished)", "Pigment White Foil", "Deep Charcoal Letterpress"],
     paperStock: "GF Smith Colorplan Imperial Blue 350gsm + Cotton 350gsm",
-    featuredImage: "/images/portfolio/business-executive-1.jpg",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-02-1200x1200.jpg",
     featured: true,
   },
   {
@@ -82,7 +82,35 @@ export const portfolioData: PortfolioPiece[] = [
       "Single-color deep letterpress on natural deckle-edge artisan paper with hand-dyed raw silk ribbon binding and custom wax seal closures.",
     techniques: ["Single-color Letterpress", "Raw Silk Ribbon Binding", "Hand-stamped Wax Seals"],
     paperStock: "Handmade 100% Cotton 500gsm Natural Cream",
-    featuredImage: "/images/portfolio/wedding-olive-1.jpg",
-    featured: false,
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4405-2000x2500.jpg",
+    featured: true,
+  },
+  {
+    id: "port-7",
+    title: "Royal Foil Monogram Celebration Suite",
+    slug: "royal-foil-monogram-celebration-suite",
+    category: "weddings",
+    categoryLabel: "Wedding Stationery",
+    clientOrProject: "Bespoke Commission",
+    description:
+      "Luminous matte gold hot foil stamping pressed into 600gsm pure cotton board with matching RSVP cards and envelope liners.",
+    techniques: ["Hot Foil Stamping", "Blind Embossing", "Euro-Flap Cotton Envelopes"],
+    paperStock: "600gsm Archival Cotton Rag",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4408-2000x2500.jpg",
+    featured: true,
+  },
+  {
+    id: "port-8",
+    title: "Elysian Atelier Minimalist Stationery",
+    slug: "elysian-atelier-minimalist-stationery",
+    category: "personalised",
+    categoryLabel: "Personalised Stationery",
+    clientOrProject: "Editorial Series",
+    description:
+      "Tone-on-tone sculptural deboss and micro-typography crafted on handmade deckled edge cotton papers.",
+    techniques: ["Sculptural Deboss", "Feathered Deckle Edges", "Calligraphy Monogram"],
+    paperStock: "Handmade Indian Cotton 450gsm",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4413-2000x2500.jpg",
+    featured: true,
   },
 ];

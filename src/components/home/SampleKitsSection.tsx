@@ -5,16 +5,18 @@ const sampleKits = [
   {
     title: "Wedding Sample Kit",
     description:
-      "Experience the quality of our wedding stationery — paper, printing techniques, and finishes in your hands.",
+      "Experience the quality of our wedding stationery — 600gsm cotton, hot foil, deckled edges, and swatches in your hands.",
     href: "/weddings/wedding-sample-kit",
-    label: "Order sample kit",
+    label: "Order wedding kit",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-1-pics-1200x1200.jpg",
   },
   {
     title: "Business Card Sample Kit",
     description:
-      "Feel the weight, texture, and print quality of our business cards before you commit to a full order.",
+      "Feel the weight, texture, and print quality of our ultra-thick business cards and foil edge gilding before you commit.",
     href: "/business-cards/business-card-sample-kit",
-    label: "Order sample kit",
+    label: "Order business kit",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-01-1200x1200.jpg",
   },
 ];
 
@@ -46,13 +48,17 @@ export function SampleKitsSection() {
             <Reveal key={kit.href} delay={0.2 + index * 0.1}>
               <Link
                 href={kit.href}
-                className="group block bg-ivory p-8 lg:p-10 rounded-sm border border-sand/50 hover:border-sage/30 hover:shadow-lg transition-all duration-500"
+                className="group block bg-ivory p-6 lg:p-8 rounded-sm border border-sand/50 hover:border-terracotta/40 hover:shadow-xl transition-all duration-500"
               >
-                {/* Image placeholder */}
-                <div className="aspect-[16/10] bg-sand/30 rounded-sm mb-6 overflow-hidden relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="text-xs text-taupe">{kit.title} image</p>
-                  </div>
+                {/* Live Sample Kit Photo */}
+                <div className="aspect-[16/10] bg-sand/30 rounded-sm mb-6 overflow-hidden relative shadow-sm">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={kit.image}
+                    alt={kit.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/5 transition-colors duration-500" />
                 </div>
 
                 <h3 className="text-xl font-serif mb-3 group-hover:text-sage-dark transition-colors duration-300">

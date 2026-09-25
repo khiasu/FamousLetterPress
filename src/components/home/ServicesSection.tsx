@@ -8,6 +8,7 @@ const services = [
       "Bespoke invitations, RSVP cards, and complete suites — designed and letterpress printed for your celebration.",
     href: "/weddings/wedding-stationery",
     label: "Explore weddings",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4405-2000x2500.jpg",
   },
   {
     title: "Business Cards",
@@ -15,6 +16,7 @@ const services = [
       "Letterpress and foil stamped business cards on premium cotton stock — made to be remembered.",
     href: "/business-cards",
     label: "Explore business cards",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-01-1200x1200.jpg",
   },
   {
     title: "Personalised Stationery",
@@ -22,6 +24,7 @@ const services = [
       "Custom letterheads, notecards, and personal stationery — designed and printed to your specification.",
     href: "/personalised-stationery",
     label: "Explore stationery",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4413-2000x2500.jpg",
   },
 ];
 
@@ -46,11 +49,14 @@ export function ServicesSection() {
                 href={service.href}
                 className="group block h-full"
               >
-                {/* Image placeholder */}
-                <div className="aspect-[4/5] bg-sand/40 rounded-sm mb-6 overflow-hidden relative">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="text-sm text-taupe">{service.title} image</p>
-                  </div>
+                {/* Real Service Image */}
+                <div className="aspect-[4/5] bg-sand/40 rounded-sm mb-6 overflow-hidden relative shadow-sm group-hover:shadow-md transition-shadow">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/5 transition-colors duration-500" />
                 </div>
 

@@ -127,11 +127,15 @@ export default function BusinessCardsPage() {
             {cardPortfolio.map((piece, idx) => (
               <Reveal key={piece.id} delay={idx * 0.1}>
                 <div className="card-warm overflow-hidden group">
-                  <div className="aspect-[16/9] bg-sand/60 relative flex items-center justify-center p-8 text-center border-b border-sand">
-                    <div className="space-y-2">
-                      <div className="text-xs uppercase tracking-widest text-warm-stone font-mono">Commission</div>
-                      <div className="font-serif text-xl text-charcoal">{piece.title}</div>
-                      <div className="text-xs text-charcoal/70">{piece.paperStock}</div>
+                  <div className="aspect-[16/9] bg-sand/60 relative overflow-hidden border-b border-sand">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={piece.featuredImage}
+                      alt={piece.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 left-3 bg-ivory/95 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] uppercase font-mono tracking-widest text-charcoal shadow-sm border border-sand/60">
+                      {piece.paperStock?.split("+")[0] || "600gsm Cotton"}
                     </div>
                   </div>
                   <div className="p-6">

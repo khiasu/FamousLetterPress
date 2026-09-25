@@ -28,6 +28,12 @@ export const servicesData: Record<string, ServiceItem> = {
       "Hand-torn Feathered Deckle Edges",
     ],
     leadTime: "3 to 5 weeks from final design & proof approval",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg",
+    galleryImages: [
+      "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4405-2000x2500.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4408-2000x2500.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3741-1-2500x2500.jpg",
+    ],
     sampleKitHref: "/weddings/wedding-sample-kit",
     features: [
       "Save the Date Cards & Envelopes",
@@ -111,6 +117,12 @@ export const servicesData: Record<string, ServiceItem> = {
       "Precision Die-Cutting & Custom Sizing",
     ],
     leadTime: "2 to 3 weeks from artwork approval",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-01-1200x1200.jpg",
+    galleryImages: [
+      "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-02-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-03-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/banner-biz-06-1365x600.jpg",
+    ],
     sampleKitHref: "/business-cards/business-card-sample-kit",
     features: [
       "Standard European (85 x 55mm) & US (89 x 51mm) dimensions or bespoke sizing",
@@ -192,6 +204,11 @@ export const servicesData: Record<string, ServiceItem> = {
       "Hand-painted Contrasting Beveled Edges",
     ],
     leadTime: "2 to 3 weeks",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4413-2000x2500.jpg",
+    galleryImages: [
+      "https://famousletterpress.com/wp-content/uploads/2026/03/march_2026_6-1826x2500.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/03/FMS_0974-2-2500x1667.jpg",
+    ],
     sampleKitHref: "/business-cards/business-card-sample-kit",
     features: [
       "Bespoke Correspondence Cards (A6 / Flat Card 450–600gsm)",

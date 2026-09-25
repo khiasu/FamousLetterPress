@@ -30,11 +30,12 @@ export const sampleKitsData: Record<string, SampleKitItem> = {
     ],
     shippingInfo:
       "Dispatched within 24–48 hours via express courier across India. Delivery typically takes 3–5 business days depending on your city. All orders include full end-to-end tracking.",
-    featuredImage: "/images/sample-kits/wedding-kit-hero.jpg",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-1-pics-1200x1200.jpg",
     galleryImages: [
-      "/images/sample-kits/wedding-kit-1.jpg",
-      "/images/sample-kits/wedding-kit-2.jpg",
-      "/images/sample-kits/wedding-kit-3.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-2-pics-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-3-pics-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-4-pics-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/banner-01-1365x600.jpg",
     ],
     stockAvailable: true,
     featured: true,
@@ -69,10 +70,12 @@ export const sampleKitsData: Record<string, SampleKitItem> = {
     ],
     shippingInfo:
       "Dispatched within 24–48 hours via express courier with real-time tracking across India. International shipping available upon direct enquiry.",
-    featuredImage: "/images/sample-kits/business-kit-hero.jpg",
+    featuredImage: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-01-1200x1200.jpg",
     galleryImages: [
-      "/images/sample-kits/business-kit-1.jpg",
-      "/images/sample-kits/business-kit-2.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-02-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-03-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-05-1200x1200.jpg",
+      "https://famousletterpress.com/wp-content/uploads/2026/04/banner-biz-06-1365x600.jpg",
     ],
     stockAvailable: true,
     featured: true,
