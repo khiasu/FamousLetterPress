@@ -45,27 +45,28 @@ export function Footer() {
 
   return (
     <footer
-      className="bg-ink text-ivory/80"
+      className="bg-ink text-stone-200"
       role="contentinfo"
     >
       {/* Main footer */}
       <div className="container-wide section">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
-          {/* Brand column */}
+        {/* Brand row on mobile, then nav columns */}
+        <div className="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-5 lg:gap-8">
+          {/* Brand column — full width on mobile, 1 col on desktop */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-3 mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://famousletterpress.com/wp-content/uploads/2022/06/FMS-new-logo-1-100x100.png"
                 alt="Famous Letterpress Seal"
-                className="w-8 h-8 object-contain rounded-full bg-ivory/10 p-0.5"
+                className="w-8 h-8 object-contain rounded-full bg-stone-800 p-0.5"
               />
-              <span className="font-serif text-xl text-ivory tracking-wide">
+              <span className="font-serif text-xl text-stone-100 tracking-wide">
                 <span className="font-light">Famous</span>{" "}
                 <span className="font-semibold">Letterpress</span>
               </span>
             </Link>
-            <p className="text-sm text-ivory/50 leading-relaxed mb-6">
+            <p className="text-sm text-stone-400 leading-relaxed mb-6 max-w-xs">
               Handcrafted letterpress &amp; foil printing.
               <br />
               Designers turned printers.
@@ -73,13 +74,13 @@ export function Footer() {
               Nagaland, India.
             </p>
 
-            {/* Social — placeholder hrefs, to be confirmed */}
+            {/* Social */}
             <div className="flex gap-4">
               <a
                 href="https://www.instagram.com/famousletterpressindia/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ivory/40 hover:text-ivory transition-colors duration-300"
+                className="text-stone-400 hover:text-stone-100 transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -90,7 +91,7 @@ export function Footer() {
                 href="https://www.facebook.com/FamousLetterpress/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ivory/40 hover:text-ivory transition-colors duration-300"
+                className="text-stone-400 hover:text-stone-100 transition-colors duration-300"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -100,37 +101,41 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Nav columns */}
-          {Object.values(footerNav).map((section) => (
-            <div key={section.title}>
-              <h3 className="eyebrow !text-ivory/40 mb-5">{section.title}</h3>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-ivory/60 hover:text-ivory transition-colors duration-300"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Nav columns — 2x2 grid on mobile/tablet, 4 columns on desktop */}
+          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-4 gap-8">
+            {Object.values(footerNav).map((section) => (
+              <div key={section.title}>
+                <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-stone-400 mb-4">
+                  {section.title}
+                </h3>
+                <ul className="space-y-2.5">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-stone-300 hover:text-white transition-colors duration-300"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-ivory/10">
+      <div className="border-t border-stone-800">
         <div className="container-wide py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-ivory/30">
+          <p className="text-xs text-stone-400">
             © {currentYear} Famous Letterpress. Handcrafted in Nagaland, India.
           </p>
           <div className="flex items-center gap-6">
             <Link
               href="/contact"
-              className="text-xs text-ivory/30 hover:text-ivory/60 transition-colors"
+              className="text-xs text-stone-400 hover:text-stone-200 transition-colors"
             >
               Contact
             </Link>

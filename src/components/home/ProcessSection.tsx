@@ -30,7 +30,7 @@ export function ProcessSection() {
       <div className="container-wide">
         <div className="text-center mb-16">
           <Reveal>
-            <p className="eyebrow mb-4">How We Work</p>
+            <p className="eyebrow text-taupe mb-4">How We Work</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2>

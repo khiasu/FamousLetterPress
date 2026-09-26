@@ -272,7 +272,7 @@ export function Header({
 
                 {/* Contact info */}
                 <div className="mt-10 pt-6 border-t border-sand/50">
-                  <p className="eyebrow mb-3">Get in touch</p>
+                  <p className="eyebrow text-taupe mb-3">Get in touch</p>
                   <a
                     href="https://wa.me/919366012345"
                     className="block text-sm text-charcoal py-1.5 hover:text-ink transition-colors"

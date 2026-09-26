@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { getCMSSettings } from "@/lib/cms/store";
 
 const inter = Inter({
@@ -42,22 +40,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const settings = getCMSSettings();
   return (
     <html
       lang="en"
       className={`${inter.variable} ${cormorant.variable} h-full`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        <JsonLd />
-        <Header
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <SiteShell
           logoUrl={settings.logoUrl}
           announcementActive={settings.announcementActive}
           announcementBarText={settings.announcementBarText}
-        />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        >
+          {children}
+        </SiteShell>
       </body>
     </html>
   );

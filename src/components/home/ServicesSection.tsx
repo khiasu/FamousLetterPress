@@ -43,7 +43,7 @@ export function ServicesSection() {
     <section className="section bg-cream" aria-label="Our services">
       <div className="container-wide">
         <Reveal>
-          <p className="eyebrow mb-4">What We Create</p>
+          <p className="eyebrow text-taupe mb-4">What We Create</p>
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="mb-16 max-w-2xl">

@@ -41,10 +41,16 @@ function AdminShell({ children }: { children: React.ReactNode }) {
           <span className={`block w-5 h-px bg-neutral-900 transition-opacity ${sidebarOpen ? "opacity-0" : ""}`} />
           <span className={`block w-5 h-px bg-neutral-900 transition-transform ${sidebarOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
         </button>
-        <span className="text-sm font-medium text-neutral-900">Famous Letterpress</span>
-        <Link href="/" target="_blank" className="text-xs text-neutral-400 hover:text-neutral-700">
-          View Site
-        </Link>
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span className="text-sm font-semibold tracking-tight text-neutral-900">Admin Portal</span>
+        </div>
+        <button
+          onClick={handleLogout}
+          className="text-xs font-medium text-neutral-500 hover:text-red-600 transition-colors px-2 py-1 rounded"
+        >
+          Sign Out
+        </button>
       </div>
 
       {/* Mobile overlay */}
@@ -65,7 +71,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
         <div className="p-5 border-b border-neutral-100">
           <Link href="/admin" onClick={() => setSidebarOpen(false)}>
             <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 block">
-              Admin
+              Admin Portal
             </span>
             <span className="text-sm font-medium text-neutral-900 block mt-0.5">
               Famous Letterpress
@@ -82,9 +88,10 @@ function AdminShell({ children }: { children: React.ReactNode }) {
               onClick={() => setSidebarOpen(false)}
               className={`block px-3 py-2 text-[13px] rounded transition-colors mb-0.5 ${
                 isActive(item.href)
-                  ? "bg-neutral-900 text-white font-medium"
+                  ? "bg-neutral-900 !text-white font-medium"
                   : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100"
               }`}
+              style={{ color: isActive(item.href) ? "#ffffff" : undefined }}
             >
               {item.label}
             </Link>
@@ -92,19 +99,20 @@ function AdminShell({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Sidebar footer */}
-        <div className="p-3 border-t border-neutral-100 space-y-1">
-          <Link
-            href="/"
-            target="_blank"
-            className="block px-3 py-2 text-[13px] text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50 rounded transition-colors"
-          >
-            View Public Site →
-          </Link>
+        <div className="p-3 border-t border-neutral-100 space-y-2">
+          <div className="px-3 py-1 flex items-center justify-between text-[11px] text-neutral-400">
+            <span>Environment</span>
+            <span className="inline-flex items-center gap-1.5 text-emerald-600 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Isolated
+            </span>
+          </div>
           <button
             onClick={handleLogout}
-            className="w-full text-left px-3 py-2 text-[13px] text-neutral-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+            className="w-full text-left px-3 py-2 text-[13px] text-neutral-500 hover:text-red-600 hover:bg-red-50 rounded transition-colors flex items-center justify-between"
           >
-            Sign Out
+            <span>Sign Out</span>
+            <span className="text-[10px] text-neutral-400 uppercase tracking-wider">Secure</span>
           </button>
         </div>
       </aside>

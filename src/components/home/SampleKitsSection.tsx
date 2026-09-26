@@ -33,7 +33,7 @@ export function SampleKitsSection() {
       <div className="container-wide">
         <div className="text-center mb-14">
           <Reveal>
-            <p className="eyebrow mb-4">Sample Kits</p>
+            <p className="eyebrow text-taupe mb-4">Sample Kits</p>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="mb-4">

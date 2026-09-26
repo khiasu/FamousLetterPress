@@ -24,7 +24,7 @@ export function StudioSection() {
           {/* Text */}
           <div>
             <Reveal>
-              <p className="eyebrow mb-6">Handcrafted in Nagaland</p>
+              <p className="eyebrow text-taupe mb-6">Handcrafted in Nagaland</p>
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="mb-6">

@@ -5,7 +5,7 @@ export function PositioningSection() {
     <section className="section bg-ivory" aria-label="About Famous Letterpress">
       <div className="container-narrow text-center">
         <Reveal>
-          <p className="eyebrow mb-6">Who We Are</p>
+          <p className="eyebrow text-taupe mb-6">Who We Are</p>
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="mb-8">

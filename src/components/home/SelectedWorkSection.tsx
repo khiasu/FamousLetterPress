@@ -12,7 +12,7 @@ export function SelectedWorkSection() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
             <Reveal>
-              <p className="eyebrow mb-4">Selected Work</p>
+              <p className="eyebrow text-taupe mb-4">Selected Work</p>
             </Reveal>
             <Reveal delay={0.1}>
               <h2>
@@ -42,7 +42,7 @@ export function SelectedWorkSection() {
                   />
                   <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/5 transition-colors duration-500" />
                 </div>
-                <p className="eyebrow text-[0.65rem] mb-1">{item.categoryLabel}</p>
+                <p className="eyebrow text-taupe text-[0.65rem] mb-1">{item.categoryLabel}</p>
                 <h4 className="text-base font-serif group-hover:text-terracotta transition-colors duration-300">
                   {item.title}
                 </h4>

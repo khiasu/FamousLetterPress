@@ -16,13 +16,13 @@ interface ButtonProps {
 
 const variants = {
   primary:
-    "bg-ink hover:bg-charcoal active:bg-ink [color:var(--color-ivory)]",
+    "bg-ink hover:bg-charcoal active:bg-ink text-[#FAF8F5] !text-[#FAF8F5]",
   secondary:
-    "bg-sage hover:bg-sage-dark active:bg-sage [color:var(--color-ivory)]",
+    "bg-sage hover:bg-sage-dark active:bg-sage text-[#FAF8F5] !text-[#FAF8F5]",
   outline:
-    "bg-transparent border border-ink/20 hover:border-ink/40 hover:bg-cream active:bg-sand [color:var(--color-ink)]",
+    "bg-transparent border border-ink/20 hover:border-ink/40 hover:bg-cream active:bg-sand text-ink !text-ink",
   ghost:
-    "bg-transparent hover:bg-cream/50 active:bg-cream [color:var(--color-charcoal)] hover:[color:var(--color-ink)]",
+    "bg-transparent hover:bg-cream/50 active:bg-cream text-charcoal !text-charcoal hover:text-ink hover:!text-ink",
 };
 
 const sizes = {
@@ -48,6 +48,9 @@ export function Button({
   }`;
 
   const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
+  const colorStyle = (variant === "primary" || variant === "secondary")
+    ? { color: "#FAF8F5" }
+    : undefined;
 
   if (href) {
     if (external) {
@@ -57,6 +60,7 @@ export function Button({
           target="_blank"
           rel="noopener noreferrer"
           className={classes}
+          style={colorStyle}
           aria-label={ariaLabel}
         >
           {children}
@@ -64,7 +68,7 @@ export function Button({
       );
     }
     return (
-      <Link href={href} className={classes} aria-label={ariaLabel}>
+      <Link href={href} className={classes} style={colorStyle} aria-label={ariaLabel}>
         {children}
       </Link>
     );
@@ -75,6 +79,7 @@ export function Button({
       type={type}
       onClick={onClick}
       className={classes}
+      style={colorStyle}
       disabled={disabled}
       aria-label={ariaLabel}
     >
