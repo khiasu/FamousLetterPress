@@ -76,9 +76,8 @@ export function ImageInput({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="text-center p-2 text-stone-400">
-                <span className="block text-lg">🖼️</span>
-                <span className="text-[10px] font-mono uppercase tracking-wider block mt-1">
+              <div className="text-center p-2 text-neutral-400">
+                <span className="text-[10px] font-mono uppercase tracking-wider block">
                   {imgError ? "Invalid URL" : "No image"}
                 </span>
               </div>

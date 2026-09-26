@@ -20,148 +20,103 @@ interface OrderItem {
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<OrderItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [savingId, setSavingId] = useState<string | null>(null);
-
-  const fetchOrders = async () => {
-    try {
-      const res = await fetch("/api/admin/orders");
-      if (res.ok) {
-        const data = await res.json();
-        setOrders(data);
-      }
-    } catch (err) {
-      console.error("Failed to load orders:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchOrders();
+    fetch("/api/admin/orders")
+      .then((res) => res.json())
+      .then((data) => { if (Array.isArray(data)) setOrders(data); })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const updateFulfillment = async (id: string, status: OrderItem["fulfillmentStatus"]) => {
-    setSavingId(id);
-    const updated = orders.map((o) => (o.id === id ? { ...o, fulfillmentStatus: status } : o));
-    setOrders(updated);
-
+  const save = async (updated: OrderItem[]) => {
     try {
       await fetch("/api/admin/orders", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updated),
       });
-    } catch (err) {
-      console.error("Failed to update order fulfillment:", err);
-    } finally {
-      setSavingId(null);
-    }
+    } catch (err) { console.error(err); }
   };
 
-  const updateTracking = async (id: string, trackingNumber: string) => {
+  const updateFulfillment = (id: string, status: OrderItem["fulfillmentStatus"]) => {
+    const updated = orders.map((o) => (o.id === id ? { ...o, fulfillmentStatus: status } : o));
+    setOrders(updated);
+    save(updated);
+  };
+
+  const updateTracking = (id: string, trackingNumber: string) => {
     const updated = orders.map((o) => (o.id === id ? { ...o, trackingNumber } : o));
     setOrders(updated);
+    save(updated);
+  };
 
-    try {
-      await fetch("/api/admin/orders", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updated),
-      });
-    } catch (err) {
-      console.error("Failed to update tracking:", err);
-    }
+  const fulfillmentColors: Record<string, string> = {
+    AWAITING_PACKING: "bg-amber-50 text-amber-700",
+    DISPATCHED: "bg-blue-50 text-blue-700",
+    DELIVERED: "bg-emerald-50 text-emerald-700",
   };
 
   return (
-    <div className="space-y-6 max-w-6xl">
-      <div className="border-b border-stone-200 pb-4">
-        <h1 className="text-2xl font-serif text-stone-900 font-semibold">Sample Kit Orders</h1>
-        <p className="text-xs text-stone-500 mt-1">
-          Direct purchases processed via Razorpay for Wedding and Business Card sample kits.
-        </p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-medium text-neutral-900">Sample Kit Orders</h1>
+        <p className="text-sm text-neutral-500 mt-1">Orders processed via Razorpay.</p>
       </div>
 
       {loading ? (
-        <div className="p-8 text-center text-xs text-stone-500 font-mono">Loading orders...</div>
+        <p className="py-12 text-sm text-neutral-400 text-center">Loading...</p>
       ) : (
-        <div className="bg-white rounded-sm border border-stone-200 shadow-2xs overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-stone-50 border-b border-stone-200 text-stone-500 uppercase tracking-wider font-mono text-[10px]">
-              <tr>
-                <th className="p-4">Order No & Date</th>
-                <th className="p-4">Customer & Phone</th>
-                <th className="p-4">Product</th>
-                <th className="p-4">Shipping Destination</th>
-                <th className="p-4">Payment</th>
-                <th className="p-4">Fulfillment</th>
-                <th className="p-4">Tracking</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-stone-100">
-              {orders.map((ord) => (
-                <tr key={ord.id} className="hover:bg-stone-50/70">
-                  <td className="p-4 align-top font-mono">
-                    <div className="font-semibold text-stone-900">{ord.orderNumber}</div>
-                    <div className="text-[10px] text-stone-400 mt-0.5">{ord.createdAt}</div>
-                  </td>
+        <div className="space-y-3">
+          {orders.map((ord) => (
+            <div key={ord.id} className="bg-white border border-neutral-200 p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-neutral-900">{ord.customerName}</p>
+                  <p className="text-xs text-neutral-400 mt-0.5">{ord.orderNumber} · {ord.createdAt}</p>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-sm font-medium text-neutral-900">₹{ord.amount}</p>
+                  <span className={`text-[10px] px-2 py-0.5 font-medium ${ord.paymentStatus === "PAID" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>
+                    {ord.paymentStatus}
+                  </span>
+                </div>
+              </div>
 
-                  <td className="p-4 align-top">
-                    <div className="font-semibold text-stone-900">{ord.customerName}</div>
-                    <div className="text-stone-500 text-[11px]">{ord.customerEmail}</div>
-                    <div className="text-stone-500 text-[11px]">{ord.customerPhone}</div>
-                  </td>
+              <div className="mt-3 space-y-2">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs text-neutral-600">{ord.kitName}</span>
+                  <span className={`text-[10px] px-2 py-0.5 font-medium ${fulfillmentColors[ord.fulfillmentStatus] || ""}`}>
+                    {ord.fulfillmentStatus?.replace(/_/g, " ")}
+                  </span>
+                </div>
+                <p className="text-xs text-neutral-400">{ord.shippingAddress}</p>
+                <p className="text-xs text-neutral-400">{ord.customerEmail} · {ord.customerPhone}</p>
+              </div>
 
-                  <td className="p-4 align-top">
-                    <span className="font-medium text-stone-900">{ord.kitName}</span>
-                    <div className="text-stone-600 font-mono text-[11px]">₹{ord.amount} INR</div>
-                  </td>
-
-                  <td className="p-4 align-top max-w-xs text-stone-600 text-xs">
-                    {ord.shippingAddress}
-                  </td>
-
-                  <td className="p-4 align-top">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-xs font-semibold bg-emerald-100 text-emerald-800">
-                      {ord.paymentStatus}
-                    </span>
-                  </td>
-
-                  <td className="p-4 align-top">
-                    <select
-                      value={ord.fulfillmentStatus}
-                      disabled={savingId === ord.id}
-                      onChange={(e) =>
-                        updateFulfillment(ord.id, e.target.value as OrderItem["fulfillmentStatus"])
-                      }
-                      className="text-xs bg-stone-50 border border-stone-300 rounded-sm px-2 py-1 font-mono font-medium disabled:opacity-50"
-                    >
-                      <option value="AWAITING_PACKING">AWAITING_PACKING</option>
-                      <option value="DISPATCHED">DISPATCHED</option>
-                      <option value="DELIVERED">DELIVERED</option>
-                    </select>
-                  </td>
-
-                  <td className="p-4 align-top font-mono text-xs text-stone-700">
-                    <input
-                      type="text"
-                      placeholder="Add tracking ref"
-                      defaultValue={ord.trackingNumber || ""}
-                      onBlur={(e) => updateTracking(ord.id, e.target.value)}
-                      className="bg-stone-50 border border-stone-300 rounded-xs px-2 py-1 text-xs w-36"
-                    />
-                  </td>
-                </tr>
-              ))}
-              {orders.length === 0 && (
-                <tr>
-                  <td colSpan={7} className="p-8 text-center text-xs text-stone-400">
-                    No sample kit orders found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+              <div className="flex items-center gap-3 mt-3 flex-wrap">
+                <select
+                  value={ord.fulfillmentStatus}
+                  onChange={(e) => updateFulfillment(ord.id, e.target.value as OrderItem["fulfillmentStatus"])}
+                  className="text-xs bg-neutral-50 border border-neutral-200 px-2 py-1.5 text-neutral-700"
+                >
+                  <option value="AWAITING_PACKING">Awaiting Packing</option>
+                  <option value="DISPATCHED">Dispatched</option>
+                  <option value="DELIVERED">Delivered</option>
+                </select>
+                <input
+                  type="text"
+                  placeholder="Tracking number"
+                  defaultValue={ord.trackingNumber || ""}
+                  onBlur={(e) => updateTracking(ord.id, e.target.value)}
+                  className="text-xs bg-neutral-50 border border-neutral-200 px-2 py-1.5 w-40"
+                />
+              </div>
+            </div>
+          ))}
+          {orders.length === 0 && (
+            <p className="py-12 text-sm text-neutral-400 text-center">No orders yet.</p>
+          )}
         </div>
       )}
     </div>

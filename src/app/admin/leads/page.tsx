@@ -21,174 +21,135 @@ export default function AdminLeadsPage() {
   const [loading, setLoading] = useState(true);
   const [savingId, setSavingId] = useState<string | null>(null);
 
-  const fetchLeads = async () => {
-    try {
-      const res = await fetch("/api/admin/leads");
-      if (res.ok) {
-        const data = await res.json();
-        setLeads(data);
-      }
-    } catch (err) {
-      console.error("Failed to load leads:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchLeads();
+    fetch("/api/admin/leads")
+      .then((res) => res.json())
+      .then((data) => { if (Array.isArray(data)) setLeads(data); })
+      .catch((err) => console.error("Error loading leads:", err))
+      .finally(() => setLoading(false));
   }, []);
 
   const updateStatus = async (id: string, newStatus: LeadItem["status"]) => {
     setSavingId(id);
     const updated = leads.map((item) => (item.id === id ? { ...item, status: newStatus } : item));
     setLeads(updated);
-
     try {
       await fetch("/api/admin/leads", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updated),
       });
-    } catch (err) {
-      console.error("Failed to save lead status:", err);
-    } finally {
-      setSavingId(null);
-    }
+    } catch (err) { console.error(err); }
+    finally { setSavingId(null); }
   };
 
   const deleteLead = async (id: string) => {
-    if (!confirm("Are you sure you want to remove this lead record?")) return;
+    if (!confirm("Remove this lead?")) return;
     const updated = leads.filter((l) => l.id !== id);
     setLeads(updated);
-
     try {
       await fetch("/api/admin/leads", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updated),
       });
-    } catch (err) {
-      console.error("Failed to delete lead:", err);
-    }
+    } catch (err) { console.error(err); }
   };
 
-  const filteredLeads =
-    filterType === "ALL" ? leads : leads.filter((l) => l.type === filterType);
+  const filteredLeads = filterType === "ALL" ? leads : leads.filter((l) => l.type === filterType);
+
+  const statusColors: Record<string, string> = {
+    NEW: "bg-amber-50 text-amber-700",
+    CONTACTED: "bg-blue-50 text-blue-700",
+    IN_DISCUSSION: "bg-violet-50 text-violet-700",
+    PROPOSAL_SENT: "bg-emerald-50 text-emerald-700",
+    ARCHIVED: "bg-neutral-100 text-neutral-500",
+  };
 
   return (
-    <div className="space-y-6 max-w-6xl">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-200 pb-4">
-        <div>
-          <h1 className="text-2xl font-serif text-stone-900 font-semibold">Leads & Consultations</h1>
-          <p className="text-xs text-stone-500 mt-1">
-            Submitted inquiries from Early Bride, General Project, and Trade Partner forms.
-          </p>
-        </div>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-medium text-neutral-900">Leads & Consultations</h1>
+        <p className="text-sm text-neutral-500 mt-1">Inquiries from website forms.</p>
+      </div>
 
-        {/* Filter Tabs */}
-        <div className="flex gap-2">
-          {["ALL", "Early Bride", "General Project", "Channel Partner"].map((type) => (
-            <button
-              key={type}
-              onClick={() => setFilterType(type)}
-              className={`px-3 py-1.5 text-xs rounded-sm transition-colors ${
-                filterType === type
-                  ? "bg-stone-900 text-white font-medium"
-                  : "bg-white text-stone-600 border border-stone-200 hover:bg-stone-50"
-              }`}
-            >
-              {type}
-            </button>
-          ))}
-        </div>
+      {/* Filter */}
+      <div className="flex flex-wrap gap-2">
+        {["ALL", "Early Bride", "General Project", "Channel Partner"].map((type) => (
+          <button
+            key={type}
+            onClick={() => setFilterType(type)}
+            className={`px-3 py-1.5 text-xs transition-colors ${
+              filterType === type
+                ? "bg-neutral-900 text-white"
+                : "bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-300"
+            }`}
+          >
+            {type === "ALL" ? "All" : type}
+          </button>
+        ))}
       </div>
 
       {loading ? (
-        <div className="p-8 text-center text-xs text-stone-500 font-mono">Loading leads...</div>
+        <p className="py-12 text-sm text-neutral-400 text-center">Loading...</p>
       ) : (
-        <div className="bg-white rounded-sm border border-stone-200 shadow-2xs overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-stone-50 border-b border-stone-200 text-stone-500 uppercase tracking-wider font-mono text-[10px]">
-              <tr>
-                <th className="p-4">Reference</th>
-                <th className="p-4">Client & Contact</th>
-                <th className="p-4">Type & Details</th>
-                <th className="p-4">Notes</th>
-                <th className="p-4">Status</th>
-                <th className="p-4">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-stone-100">
-              {filteredLeads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-stone-50/70">
-                  <td className="p-4 align-top font-mono text-stone-500">
-                    <div className="font-semibold text-stone-900">{lead.ref}</div>
-                    <div className="text-[10px] text-stone-400 mt-0.5">{lead.date}</div>
-                  </td>
-
-                  <td className="p-4 align-top">
-                    <div className="font-semibold text-stone-900 text-sm">{lead.name}</div>
-                    <div className="text-stone-500 mt-0.5">{lead.email}</div>
-                    <div className="text-stone-500">{lead.phone}</div>
-                  </td>
-
-                  <td className="p-4 align-top max-w-xs">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-xs bg-stone-100 text-stone-700 font-medium">
-                      {lead.type}
+        <div className="space-y-3">
+          {filteredLeads.map((lead) => (
+            <div key={lead.id} className="bg-white border border-neutral-200 p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-sm font-medium text-neutral-900">{lead.name}</span>
+                    <span className={`text-[10px] px-2 py-0.5 font-medium ${statusColors[lead.status] || "bg-neutral-100 text-neutral-600"}`}>
+                      {lead.status.replace(/_/g, " ")}
                     </span>
-                    <div className="text-stone-700 mt-1 font-medium">{lead.eventOrService}</div>
-                  </td>
+                  </div>
+                  <p className="text-xs text-neutral-400 mt-1">{lead.ref} · {lead.type} · {lead.date}</p>
+                </div>
+                <button
+                  onClick={() => deleteLead(lead.id)}
+                  className="text-xs text-neutral-300 hover:text-red-500 transition-colors shrink-0"
+                  title="Delete"
+                >
+                  ×
+                </button>
+              </div>
 
-                  <td className="p-4 align-top max-w-xs text-stone-600 text-xs">
-                    {lead.notes}
-                  </td>
-
-                  <td className="p-4 align-top">
-                    <select
-                      value={lead.status}
-                      disabled={savingId === lead.id}
-                      onChange={(e) => updateStatus(lead.id, e.target.value as LeadItem["status"])}
-                      className="text-xs bg-stone-50 border border-stone-300 rounded-sm px-2 py-1 font-mono font-medium disabled:opacity-50"
-                    >
-                      <option value="NEW">NEW</option>
-                      <option value="CONTACTED">CONTACTED</option>
-                      <option value="IN_DISCUSSION">IN_DISCUSSION</option>
-                      <option value="PROPOSAL_SENT">PROPOSAL_SENT</option>
-                      <option value="ARCHIVED">ARCHIVED</option>
-                    </select>
-                  </td>
-
-                  <td className="p-4 align-top flex items-center gap-2">
-                    <a
-                      href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(
-                        lead.name
-                      )},%20this%20is%20Famous%20Letterpress...`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block px-2.5 py-1 bg-stone-800 hover:bg-stone-900 text-white rounded-xs text-[11px] font-medium"
-                    >
-                      WhatsApp &rarr;
-                    </a>
-                    <button
-                      onClick={() => deleteLead(lead.id)}
-                      className="px-2 py-1 text-[11px] text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xs"
-                      title="Delete inquiry"
-                    >
-                      ✕
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {filteredLeads.length === 0 && (
-                <tr>
-                  <td colSpan={6} className="p-8 text-center text-xs text-stone-400">
-                    No inquiries found.
-                  </td>
-                </tr>
+              <p className="text-sm text-neutral-600 mt-2">{lead.eventOrService}</p>
+              {lead.notes && (
+                <p className="text-xs text-neutral-400 mt-1 leading-relaxed">{lead.notes}</p>
               )}
-            </tbody>
-          </table>
+
+              <div className="flex items-center gap-3 mt-3 flex-wrap">
+                <p className="text-xs text-neutral-400">{lead.email} · {lead.phone}</p>
+                <div className="flex items-center gap-2 ml-auto">
+                  <select
+                    value={lead.status}
+                    disabled={savingId === lead.id}
+                    onChange={(e) => updateStatus(lead.id, e.target.value as LeadItem["status"])}
+                    className="text-xs bg-neutral-50 border border-neutral-200 px-2 py-1 text-neutral-700 disabled:opacity-50"
+                  >
+                    <option value="NEW">New</option>
+                    <option value="CONTACTED">Contacted</option>
+                    <option value="IN_DISCUSSION">In Discussion</option>
+                    <option value="PROPOSAL_SENT">Proposal Sent</option>
+                    <option value="ARCHIVED">Archived</option>
+                  </select>
+                  <a
+                    href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-neutral-900 text-white text-xs hover:bg-neutral-800 transition-colors"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+          {filteredLeads.length === 0 && (
+            <p className="py-12 text-sm text-neutral-400 text-center">No inquiries found.</p>
+          )}
         </div>
       )}
     </div>
