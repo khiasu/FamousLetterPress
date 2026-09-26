@@ -64,19 +64,13 @@ export function Header({
         </div>
       )}
       <header
-        className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-[var(--ease-out-expo)] ${
-          announcementActive && announcementBarText ? "top-[32px]" : "top-0"
-        } ${
-          isScrolled
-            ? "bg-ivory/95 backdrop-blur-md shadow-[0_1px_0_var(--color-sand)]"
-            : "bg-transparent"
+        className={`sticky top-0 z-50 bg-ivory/95 backdrop-blur-md border-b border-sand/40 transition-shadow duration-300 ${
+          isScrolled ? "shadow-sm" : ""
         }`}
       >
         <div className="container-wide">
           <nav
-            className={`flex items-center justify-between transition-all duration-500 ${
-              isScrolled ? "h-16 lg:h-18" : "h-20 lg:h-24"
-            }`}
+            className="flex items-center justify-between h-20"
             aria-label="Primary navigation"
           >
             {/* Logo */}

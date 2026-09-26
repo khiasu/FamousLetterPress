@@ -42,9 +42,9 @@ export function StudioSection() {
               className="aspect-[4/3] rounded-sm shadow-2xl cursor-view"
             >
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                <div className="glass-panel-dark px-4 py-2.5 rounded-sm inline-flex items-center gap-2">
+                <div className="glass-panel px-4 py-2.5 rounded-sm inline-flex items-center gap-2 border border-sand/60 shadow-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-ivory/70">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-charcoal/80 font-medium">
                     Nagaland Pressroom · Vintage Platen Press
                   </span>
                 </div>

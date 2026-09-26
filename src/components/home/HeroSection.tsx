@@ -8,8 +8,9 @@ import {
   useSpring,
   type Variants,
 } from "framer-motion";
-import { GoldShimmer, HorizontalMarquee } from "@/components/ui/GoldShimmer";
+import { GoldShimmer } from "@/components/ui/GoldShimmer";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -20,49 +21,28 @@ export function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  // Parallax & zoom transforms
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 0.65]);
-
-  // Spring physics for smooth motion
-  const smoothScale = useSpring(imageScale, { stiffness: 100, damping: 30 });
-  const smoothImageY = useSpring(imageY, { stiffness: 100, damping: 30 });
+  const textY = useTransform(scrollYProgress, [0, 1], ["0px", "50px"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0px", "-40px"]);
   const smoothTextY = useSpring(textY, { stiffness: 100, damping: 30 });
+  const smoothImageY = useSpring(imageY, { stiffness: 100, damping: 30 });
 
-  // Staggered entrance variants
   const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
         staggerChildren: 0.12,
-        delayChildren: 0.3,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
-        duration: 1,
-        ease: easeOutExpo,
-      },
-    },
-  };
-
-  const imageVariants: Variants = {
-    hidden: { opacity: 0, scale: 1.08, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      filter: "blur(0px)",
-      transition: {
-        duration: 1.6,
+        duration: 0.9,
         ease: easeOutExpo,
       },
     },
@@ -71,147 +51,141 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-ink grain-overlay"
+      className="relative min-h-[90vh] lg:min-h-[92vh] flex items-center bg-cream overflow-hidden grain-overlay"
       aria-label="Welcome to Famous Letterpress"
+      style={{
+        paddingTop: "clamp(3rem, 6vw, 6rem)",
+        paddingBottom: "clamp(4rem, 8vw, 8rem)",
+      }}
     >
-      {/* ── Fullscreen Background Image with Parallax ── */}
-      <motion.div
-        className="absolute inset-0 will-change-transform"
-        style={{ scale: smoothScale, y: smoothImageY }}
-        variants={imageVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg"
-          alt="Handcrafted letterpress wedding stationery by Famous Letterpress"
-          className="w-full h-full object-cover object-center"
-        />
-      </motion.div>
-
-      {/* ── Cinematic gradient overlays ── */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent"
-        style={{ opacity: overlayOpacity }}
+      {/* ── Soft warm champagne ambient glow ── */}
+      <div
+        className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(184,150,62,0.07) 0%, transparent 65%)",
+        }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-transparent to-transparent" />
+      <div
+        className="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(232,213,204,0.3) 0%, transparent 70%)",
+        }}
+      />
 
-      {/* ── Decorative floating elements ── */}
-      <div className="absolute top-[15%] right-[8%] w-px h-20 bg-gradient-to-b from-transparent via-gold/30 to-transparent float-gentle hidden lg:block" />
-      <div className="absolute top-[25%] left-[5%] w-16 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent float-gentle hidden lg:block" style={{ animationDelay: "2s" }} />
-
-      {/* ── Content ── */}
-      <div className="relative z-10 container-wide pb-12 pt-32 lg:pt-0 lg:pb-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          style={{ y: smoothTextY }}
-          className="max-w-2xl"
-        >
-          {/* Eyebrow */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <span className="inline-flex items-center gap-3">
-              <span className="w-8 h-px bg-gold" />
-              <span className="eyebrow !text-ivory/50 tracking-[0.2em]">
-                Handcrafted in Nagaland
-              </span>
-            </span>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="!text-ivory mb-6 leading-[1.05]"
-          >
-            Designers turned{" "}
-            <GoldShimmer className="italic font-light">printers</GoldShimmer>
-          </motion.h1>
-
-          {/* Subtext */}
-          <motion.p
-            variants={itemVariants}
-            className="text-lg lg:text-xl text-ivory/60 leading-relaxed mb-10 max-w-lg font-light"
-          >
-            We craft premium letterpress and foil stamped wedding invitations,
-            business cards, and personalised stationery — designed and printed
-            entirely under one roof.
-          </motion.p>
-
-          {/* CTA Buttons */}
+      <div className="container-wide relative z-10 w-full">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* ── Left Column: Editorial Story & CTAs (7 cols) ── */}
           <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            style={{ y: smoothTextY }}
+            className="lg:col-span-7 max-w-2xl"
           >
-            <MagneticButton
-              href="/start-a-project"
-              className="px-8 py-4 bg-ivory text-ink text-sm tracking-widest uppercase font-medium hover:bg-gold hover:text-ivory transition-colors duration-500 rounded-sm"
-            >
-              Start a Project
-            </MagneticButton>
-            <MagneticButton
-              href="/work"
-              className="px-8 py-4 border border-ivory/25 text-ivory text-sm tracking-widest uppercase font-medium hover:border-gold hover:text-gold transition-colors duration-500 rounded-sm"
-            >
-              View Our Work
-            </MagneticButton>
-          </motion.div>
-        </motion.div>
+            {/* Eyebrow */}
+            <motion.div variants={itemVariants} className="mb-6">
+              <span className="inline-flex items-center gap-3">
+                <span className="w-8 h-px bg-gold" />
+                <span className="eyebrow text-taupe tracking-[0.2em]">
+                  Handcrafted in Nagaland, India
+                </span>
+              </span>
+            </motion.div>
 
-        {/* ── Bottom bar: product badge + scroll indicator ── */}
-        <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex items-end justify-between mt-16 lg:mt-24"
-        >
-          {/* Product badge — glass panel */}
-          <div className="glass-panel-dark px-5 py-3 rounded-sm hidden sm:flex items-center gap-4">
-            <div>
-              <p className="font-serif text-sm text-ivory/90 font-medium">
-                Bespoke 600gsm Cotton Suite
-              </p>
-              <p className="text-[11px] text-ivory/40 font-light">
-                Deep mechanical impression & matte gold foil
-              </p>
-            </div>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-gold bg-gold/10 px-2.5 py-1 rounded">
-              Atelier
-            </span>
-          </div>
+            {/* Headline */}
+            <motion.h1
+              variants={itemVariants}
+              className="text-charcoal mb-6 leading-[1.05]"
+            >
+              Designers turned{" "}
+              <GoldShimmer className="italic font-light">printers</GoldShimmer>
+            </motion.h1>
 
-          {/* Scroll indicator */}
-          <div className="hidden lg:flex flex-col items-center gap-3">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/30 font-light">
-              Scroll
-            </span>
+            {/* Subtext */}
+            <motion.p
+              variants={itemVariants}
+              className="text-lg lg:text-xl text-taupe leading-relaxed mb-10 font-light"
+            >
+              We craft premium letterpress and foil stamped wedding invitations,
+              business cards, and personalised stationery — designed and printed
+              entirely under one roof.
+            </motion.p>
+
+            {/* CTA Buttons */}
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-px h-10 bg-gradient-to-b from-gold/60 to-transparent"
-            />
-          </div>
-        </motion.div>
-      </div>
+              variants={itemVariants}
+              className="flex flex-wrap items-center gap-4 mb-12"
+            >
+              <MagneticButton
+                href="/start-a-project"
+                className="px-8 py-4 bg-charcoal text-ivory text-xs tracking-[0.2em] uppercase font-medium hover:bg-gold hover:text-ivory transition-colors duration-500 rounded-sm shadow-sm"
+              >
+                Start a Project
+              </MagneticButton>
+              <MagneticButton
+                href="/work"
+                className="px-8 py-4 border border-sand hover:border-gold text-charcoal hover:text-gold text-xs tracking-[0.2em] uppercase font-medium transition-colors duration-500 rounded-sm bg-ivory/60"
+              >
+                View Our Work
+              </MagneticButton>
+            </motion.div>
 
-      {/* ── Marquee strip at the very bottom ── */}
-      <div className="relative z-10 border-t border-ivory/5 py-3 bg-ink/30 backdrop-blur-sm">
-        <HorizontalMarquee speed={40} className="text-ivory/25">
-          <span className="text-[11px] tracking-[0.3em] uppercase font-light flex items-center gap-8">
-            <span>Letterpress</span>
-            <span className="text-gold/40">·</span>
-            <span>Foil Stamping</span>
-            <span className="text-gold/40">·</span>
-            <span>600gsm Cotton</span>
-            <span className="text-gold/40">·</span>
-            <span>Handmade in Nagaland</span>
-            <span className="text-gold/40">·</span>
-            <span>Bespoke Design</span>
-            <span className="text-gold/40">·</span>
-            <span>Premium Stationery</span>
-          </span>
-        </HorizontalMarquee>
+            {/* Atelier Craft Badge */}
+            <motion.div variants={itemVariants}>
+              <div className="glass-panel px-5 py-3 rounded-sm inline-flex items-center gap-4 border border-sand/60 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+                <div>
+                  <p className="font-serif text-sm text-charcoal font-medium">
+                    Bespoke 600gsm Cotton Suite
+                  </p>
+                  <p className="text-[11px] text-taupe font-light">
+                    Deep mechanical impression & matte gold foil
+                  </p>
+                </div>
+                <span className="font-mono text-[9px] uppercase tracking-widest text-gold bg-gold/10 px-2.5 py-1 rounded ml-2">
+                  Atelier
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* ── Right Column: 3D Visual Showcase (5 cols) ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: easeOutExpo }}
+            style={{ y: smoothImageY }}
+            className="lg:col-span-5 relative"
+          >
+            <TiltCard maxTilt={5}>
+              <div className="relative aspect-[4/5] rounded-sm overflow-hidden shadow-2xl border border-sand/60 bg-ivory cursor-view group">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg"
+                  alt="Handcrafted letterpress wedding stationery by Famous Letterpress"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-106"
+                />
+
+                {/* Subtle paper vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent pointer-events-none" />
+
+                {/* Delicate gold border frame */}
+                <div className="absolute inset-3 border border-gold/20 rounded-sm pointer-events-none group-hover:border-gold/40 transition-colors duration-500" />
+
+                {/* Floating caption tag on image */}
+                <div className="absolute bottom-6 left-6 right-6 pointer-events-none">
+                  <div className="glass-panel px-4 py-2 rounded-sm inline-block shadow-sm">
+                    <p className="font-serif text-xs text-charcoal italic">
+                      Traditional Heidelberg & Platen Impression
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </TiltCard>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
