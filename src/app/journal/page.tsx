@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { journalArticles } from "@/lib/data/articles";
+import { getCMSArticles } from "@/lib/cms/store";
 
 export const metadata: Metadata = {
   title: "The Journal | Letterpress Guides, Materials & Etiquette | Famous Letterpress",
@@ -11,8 +11,18 @@ export const metadata: Metadata = {
 };
 
 export default function JournalIndexPage() {
-  const featuredArticle = journalArticles[0];
-  const regularArticles = journalArticles.slice(1);
+  const articles = getCMSArticles();
+  const featuredArticle = articles[0] || {
+    id: "default",
+    title: "The Anatomy of Letterpress",
+    slug: "anatomy-of-letterpress",
+    excerpt: "Exploring the craft of relief printing.",
+    category: "Craft",
+    readTime: "5 min",
+    publishedAt: "2026",
+    image: "https://famousletterpress.com/wp-content/uploads/2022/06/craft-1.jpg",
+  };
+  const regularArticles = articles.slice(1);
 
   return (
     <div className="bg-cream">

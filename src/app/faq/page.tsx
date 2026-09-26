@@ -3,80 +3,23 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 
+import { getCMSFAQs } from "@/lib/cms/store";
+
 export const metadata: Metadata = {
   title: "Frequently Asked Questions | Famous Letterpress",
   description:
     "Everything you need to know about our letterpress printing, wedding suites, cotton papers, turnaround times, sample kits, and delivery across India.",
 };
 
-const faqSections = [
-  {
-    category: "General & The Studio",
-    items: [
-      {
-        q: "Where is Famous Letterpress located?",
-        a: "Our printing studio and pressroom are located in Nagaland, India. We dispatch bespoke paper goods and sample kits to couples, designers, and companies all across India and internationally.",
-      },
-      {
-        q: "What makes letterpress different from digital printing?",
-        a: "Digital printing sprays toner or ink onto the surface of thin commercial paper. Letterpress is a mechanical, sculptural relief process where raised metal or photopolymer plates press hand-mixed ink deeply into heavyweight cotton paper, creating a tangible indentation you can feel with your fingers.",
-      },
-      {
-        q: "Can I visit your pressroom in person?",
-        a: "Studio visits are available by appointment only. Because our pressroom operates with active cast-iron machinery, we schedule dedicated walkthroughs for couples and collaborators in advance.",
-      },
-    ],
-  },
-  {
-    category: "Wedding Stationery",
-    items: [
-      {
-        q: "When should we place our wedding stationery order?",
-        a: "We advise reaching out 3 to 5 months before your wedding date. This allows ample time for collaborative design, material sourcing, proof sign-offs, letterpress production, and mailing invitations to your guests 6–8 weeks before the event.",
-      },
-      {
-        q: "Can you print designs created by our own designer or calligraphy artist?",
-        a: "Yes. Many of our commissions come from independent graphic designers and calligraphy artists. We provide pre-press vector guidelines for line weights, font curves, and foil registration.",
-      },
-      {
-        q: "What is your minimum order quantity for wedding invitations?",
-        a: "Our standard minimum order is 50 invitation suites. Because letterpress involves custom photopolymer plate making and lengthy mechanical press calibration, smaller quantities carry a similar fixed setup cost.",
-      },
-    ],
-  },
-  {
-    category: "Business Cards",
-    items: [
-      {
-        q: "What paper thickness do you recommend for business cards?",
-        a: "Our benchmark standard is 600gsm pure cotton board (approximately twice the thickness of standard commercial cards). We also provide 900gsm ultra-heavyweight board and duplexed colored stocks.",
-      },
-      {
-        q: "Can letterpress print on both sides of a card?",
-        a: "Yes, by duplexing two separate printed sheets back-to-back. This guarantees crisp, deep relief impressions on both faces without any reverse-side impression distortion.",
-      },
-      {
-        q: "What is the turnaround time for business cards?",
-        a: "Standard production is typically 2 to 3 weeks following final digital artwork sign-off.",
-      },
-    ],
-  },
-  {
-    category: "Sample Kits & Payments",
-    items: [
-      {
-        q: "How can I purchase a sample kit?",
-        a: "You can purchase our Wedding Sample Kit (₹1,500) or Business Card Sample Kit (₹1,000) directly on our website. Payments are processed securely via Razorpay supporting UPI, credit cards, debit cards, and net banking.",
-      },
-      {
-        q: "How fast do sample kits ship?",
-        a: "Sample kits are dispatched within 24–48 hours via express courier with real-time tracking, typically arriving within 3–5 business days anywhere in India.",
-      },
-    ],
-  },
-];
-
 export default function FAQPage() {
+  const faqs = getCMSFAQs();
+  const categories = Array.from(new Set(faqs.map((f) => f.category)));
+  const faqSections = categories.map((cat) => ({
+    category: cat,
+    items: faqs
+      .filter((f) => f.category === cat)
+      .map((f) => ({ q: f.question, a: f.answer })),
+  }));
   return (
     <div className="bg-cream">
       {/* Header */}

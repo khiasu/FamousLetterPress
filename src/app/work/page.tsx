@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { portfolioData } from "@/lib/data/portfolio";
+import { getCMSPortfolio } from "@/lib/cms/store";
 import { PortfolioGallery } from "@/components/portfolio/PortfolioGallery";
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export default function WorkPage() {
       {/* Filterable Portfolio Gallery */}
       <section className="py-20 md:py-28 bg-ivory">
         <div className="container-wide">
-          <PortfolioGallery items={portfolioData} />
+          <PortfolioGallery items={getCMSPortfolio()} />
         </div>
       </section>
 

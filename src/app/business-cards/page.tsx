@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { servicesData } from "@/lib/data/services";
-import { sampleKitsData } from "@/lib/data/sample-kits";
-import { portfolioData } from "@/lib/data/portfolio";
+import { getCMSServices, getCMSSampleKits, getCMSPortfolio } from "@/lib/cms/store";
 
 export const metadata: Metadata = {
   title: "Luxury Letterpress Business Cards | Famous Letterpress",
@@ -32,9 +30,9 @@ const cardFinishes = [
 ];
 
 export default function BusinessCardsPage() {
-  const service = servicesData["business-cards"];
-  const sampleKit = sampleKitsData["business-card-sample-kit"];
-  const cardPortfolio = portfolioData.filter((item) => item.category === "business-cards");
+  const service = getCMSServices()["business-cards"];
+  const sampleKit = getCMSSampleKits()["business-card-sample-kit"];
+  const cardPortfolio = getCMSPortfolio().filter((item) => item.category === "business-cards");
 
   return (
     <div className="bg-cream">

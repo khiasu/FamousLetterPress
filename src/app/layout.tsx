@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getCMSSettings } from "@/lib/cms/store";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -42,6 +43,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const settings = getCMSSettings();
   return (
     <html
       lang="en"
@@ -49,7 +51,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <JsonLd />
-        <Header />
+        <Header
+          logoUrl={settings.logoUrl}
+          announcementActive={settings.announcementActive}
+          announcementBarText={settings.announcementBarText}
+        />
         <main className="flex-1">{children}</main>
         <Footer />
       </body>

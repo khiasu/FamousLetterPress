@@ -21,7 +21,17 @@ const navigation = [
   { label: "Contact", href: "/contact" },
 ];
 
-export function Header() {
+export interface HeaderProps {
+  logoUrl?: string;
+  announcementActive?: boolean;
+  announcementBarText?: string;
+}
+
+export function Header({
+  logoUrl = "https://famousletterpress.com/wp-content/uploads/2022/06/FMS-new-logo-1-100x100.png",
+  announcementActive = false,
+  announcementBarText,
+}: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -48,8 +58,15 @@ export function Header() {
 
   return (
     <>
+      {announcementActive && announcementBarText && (
+        <div className="bg-stone-900 text-stone-100 text-[11px] font-mono tracking-widest uppercase py-2 px-4 text-center z-50 relative">
+          {announcementBarText}
+        </div>
+      )}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[var(--ease-out-expo)] ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-[var(--ease-out-expo)] ${
+          announcementActive && announcementBarText ? "top-[32px]" : "top-0"
+        } ${
           isScrolled
             ? "bg-ivory/95 backdrop-blur-md shadow-[0_1px_0_var(--color-sand)]"
             : "bg-transparent"
@@ -70,7 +87,7 @@ export function Header() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://famousletterpress.com/wp-content/uploads/2022/06/FMS-new-logo-1-100x100.png"
+                src={logoUrl || "https://famousletterpress.com/wp-content/uploads/2022/06/FMS-new-logo-1-100x100.png"}
                 alt="Famous Letterpress Seal"
                 className="w-8 h-8 lg:w-9 lg:h-9 object-contain rounded-full shadow-xs group-hover:scale-105 transition-transform"
               />

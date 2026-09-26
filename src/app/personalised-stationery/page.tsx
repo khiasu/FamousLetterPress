@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { servicesData } from "@/lib/data/services";
-import { portfolioData } from "@/lib/data/portfolio";
+import { getCMSServices, getCMSPortfolio } from "@/lib/cms/store";
 
 export const metadata: Metadata = {
   title: "Bespoke Personalised Stationery & Correspondence | Famous Letterpress",
@@ -31,8 +30,8 @@ const stationeryCategories = [
 ];
 
 export default function PersonalisedStationeryPage() {
-  const service = servicesData["personalised-stationery"];
-  const pieces = portfolioData.filter((item) => item.category === "personalised");
+  const service = getCMSServices()["personalised-stationery"];
+  const pieces = getCMSPortfolio().filter((item) => item.category === "personalised");
 
   return (
     <div className="bg-cream">

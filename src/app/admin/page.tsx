@@ -1,58 +1,15 @@
 import Link from "next/link";
-import { servicesData } from "@/lib/data/services";
-import { sampleKitsData } from "@/lib/data/sample-kits";
-import { portfolioData } from "@/lib/data/portfolio";
+import { readCMSStore } from "@/lib/cms/store";
 
 export default function AdminDashboardPage() {
-  const serviceCount = Object.keys(servicesData).length;
-  const sampleKitCount = Object.keys(sampleKitsData).length;
-  const portfolioCount = portfolioData.length;
+  const store = readCMSStore();
+  const serviceCount = Object.keys(store.services).length;
+  const sampleKitCount = Object.keys(store.sampleKits).length;
+  const portfolioCount = store.portfolio.length;
+  const articleCount = store.articles.length;
 
-  const mockRecentLeads = [
-    {
-      ref: "EB-2026-8492",
-      type: "Early Bride",
-      name: "Arenla & Rongsen",
-      date: "Nov 2026",
-      status: "NEW",
-      time: "Today, 4:15 PM",
-    },
-    {
-      ref: "PRJ-2026-1039",
-      type: "Business Cards",
-      name: "Kevi Architecture Studio",
-      date: "Standard",
-      status: "CONTACTED",
-      time: "Yesterday",
-    },
-    {
-      ref: "EB-2026-5521",
-      type: "Early Bride",
-      name: "Imli & Narola",
-      date: "Dec 2026",
-      status: "IN DISCUSSION",
-      time: "2 days ago",
-    },
-  ];
-
-  const mockRecentOrders = [
-    {
-      orderNo: "FLP-2026-1044",
-      kit: "Wedding Sample Kit",
-      customer: "Temsu Jamir",
-      city: "Dimapur",
-      amount: "₹1,500",
-      status: "DISPATCHED",
-    },
-    {
-      orderNo: "FLP-2026-1043",
-      kit: "Business Card Sample Kit",
-      customer: "Pooja Mehta",
-      city: "Mumbai",
-      amount: "₹1,000",
-      status: "PAID",
-    },
-  ];
+  const recentLeads = store.leads.slice(0, 3);
+  const recentOrders = store.orders.slice(0, 3);
 
   return (
     <div className="space-y-8 max-w-6xl">
@@ -129,8 +86,8 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="divide-y divide-stone-100">
-            {mockRecentLeads.map((lead) => (
-              <div key={lead.ref} className="py-3 flex items-center justify-between">
+            {recentLeads.map((lead) => (
+              <div key={lead.id || lead.ref} className="py-3 flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-xs text-stone-900">{lead.name}</span>
@@ -139,7 +96,7 @@ export default function AdminDashboardPage() {
                     </span>
                   </div>
                   <div className="text-[11px] text-stone-400 mt-0.5">
-                    Ref: {lead.ref} · {lead.time}
+                    Ref: {lead.ref} · {lead.date}
                   </div>
                 </div>
                 <div>
@@ -172,27 +129,27 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="divide-y divide-stone-100">
-            {mockRecentOrders.map((ord) => (
-              <div key={ord.orderNo} className="py-3 flex items-center justify-between">
+            {recentOrders.map((ord) => (
+              <div key={ord.id || ord.orderNumber} className="py-3 flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-medium text-xs text-stone-900">{ord.customer}</span>
-                    <span className="text-[11px] text-stone-500 font-mono">({ord.city})</span>
+                    <span className="font-medium text-xs text-stone-900">{ord.customerName}</span>
+                    <span className="text-[11px] text-stone-500 font-mono">({ord.kitName})</span>
                   </div>
                   <div className="text-[11px] text-stone-400 mt-0.5">
-                    {ord.orderNo} · {ord.kit}
+                    {ord.orderNumber} · {ord.createdAt}
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs font-semibold text-stone-900 font-mono">{ord.amount}</div>
+                  <div className="text-xs font-semibold text-stone-900 font-mono">₹{ord.amount}</div>
                   <span
                     className={`text-[10px] font-mono px-1.5 py-0.5 rounded-xs font-semibold ${
-                      ord.status === "PAID"
+                      ord.paymentStatus === "PAID"
                         ? "bg-emerald-100 text-emerald-800"
                         : "bg-stone-100 text-stone-700"
                     }`}
                   >
-                    {ord.status}
+                    {ord.paymentStatus}
                   </span>
                 </div>
               </div>

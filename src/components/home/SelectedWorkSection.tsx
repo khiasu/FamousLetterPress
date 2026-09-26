@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { portfolioData } from "@/lib/data/portfolio";
+import { getCMSPortfolio } from "@/lib/cms/store";
 
 export function SelectedWorkSection() {
-  const selectedWork = portfolioData.slice(0, 4);
+  const portfolio = getCMSPortfolio();
+  const selectedWork = portfolio.slice(0, 4);
   return (
     <section className="section bg-ivory" aria-label="Selected work">
       <div className="container-wide">

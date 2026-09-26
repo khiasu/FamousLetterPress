@@ -3,21 +3,23 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { journalArticles } from "@/lib/data/articles";
+import { getCMSArticles } from "@/lib/cms/store";
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return journalArticles.map((article) => ({
+  const articles = getCMSArticles();
+  return articles.map((article) => ({
     slug: article.slug,
   }));
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const article = journalArticles.find((a) => a.slug === resolvedParams.slug);
+  const articles = getCMSArticles();
+  const article = articles.find((a) => a.slug === resolvedParams.slug);
 
   if (!article) {
     return { title: "Article Not Found | Famous Letterpress" };
@@ -38,7 +40,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
 export default async function JournalArticlePage({ params }: ArticlePageProps) {
   const resolvedParams = await params;
-  const article = journalArticles.find((a) => a.slug === resolvedParams.slug);
+  const articles = getCMSArticles();
+  const article = articles.find((a) => a.slug === resolvedParams.slug);
 
   if (!article) {
     notFound();

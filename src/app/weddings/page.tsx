@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { servicesData } from "@/lib/data/services";
-import { sampleKitsData } from "@/lib/data/sample-kits";
-import { portfolioData } from "@/lib/data/portfolio";
+import { getCMSServices, getCMSSampleKits, getCMSPortfolio } from "@/lib/cms/store";
+
 
 export const metadata: Metadata = {
   title: "Letterpress Wedding Stationery & Invitations | Famous Letterpress",
@@ -59,9 +58,9 @@ const timelineSteps = [
 ];
 
 export default function WeddingsHubPage() {
-  const weddingService = servicesData["wedding-stationery"];
-  const weddingKit = sampleKitsData["wedding-sample-kit"];
-  const weddingPortfolio = portfolioData.filter((item) => item.category === "weddings");
+  const weddingService = getCMSServices()["wedding-stationery"];
+  const weddingKit = getCMSSampleKits()["wedding-sample-kit"];
+  const weddingPortfolio = getCMSPortfolio().filter((item) => item.category === "weddings");
 
   return (
     <div className="bg-cream">

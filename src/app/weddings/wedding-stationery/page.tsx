@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { servicesData } from "@/lib/data/services";
-import { sampleKitsData } from "@/lib/data/sample-kits";
+import { getCMSServices, getCMSSampleKits } from "@/lib/cms/store";
 
 export const metadata: Metadata = {
   title: "Bespoke Letterpress Wedding Stationery | Famous Letterpress",
@@ -12,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function WeddingStationeryPage() {
-  const service = servicesData["wedding-stationery"];
-  const sampleKit = sampleKitsData["wedding-sample-kit"];
+  const service = getCMSServices()["wedding-stationery"];
+  const sampleKit = getCMSSampleKits()["wedding-sample-kit"];
 
   return (
     <div className="bg-cream">

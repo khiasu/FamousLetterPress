@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { sampleKitsData } from "@/lib/data/sample-kits";
+import { getCMSSampleKits } from "@/lib/cms/store";
 import { SampleKitCheckout } from "@/components/shop/SampleKitCheckout";
 
 export const metadata: Metadata = {
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function BusinessCardSampleKitPage() {
-  const kit = sampleKitsData["business-card-sample-kit"];
+  const kits = getCMSSampleKits();
+  const kit = kits["business-card-sample-kit"];
 
   return (
     <div className="bg-cream">

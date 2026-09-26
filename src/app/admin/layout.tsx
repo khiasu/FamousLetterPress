@@ -19,6 +19,7 @@ const adminNav = [
   { label: "Services", href: "/admin/services", icon: "✨" },
   { label: "Portfolio Items", href: "/admin/portfolio", icon: "🖼️" },
   { label: "FAQs", href: "/admin/faqs", icon: "❓" },
+  { label: "Journal Articles", href: "/admin/journal", icon: "📰" },
   { label: "Site Settings", href: "/admin/settings", icon: "⚙️" },
 ];
 
