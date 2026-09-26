@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 
 interface SiteShellProps {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ export function SiteShell({
 
   return (
     <>
+      <ScrollProgressBar />
       <JsonLd />
       <Header
         logoUrl={logoUrl}
