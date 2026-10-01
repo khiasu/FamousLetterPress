@@ -1,77 +1,78 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "About Us | Designers Turned Printers | Famous Letterpress",
+  title: "Our Story | Designers Turned Printers | Famous Letterpress",
   description:
-    "Famous Letterpress is a boutique letterpress printing and stationery studio based in Nagaland, India. Designers turned printers handcrafting mindful paper heirlooms.",
+    "Famous Letterpress is a boutique letterpress atelier founded by Akanito in Nagaland, India. Designers turned printers handcrafting bespoke wedding stationery and luxury business cards.",
 };
 
 const studioValues = [
   {
     title: "Designers Turned Printers",
-    desc: "Because our background is in graphic design and typography, we don't just execute print files—we understand kerning, line-height, visual hierarchy, and how ink settles into cotton fibers.",
+    desc: "Because our background is in graphic design and typography, we don't just execute print files—we understand kerning, line-height, optical balance, and how ink settles into 600gsm cotton fibers.",
   },
   {
     title: "Handcrafted in Nagaland",
-    desc: "Nestled in the lush hills of Northeast India, our pressroom operates with deliberate slowness and dedication to time-honored artisanal methods.",
+    desc: "From our workshop in Dimapur, Nagaland, our atelier operates with deliberate slowness and reverence for time-honored artisanal mechanics.",
   },
   {
-    title: "Pure Tactile Integrity",
-    desc: "We print exclusively on heavyweight 100% cotton papers, archival vegetable and mineral inks, and certified European boards that never compromise on longevity.",
+    title: "Pure Cotton Integrity",
+    desc: "We print exclusively on heavyweight 100% cotton papers (300 to 900 gsm), vegetable-based oil inks, and genuine European stamping foils.",
   },
   {
-    title: "Direct Studio Communication",
-    desc: "When you reach out to Famous Letterpress, you speak directly with craftspeople who will personally mix your ink, align the plates, and feed the press.",
+    title: "Direct Studio Relationship",
+    desc: "When you reach out to Famous Letterpress, you speak directly with craftspeople who personally mix your inks, calibrate the pressure, and hand-feed every single sheet.",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="bg-cream">
-      {/* Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 border-b border-sand">
+    <div className="bg-paper-creme min-h-screen">
+      {/* ── Header ── */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-terracotta">About</span>
+                <span className="text-ink-deep">Our Story</span>
               </div>
-              <span className="eyebrow text-terracotta">Our Origin & Ethos</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-6">
-                Designers turned printers, rooted in Nagaland.
+              <p className="eyebrow mb-2">Heritage &amp; Craft</p>
+              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+                Designers turned printers,{" "}
+                <em className="font-light">rooted in Nagaland.</em>
               </h1>
-              <p className="body-lg text-warm-stone max-w-2xl font-light leading-relaxed mb-8">
-                Famous Letterpress was born from an unyielding love for typography and physical paper. In an increasingly disposable digital landscape, we believe the printed word should carry substance, texture, and lasting emotional weight.
+              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
+                Famous Letterpress was born from an unyielding devotion to typography and tactile paper. In an increasingly disposable digital landscape, we believe the printed word should carry substance, texture, and permanent emotional weight.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Studio Narrative */}
-      <section className="py-20 md:py-28 bg-ivory border-b border-sand">
+      {/* ── Studio Narrative ── */}
+      <section className="section bg-paper-white" aria-label="Studio Journey">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-6 space-y-6">
               <Reveal>
-                <span className="eyebrow text-forest">The Studio Journey</span>
-                <h2 className="heading-lg text-charcoal mt-2 mb-6">
-                  Where mechanical history meets modern editorial design.
+                <p className="eyebrow mb-2">The Journey Since 2008</p>
+                <h2 className="mb-6 font-serif">
+                  Where mechanical history meets{" "}
+                  <em className="font-light">modern editorial design.</em>
                 </h2>
-                <div className="space-y-4 body-md text-warm-stone font-light leading-relaxed">
+                <div className="space-y-4 text-sm md:text-base text-ink-muted font-light leading-relaxed">
                   <p>
-                    Famous Letterpress operates from Nagaland, India. What began as a passionate design studio evolved naturally into a dedicated printing atelier when we realized that commercial digital printing could never reproduce the sensory relief of cast-iron presswork.
+                    Famous Letterpress operates from Nagaland, in Northeast India. What began as a graphic design practice founded by <strong>Akanito</strong> in 2008 evolved into a dedicated letterpress printing atelier when we realized that commercial digital printing could never reproduce the sensory relief of cast-iron presswork.
                   </p>
                   <p>
-                    Letterpress printing is not an automated push-button process. Each sheet of paper is individual, requiring precise adjustments of ink viscosity, packing pressure, and register pins.
+                    Letterpress printing is not an automated push-button process. Each sheet of 600gsm cotton rag is hand-fed one at a time. Each run requires meticulous manual tuning of ink tack, packing hardness, register pins, and platen pressure to achieve the signature &ldquo;bite&rdquo;.
                   </p>
                   <p>
-                    Under the creative direction of founder <strong>Mr Khiasu</strong>, our studio has grown into a trusted craft partner for discerning couples, creative agencies, and luxury brands across India and abroad.
+                    We tracked down and salvaged vintage Heidelberg platen presses, restoring them bolt by bolt in our Nagaland workshop. Today, our atelier is trusted by couples, luxury brands, and creative agencies throughout India and across the world.
                   </p>
                 </div>
               </Reveal>
@@ -79,11 +80,11 @@ export default function AboutPage() {
 
             <div className="lg:col-span-6 space-y-6">
               <Reveal delay={0.1}>
-                <div className="card-warm overflow-hidden bg-cream border-sand shadow-sm">
-                  <div className="aspect-[16/10] relative overflow-hidden bg-sand/40">
+                <div className="overflow-hidden bg-paper-sand border border-border-hairline">
+                  <div className="aspect-[16/10] relative overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3671-2500x1250.jpg"
+                      src="https://famousletterpress.com/wp-content/uploads/2026/04/banner-01-1365x600.jpg"
                       alt="Famous Letterpress vintage cast iron platen printing press in Nagaland"
                       className="w-full h-full object-cover"
                     />
@@ -92,22 +93,22 @@ export default function AboutPage() {
               </Reveal>
 
               <Reveal delay={0.15}>
-                <div className="card-warm p-8 bg-cream border-sand">
-                  <span className="eyebrow text-terracotta">Our Physical Pressroom</span>
-                  <h3 className="font-serif text-2xl text-charcoal mt-2 mb-4">
+                <div className="bg-paper-creme border border-border-hairline p-8">
+                  <p className="eyebrow mb-2">Our Physical Workshop</p>
+                  <h3 className="font-serif text-2xl text-ink-deep mb-4">
                     The Machinery of Mindful Craft
                   </h3>
-                  <p className="body-sm text-warm-stone leading-relaxed mb-6 font-light">
-                    Our studio houses vintage platen presses and cylinder proof presses. These machines, crafted with immense mechanical precision, apply thousands of pounds of pressure per square inch to deboss our designs permanently into pure cotton stock.
+                  <p className="text-xs md:text-sm text-ink-muted leading-relaxed mb-6 font-light">
+                    Our atelier houses vintage Heidelberg platen presses and cylinder proof presses. These machines, engineered with immense cast-iron precision, apply thousands of pounds of pressure per square inch to create an indelible deboss into soft cotton board.
                   </p>
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sand text-xs font-mono text-charcoal">
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border-hairline text-xs font-sans">
                     <div>
-                      <div className="text-warm-stone uppercase text-[10px]">Location</div>
-                      <div className="font-medium mt-0.5">Nagaland, India</div>
+                      <span className="text-ink-light uppercase text-[10px] tracking-wider block">Atelier Location</span>
+                      <span className="font-medium text-ink-deep mt-0.5 block">Dimapur, Nagaland, India</span>
                     </div>
                     <div>
-                      <div className="text-warm-stone uppercase text-[10px]">Core Philosophy</div>
-                      <div className="font-medium mt-0.5">Designers Turned Printers</div>
+                      <span className="text-ink-light uppercase text-[10px] tracking-wider block">Founding Heritage</span>
+                      <span className="font-medium text-ink-deep mt-0.5 block">Est. 2008 · Akanito</span>
                     </div>
                   </div>
                 </div>
@@ -117,25 +118,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Core Values */}
-      <section className="py-20 md:py-28 bg-cream border-b border-sand">
+      {/* ── Studio Pillars ── */}
+      <section className="section bg-paper-creme" aria-label="Core Pillars">
         <div className="container-wide">
-          <Reveal>
-            <div className="text-center max-w-xl mx-auto mb-16">
-              <span className="eyebrow text-terracotta">What We Stand For</span>
-              <h2 className="heading-xl text-charcoal mt-2">The four pillars of our work</h2>
-            </div>
-          </Reveal>
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <Reveal>
+              <p className="eyebrow mb-2">What We Stand For</p>
+              <h2 className="mb-4">
+                The four pillars of <em className="font-light">our atelier</em>
+              </h2>
+            </Reveal>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid sm:grid-cols-2 gap-8">
             {studioValues.map((val, idx) => (
-              <Reveal key={val.title} delay={idx * 0.1}>
-                <div className="card-warm p-8 h-full">
-                  <span className="text-xs font-mono uppercase tracking-widest text-forest font-semibold block mb-2">
-                    Pillar 0{idx + 1}
+              <Reveal key={val.title} delay={idx * 0.08}>
+                <div className="bg-paper-white border border-border-hairline p-8 h-full">
+                  <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-3">
+                    0{idx + 1}
                   </span>
-                  <h3 className="font-serif text-xl text-charcoal mb-3">{val.title}</h3>
-                  <p className="text-sm text-warm-stone leading-relaxed font-light">{val.desc}</p>
+                  <h3 className="font-serif text-xl text-ink-deep mb-3">{val.title}</h3>
+                  <p className="text-xs md:text-sm text-ink-muted leading-relaxed font-light">{val.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -143,22 +146,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-28 bg-ivory">
-        <div className="container-narrow text-center">
+      {/* ── Consultation CTA ── */}
+      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+        <div className="container-narrow">
           <Reveal>
-            <span className="eyebrow text-terracotta">Work With Us</span>
-            <h2 className="heading-xl text-charcoal mt-2 mb-4">Let's craft something memorable</h2>
-            <p className="body-md text-warm-stone max-w-lg mx-auto mb-8 font-light">
-              We welcome commissions for wedding invitation suites, executive business cards, and bespoke paper projects.
+            <p className="eyebrow !text-paper-creme/30 mb-3">Work With Our Atelier</p>
+            <h2 className="!text-paper-creme mb-4">
+              Let&apos;s create something <em className="font-light">worth keeping forever.</em>
+            </h2>
+            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+              We welcome commissions for bespoke wedding invitations, luxury business cards, and custom stationery suites.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/start-a-project" variant="primary" size="lg">
+              <Link
+                href="/start-a-project"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+              >
                 Start a Conversation
-              </Button>
-              <Button href="/weddings/wedding-sample-kit" variant="outline" size="lg">
+              </Link>
+              <Link
+                href="/weddings/wedding-sample-kit"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+              >
                 Order Sample Kit
-              </Button>
+              </Link>
             </div>
           </Reveal>
         </div>

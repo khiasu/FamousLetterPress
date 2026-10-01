@@ -15,22 +15,24 @@ export default function BusinessCardSampleKitPage() {
   const kit = kits["business-card-sample-kit"];
 
   return (
-    <div className="bg-cream">
+    <div className="bg-paper-creme min-h-screen">
       {/* Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 border-b border-sand">
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <Link href="/business-cards" className="hover:text-terracotta">Business Cards</Link>
+                <Link href="/business-cards" className="hover:text-ink-deep transition-colors">Business Cards</Link>
                 <span>/</span>
-                <span className="text-terracotta">Sample Kit</span>
+                <span className="text-ink-deep">Sample Kit</span>
               </div>
-              <span className="eyebrow text-terracotta">Sensory Assessment</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-4">{kit.name}</h1>
-              <p className="body-lg text-warm-stone max-w-2xl font-light leading-relaxed">
+              <p className="eyebrow mb-2">Tactile Assessment</p>
+              <h1 className="text-ink-deep mb-4 font-serif">
+                {kit.name}
+              </h1>
+              <p className="text-base md:text-lg text-ink-muted max-w-2xl leading-relaxed">
                 {kit.tagline}
               </p>
             </div>
@@ -39,15 +41,15 @@ export default function BusinessCardSampleKitPage() {
       </section>
 
       {/* Main Content & Checkout Form */}
-      <section className="py-16 md:py-24 bg-ivory">
+      <section className="section bg-paper-white">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Kit Details & Inclusions */}
             <div className="lg:col-span-7 space-y-8">
               {/* Product Visual Showcase */}
               <Reveal>
-                <div className="card-warm overflow-hidden shadow-sm">
-                  <div className="aspect-[16/10] relative overflow-hidden bg-sand/40">
+                <div className="overflow-hidden bg-paper-sand border border-border-hairline">
+                  <div className="aspect-[16/10] relative overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={kit.featuredImage}
@@ -56,9 +58,9 @@ export default function BusinessCardSampleKitPage() {
                     />
                   </div>
                   {kit.galleryImages && kit.galleryImages.length > 0 && (
-                    <div className="grid grid-cols-4 gap-2 p-3 bg-cream border-t border-sand">
+                    <div className="grid grid-cols-4 gap-2 p-3 bg-paper-creme border-t border-border-hairline">
                       {kit.galleryImages.map((img, i) => (
-                        <div key={i} className="aspect-square rounded overflow-hidden border border-sand/60 shadow-xs">
+                        <div key={i} className="aspect-square overflow-hidden border border-border-hairline">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={img}
@@ -73,18 +75,18 @@ export default function BusinessCardSampleKitPage() {
               </Reveal>
 
               <Reveal delay={0.05}>
-                <div className="card-warm p-8">
-                  <h2 className="heading-md text-charcoal mb-4">Feel Before You Print</h2>
-                  <p className="text-sm text-warm-stone leading-relaxed mb-6 font-light">
+                <div className="bg-paper-creme border border-border-hairline p-6 md:p-8">
+                  <h2 className="text-xl md:text-2xl text-ink-deep mb-4 font-serif">Feel Before You Print</h2>
+                  <p className="text-sm text-ink-muted leading-relaxed mb-6 font-light">
                     {kit.description}
                   </p>
 
-                  <div className="pt-6 border-t border-sand">
-                    <h3 className="font-serif text-xl text-charcoal mb-4">Sample Kit Box Inclusions</h3>
+                  <div className="pt-6 border-t border-border-hairline">
+                    <h3 className="text-lg text-ink-deep mb-4 font-serif">Sample Kit Box Inclusions</h3>
                     <ul className="space-y-3">
                       {kit.includedItems.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-warm-stone">
-                          <span className="w-1.5 h-1.5 rounded-full bg-forest mt-2 shrink-0" />
+                        <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-ink-muted">
+                          <span className="w-1.5 h-1.5 rounded-full bg-ink-deep mt-2 shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -94,19 +96,19 @@ export default function BusinessCardSampleKitPage() {
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="card-warm p-8 bg-cream border-forest/20">
-                  <span className="eyebrow text-forest">Express Dispatch</span>
-                  <h3 className="font-serif text-xl text-charcoal mt-2 mb-3">Courier Shipping Across India</h3>
-                  <p className="text-xs sm:text-sm text-warm-stone leading-relaxed">
-                    {kit.shippingInfo}
+                <div className="bg-paper-sand border border-border-hairline p-6 md:p-8">
+                  <p className="eyebrow mb-2">Express Dispatch</p>
+                  <h3 className="text-lg md:text-xl text-ink-deep mb-3 font-serif">Courier Shipping Across India</h3>
+                  <p className="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                    Shipped directly from our Nagaland workshop. Carefully boxed with protective wrapping and dispatched via express courier with real-time tracking.
                   </p>
                 </div>
               </Reveal>
             </div>
 
-            {/* Right Column: Checkout Form */}
-            <div className="lg:col-span-5 sticky top-28">
-              <Reveal delay={0.2}>
+            {/* Right Column: Sticky Razorpay Checkout */}
+            <div className="lg:col-span-5 lg:sticky lg:top-28">
+              <Reveal delay={0.15}>
                 <SampleKitCheckout kit={kit} />
               </Reveal>
             </div>

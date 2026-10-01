@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { Button } from "@/components/ui/Button";
-
 import { getCMSFAQs } from "@/lib/cms/store";
 
 export const metadata: Metadata = {
@@ -20,49 +18,52 @@ export default function FAQPage() {
       .filter((f) => f.category === cat)
       .map((f) => ({ q: f.question, a: f.answer })),
   }));
+
   return (
-    <div className="bg-cream">
-      {/* Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 border-b border-sand">
+    <div className="bg-paper-creme min-h-screen">
+      {/* ── Header ── */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-terracotta">FAQ</span>
+                <span className="text-ink-deep">FAQ</span>
               </div>
-              <span className="eyebrow text-terracotta">Help & Clarity</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-6">Frequently Asked Questions</h1>
-              <p className="body-lg text-warm-stone max-w-2xl font-light leading-relaxed mb-8">
-                Factual answers to help you understand our processes, materials, order timelines, and delivery terms.
+              <p className="eyebrow mb-2">Help &amp; Clarity</p>
+              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+                Frequently Asked <em className="font-light">Questions</em>
+              </h1>
+              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
+                Clear answers regarding our printing techniques, cotton papers, proofing workflows, turnaround times, and delivery across India and internationally.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Categorized FAQs */}
-      <section className="py-20 md:py-28 bg-ivory">
+      {/* ── Categorized FAQs ── */}
+      <section className="section bg-paper-white">
         <div className="container-wide max-w-4xl">
           <div className="space-y-16">
             {faqSections.map((sec, secIdx) => (
               <div key={sec.category} className="space-y-6">
-                <Reveal delay={secIdx * 0.1}>
-                  <div className="border-b border-sand pb-3 mb-6">
-                    <span className="font-mono text-xs uppercase tracking-widest text-forest font-semibold block mb-1">
-                      Category 0{secIdx + 1}
+                <Reveal delay={secIdx * 0.08}>
+                  <div className="border-b border-border-hairline pb-3 mb-6">
+                    <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-1">
+                      Section 0{secIdx + 1}
                     </span>
-                    <h2 className="heading-md text-charcoal">{sec.category}</h2>
+                    <h2 className="text-xl md:text-2xl font-serif text-ink-deep">{sec.category}</h2>
                   </div>
                 </Reveal>
 
                 <div className="space-y-4">
                   {sec.items.map((item, idx) => (
-                    <Reveal key={item.q} delay={idx * 0.05}>
-                      <div className="card-warm p-6 bg-cream">
-                        <h3 className="font-serif text-lg text-charcoal mb-2">{item.q}</h3>
-                        <p className="body-sm text-warm-stone font-light leading-relaxed">{item.a}</p>
+                    <Reveal key={item.q} delay={idx * 0.04}>
+                      <div className="bg-paper-creme border border-border-hairline p-6 md:p-8">
+                        <h3 className="font-serif text-lg text-ink-deep mb-2">{item.q}</h3>
+                        <p className="text-xs md:text-sm text-ink-muted font-light leading-relaxed">{item.a}</p>
                       </div>
                     </Reveal>
                   ))}
@@ -73,22 +74,30 @@ export default function FAQPage() {
         </div>
       </section>
 
-      {/* Still Have Questions */}
-      <section className="py-20 md:py-28 bg-cream border-t border-sand">
-        <div className="container-narrow text-center">
+      {/* ── Still Have Questions CTA ── */}
+      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+        <div className="container-narrow">
           <Reveal>
-            <span className="eyebrow text-terracotta">Direct Studio Support</span>
-            <h2 className="heading-xl text-charcoal mt-2 mb-4">Still have a specific question?</h2>
-            <p className="body-md text-warm-stone max-w-lg mx-auto mb-8 font-light">
-              Reach out directly to our studio team on WhatsApp or send us an email. We are always glad to assist.
+            <p className="eyebrow !text-paper-creme/30 mb-3">Direct Studio Support</p>
+            <h2 className="!text-paper-creme mb-4">
+              Still have a specific question?
+            </h2>
+            <p className="text-sm md:text-base text-paper-creme/50 max-w-lg mx-auto mb-8 font-light leading-relaxed">
+              Reach out directly to our pressroom team on WhatsApp or send us an email. We are always glad to assist.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/contact" variant="primary" size="lg">
-                Contact Studio
-              </Button>
-              <Button href="/start-a-project" variant="outline" size="lg">
+              <Link
+                href="/contact"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+              >
+                Contact Atelier
+              </Link>
+              <Link
+                href="/start-a-project"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+              >
                 Start a Project
-              </Button>
+              </Link>
             </div>
           </Reveal>
         </div>

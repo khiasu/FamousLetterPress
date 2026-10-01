@@ -27,21 +27,23 @@ async function FormContainer({ searchParams }: { searchParams: Promise<{ service
 
 export default function StartAProjectPage({ searchParams }: StartProjectPageProps) {
   return (
-    <div className="bg-cream">
+    <div className="bg-paper-creme min-h-screen">
       {/* Header */}
-      <section className="pt-32 pb-14 md:pt-40 md:pb-20 border-b border-sand">
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center justify-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-terracotta">Start a Project</span>
+                <span className="text-ink-deep">Start a Project</span>
               </div>
-              <span className="eyebrow text-terracotta">Project Initiation</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-4">Start a Commission</h1>
-              <p className="body-md text-warm-stone font-light leading-relaxed">
-                Whether you have an upcoming wedding celebration, need executive identity cards, or are planning bespoke personal stationery, we are ready to bring it to life.
+              <p className="eyebrow mb-2">Project Initiation</p>
+              <h1 className="text-ink-deep mb-4 font-serif">
+                Start a Commission
+              </h1>
+              <p className="text-sm md:text-base text-ink-muted font-light leading-relaxed">
+                Whether you have an upcoming wedding celebration, need executive identity cards, or are planning bespoke personal stationery, our atelier is ready to bring it to life.
               </p>
             </div>
           </Reveal>
@@ -49,10 +51,10 @@ export default function StartAProjectPage({ searchParams }: StartProjectPageProp
       </section>
 
       {/* Form Area */}
-      <section className="py-16 md:py-24 bg-ivory">
+      <section className="section bg-paper-white">
         <div className="container-wide">
           <Reveal>
-            <Suspense fallback={<div className="text-center py-12 text-warm-stone">Loading project form...</div>}>
+            <Suspense fallback={<div className="text-center py-12 text-ink-light text-xs font-sans">Loading brief form...</div>}>
               <FormContainer searchParams={searchParams} />
             </Suspense>
           </Reveal>

@@ -1,41 +1,42 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Contact Famous Letterpress | Nagaland, India",
+  title: "Contact Famous Letterpress | Nagaland Atelier",
   description:
-    "Get in touch with Famous Letterpress. Contact our studio via WhatsApp, email, or schedule a consultation for your upcoming wedding or brand stationery.",
+    "Get in touch with Famous Letterpress. Contact our atelier via WhatsApp, email, or schedule a consultation for your upcoming wedding or brand stationery.",
 };
 
 const studioDetails = {
-  name: "Famous Letterpress",
-  location: "Nagaland, India",
+  name: "Famous Letterpress Atelier",
+  location: "Dimapur, Nagaland, India",
   email: "hello@famousletterpress.com",
-  phone: "+91 98628 00000",
-  whatsapp: "+91 98628 00000",
-  hours: "Monday – Saturday: 9:30 AM – 6:00 PM IST (Closed Sundays)",
-  instagram: "https://www.instagram.com/famousletterpress",
-  facebook: "https://www.facebook.com/famousletterpress",
+  phone: "+91 93660 12345",
+  whatsapp: "+91 93660 12345",
+  hours: "Monday – Saturday: 9:30 AM – 6:00 PM IST",
+  instagram: "https://www.instagram.com/famousletterpressindia/",
+  facebook: "https://www.facebook.com/FamousLetterpress/",
 };
 
 export default function ContactPage() {
   return (
-    <div className="bg-cream">
-      {/* Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 border-b border-sand">
+    <div className="bg-paper-creme min-h-screen">
+      {/* ── Header ── */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-terracotta">Contact</span>
+                <span className="text-ink-deep">Contact</span>
               </div>
-              <span className="eyebrow text-terracotta">Get In Touch</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-6">Connect With Our Studio</h1>
-              <p className="body-lg text-warm-stone max-w-2xl font-light leading-relaxed mb-8">
+              <p className="eyebrow mb-2">Get In Touch</p>
+              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+                Connect with our <em className="font-light">atelier.</em>
+              </h1>
+              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
                 Whether you have an upcoming wedding celebration, need executive business cards, or wish to explore a trade collaboration, we welcome your conversation.
               </p>
             </div>
@@ -43,42 +44,40 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Cards & Studio Coordinates */}
-      <section className="py-20 md:py-28 bg-ivory">
+      {/* ── Contact Options ── */}
+      <section className="section bg-paper-white">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Primary Direct Contact Channels */}
             <div className="lg:col-span-7 space-y-8">
               <Reveal>
-                <div className="card-warm p-8">
-                  <span className="eyebrow text-forest">Direct Messaging</span>
-                  <h2 className="heading-md text-charcoal mt-2 mb-4">Fastest Response via WhatsApp</h2>
-                  <p className="body-sm text-warm-stone mb-6 font-light leading-relaxed">
+                <div className="bg-paper-creme border border-border-hairline p-8 md:p-10">
+                  <p className="eyebrow mb-2">Direct Messaging</p>
+                  <h2 className="text-2xl font-serif text-ink-deep mb-3">Fastest Response via WhatsApp</h2>
+                  <p className="text-sm text-ink-muted mb-6 font-light leading-relaxed">
                     For quick pricing checks, paper availability, or to share inspiration photos directly with our press team, message us on WhatsApp.
                   </p>
-                  <div className="flex flex-wrap items-center gap-4">
-                    <a
-                      href={`https://wa.me/${studioDetails.whatsapp.replace(/[^0-9]/g, "")}?text=Hello%20Famous%20Letterpress,%20I%20would%20like%20to%20enquire%20about...`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary"
-                    >
-                      Chat on WhatsApp ({studioDetails.whatsapp})
-                    </a>
-                  </div>
+                  <a
+                    href={`https://wa.me/${studioDetails.whatsapp.replace(/[^0-9]/g, "")}?text=Hello%20Famous%20Letterpress,%20I%20would%20like%20to%20enquire%20about...`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                  >
+                    Chat on WhatsApp ({studioDetails.whatsapp})
+                  </a>
                 </div>
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="card-warm p-8">
-                  <span className="eyebrow text-terracotta">Email Correspondence</span>
-                  <h2 className="heading-md text-charcoal mt-2 mb-4">Email Artwork & Briefs</h2>
-                  <p className="body-sm text-warm-stone mb-6 font-light leading-relaxed">
-                    Send vector artwork files, PDF proofs, project briefs, or trade partnership inquiries to our primary email inbox.
+                <div className="bg-paper-creme border border-border-hairline p-8 md:p-10">
+                  <p className="eyebrow mb-2">Email Correspondence</p>
+                  <h2 className="text-2xl font-serif text-ink-deep mb-3">Email Artwork &amp; Briefs</h2>
+                  <p className="text-sm text-ink-muted mb-6 font-light leading-relaxed">
+                    Send vector artwork files (.AI, .PDF), project briefs, or trade partnership inquiries to our primary studio email.
                   </p>
                   <a
                     href={`mailto:${studioDetails.email}`}
-                    className="font-serif text-xl text-charcoal hover:text-terracotta transition-colors underline decoration-sand underline-offset-4"
+                    className="font-serif text-xl text-ink-deep hover:opacity-70 transition-opacity underline decoration-border-hairline underline-offset-4"
                   >
                     {studioDetails.email}
                   </a>
@@ -88,57 +87,45 @@ export default function ContactPage() {
 
             {/* Studio Information Sidebar */}
             <div className="lg:col-span-5 space-y-8">
-              <Reveal delay={0.2}>
-                <div className="card-warm p-8 bg-cream border-sand space-y-6">
+              <Reveal delay={0.15}>
+                <div className="bg-paper-sand border border-border-hairline p-8 space-y-6">
                   <div>
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-warm-stone block mb-1">
-                      Studio Location
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-ink-light block mb-1">
+                      Atelier Location
                     </span>
-                    <div className="font-serif text-xl text-charcoal">{studioDetails.name}</div>
-                    <div className="text-sm text-warm-stone font-light">{studioDetails.location}</div>
+                    <div className="font-serif text-xl text-ink-deep">{studioDetails.name}</div>
+                    <div className="text-sm text-ink-muted font-light mt-0.5">{studioDetails.location}</div>
                   </div>
 
-                  <div className="pt-4 border-t border-sand">
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-warm-stone block mb-1">
-                      Operating Hours
+                  <div className="pt-4 border-t border-border-hairline">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-ink-light block mb-1">
+                      Studio Hours
                     </span>
-                    <div className="text-sm text-charcoal font-medium">{studioDetails.hours}</div>
-                    <div className="text-xs text-warm-stone font-light mt-1">
-                      Responses typically within 24 business hours.
-                    </div>
+                    <div className="text-sm text-ink-deep font-sans">{studioDetails.hours}</div>
                   </div>
 
-                  <div className="pt-4 border-t border-sand">
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-warm-stone block mb-2">
-                      Social Channels
+                  <div className="pt-4 border-t border-border-hairline">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-ink-light block mb-2">
+                      Social Archives
                     </span>
                     <div className="flex gap-4">
                       <a
                         href={studioDetails.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs uppercase tracking-wider font-mono text-terracotta hover:underline"
+                        className="text-xs uppercase tracking-wider text-ink-deep hover:opacity-60 transition-opacity font-sans"
                       >
-                        Instagram &rarr;
+                        Instagram →
                       </a>
                       <a
                         href={studioDetails.facebook}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs uppercase tracking-wider font-mono text-terracotta hover:underline"
+                        className="text-xs uppercase tracking-wider text-ink-deep hover:opacity-60 transition-opacity font-sans"
                       >
-                        Facebook &rarr;
+                        Facebook →
                       </a>
                     </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-sand">
-                    <span className="text-[11px] font-mono uppercase tracking-widest text-warm-stone block mb-2">
-                      Have a Specific Event?
-                    </span>
-                    <Button href="/start-a-project" variant="primary" size="md" className="w-full">
-                      Start a Project Form
-                    </Button>
                   </div>
                 </div>
               </Reveal>

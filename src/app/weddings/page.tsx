@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { getCMSServices, getCMSSampleKits, getCMSPortfolio } from "@/lib/cms/store";
-
+import { getCMSSampleKits, getCMSPortfolio } from "@/lib/cms/store";
+import { SampleKitCheckout } from "@/components/shop/SampleKitCheckout";
 
 export const metadata: Metadata = {
   title: "Letterpress Wedding Stationery & Invitations | Famous Letterpress",
   description:
-    "Handcrafted letterpress wedding invitations, save-the-dates, and bespoke day-of paper pressed on 100% cotton paper in Nagaland, India. Explore suites, sample kits, and our Early Bride consultation.",
+    "Handcrafted letterpress wedding invitations, save-the-dates, and bespoke day-of stationery pressed on 100% cotton paper in Nagaland, India. Explore suites, sample kits, and book an Early Bride consultation.",
 };
 
 const weddingSuites = [
@@ -34,23 +33,50 @@ const weddingSuites = [
   },
 ];
 
+const tactileDetails = [
+  {
+    title: "Handmade Euro-Flap Envelopes",
+    detail: "Custom die-cut envelopes in pure cotton, handmade deckle paper, or Colorplan archival stocks.",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4413-2000x2500.jpg",
+  },
+  {
+    title: "Illustrated Envelope Liners",
+    detail: "Custom venue illustrations, floral patterns, or blind-embossed monograms inside each envelope flap.",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg",
+  },
+  {
+    title: "Botanical & Crest Wax Seals",
+    detail: "Hand-poured flexible sealing wax in antique bronze, matte champagne, pearl white, or forest green.",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-1-pics-1200x1200.jpg",
+  },
+  {
+    title: "Edge Gilding & Beveling",
+    detail: "Mirror-finish metallic foil applied by hand along the thick 600–900gsm beveled edges of your cards.",
+    image: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-01-1200x1200.jpg",
+  },
+];
+
 const timelineSteps = [
   {
+    step: "01",
     time: "6 to 9 Months Before",
     title: "Order Sample Kit & Save the Dates",
-    desc: "Feel the cotton paper in your hands with our Wedding Sample Kit. Finalize guest list count and dispatch Save the Dates.",
+    desc: "Feel the cotton paper in your hands with our Wedding Sample Kit. Finalize your guest count and dispatch Save the Dates.",
   },
   {
+    step: "02",
     time: "4 to 5 Months Before",
     title: "Consultation & Design",
-    desc: "Submit our Early Bride consultation or meet with our studio team. We refine typographic proofs, select papers, and finalize foil tones.",
+    desc: "Submit your Early Bride consultation. We refine typographic proofs, select papers, and finalize foil tones and ink mixtures.",
   },
   {
+    step: "03",
     time: "2 to 3 Months Before",
     title: "Presswork & Suite Delivery",
-    desc: "We hand-mix inks and press your suite on vintage platen presses in Nagaland. Meticulously inspected, packaged, and shipped to your home.",
+    desc: "We hand-mix inks and press your suite on vintage platen presses in Nagaland. Meticulously inspected, packaged, and shipped to your door.",
   },
   {
+    step: "04",
     time: "6 to 8 Weeks Before",
     title: "Mailing to Guests",
     desc: "Your invitations are in the mail, giving loved ones ample time to RSVP and anticipate your celebration.",
@@ -58,183 +84,156 @@ const timelineSteps = [
 ];
 
 export default function WeddingsHubPage() {
-  const weddingService = getCMSServices()["wedding-stationery"];
   const weddingKit = getCMSSampleKits()["wedding-sample-kit"];
   const weddingPortfolio = getCMSPortfolio().filter((item) => item.category === "weddings");
 
   return (
-    <div className="bg-cream">
-      {/* Editorial Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 border-b border-sand">
+    <div className="bg-paper-creme min-h-screen">
+      {/* ── Editorial Header ── */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <span className="eyebrow text-terracotta">For People Getting Married</span>
-              <h1 className="display-lg text-charcoal mt-3 mb-6">
-                Heirloom wedding stationery pressed with heart & heavy metal.
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+                <span>/</span>
+                <span className="text-ink-deep">Weddings</span>
+              </div>
+              <p className="eyebrow mb-2">Bespoke Wedding Stationery</p>
+              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+                Heirloom wedding stationery pressed by hand on{" "}
+                <em className="font-light">100% cotton.</em>
               </h1>
-              <p className="body-lg text-warm-stone max-w-2xl font-light leading-relaxed">
+              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
                 We believe wedding stationery is not merely paper with dates—it is the tangible opening chapter of your celebration.
-                Handcrafted on vintage cast-iron presses in Nagaland on pure cotton stock.
+                Handcrafted on vintage platen presses in Nagaland on pure cotton stock.
               </p>
-              <div className="flex flex-wrap items-center gap-4 mt-8">
-                <Button href="/weddings/early-bride" variant="primary" size="lg">
-                  Early Bride Consultation
-                </Button>
-                <Button href="/weddings/wedding-sample-kit" variant="outline" size="lg">
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href="/weddings/early-bride"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                >
+                  Book a Consult
+                </Link>
+                <a
+                  href="#sample-kit"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/40 transition-colors"
+                >
                   Order Sample Kit (₹{weddingKit.price})
-                </Button>
-                <Button href="/weddings/wedding-stationery" variant="ghost" size="lg">
-                  Explore Full Service Details &rarr;
-                </Button>
+                </a>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 3 Dedicated Wedding Destinations */}
-      <section className="py-20 md:py-28 bg-ivory border-b border-sand">
-        <div className="container-wide">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="eyebrow text-warm-stone">The Wedding Journey</span>
-              <h2 className="heading-xl text-charcoal mt-2">Three ways to begin with us</h2>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1: Sample Kit */}
-            <Reveal delay={0.1} className="h-full">
-              <div className="card-warm p-8 flex flex-col justify-between h-full group hover:border-terracotta/40 transition-colors">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-terracotta font-medium mb-3">Step One · Tangible Proof</div>
-                  <h3 className="heading-md text-charcoal mb-3">The Wedding Sample Kit</h3>
-                  <p className="body-sm text-warm-stone mb-6">
-                    Feel the physical difference before deciding. Includes 600gsm cotton suites, metallic foil swatches, blind debossing, and deckled paper samples.
-                  </p>
-                  <div className="text-2xl font-serif text-charcoal mb-6">₹{weddingKit.price} <span className="text-xs text-warm-stone font-sans">incl. courier delivery</span></div>
-                </div>
-                <Button href="/weddings/wedding-sample-kit" variant="primary" size="md" className="w-full">
-                  Order Wedding Sample Kit
-                </Button>
-              </div>
-            </Reveal>
-
-            {/* Card 2: Early Bride */}
-            <Reveal delay={0.2} className="h-full">
-              <div className="card-warm p-8 flex flex-col justify-between h-full group border-terracotta/30 bg-cream">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-forest font-medium mb-3">Custom Project · Direct Planning</div>
-                  <h3 className="heading-md text-charcoal mb-3">Early Bride Consultation</h3>
-                  <p className="body-sm text-warm-stone mb-6">
-                    A dedicated questionnaire for engaged couples. Tell us your date, aesthetic dreams, guest count, and stationery requirements so we can prepare tailored recommendations.
-                  </p>
-                  <ul className="text-xs text-warm-stone space-y-2 mb-6">
-                    <li className="flex items-center gap-2">&bull; Direct response via WhatsApp or email</li>
-                    <li className="flex items-center gap-2">&bull; Paper & budget feasibility guidance</li>
-                    <li className="flex items-center gap-2">&bull; Custom timeline calculation</li>
-                  </ul>
-                </div>
-                <Button href="/weddings/early-bride" variant="primary" size="md" className="w-full">
-                  Begin Early Bride Form
-                </Button>
-              </div>
-            </Reveal>
-
-            {/* Card 3: Wedding Stationery Service */}
-            <Reveal delay={0.3} className="h-full">
-              <div className="card-warm p-8 flex flex-col justify-between h-full group hover:border-terracotta/40 transition-colors">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-terracotta font-medium mb-3">Techniques & Materials</div>
-                  <h3 className="heading-md text-charcoal mb-3">Full Stationery Collection</h3>
-                  <p className="body-sm text-warm-stone mb-6">
-                    Explore our complete capabilities: deep letterpress relief, matte foil stamping, deckle edges, envelope liners, and day-of reception paper.
-                  </p>
-                  <div className="text-xs text-warm-stone mb-6">
-                    Full specs on 300–900gsm cotton stocks, ink mixing, plate prep, and bespoke design workflows.
-                  </div>
-                </div>
-                <Button href="/weddings/wedding-stationery" variant="outline" size="md" className="w-full">
-                  View Stationery Guide
-                </Button>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* What We Create */}
-      <section className="py-20 md:py-28 bg-cream border-b border-sand">
-        <div className="container-wide">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-4">
+      {/* ── Section 1: Invitations & Suites Showcase (IG-Style Reel) ── */}
+      <section className="section bg-paper-white" aria-label="Wedding Suites Reel">
+        <div className="container-wide mb-8 md:mb-12">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
               <Reveal>
-                <span className="eyebrow text-terracotta">Elements of a Suite</span>
-                <h2 className="heading-lg text-charcoal mt-2 mb-4">What we craft for your celebration</h2>
-                <p className="body-md text-warm-stone">
-                  From the announcement that introduces your date to the individual place cards greeting your guests at dinner, every paper piece speaks the same intentional visual language.
-                </p>
+                <p className="eyebrow mb-3">Section 01 · Bespoke Commissions</p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2>
+                  Selected <em className="font-light">wedding suites</em>
+                </h2>
               </Reveal>
             </div>
-            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {weddingSuites.map((item, idx) => (
-                <Reveal key={item.title} delay={idx * 0.1}>
-                  <div className="card-warm p-6 h-full">
-                    <span className="text-[11px] uppercase tracking-wider font-semibold text-terracotta/80 mb-2 block">
-                      {item.tag}
-                    </span>
-                    <h3 className="font-serif text-xl text-charcoal mb-2">{item.title}</h3>
-                    <p className="text-sm text-warm-stone leading-relaxed">{item.desc}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Selected Wedding Portfolio */}
-      <section className="py-20 md:py-28 bg-ivory border-b border-sand">
-        <div className="container-wide">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
-            <Reveal>
-              <span className="eyebrow text-warm-stone">Selected Portfolio</span>
-              <h2 className="heading-lg text-charcoal mt-2">Real suites from our studio</h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <Link href="/work" className="text-sm uppercase tracking-wider font-medium text-terracotta hover:underline mt-4 sm:mt-0">
-                View all studio work &rarr;
+            <Reveal delay={0.15}>
+              <Link
+                href="/weddings/early-bride"
+                className="text-[11px] tracking-[0.14em] uppercase text-ink-light hover:text-ink-deep transition-colors"
+              >
+                Inquire for Your Date →
               </Link>
             </Reveal>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {weddingPortfolio.slice(0, 3).map((piece, idx) => (
-              <Reveal key={piece.id} delay={idx * 0.1}>
-                <div className="card-warm overflow-hidden group">
-                  <div className="aspect-[4/3] bg-sand/60 relative overflow-hidden border-b border-sand">
+        {/* Carousel Reel */}
+        <div className="carousel-scroll pl-[clamp(1.25rem,5vw,3rem)] pr-6 mb-12">
+          {weddingPortfolio.map((piece) => (
+            <div
+              key={piece.id}
+              className="w-[75vw] md:w-[42vw] lg:w-[30vw] min-w-[280px] max-w-[440px]"
+            >
+              <div className="relative aspect-[3/4] overflow-hidden bg-paper-sand group mb-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={piece.featuredImage}
+                  alt={piece.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <span className="text-[10px] tracking-[0.16em] uppercase text-white/70 font-sans">
+                    {piece.paperStock}
+                  </span>
+                  <p className="font-serif text-base text-white mt-1 leading-snug">
+                    {piece.title}
+                  </p>
+                </div>
+              </div>
+              <p className="text-xs text-ink-muted line-clamp-2 leading-relaxed">
+                {piece.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Suite Components Grid */}
+        <div className="container-wide pt-8 border-t border-border-hairline">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {weddingSuites.map((item, index) => (
+              <Reveal key={item.title} delay={0.1 + index * 0.08}>
+                <div className="space-y-2">
+                  <span className="text-[10px] tracking-[0.16em] uppercase text-ink-light font-mono">
+                    {item.tag}
+                  </span>
+                  <h3 className="text-base text-ink-deep font-serif">{item.title}</h3>
+                  <p className="text-xs text-ink-muted leading-relaxed">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 2: Envelopes, Liners & Seals ── */}
+      <section className="section bg-paper-creme" aria-label="Finishing & Details">
+        <div className="container-wide">
+          <div className="max-w-xl mb-12">
+            <Reveal>
+              <p className="eyebrow mb-3">Section 02 · Tactile Finishing</p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mb-4">
+                Envelopes, liners <em className="font-light">&amp; wax seals</em>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p className="text-sm text-ink-muted leading-relaxed">
+                Every detail of your wedding suite is customized. We craft bespoke envelope liners, pour custom wax seals with your monogram crest, and hand-bevel edges with mirror-finish foils.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {tactileDetails.map((detail, index) => (
+              <Reveal key={detail.title} delay={0.1 + index * 0.08}>
+                <div className="group block">
+                  <div className="relative aspect-square overflow-hidden bg-paper-sand mb-4">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={piece.featuredImage}
-                      alt={piece.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      src={detail.image}
+                      alt={detail.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
-                    <div className="absolute top-3 left-3 bg-ivory/95 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] uppercase font-mono tracking-widest text-charcoal shadow-sm border border-sand/60">
-                      {piece.paperStock?.split("&")[0] || "100% Cotton"}
-                    </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="font-serif text-lg text-charcoal mb-2">{piece.title}</h3>
-                    <p className="text-xs text-warm-stone leading-relaxed mb-4">{piece.description}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {piece.techniques.map((t) => (
-                        <span key={t} className="text-[10px] bg-sand/70 text-charcoal px-2 py-0.5 rounded-sm">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  <h3 className="text-sm font-serif text-ink-deep mb-1">{detail.title}</h3>
+                  <p className="text-xs text-ink-muted leading-relaxed">{detail.detail}</p>
                 </div>
               </Reveal>
             ))}
@@ -242,32 +241,98 @@ export default function WeddingsHubPage() {
         </div>
       </section>
 
-      {/* Practical Wedding Timeline */}
-      <section className="py-20 md:py-28 bg-cream border-b border-sand">
-        <div className="container-narrow">
-          <Reveal>
-            <div className="text-center max-w-xl mx-auto mb-16">
-              <span className="eyebrow text-terracotta">Guidance & Planning</span>
-              <h2 className="heading-lg text-charcoal mt-2">When should you contact us?</h2>
-              <p className="body-sm text-warm-stone mt-3">
-                Letterpress is an intentional, mechanical process requiring custom die engraving, hand-mixed inks, and individual sheet inspection.
-              </p>
-            </div>
-          </Reveal>
+      {/* ── Section 3: The Famous Wedding Sample Kit (Direct Commerce) ── */}
+      <section id="sample-kit" className="section bg-paper-white" aria-label="Wedding Sample Kit">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left: Kit Story & Details */}
+            <div className="lg:col-span-6 space-y-8">
+              <Reveal>
+                <p className="eyebrow mb-2">Section 03 · Direct Commerce</p>
+                <h2 className="mb-4 font-serif">
+                  The Wedding <em className="font-light">Sample Kit</em>
+                </h2>
+                <p className="text-sm md:text-base text-ink-muted leading-relaxed mb-6">
+                  Screens cannot convey the texture of 600gsm cotton rag, the brilliance of hot foil under daylight, or the depth of a platen impression.
+                  Hold our finished work in your hands before commissioning your suite.
+                </p>
+              </Reveal>
 
-          <div className="space-y-8">
-            {timelineSteps.map((step, idx) => (
-              <Reveal key={step.title} delay={idx * 0.1}>
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4 p-6 bg-ivory rounded-sm border border-sand">
-                  <div className="sm:w-48 shrink-0">
-                    <span className="text-xs uppercase tracking-widest font-mono text-terracotta font-semibold">
-                      {step.time}
-                    </span>
+              <Reveal delay={0.1}>
+                <div className="overflow-hidden bg-paper-sand border border-border-hairline">
+                  <div className="aspect-[4/3] relative overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={weddingKit.featuredImage}
+                      alt={weddingKit.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div>
-                    <h3 className="font-serif text-xl text-charcoal mb-1">{step.title}</h3>
-                    <p className="text-sm text-warm-stone leading-relaxed">{step.desc}</p>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.15}>
+                <div className="bg-paper-creme border border-border-hairline p-6 space-y-4">
+                  <h3 className="text-base font-serif text-ink-deep">What&apos;s Included in the Box:</h3>
+                  <ul className="space-y-2.5">
+                    {weddingKit.includedItems.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-ink-muted">
+                        <span className="w-1.5 h-1.5 rounded-full bg-ink-deep mt-1.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-[11px] text-ink-light pt-2 border-t border-border-hairline">
+                    * The ₹{weddingKit.price} kit cost is 100% credited toward your final wedding order upon confirmation.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Right: Integrated Direct Razorpay Checkout */}
+            <div className="lg:col-span-6 lg:sticky lg:top-28">
+              <Reveal delay={0.2}>
+                <div className="space-y-4">
+                  <div className="bg-ink-deep text-paper-creme p-4 text-center">
+                    <p className="text-[10px] tracking-[0.18em] uppercase font-sans">
+                      Direct Dispatch · Ships Across India within 48 Hours
+                    </p>
                   </div>
+                  <SampleKitCheckout kit={weddingKit} />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: 4-Stage Wedding Timeline ── */}
+      <section className="section bg-paper-creme" aria-label="Production Timeline">
+        <div className="container-wide">
+          <div className="text-center max-w-xl mx-auto mb-14">
+            <Reveal>
+              <p className="eyebrow mb-2">Planning Guide</p>
+              <h2 className="mb-4">
+                The Wedding <em className="font-light">Stationery Timeline</em>
+              </h2>
+              <p className="text-xs md:text-sm text-ink-muted leading-relaxed">
+                Letterpress is a meticulous physical process. We recommend reaching out early to ensure dedicated press time for your suite.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {timelineSteps.map((step, index) => (
+              <Reveal key={step.title} delay={0.1 + index * 0.08}>
+                <div className="bg-paper-white border border-border-hairline p-6 relative">
+                  <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-2">
+                    {step.step}
+                  </span>
+                  <p className="text-[11px] tracking-wide uppercase text-ink-deep font-medium font-sans mb-1">
+                    {step.time}
+                  </p>
+                  <h3 className="text-sm font-serif text-ink-deep mb-2">{step.title}</h3>
+                  <p className="text-xs text-ink-muted leading-relaxed">{step.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -275,41 +340,32 @@ export default function WeddingsHubPage() {
         </div>
       </section>
 
-      {/* Wedding FAQs */}
-      <section className="py-20 md:py-28 bg-ivory">
+      {/* ── Section 5: Consultation CTA ── */}
+      <section className="section-lg bg-ink-deep text-paper-creme text-center">
         <div className="container-narrow">
           <Reveal>
-            <div className="text-center max-w-lg mx-auto mb-16">
-              <span className="eyebrow text-warm-stone">Helpful Details</span>
-              <h2 className="heading-lg text-charcoal mt-2">Common Wedding Questions</h2>
-            </div>
-          </Reveal>
-
-          <div className="space-y-6">
-            {weddingService.faqs?.map((faq, idx) => (
-              <Reveal key={faq.question} delay={idx * 0.1}>
-                <div className="card-warm p-6">
-                  <h3 className="font-serif text-lg text-charcoal mb-2">{faq.question}</h3>
-                  <p className="text-sm text-warm-stone leading-relaxed">{faq.answer}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.2}>
-            <div className="mt-16 text-center card-warm p-10 bg-cream">
-              <h3 className="heading-md text-charcoal mb-3">Ready to begin your wedding suite?</h3>
-              <p className="body-sm text-warm-stone max-w-md mx-auto mb-6">
-                Tell us about your celebration through our Early Bride form, or order a sample kit to feel our papers firsthand.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button href="/weddings/early-bride" variant="primary" size="md">
-                  Begin Early Bride Consultation
-                </Button>
-                <Button href="/weddings/wedding-sample-kit" variant="outline" size="md">
-                  Order Wedding Sample Kit (₹{weddingKit.price})
-                </Button>
-              </div>
+            <p className="eyebrow !text-paper-creme/30 mb-3">Begin Your Suite</p>
+            <h2 className="!text-paper-creme mb-4">
+              Ready to craft your <em className="font-light">heirloom suite?</em>
+            </h2>
+            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+              Every Famous Letterpress suite is custom formulated. Share your wedding vision with us through our Early Bride consultation or message our founder directly on WhatsApp.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/weddings/early-bride"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+              >
+                Submit Early Bride Form
+              </Link>
+              <a
+                href="https://wa.me/919366012345"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+              >
+                WhatsApp Founder Direct
+              </a>
             </div>
           </Reveal>
         </div>

@@ -1,190 +1,203 @@
 "use client";
 
-import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  type Variants,
-} from "framer-motion";
-import { GoldShimmer } from "@/components/ui/GoldShimmer";
-import { MagneticButton } from "@/components/ui/MagneticButton";
-import { TiltCard } from "@/components/ui/TiltCard";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
-const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1];
+/* ── IG-Style Hero Carousel ──
+   Full-width horizontal swipe reel with momentum,
+   using real studio photography. */
+
+const heroSlides = [
+  {
+    image: "/assets/home/carousel/FMS_7392.jpg",
+    alt: "Bespoke cotton letterpress wedding suite with gold foil detailing",
+    caption: "Bespoke Wedding Suite",
+    detail: "600gsm cotton · matte gold foil",
+  },
+  {
+    image: "/assets/wed-kit/FMS_3749.jpg",
+    alt: "Letterpress wedding sample kit with cotton swatches and foil samples",
+    caption: "Wedding Sample Kit",
+    detail: "Paper swatches · foil library · bite depths",
+  },
+  {
+    image: "/assets/home/carousel/FMS_4040.jpg",
+    alt: "Hand-set vintage typography on heavy cotton",
+    caption: "Vintage Platen Presswork",
+    detail: "Hand-fed through vintage Heidelberg presses",
+  },
+  {
+    image: "/assets/business-cards/FMS_3462.jpg",
+    alt: "Luxury letterpress business cards with edge gilding and blind deboss",
+    caption: "Luxury Business Cards",
+    detail: "Edge gilding · blind deboss · duplexed cotton",
+  },
+  {
+    image: "/assets/home/carousel/IMG_7600.jpg",
+    alt: "Deep relief impression on 600gsm cotton rag",
+    caption: "Deep Relief Impression",
+    detail: "Handcrafted in our Nagaland atelier",
+  },
+  {
+    image: "/assets/home/carousel/FMS_7358.jpg",
+    alt: "Hand-mixed ink calibration on platen press",
+    caption: "Artisan Inks & Pigments",
+    detail: "Hand-mixed oil pigments for bespoke tone",
+  },
+];
 
 export function HeroSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const textY = useTransform(scrollYProgress, [0, 1], ["0px", "50px"]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0px", "-40px"]);
-  const smoothTextY = useSpring(textY, { stiffness: 100, damping: 30 });
-  const smoothImageY = useSpring(imageY, { stiffness: 100, damping: 30 });
+  /* Track which card is most centered */
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const handleScroll = () => {
+      const scrollLeft = el.scrollLeft;
+      const cardWidth = el.children[0]?.clientWidth || 300;
+      const gap = 16;
+      const idx = Math.round(scrollLeft / (cardWidth + gap));
+      setActiveIndex(Math.min(idx, heroSlides.length - 1));
+    };
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const containerVariants: Variants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
-      },
-    },
+  /* Mouse drag for desktop */
+  const dragState = useRef({ startX: 0, scrollLeft: 0 });
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    dragState.current = { startX: e.pageX - el.offsetLeft, scrollLeft: el.scrollLeft };
+    el.style.cursor = "grabbing";
   };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.9,
-        ease: easeOutExpo,
-      },
-    },
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    e.preventDefault();
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - dragState.current.startX) * 1.2;
+    el.scrollLeft = dragState.current.scrollLeft - walk;
+  };
+  const onMouseUp = () => {
+    setIsDragging(false);
+    if (scrollRef.current) scrollRef.current.style.cursor = "grab";
   };
 
   return (
     <section
-      ref={sectionRef}
-      className="relative min-h-[90vh] lg:min-h-[92vh] flex items-center bg-cream overflow-hidden grain-overlay"
-      aria-label="Welcome to Famous Letterpress"
-      style={{
-        paddingTop: "clamp(3rem, 6vw, 6rem)",
-        paddingBottom: "clamp(4rem, 8vw, 8rem)",
-      }}
+      className="relative bg-paper-creme overflow-hidden"
+      aria-label="Product showcase"
     >
-      {/* ── Soft warm champagne ambient glow ── */}
-      <div
-        className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(184,150,62,0.07) 0%, transparent 65%)",
-        }}
-      />
-      <div
-        className="absolute bottom-10 right-10 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(232,213,204,0.3) 0%, transparent 70%)",
-        }}
-      />
+      {/* Top padding for fixed header */}
+      <div className="pt-20 md:pt-28" />
 
-      <div className="container-wide relative z-10 w-full">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* ── Left Column: Editorial Story & CTAs (7 cols) ── */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            style={{ y: smoothTextY }}
-            className="lg:col-span-7 max-w-2xl"
-          >
-            {/* Eyebrow */}
-            <motion.div variants={itemVariants} className="mb-6">
-              <span className="inline-flex items-center gap-3">
-                <span className="w-8 h-px bg-gold" />
-                <span className="eyebrow text-taupe tracking-[0.2em]">
-                  Handcrafted in Nagaland, India
-                </span>
-              </span>
-            </motion.div>
+      {/* Intro text */}
+      <div className="container-wide mb-8 md:mb-10">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="eyebrow mb-4"
+        >
+          Letterpress & Foil Studio — Nagaland, India
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="text-ink-deep"
+        >
+          Pressed by Hand,{" "}
+          <em className="font-light not-italic" style={{ fontStyle: "italic" }}>
+            Kept Forever
+          </em>
+        </motion.h1>
+      </div>
 
-            {/* Headline */}
-            <motion.h1
-              variants={itemVariants}
-              className="text-charcoal mb-6 leading-[1.05]"
+      {/* IG-Style Carousel */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
+        <div
+          ref={scrollRef}
+          className="carousel-scroll pl-[clamp(1.25rem,5vw,3rem)] pr-6 cursor-grab select-none"
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseUp}
+        >
+          {heroSlides.map((slide, i) => (
+            <div
+              key={i}
+              className="w-[75vw] md:w-[38vw] lg:w-[28vw] min-w-[280px] max-w-[420px]"
             >
-              Designers turned{" "}
-              <GoldShimmer className="italic font-light">printers</GoldShimmer>
-            </motion.h1>
-
-            {/* Subtext */}
-            <motion.p
-              variants={itemVariants}
-              className="text-lg lg:text-xl text-taupe leading-relaxed mb-10 font-light"
-            >
-              We craft premium letterpress and foil stamped wedding invitations,
-              business cards, and personalised stationery — designed and printed
-              entirely under one roof.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap items-center gap-4 mb-12"
-            >
-              <MagneticButton
-                href="/start-a-project"
-                className="px-8 py-4 bg-charcoal text-ivory text-xs tracking-[0.2em] uppercase font-medium hover:bg-gold hover:text-ivory transition-colors duration-500 rounded-sm shadow-sm"
-              >
-                Start a Project
-              </MagneticButton>
-              <MagneticButton
-                href="/work"
-                className="px-8 py-4 border border-sand hover:border-gold text-charcoal hover:text-gold text-xs tracking-[0.2em] uppercase font-medium transition-colors duration-500 rounded-sm bg-ivory/60"
-              >
-                View Our Work
-              </MagneticButton>
-            </motion.div>
-
-            {/* Atelier Craft Badge */}
-            <motion.div variants={itemVariants}>
-              <div className="glass-panel px-5 py-3 rounded-sm inline-flex items-center gap-4 border border-sand/60 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-                <div>
-                  <p className="font-serif text-sm text-charcoal font-medium">
-                    Bespoke 600gsm Cotton Suite
-                  </p>
-                  <p className="text-[11px] text-taupe font-light">
-                    Deep mechanical impression & matte gold foil
-                  </p>
-                </div>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-gold bg-gold/10 px-2.5 py-1 rounded ml-2">
-                  Atelier
-                </span>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* ── Right Column: 3D Visual Showcase (5 cols) ── */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.2, ease: easeOutExpo }}
-            style={{ y: smoothImageY }}
-            className="lg:col-span-5 relative"
-          >
-            <TiltCard maxTilt={5}>
-              <div className="relative aspect-[4/5] rounded-sm overflow-hidden shadow-2xl border border-sand/60 bg-ivory cursor-view group">
+              <div className="relative aspect-[3/4] overflow-hidden bg-paper-sand group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://famousletterpress.com/wp-content/uploads/2026/05/FMS_4395-2000x2500.jpg"
-                  alt="Handcrafted letterpress wedding stationery by Famous Letterpress"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-106"
+                  src={slide.image}
+                  alt={slide.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  draggable={false}
                 />
-
-                {/* Subtle paper vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent pointer-events-none" />
-
-                {/* Delicate gold border frame */}
-                <div className="absolute inset-3 border border-gold/20 rounded-sm pointer-events-none group-hover:border-gold/40 transition-colors duration-500" />
-
-                {/* Floating caption tag on image */}
-                <div className="absolute bottom-6 left-6 right-6 pointer-events-none">
-                  <div className="glass-panel px-4 py-2 rounded-sm inline-block shadow-sm">
-                    <p className="font-serif text-xs text-charcoal italic">
-                      Traditional Heidelberg & Platen Impression
-                    </p>
-                  </div>
+                {/* Caption bar */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+                  <p className="font-serif text-sm text-white/90">{slide.caption}</p>
+                  <p className="text-[10px] text-white/50 mt-0.5 font-sans tracking-wide">
+                    {slide.detail}
+                  </p>
                 </div>
               </div>
-            </TiltCard>
-          </motion.div>
+            </div>
+          ))}
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-1.5 mt-6 mb-2">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                const el = scrollRef.current;
+                if (!el || !el.children[0]) return;
+                const cardWidth = (el.children[0] as HTMLElement).clientWidth + 16;
+                el.scrollTo({ left: cardWidth * i, behavior: "smooth" });
+              }}
+              className={`h-[2px] rounded-full transition-all duration-300 ${
+                i === activeIndex
+                  ? "w-6 bg-ink-deep"
+                  : "w-2 bg-ink-deep/20"
+              }`}
+              aria-label={`View slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Below-carousel CTAs */}
+      <div className="container-wide py-8 md:py-10">
+        <div className="flex flex-wrap gap-4">
+          <Link
+            href="/start-a-project"
+            className="inline-flex px-7 py-3 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors duration-300"
+          >
+            Book a Consult
+          </Link>
+          <Link
+            href="/weddings/wedding-sample-kit"
+            className="inline-flex px-7 py-3 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/30 transition-colors duration-300"
+          >
+            Order Sample Kit
+          </Link>
         </div>
       </div>
     </section>

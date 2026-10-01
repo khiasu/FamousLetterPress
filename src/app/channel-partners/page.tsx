@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
@@ -52,63 +51,74 @@ const collaborationWorkflow = [
 
 export default function ChannelPartnersPage() {
   return (
-    <div className="bg-cream">
-      {/* Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 border-b border-sand">
+    <div className="bg-paper-creme min-h-screen">
+      {/* ── Header ── */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-terracotta">Channel Partners</span>
+                <span className="text-ink-deep">Channel Partners</span>
               </div>
-              <span className="eyebrow text-terracotta">Trade Collaboration</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-6">
-                Your dedicated artisanal letterpress partner.
+              <p className="eyebrow mb-2">Trade Collaboration</p>
+              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+                Your dedicated artisanal{" "}
+                <em className="font-light">letterpress printmaker.</em>
               </h1>
-              <p className="body-lg text-warm-stone max-w-2xl font-light leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
                 We work alongside wedding planners, brand designers, event directors, and creative agencies across India and internationally.
                 Think of our Nagaland pressroom as your own private print atelier.
               </p>
               <div className="flex flex-wrap items-center gap-4">
-                <Button href="/start-a-project?type=partner" variant="primary" size="lg">
+                <Link
+                  href="/start-a-project?type=partner"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                >
                   Apply for Trade Partnership
-                </Button>
-                <Button href="/weddings/wedding-sample-kit" variant="outline" size="lg">
-                  Order Studio Sample Swatches
-                </Button>
+                </Link>
+                <Link
+                  href="/weddings/wedding-sample-kit"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/40 transition-colors"
+                >
+                  Order Studio Sample Kit
+                </Link>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Who We Collaborate With */}
-      <section className="py-20 md:py-28 bg-ivory border-b border-sand">
+      {/* ── Who We Collaborate With ── */}
+      <section className="section bg-paper-white" aria-label="Creative Disciplines">
         <div className="container-wide">
-          <Reveal>
-            <div className="text-center max-w-xl mx-auto mb-16">
-              <span className="eyebrow text-warm-stone">Trade Network</span>
-              <h2 className="heading-xl text-charcoal mt-2">Built for creative professionals</h2>
-            </div>
-          </Reveal>
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <Reveal>
+              <p className="eyebrow mb-2">Trade Network</p>
+              <h2 className="mb-4">
+                Built for <em className="font-light">creative professionals</em>
+              </h2>
+            </Reveal>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {partnerAudiences.map((item, idx) => (
-              <Reveal key={item.title} delay={idx * 0.1} className="h-full">
-                <div className="card-warm p-8 h-full flex flex-col justify-between">
+              <Reveal key={item.title} delay={idx * 0.1}>
+                <div className="bg-paper-creme border border-border-hairline p-8 h-full flex flex-col justify-between">
                   <div>
-                    <h3 className="heading-md text-charcoal mb-3">{item.title}</h3>
-                    <p className="body-sm text-warm-stone mb-6 font-light leading-relaxed">
+                    <h3 className="text-xl font-serif text-ink-deep mb-3">{item.title}</h3>
+                    <p className="text-xs md:text-sm text-ink-muted leading-relaxed mb-6 font-light">
                       {item.desc}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-sand">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-forest font-semibold block mb-1">
-                      Key Benefit
+                  <div className="pt-4 border-t border-border-hairline">
+                    <span className="text-[10px] tracking-[0.16em] uppercase text-ink-deep font-sans font-medium block">
+                      Trade Benefit:
                     </span>
-                    <span className="text-xs text-charcoal font-medium">{item.benefit}</span>
+                    <span className="text-xs text-ink-muted mt-1 block">
+                      {item.benefit}
+                    </span>
                   </div>
                 </div>
               </Reveal>
@@ -117,27 +127,30 @@ export default function ChannelPartnersPage() {
         </div>
       </section>
 
-      {/* Collaboration Workflow */}
-      <section className="py-20 md:py-28 bg-cream border-b border-sand">
+      {/* ── Collaboration Workflow ── */}
+      <section className="section bg-paper-creme" aria-label="Trade Workflow">
         <div className="container-wide">
-          <Reveal>
-            <div className="text-center max-w-xl mx-auto mb-16">
-              <span className="eyebrow text-terracotta">How We Collaborate</span>
-              <h2 className="heading-xl text-charcoal mt-2">A transparent trade workflow</h2>
-            </div>
-          </Reveal>
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <Reveal>
+              <p className="eyebrow mb-2">Partnership Process</p>
+              <h2 className="mb-4">
+                How we work <em className="font-light">together</em>
+              </h2>
+              <p className="text-xs md:text-sm text-ink-muted leading-relaxed">
+                From wholesale trade pricing to direct client drop-shipping under plain packaging.
+              </p>
+            </Reveal>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {collaborationWorkflow.map((item, idx) => (
-              <Reveal key={item.title} delay={idx * 0.1}>
-                <div className="card-warm p-6 h-full flex flex-col justify-between">
-                  <div>
-                    <span className="font-mono text-xs uppercase tracking-widest text-terracotta font-semibold block mb-2">
-                      {item.step}
-                    </span>
-                    <h3 className="font-serif text-lg text-charcoal mb-2">{item.title}</h3>
-                    <p className="text-xs text-warm-stone leading-relaxed font-light">{item.desc}</p>
-                  </div>
+              <Reveal key={item.title} delay={idx * 0.08}>
+                <div className="bg-paper-white border border-border-hairline p-6 relative h-full">
+                  <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-2">
+                    {item.step}
+                  </span>
+                  <h3 className="text-base font-serif text-ink-deep mb-2">{item.title}</h3>
+                  <p className="text-xs text-ink-muted leading-relaxed font-light">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -145,22 +158,32 @@ export default function ChannelPartnersPage() {
         </div>
       </section>
 
-      {/* Trade Enquiry Banner */}
-      <section className="py-20 md:py-28 bg-ivory">
-        <div className="container-narrow text-center">
+      {/* ── Direct Trade Inquiry CTA ── */}
+      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+        <div className="container-narrow">
           <Reveal>
-            <span className="eyebrow text-forest">Let's Create Together</span>
-            <h2 className="heading-xl text-charcoal mt-2 mb-4">Introduce your studio or agency</h2>
-            <p className="body-md text-warm-stone max-w-lg mx-auto mb-8 font-light">
-              Connect with Mr Khiasu and the Famous Letterpress team to discuss trade pricing, client swatch boxes, and upcoming project timelines.
+            <p className="eyebrow !text-paper-creme/30 mb-3">Partner With Us</p>
+            <h2 className="!text-paper-creme mb-4">
+              Bring letterpress craft to <em className="font-light">your clients.</em>
+            </h2>
+            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+              We offer trade discounts, custom sample boxes, and prioritized press turnarounds for registered partners. Reach out to set up your account.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/start-a-project?type=partner" variant="primary" size="lg">
-                Partner Application Form
-              </Button>
-              <Button href="/contact" variant="outline" size="lg">
-                Direct WhatsApp Discussion
-              </Button>
+              <Link
+                href="/start-a-project?type=partner"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+              >
+                Register as a Trade Partner
+              </Link>
+              <a
+                href="https://wa.me/919366012345"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+              >
+                Chat on WhatsApp
+              </a>
             </div>
           </Reveal>
         </div>

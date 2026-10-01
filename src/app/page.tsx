@@ -1,25 +1,36 @@
 import { HeroSection } from "@/components/home/HeroSection";
-import { PositioningSection } from "@/components/home/PositioningSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { SelectedWorkSection } from "@/components/home/SelectedWorkSection";
-import { CraftSection } from "@/components/home/CraftSection";
-import { StudioSection } from "@/components/home/StudioSection";
-import { ProcessSection } from "@/components/home/ProcessSection";
+import { WhatWeMakeSection } from "@/components/home/WhatWeMakeSection";
+import { HowWeMakeSection } from "@/components/home/HowWeMakeSection";
+import { WhoWeMakeForSection } from "@/components/home/WhoWeMakeForSection";
 import { SampleKitsSection } from "@/components/home/SampleKitsSection";
 import { CTASection } from "@/components/home/CTASection";
 
+export const metadata = {
+  title: "Famous Letterpress — Handcrafted Letterpress & Foil Studio",
+  description:
+    "India's premier artisanal letterpress atelier. Bespoke wedding invitations, luxury business cards, and custom stationery pressed by hand on vintage platen presses in Nagaland.",
+};
+
 export default function HomePage() {
   return (
-    <>
+    <main>
+      {/* 1. Hero Reel: IG-Style Momentum Showcase */}
       <HeroSection />
-      <PositioningSection />
-      <ServicesSection />
-      <SelectedWorkSection />
-      <CraftSection />
-      <StudioSection />
-      <ProcessSection />
+
+      {/* 2. What We Make: Wedding vs Business Split Gateway */}
+      <WhatWeMakeSection />
+
+      {/* 3. How We Make: Authentic Letterpress Craftsmanship Story */}
+      <HowWeMakeSection />
+
+      {/* 4. Who We Make For: Couples, Planners & B2B Audiences */}
+      <WhoWeMakeForSection />
+
+      {/* 5. Sample Kits: Tactile Commerce Discovery */}
       <SampleKitsSection />
+
+      {/* 6. Direct Inquiry & Consultation CTA */}
       <CTASection />
-    </>
+    </main>
   );
 }

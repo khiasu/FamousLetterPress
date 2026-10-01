@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Script from "next/script";
+import Link from "next/link";
 import { SampleKitItem } from "@/types";
-import { Button } from "@/components/ui/Button";
 
 interface SampleKitCheckoutProps {
   kit: SampleKitItem;
@@ -76,11 +76,10 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
             contact: data.customer.phone,
           },
           theme: {
-            color: "#C16543", // Terracotta brand accent
+            color: "#111111", // Deep ink
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           handler: async function (response: any) {
-            // Verify payment on server
             const verifyRes = await fetch("/api/orders/verify-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -99,23 +98,25 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 amount: data.amount,
               });
             } else {
-              setErrorMsg("Payment verification pending or failed. Our studio will contact you directly.");
+              setErrorMsg(verifyData.error || "Payment verification failed. Please contact us.");
             }
+          },
+          modal: {
+            ondismiss: function () {
+              setIsLoading(false);
+            },
           },
         };
 
         const rzp = new window.Razorpay(options);
         rzp.open();
       } else {
-        // Fallback / Demonstration mode when keys aren't set in local env
-        // Still produces verified simulated order confirmation
-        setTimeout(() => {
-          setOrderConfirmed({
-            orderNumber: data.orderNumber,
-            customerEmail: formData.customerEmail,
-            amount: data.amount,
-          });
-        }, 800);
+        // Fallback for demo or offline staging
+        setOrderConfirmed({
+          orderNumber: data.orderNumber,
+          customerEmail: data.customer.email,
+          amount: data.amount,
+        });
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -130,45 +131,51 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
 
   if (orderConfirmed) {
     return (
-      <div className="card-warm p-8 md:p-12 text-center bg-cream border-2 border-forest/30">
-        <div className="w-12 h-12 bg-forest/10 text-forest rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <div className="bg-paper-white border border-border-hairline p-8 md:p-12 text-center">
+        <div className="w-12 h-12 bg-ink-deep text-paper-creme rounded-full flex items-center justify-center mx-auto mb-5">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <span className="eyebrow text-forest">Order Confirmed</span>
-        <h2 className="heading-lg text-charcoal mt-2 mb-3">Thank you for your order!</h2>
-        <p className="body-md text-warm-stone max-w-md mx-auto mb-6">
-          Your sample kit order <strong className="text-charcoal font-mono">{orderConfirmed.orderNumber}</strong> has been logged.
-          A confirmation receipt has been sent to <span className="text-charcoal font-medium">{orderConfirmed.customerEmail}</span>.
+        <p className="eyebrow mb-2">Order Confirmed</p>
+        <h2 className="text-2xl md:text-3xl text-ink-deep mb-3 font-serif">Thank you for your order</h2>
+        <p className="text-sm text-ink-muted max-w-md mx-auto mb-8 leading-relaxed">
+          Your sample kit order <strong className="text-ink-deep font-mono">{orderConfirmed.orderNumber}</strong> has been logged.
+          A confirmation receipt has been sent to <span className="text-ink-deep font-medium">{orderConfirmed.customerEmail}</span>.
         </p>
 
-        <div className="bg-ivory p-6 rounded-sm max-w-sm mx-auto text-left border border-sand mb-8 text-xs text-warm-stone space-y-2">
+        <div className="bg-paper-creme p-6 max-w-sm mx-auto text-left border border-border-hairline mb-8 text-xs text-ink-muted space-y-2.5 font-sans">
           <div className="flex justify-between">
             <span>Item:</span>
-            <strong className="text-charcoal">{kit.name}</strong>
+            <strong className="text-ink-deep">{kit.name}</strong>
           </div>
           <div className="flex justify-between">
             <span>Total Paid:</span>
-            <strong className="text-charcoal font-serif text-sm">₹{orderConfirmed.amount}</strong>
+            <strong className="text-ink-deep font-serif text-sm">₹{orderConfirmed.amount}</strong>
           </div>
           <div className="flex justify-between">
             <span>Dispatch Timeline:</span>
-            <span className="text-charcoal font-medium">Within 24–48 Hours</span>
+            <span className="text-ink-deep">Within 24–48 Hours</span>
           </div>
           <div className="flex justify-between">
             <span>Courier:</span>
-            <span className="text-charcoal">Express Courier with Tracking</span>
+            <span className="text-ink-deep">Express Tracked Courier</span>
           </div>
         </div>
 
-        <div className="flex justify-center gap-4">
-          <Button href="/weddings" variant="primary" size="md">
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link
+            href="/weddings"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+          >
             Explore Wedding Services
-          </Button>
-          <Button href="/" variant="outline" size="md">
+          </Link>
+          <Link
+            href="/"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/30 transition-colors"
+          >
             Return to Home
-          </Button>
+          </Link>
         </div>
       </div>
     );
@@ -178,33 +185,31 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
 
-      <form onSubmit={handleCheckout} className="card-warm p-8 md:p-10 bg-ivory">
-        <div className="border-b border-sand pb-6 mb-6">
+      <form onSubmit={handleCheckout} className="bg-paper-white border border-border-hairline p-6 md:p-8">
+        <div className="border-b border-border-hairline pb-6 mb-6">
           <div className="flex items-baseline justify-between mb-2">
-            <h3 className="heading-md text-charcoal">{kit.name}</h3>
-            <div className="text-2xl font-serif text-charcoal">
-              ₹{kit.price} <span className="text-xs font-sans text-warm-stone">INR</span>
+            <h3 className="text-xl font-serif text-ink-deep">{kit.name}</h3>
+            <div className="text-2xl font-serif text-ink-deep">
+              ₹{kit.price} <span className="text-xs font-sans text-ink-light">INR</span>
             </div>
           </div>
-          <p className="text-xs text-warm-stone">
+          <p className="text-xs text-ink-muted leading-relaxed">
             All-inclusive price. Includes express courier shipping with real-time tracking across India.
           </p>
         </div>
 
         {errorMsg && (
-          <div className="mb-6 p-4 bg-terracotta/10 border border-terracotta/30 text-terracotta text-xs rounded-sm">
+          <div className="mb-6 p-4 bg-ink-deep text-paper-creme text-xs">
             {errorMsg}
           </div>
         )}
 
         <div className="space-y-4">
-          <div className="text-xs font-mono uppercase tracking-wider text-terracotta font-semibold">
-            1. Recipient Details
-          </div>
+          <p className="eyebrow mb-2">1. Recipient Details</p>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">
-              Full Name <span className="text-terracotta">*</span>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Full Name *
             </label>
             <input
               type="text"
@@ -213,14 +218,14 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               value={formData.customerName}
               onChange={handleChange}
               placeholder="e.g. Rongsen Jamir"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-medium text-charcoal mb-1">
-                Email Address <span className="text-terracotta">*</span>
+              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+                Email Address *
               </label>
               <input
                 type="email"
@@ -229,12 +234,12 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.customerEmail}
                 onChange={handleChange}
                 placeholder="you@domain.com"
-                className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-charcoal mb-1">
-                Phone / WhatsApp <span className="text-terracotta">*</span>
+              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+                Phone / WhatsApp *
               </label>
               <input
                 type="tel"
@@ -243,18 +248,16 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.customerPhone}
                 onChange={handleChange}
                 placeholder="+91 98765 43210"
-                className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
               />
             </div>
           </div>
 
-          <div className="pt-2 text-xs font-mono uppercase tracking-wider text-terracotta font-semibold">
-            2. Shipping Address (India)
-          </div>
+          <p className="eyebrow pt-3 mb-2">2. Shipping Address (India)</p>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">
-              Address Line 1 <span className="text-terracotta">*</span>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Address Line 1 *
             </label>
             <input
               type="text"
@@ -263,26 +266,28 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               value={formData.addressLine1}
               onChange={handleChange}
               placeholder="Apartment, house number, street"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">Address Line 2 (Optional)</label>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Address Line 2 (Optional)
+            </label>
             <input
               type="text"
               name="addressLine2"
               value={formData.addressLine2}
               onChange={handleChange}
               placeholder="Landmark, building name, suite"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-medium text-charcoal mb-1">
-                City <span className="text-terracotta">*</span>
+              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+                City *
               </label>
               <input
                 type="text"
@@ -290,13 +295,13 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 required
                 value={formData.city}
                 onChange={handleChange}
-                placeholder="e.g. Dimapur / Delhi"
-                className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+                placeholder="Dimapur / Delhi"
+                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-charcoal mb-1">
-                State <span className="text-terracotta">*</span>
+              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+                State *
               </label>
               <input
                 type="text"
@@ -304,13 +309,13 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 required
                 value={formData.state}
                 onChange={handleChange}
-                placeholder="e.g. Nagaland"
-                className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+                placeholder="Nagaland"
+                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-charcoal mb-1">
-                Postal Code <span className="text-terracotta">*</span>
+              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+                Postal Code *
               </label>
               <input
                 type="text"
@@ -319,25 +324,23 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.postalCode}
                 onChange={handleChange}
                 placeholder="PIN Code"
-                className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
               />
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-sand">
-          <Button
+        <div className="mt-8 pt-6 border-t border-border-hairline">
+          <button
             type="submit"
-            variant="primary"
-            size="lg"
             disabled={isLoading}
-            className="w-full justify-center text-center"
+            className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
           >
             {isLoading ? "Preparing Order..." : `Proceed to Secure Payment · ₹${kit.price}`}
-          </Button>
+          </button>
 
-          <div className="flex items-center justify-center gap-2 mt-4 text-[11px] text-warm-stone">
-            <svg className="w-3.5 h-3.5 text-forest" fill="currentColor" viewBox="0 0 20 20">
+          <div className="flex items-center justify-center gap-2 mt-4 text-[10px] text-ink-light tracking-wide font-sans">
+            <svg className="w-3.5 h-3.5 text-ink-deep" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
                 d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"

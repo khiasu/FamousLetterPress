@@ -1,72 +1,55 @@
 @import "tailwindcss";
 
 /* ========================================================================
-   FAMOUS LETTERPRESS — DESIGN SYSTEM
-   Minimal · Luxurious · Feminine · Editorial · Tactile · Premium
+   FAMOUS LETTERPRESS — LUXURY DESIGN SYSTEM
+   Simple · Black & White · Creme · Feminine · Editorial · Tactile
    ======================================================================== */
 
 :root {
-  /* ── Brand Colors ── */
-  --color-ivory:       #FAF8F5;
-  --color-cream:       #F5F0EA;
-  --color-warm-white:  #FDFCFA;
-  --color-sand:        #E8E0D5;
-  --color-stone:       #C4B8A9;
-  --color-taupe:       #9C8E7E;
-  --color-charcoal:    #2C2C2C;
-  --color-ink:         #1A1A1A;
-  --color-sage:        #6B7C6B;
-  --color-sage-dark:   #4A5C4A;
-  --color-gold:        #B8963E;
-  --color-gold-light:  #D4B86A;
-  --color-blush:       #E8D5CC;
-  --color-rose:        #C9A99A;
+  /* ── Restricted Luxury Palette ──
+     Only these colors exist in the brand world.
+     No sage, no gold, no blush, no terracotta — ever. */
+  --color-paper-white:    #FFFFFF;
+  --color-paper-creme:    #FBF9F5;
+  --color-paper-sand:     #F5F2EB;
+  --color-border-hairline:#E8E3DA;
+  --color-ink-deep:       #111111;
+  --color-ink-muted:      #66615B;
+  --color-ink-light:      #99928A;
 
-  /* ── Semantic Colors ── */
-  --background:        var(--color-ivory);
-  --foreground:        var(--color-ink);
-  --muted:             var(--color-taupe);
-  --border:            var(--color-sand);
-  --accent:            var(--color-sage);
-  --accent-dark:       var(--color-sage-dark);
-  --highlight:         var(--color-gold);
+  /* ── Semantic Aliases ── */
+  --background:           var(--color-paper-creme);
+  --foreground:           var(--color-ink-deep);
 
   /* ── Motion ── */
-  --ease-out-expo:     cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart:    cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-in-out:       cubic-bezier(0.65, 0, 0.35, 1);
-  --duration-fast:     150ms;
-  --duration-normal:   300ms;
-  --duration-slow:     600ms;
-  --duration-reveal:   900ms;
+  --ease-out-expo:        cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart:       cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-smooth:   cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast:        150ms;
+  --duration-normal:      300ms;
+  --duration-slow:        600ms;
+  --duration-reveal:      900ms;
 }
 
 @theme inline {
-  /* ── Color tokens for Tailwind ── */
-  --color-background:   var(--background);
-  --color-foreground:   var(--foreground);
-  --color-ivory:        var(--color-ivory);
-  --color-cream:        var(--color-cream);
-  --color-warm-white:   var(--color-warm-white);
-  --color-sand:         var(--color-sand);
-  --color-stone:        var(--color-stone);
-  --color-taupe:        var(--color-taupe);
-  --color-charcoal:     var(--color-charcoal);
-  --color-ink:          var(--color-ink);
-  --color-sage:         var(--color-sage);
-  --color-sage-dark:    var(--color-sage-dark);
-  --color-gold:         var(--color-gold);
-  --color-gold-light:   var(--color-gold-light);
-  --color-blush:        var(--color-blush);
-  --color-rose:         var(--color-rose);
+  /* ── Color tokens for Tailwind v4 ── */
+  --color-background:       var(--background);
+  --color-foreground:       var(--foreground);
+  --color-paper-white:      var(--color-paper-white);
+  --color-paper-creme:      var(--color-paper-creme);
+  --color-paper-sand:       var(--color-paper-sand);
+  --color-border-hairline:  var(--color-border-hairline);
+  --color-ink-deep:         var(--color-ink-deep);
+  --color-ink-muted:        var(--color-ink-muted);
+  --color-ink-light:        var(--color-ink-light);
 
   /* ── Fonts ── */
   --font-serif:   var(--font-cormorant-garamond);
   --font-sans:    var(--font-inter);
 
-  /* ── Spacing scale ── */
-  --spacing-section:     clamp(4rem, 8vw, 8rem);
-  --spacing-section-lg:  clamp(6rem, 12vw, 12rem);
+  /* ── Spacing ── */
+  --spacing-section:        clamp(4rem, 8vw, 7rem);
+  --spacing-section-lg:     clamp(5rem, 10vw, 10rem);
 }
 
 /* ========================================================================
@@ -88,36 +71,38 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Typography & Base Elements ── */
+/* ── Typography ── */
 
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif), 'Georgia', serif;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.15;
     letter-spacing: -0.01em;
-    color: var(--color-ink);
+    color: var(--color-ink-deep);
   }
 
   h1 {
-    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    font-size: clamp(2.25rem, 5vw + 0.5rem, 4rem);
     letter-spacing: -0.02em;
+    font-weight: 300;
   }
 
   h2 {
-    font-size: clamp(2rem, 3.5vw + 0.5rem, 3.25rem);
+    font-size: clamp(1.75rem, 3.5vw + 0.25rem, 2.75rem);
   }
 
   h3 {
-    font-size: clamp(1.5rem, 2.5vw + 0.25rem, 2.25rem);
+    font-size: clamp(1.375rem, 2vw + 0.25rem, 1.875rem);
   }
 
   h4 {
-    font-size: clamp(1.25rem, 1.5vw + 0.25rem, 1.5rem);
+    font-size: clamp(1.125rem, 1.5vw + 0.125rem, 1.375rem);
   }
 
   p {
-    max-width: 65ch;
+    max-width: 60ch;
+    color: var(--color-ink-muted);
   }
 
   a {
@@ -128,22 +113,18 @@ body {
 }
 
 /* ── Selection ── */
-
 ::selection {
-  background-color: var(--color-blush);
-  color: var(--color-ink);
+  background-color: var(--color-paper-sand);
+  color: var(--color-ink-deep);
 }
 
 /* ── Focus ── */
-
 :focus-visible {
-  outline: 2px solid var(--color-sage);
+  outline: 1px solid var(--color-ink-deep);
   outline-offset: 3px;
-  border-radius: 2px;
 }
 
 /* ── Images ── */
-
 img {
   max-width: 100%;
   height: auto;
@@ -167,160 +148,37 @@ img {
 
 /* Container */
 .container-wide {
-  max-width: 1400px;
+  max-width: 1340px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.25rem, 4vw, 3rem);
-  padding-right: clamp(1.25rem, 4vw, 3rem);
+  padding-left: clamp(1.25rem, 5vw, 3rem);
+  padding-right: clamp(1.25rem, 5vw, 3rem);
 }
 
 .container-narrow {
-  max-width: 900px;
+  max-width: 860px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.25rem, 4vw, 3rem);
-  padding-right: clamp(1.25rem, 4vw, 3rem);
+  padding-left: clamp(1.25rem, 5vw, 3rem);
+  padding-right: clamp(1.25rem, 5vw, 3rem);
 }
 
-/* Label / eyebrow text */
+/* Eyebrow label */
 .eyebrow {
   font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-taupe);
+  color: var(--color-ink-light);
 }
 
-/* Divider */
+/* Hairline divider */
 .divider {
-  width: 3rem;
+  width: 2.5rem;
   height: 1px;
-  background-color: var(--color-sand);
+  background-color: var(--color-border-hairline);
   border: none;
-}
-
-/* ========================================================================
-   PREMIUM KEYFRAME ANIMATIONS
-   ======================================================================== */
-
-@keyframes goldShimmer {
-  0%, 100% { background-position: 200% 0; }
-  50% { background-position: -200% 0; }
-}
-
-@keyframes grainDrift {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-2%, -2%); }
-  20% { transform: translate(1%, 3%); }
-  30% { transform: translate(-3%, 1%); }
-  40% { transform: translate(3%, -1%); }
-  50% { transform: translate(-1%, 2%); }
-  60% { transform: translate(2%, -3%); }
-  70% { transform: translate(-2%, 1%); }
-  80% { transform: translate(1%, -2%); }
-  90% { transform: translate(-1%, 3%); }
-}
-
-@keyframes floatGentle {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(1deg); }
-  66% { transform: translateY(4px) rotate(-0.5deg); }
-}
-
-@keyframes drawLine {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
-@keyframes scaleReveal {
-  from { clip-path: inset(100% 0 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-
-/* ========================================================================
-   PREMIUM UTILITY CLASSES
-   ======================================================================== */
-
-/* Grain texture overlay */
-.grain-overlay {
-  position: relative;
-}
-.grain-overlay::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.04;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
-  animation: grainDrift 8s steps(10) infinite;
-  z-index: 1;
-}
-
-/* Gold line that draws itself */
-.gold-line-draw {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-  transform-origin: left center;
-  animation: drawLine 1.2s var(--ease-out-expo) forwards;
-}
-
-/* Floating animation utility */
-.float-gentle {
-  animation: floatGentle 6s ease-in-out infinite;
-}
-
-/* Premium cursor for interactive elements */
-.cursor-view {
-  cursor: crosshair;
-}
-
-/* Glass panel */
-.glass-panel {
-  background: rgba(250, 248, 245, 0.85);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(232, 224, 213, 0.5);
-}
-
-/* Dark glass panel */
-.glass-panel-dark {
-  background: rgba(26, 26, 26, 0.75);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Scroll-linked progress bar */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
-  transform-origin: left;
-  z-index: 9999;
-}
-
-/* Editorial large quote */
-.editorial-quote {
-  font-family: var(--font-serif), 'Georgia', serif;
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  line-height: 1.3;
-  font-weight: 300;
-  letter-spacing: -0.01em;
 }
 
 /* ========================================================================
@@ -347,14 +205,37 @@ img {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-cream);
+  background: var(--color-paper-creme);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--color-stone), var(--color-gold));
+  background: var(--color-border-hairline);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gold);
+  background: var(--color-ink-light);
+}
+
+/* ========================================================================
+   HORIZONTAL SCROLL CAROUSEL (IG-Style)
+   ======================================================================== */
+
+.carousel-scroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.5rem;
+}
+
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-scroll > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }

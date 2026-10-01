@@ -23,7 +23,7 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
 
   return (
     <div>
-      {/* Category Filter Pills */}
+      {/* Category Filter Tabs */}
       <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
         {filters.map((filter) => {
           const isActive = activeFilter === filter.value;
@@ -31,10 +31,10 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
             <button
               key={filter.value}
               onClick={() => setActiveFilter(filter.value)}
-              className={`px-4 py-2 text-xs uppercase tracking-wider transition-all rounded-sm ${
+              className={`px-5 py-2.5 text-[11px] tracking-[0.14em] uppercase transition-all duration-300 ${
                 isActive
-                  ? "bg-charcoal text-cream font-medium shadow-xs"
-                  : "bg-ivory text-warm-stone border border-sand hover:border-terracotta/40"
+                  ? "bg-ink-deep text-paper-creme font-medium"
+                  : "bg-paper-creme text-ink-muted border border-border-hairline hover:border-ink-deep/30"
               }`}
             >
               {filter.label}
@@ -47,37 +47,37 @@ export function PortfolioGallery({ items }: PortfolioGalleryProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredItems.map((piece, idx) => (
           <Reveal key={piece.id} delay={idx * 0.05}>
-            <div className="card-warm overflow-hidden group h-full flex flex-col justify-between">
+            <div className="bg-paper-white border border-border-hairline overflow-hidden group h-full flex flex-col justify-between">
               <div>
-                <div className="aspect-[4/3] bg-sand/60 relative overflow-hidden border-b border-sand">
+                <div className="aspect-[4/3] bg-paper-sand relative overflow-hidden border-b border-border-hairline">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={piece.featuredImage}
                     alt={piece.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   />
-                  <div className="absolute top-3 left-3 bg-ivory/95 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] uppercase font-mono tracking-widest text-charcoal shadow-sm border border-sand/60">
+                  <div className="absolute top-3 left-3 bg-paper-creme/90 backdrop-blur-sm px-2.5 py-1 text-[10px] uppercase font-mono tracking-widest text-ink-deep border border-border-hairline">
                     {piece.categoryLabel}
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <div className="text-[11px] font-mono uppercase tracking-wider text-terracotta mb-2 font-medium">
-                    {piece.clientOrProject || "Bespoke Project"}
-                  </div>
-                  <h3 className="font-serif text-lg text-charcoal mb-2">{piece.title}</h3>
-                  <p className="text-xs text-warm-stone leading-relaxed mb-4 font-light">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink-light mb-2 block font-medium">
+                    {piece.clientOrProject || "Bespoke Commission"}
+                  </span>
+                  <h3 className="font-serif text-xl text-ink-deep mb-2">{piece.title}</h3>
+                  <p className="text-xs text-ink-muted leading-relaxed mb-4 font-light">
                     {piece.description}
                   </p>
                 </div>
               </div>
 
               <div className="px-6 pb-6 pt-0">
-                <div className="pt-4 border-t border-sand flex flex-wrap gap-1.5">
+                <div className="pt-4 border-t border-border-hairline flex flex-wrap gap-1.5">
                   {piece.techniques.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[10px] bg-sand/70 text-charcoal px-2 py-0.5 rounded-sm"
+                      className="text-[10px] bg-paper-creme border border-border-hairline text-ink-deep px-2.5 py-0.5 tracking-wide font-sans"
                     >
                       {tech}
                     </span>

@@ -20,11 +20,11 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    default: "Famous Letterpress — Handcrafted Letterpress & Foil Printing | Nagaland, India",
+    default: "Famous Letterpress — Letterpress & Foil Printing Studio in Nagaland, India",
     template: "%s | Famous Letterpress",
   },
   description:
-    "Famous Letterpress crafts premium letterpress and foil stamping wedding invitations, business cards, and personalised stationery. Handcrafted in Nagaland, India.",
+    "India’s artisanal letterpress and foil printing studio. We design and print wedding invitations, business cards, and personal stationery on thick cotton paper. Based in Nagaland, shipped nationwide.",
   metadataBase: new URL("https://famousletterpress.com"),
   openGraph: {
     type: "website",

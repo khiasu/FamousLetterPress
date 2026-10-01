@@ -11,22 +11,24 @@ export const metadata: Metadata = {
 
 export default function EarlyBridePage() {
   return (
-    <div className="bg-cream">
+    <div className="bg-paper-creme min-h-screen">
       {/* Header */}
-      <section className="pt-32 pb-14 md:pt-40 md:pb-20 border-b border-sand">
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center justify-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <Link href="/weddings" className="hover:text-terracotta">Weddings</Link>
+                <Link href="/weddings" className="hover:text-ink-deep transition-colors">Weddings</Link>
                 <span>/</span>
-                <span className="text-terracotta">Early Bride</span>
+                <span className="text-ink-deep">Early Bride</span>
               </div>
-              <span className="eyebrow text-terracotta">Dedicated Consultation</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-4">The Early Bride Experience</h1>
-              <p className="body-md text-warm-stone font-light leading-relaxed">
+              <p className="eyebrow mb-2">Dedicated Consultation</p>
+              <h1 className="text-ink-deep mb-4 font-serif">
+                The Early Bride Experience
+              </h1>
+              <p className="text-sm md:text-base text-ink-muted font-light leading-relaxed">
                 Whether you have an exact visual concept or are just beginning to explore tactile letterpress, our Early Bride inquiry helps us understand your celebration and propose the best artisanal path forward.
               </p>
             </div>
@@ -35,7 +37,7 @@ export default function EarlyBridePage() {
       </section>
 
       {/* Form Section */}
-      <section className="py-16 md:py-24 bg-ivory">
+      <section className="section bg-paper-white">
         <div className="container-wide">
           <Reveal>
             <EarlyBrideForm />

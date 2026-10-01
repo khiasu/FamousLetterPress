@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
 interface ProjectFormProps {
   initialService?: string;
@@ -66,33 +66,39 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
 
   if (submittedRef) {
     return (
-      <div className="card-warm p-8 md:p-12 text-center bg-cream border-2 border-forest/30 max-w-xl mx-auto">
-        <div className="w-12 h-12 bg-forest/10 text-forest rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <div className="bg-paper-white border border-border-hairline p-8 md:p-12 text-center max-w-xl mx-auto">
+        <div className="w-12 h-12 bg-ink-deep text-paper-creme rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <span className="eyebrow text-forest">Enquiry Received</span>
-        <h2 className="heading-lg text-charcoal mt-2 mb-3">Thank you for contacting us</h2>
-        <p className="body-md text-warm-stone mb-6 font-light">
-          Your project reference is <strong className="text-charcoal font-mono">{submittedRef}</strong>.
+        <p className="eyebrow mb-2">Enquiry Received</p>
+        <h2 className="text-2xl md:text-3xl text-ink-deep mb-3 font-serif">Thank you for contacting us</h2>
+        <p className="text-sm text-ink-muted mb-8 font-light leading-relaxed">
+          Your project reference is <strong className="text-ink-deep font-mono">{submittedRef}</strong>.
           We will review your specifications and contact you via{" "}
-          <strong className="text-charcoal">{formData.preferredContact}</strong> within 24 business hours.
+          <strong className="text-ink-deep">({formData.preferredContact})</strong> within 24 business hours.
         </p>
-        <div className="flex justify-center gap-4">
-          <Button href="/" variant="primary" size="md">
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link
+            href="/"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+          >
             Return to Home
-          </Button>
-          <Button href="/work" variant="outline" size="md">
+          </Link>
+          <Link
+            href="/work"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/30 transition-colors"
+          >
             View More Work
-          </Button>
+          </Link>
         </div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card-warm p-8 md:p-12 bg-ivory max-w-3xl mx-auto">
+    <form onSubmit={handleSubmit} className="bg-paper-white border border-border-hairline p-8 md:p-12 max-w-3xl mx-auto">
       <input
         type="text"
         name="hpField"
@@ -103,15 +109,16 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         autoComplete="off"
       />
 
-      <div className="border-b border-sand pb-6 mb-8">
-        <h2 className="heading-lg text-charcoal">Project Details</h2>
-        <p className="body-sm text-warm-stone mt-2 font-light">
+      <div className="border-b border-border-hairline pb-6 mb-8">
+        <p className="eyebrow mb-2">Project Brief</p>
+        <h2 className="text-2xl md:text-3xl font-serif text-ink-deep">Project Details</h2>
+        <p className="text-xs md:text-sm text-ink-muted mt-2 font-light leading-relaxed">
           Tell us about what you would like to print. We review every brief individually to determine paper options, die requirements, and timing.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="mb-6 p-4 bg-terracotta/10 border border-terracotta/30 text-terracotta text-xs rounded-sm">
+        <div className="mb-6 p-4 bg-ink-deep text-paper-creme text-xs">
           {errorMsg}
         </div>
       )}
@@ -120,8 +127,8 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Name & Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">
-              Your Name <span className="text-terracotta">*</span>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Your Name *
             </label>
             <input
               type="text"
@@ -130,12 +137,12 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.name}
               onChange={handleChange}
               placeholder="e.g. Rongsen Jamir"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">
-              Email Address <span className="text-terracotta">*</span>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Email Address *
             </label>
             <input
               type="email"
@@ -144,7 +151,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.email}
               onChange={handleChange}
               placeholder="you@domain.com"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
         </div>
@@ -152,25 +159,29 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Phone & City */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">Phone / WhatsApp</label>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Phone / WhatsApp
+            </label>
             <input
               type="tel"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               placeholder="+91 98765 43210"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">City / Location</label>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              City / Location
+            </label>
             <input
               type="text"
               name="city"
               value={formData.city}
               onChange={handleChange}
               placeholder="e.g. Dimapur, Mumbai, London"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
         </div>
@@ -178,12 +189,14 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Service & Quantity */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">Service Needed</label>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Service Needed
+            </label>
             <select
               name="serviceNeeded"
               value={formData.serviceNeeded}
               onChange={handleChange}
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-xs text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-xs text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             >
               <option value="Wedding Stationery">Wedding Stationery / Suites</option>
               <option value="Business Cards">Luxury Letterpress Business Cards</option>
@@ -193,14 +206,16 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">Estimated Quantity</label>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Estimated Quantity
+            </label>
             <input
               type="text"
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
               placeholder="e.g. 100 suites / 200 cards"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
         </div>
@@ -208,33 +223,37 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Timeline & Budget */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">Target Delivery Date / Month</label>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Target Delivery Date / Month
+            </label>
             <input
               type="text"
               name="timeline"
               value={formData.timeline}
               onChange={handleChange}
               placeholder="e.g. November 2026"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-charcoal mb-1">Estimated Budget (Optional)</label>
+            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              Estimated Budget (Optional)
+            </label>
             <input
               type="text"
               name="budget"
               value={formData.budget}
               onChange={handleChange}
               placeholder="e.g. Flexible / approx range"
-              className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
             />
           </div>
         </div>
 
         {/* Message */}
         <div>
-          <label className="block text-xs font-medium text-charcoal mb-1">
-            Project Description / Message <span className="text-terracotta">*</span>
+          <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            Project Description / Message *
           </label>
           <textarea
             name="message"
@@ -243,23 +262,25 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             value={formData.message}
             onChange={handleChange}
             placeholder="Share details on techniques (letterpress, foil, embossing), paper preferences, or design ideas..."
-            className="w-full bg-cream border border-sand px-3.5 py-2.5 text-sm text-charcoal rounded-sm focus:outline-none focus:border-terracotta transition-colors"
+            className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
           />
         </div>
 
         {/* Preferred Contact Method */}
         <div>
-          <label className="block text-xs font-medium text-charcoal mb-2">Preferred Contact Method</label>
+          <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-2 font-sans">
+            Preferred Contact Method
+          </label>
           <div className="flex gap-6">
             {(["WhatsApp", "Email", "Phone"] as const).map((method) => (
-              <label key={method} className="flex items-center gap-2 text-xs text-charcoal cursor-pointer">
+              <label key={method} className="flex items-center gap-2 text-xs text-ink-deep cursor-pointer font-sans">
                 <input
                   type="radio"
                   name="preferredContact"
                   value={method}
                   checked={formData.preferredContact === method}
                   onChange={handleChange}
-                  className="text-terracotta focus:ring-terracotta"
+                  className="accent-ink-deep"
                 />
                 <span>{method}</span>
               </label>
@@ -268,17 +289,15 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-sand">
-        <Button
+      <div className="mt-8 pt-6 border-t border-border-hairline">
+        <button
           type="submit"
-          variant="primary"
-          size="lg"
           disabled={isLoading}
-          className="w-full justify-center text-center"
+          className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
         >
           {isLoading ? "Submitting Brief..." : "Submit Project Brief"}
-        </Button>
-        <p className="text-[11px] text-warm-stone text-center mt-3 font-light">
+        </button>
+        <p className="text-[11px] text-ink-light text-center mt-3 font-sans">
           We reply promptly within 24 hours. Your details are strictly confidential.
         </p>
       </div>

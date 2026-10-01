@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
@@ -14,24 +13,21 @@ const materialCategories = [
     title: "100% Pure Cotton Rag Paper",
     subtitle: "Tree-Free & Naturally Archival",
     desc: "Unlike standard wood-pulp paper that yellows and degrades over time, our cotton stocks are crafted from recycled textile linters. Soft to the touch yet incredibly resilient, cotton paper absorbs heavy mechanical impression without tearing.",
-    weights: "Available in 300gsm, 450gsm, 600gsm, and custom triplexed 900gsm board.",
-    accent: "text-forest",
+    weights: "Available in 300gsm, 450gsm, 600gsm, and custom duplexed 900gsm board.",
     image: "https://famousletterpress.com/wp-content/uploads/2026/04/wedkit-3-pics-1200x1200.jpg",
   },
   {
     title: "Handmade Deckled Edge Paper",
     subtitle: "Artisanal Feathered Borders",
     desc: "Formed sheet-by-sheet on traditional wire moulds. The water slurry naturally recedes at the edges, creating romantic, organic, feathered deckle margins that give wedding invitations an ancient, tactile majesty.",
-    weights: "Handcrafted 400–500gsm natural ivory and soft blush tones.",
-    accent: "text-terracotta",
+    weights: "Handcrafted 400–500gsm natural ivory and soft creme tones.",
     image: "https://famousletterpress.com/wp-content/uploads/2026/04/FMS_3741-1-2500x2500.jpg",
   },
   {
     title: "European Colorplan Boards",
     subtitle: "Saturated Colored Uncoated Paper",
-    desc: "Milled by GF Smith in the United Kingdom, Colorplan is the benchmark for dyed-through premium paper. Available in deep forest, rich navy, warm terracotta, charcoal, and muted sage—providing impeccable contrast when duplexed with cotton.",
+    desc: "Milled by GF Smith in the United Kingdom, Colorplan is the benchmark for dyed-through premium paper. Available in deep forest, rich navy, warm taupe, charcoal, and muted sand—providing impeccable contrast when duplexed with cotton.",
     weights: "350gsm to 700gsm duplexed boards.",
-    accent: "text-charcoal",
     image: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-02-1200x1200.jpg",
   },
 ];
@@ -65,69 +61,80 @@ const techniqueCategories = [
 
 export default function MaterialsPage() {
   return (
-    <div className="bg-cream">
-      {/* Header */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 border-b border-sand">
+    <div className="bg-paper-creme min-h-screen">
+      {/* ── Header ── */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-xs font-mono tracking-widest uppercase text-warm-stone">
-                <Link href="/" className="hover:text-terracotta">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
+                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-terracotta">Materials</span>
+                <span className="text-ink-deep">Materials</span>
               </div>
-              <span className="eyebrow text-terracotta">Physical Craft</span>
-              <h1 className="display-lg text-charcoal mt-2 mb-6">Substrates & Studio Techniques</h1>
-              <p className="body-lg text-warm-stone max-w-2xl font-light leading-relaxed mb-8">
+              <p className="eyebrow mb-2">Physical Craft</p>
+              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+                Substrates &amp; <em className="font-light">studio techniques.</em>
+              </h1>
+              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
                 In letterpress, paper is not just a carrier for ink—it is half the design. Explore the cotton papers, foils, and finishing methods we use in our Nagaland atelier.
               </p>
               <div className="flex flex-wrap items-center gap-4">
-                <Button href="/weddings/wedding-sample-kit" variant="primary" size="lg">
+                <Link
+                  href="/weddings/wedding-sample-kit"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                >
                   Order Tactile Sample Kit
-                </Button>
-                <Button href="/start-a-project" variant="outline" size="lg">
+                </Link>
+                <Link
+                  href="/start-a-project"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/40 transition-colors"
+                >
                   Enquire for Custom Paper
-                </Button>
+                </Link>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Paper Stocks */}
-      <section className="py-20 md:py-28 bg-ivory border-b border-sand">
+      {/* ── Paper Stocks ── */}
+      <section className="section bg-paper-white" aria-label="Paper Stocks">
         <div className="container-wide">
-          <Reveal>
-            <div className="max-w-xl mb-16">
-              <span className="eyebrow text-forest">The Foundation</span>
-              <h2 className="heading-xl text-charcoal mt-2">The Papers We Print On</h2>
-            </div>
-          </Reveal>
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <Reveal>
+              <p className="eyebrow mb-2">The Substrates</p>
+              <h2 className="mb-4">
+                Archival papers crafted for <em className="font-light">heavy impression</em>
+              </h2>
+            </Reveal>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {materialCategories.map((mat, idx) => (
-              <Reveal key={mat.title} delay={idx * 0.1}>
-                <div className="card-warm overflow-hidden h-full flex flex-col justify-between group">
-                  <div>
-                    <div className="aspect-[16/10] bg-sand/40 overflow-hidden relative border-b border-sand">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={mat.image}
-                        alt={mat.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+          <div className="space-y-12">
+            {materialCategories.map((item, idx) => (
+              <Reveal key={item.title} delay={0.1}>
+                <div className="bg-paper-creme border border-border-hairline overflow-hidden">
+                  <div className="grid lg:grid-cols-12 items-center">
+                    <div className={`lg:col-span-6 ${idx % 2 === 1 ? "lg:order-2" : "lg:order-1"}`}>
+                      <div className="aspect-[16/10] bg-paper-sand relative overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
-                    <div className="p-8 pb-4">
-                      <span className={`text-xs font-mono uppercase tracking-widest font-semibold block mb-2 ${mat.accent}`}>
-                        {mat.subtitle}
-                      </span>
-                      <h3 className="heading-md text-charcoal mb-3">{mat.title}</h3>
-                      <p className="body-sm text-warm-stone font-light leading-relaxed mb-4">{mat.desc}</p>
-                    </div>
-                  </div>
-                  <div className="px-8 pb-8 pt-0">
-                    <div className="pt-4 border-t border-sand text-xs text-charcoal font-mono">
-                      {mat.weights}
+                    <div className={`lg:col-span-6 p-8 md:p-12 ${idx % 2 === 1 ? "lg:order-1" : "lg:order-2"}`}>
+                      <p className="eyebrow mb-2">{item.subtitle}</p>
+                      <h3 className="text-2xl font-serif text-ink-deep mb-4">{item.title}</h3>
+                      <p className="text-xs md:text-sm text-ink-muted leading-relaxed font-light mb-6">
+                        {item.desc}
+                      </p>
+                      <div className="pt-4 border-t border-border-hairline text-xs font-sans text-ink-muted">
+                        <strong className="text-ink-deep">Weights: </strong>
+                        {item.weights}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -137,25 +144,27 @@ export default function MaterialsPage() {
         </div>
       </section>
 
-      {/* Studio Techniques */}
-      <section className="py-20 md:py-28 bg-cream border-b border-sand">
+      {/* ── Studio Techniques ── */}
+      <section className="section bg-paper-creme" aria-label="Finishing Techniques">
         <div className="container-wide">
-          <Reveal>
-            <div className="text-center max-w-xl mx-auto mb-16">
-              <span className="eyebrow text-terracotta">Press Capabilities</span>
-              <h2 className="heading-xl text-charcoal mt-2">Artisanal Print Techniques</h2>
-            </div>
-          </Reveal>
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <Reveal>
+              <p className="eyebrow mb-2">Finishing Arts</p>
+              <h2 className="mb-4">
+                Six tactile <em className="font-light">dimensions</em>
+              </h2>
+            </Reveal>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {techniqueCategories.map((tech, idx) => (
-              <Reveal key={tech.title} delay={idx * 0.05}>
-                <div className="card-warm p-6 h-full">
-                  <span className="font-mono text-xs uppercase tracking-widest text-warm-stone block mb-2">
-                    Technique 0{idx + 1}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {techniqueCategories.map((item, idx) => (
+              <Reveal key={item.title} delay={idx * 0.06}>
+                <div className="bg-paper-white border border-border-hairline p-8 h-full">
+                  <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-3">
+                    0{idx + 1}
                   </span>
-                  <h3 className="font-serif text-xl text-charcoal mb-3">{tech.title}</h3>
-                  <p className="text-xs text-warm-stone leading-relaxed font-light">{tech.desc}</p>
+                  <h3 className="font-serif text-xl text-ink-deep mb-3">{item.title}</h3>
+                  <p className="text-xs md:text-sm text-ink-muted leading-relaxed font-light">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -163,22 +172,30 @@ export default function MaterialsPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-28 bg-ivory">
-        <div className="container-narrow text-center">
+      {/* ── Sample Kit CTA ── */}
+      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+        <div className="container-narrow">
           <Reveal>
-            <span className="eyebrow text-terracotta">Feel The Materials</span>
-            <h2 className="heading-xl text-charcoal mt-2 mb-4">Nothing replaces physical touch</h2>
-            <p className="body-md text-warm-stone max-w-lg mx-auto mb-8 font-light">
-              Order our sample kits to experience 600gsm cotton board, metallic foil stamping, and debossed textures in person.
+            <p className="eyebrow !text-paper-creme/30 mb-3">Experience It In Person</p>
+            <h2 className="!text-paper-creme mb-4">
+              Order our physical <em className="font-light">paper swatch kit.</em>
+            </h2>
+            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+              Touch 300 to 900 gsm cotton boards, examine foil tones under daylight, and evaluate impression depth with our curated sample kit.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button href="/weddings/wedding-sample-kit" variant="primary" size="lg">
+              <Link
+                href="/weddings/wedding-sample-kit"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+              >
                 Order Wedding Kit (₹1,500)
-              </Button>
-              <Button href="/business-cards/business-card-sample-kit" variant="outline" size="lg">
-                Order Business Card Kit (₹1,000)
-              </Button>
+              </Link>
+              <Link
+                href="/business-cards/business-card-sample-kit"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+              >
+                Order Business Kit (₹1,000)
+              </Link>
             </div>
           </Reveal>
         </div>

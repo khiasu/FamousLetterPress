@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { Reveal } from "@/components/ui/Reveal";
 import { getCMSServices } from "@/lib/cms/store";
-import { ServiceCardClient } from "./ServiceCardClient";
 
 export function ServicesSection() {
   const servicesMap = getCMSServices();
@@ -9,7 +9,7 @@ export function ServicesSection() {
       title: servicesMap["wedding-stationery"]?.title || "Wedding Stationery",
       description:
         servicesMap["wedding-stationery"]?.tagline ||
-        "Bespoke invitations, RSVP cards, and complete suites — designed and letterpress printed for your celebration.",
+        "Bespoke invitations, RSVP inserts, save-the-dates, and day-of stationery. Deep-bitten impressions on 300 to 900 gsm cotton paper, with foil stamping and hand-deckled edges.",
       href: "/weddings/wedding-stationery",
       label: "Explore weddings",
       image:
@@ -20,7 +20,7 @@ export function ServicesSection() {
       title: servicesMap["business-cards"]?.title || "Business Cards",
       description:
         servicesMap["business-cards"]?.tagline ||
-        "Letterpress and foil stamped business cards on premium cotton stock — made to be remembered.",
+        "Thick cotton business cards with deep impression, foil detailing, and custom edge painting. Printed one card at a time to make sure each one feels substantial.",
       href: "/business-cards",
       label: "Explore business cards",
       image:
@@ -29,11 +29,10 @@ export function ServicesSection() {
     },
     {
       title:
-        servicesMap["personalised-stationery"]?.title ||
-        "Personalised Stationery",
+        servicesMap["personalised-stationery"]?.title || "Personalised Stationery",
       description:
         servicesMap["personalised-stationery"]?.tagline ||
-        "Custom letterheads, notecards, and personal stationery — designed and printed to your specification.",
+        "Custom correspondence cards, monogrammed letterheads, and envelopes with custom linings. Made for handwritten notes that warrant proper paper.",
       href: "/personalised-stationery",
       label: "Explore stationery",
       image:
@@ -43,16 +42,46 @@ export function ServicesSection() {
   ];
 
   return (
-    <section
-      className="relative bg-cream overflow-hidden grain-overlay"
-      aria-label="Our services"
-      style={{
-        paddingTop: "clamp(5rem, 10vw, 10rem)",
-        paddingBottom: "clamp(5rem, 10vw, 10rem)",
-      }}
-    >
+    <section className="section bg-cream" aria-label="Our services">
       <div className="container-wide">
-        <ServiceCardClient services={services} />
+        <Reveal>
+          <p className="eyebrow text-taupe mb-4">What We Print</p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <h2 className="mb-16 max-w-2xl font-serif text-charcoal">
+            Three things we do{" "}
+            <span className="italic font-light">really well</span>
+          </h2>
+        </Reveal>
+
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          {services.map((service, index) => (
+            <Reveal key={service.href} delay={0.15 + index * 0.1}>
+              <Link href={service.href} className="group block h-full">
+                {/* Real Service Image */}
+                <div className="aspect-[4/5] bg-sand/40 rounded-sm mb-6 overflow-hidden relative shadow-sm group-hover:shadow-md transition-shadow">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/5 transition-colors duration-500" />
+                </div>
+
+                <h3 className="text-xl mb-3 font-serif text-charcoal group-hover:text-sage-dark transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-taupe leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                <span className="text-xs tracking-wider uppercase text-sage group-hover:text-sage-dark transition-colors duration-300">
+                  {service.label} →
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
