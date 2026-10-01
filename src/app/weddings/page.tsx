@@ -88,36 +88,36 @@ export default function WeddingsHubPage() {
   const weddingPortfolio = getCMSPortfolio().filter((item) => item.category === "weddings");
 
   return (
-    <div className="bg-paper-creme min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* ── Editorial Header ── */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
-                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-ink-deep">Weddings</span>
+                <span className="text-black">Weddings</span>
               </div>
               <p className="eyebrow mb-2">Bespoke Wedding Stationery</p>
-              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+              <h1 className="text-black mt-2 mb-6 font-serif">
                 Heirloom wedding stationery pressed by hand on{" "}
                 <em className="font-light">100% cotton.</em>
               </h1>
-              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 We believe wedding stationery is not merely paper with dates—it is the tangible opening chapter of your celebration.
                 Handcrafted on vintage platen presses in Nagaland on pure cotton stock.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   href="/weddings/early-bride"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
                 >
                   Book a Consult
                 </Link>
                 <a
                   href="#sample-kit"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/40 transition-colors"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/40 transition-colors"
                 >
                   Order Sample Kit (₹{weddingKit.price})
                 </a>
@@ -128,7 +128,7 @@ export default function WeddingsHubPage() {
       </section>
 
       {/* ── Section 1: Invitations & Suites Showcase (IG-Style Reel) ── */}
-      <section className="section bg-paper-white" aria-label="Wedding Suites Reel">
+      <section className="section bg-white" aria-label="Wedding Suites Reel">
         <div className="container-wide mb-8 md:mb-12">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
@@ -144,7 +144,7 @@ export default function WeddingsHubPage() {
             <Reveal delay={0.15}>
               <Link
                 href="/weddings/early-bride"
-                className="text-[11px] tracking-[0.14em] uppercase text-ink-light hover:text-ink-deep transition-colors"
+                className="text-[11px] tracking-[0.14em] uppercase text-[#888888] hover:text-black transition-colors"
               >
                 Inquire for Your Date →
               </Link>
@@ -159,7 +159,7 @@ export default function WeddingsHubPage() {
               key={piece.id}
               className="w-[75vw] md:w-[42vw] lg:w-[30vw] min-w-[280px] max-w-[440px]"
             >
-              <div className="relative aspect-[3/4] overflow-hidden bg-paper-sand group mb-4">
+              <div className="relative aspect-[3/4] overflow-hidden bg-[#F7F7F7] group mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={piece.featuredImage}
@@ -168,7 +168,7 @@ export default function WeddingsHubPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <span className="text-[10px] tracking-[0.16em] uppercase text-white/70 font-sans">
+                  <span className="text-[10px] tracking-[0.16em] uppercase text-[#555555] font-sans">
                     {piece.paperStock}
                   </span>
                   <p className="font-serif text-base text-white mt-1 leading-snug">
@@ -176,7 +176,7 @@ export default function WeddingsHubPage() {
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-ink-muted line-clamp-2 leading-relaxed">
+              <p className="text-xs text-[#555555] line-clamp-2 leading-relaxed">
                 {piece.description}
               </p>
             </div>
@@ -184,16 +184,16 @@ export default function WeddingsHubPage() {
         </div>
 
         {/* Suite Components Grid */}
-        <div className="container-wide pt-8 border-t border-border-hairline">
+        <div className="container-wide pt-8 border-t border-[#E5E5E5]">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {weddingSuites.map((item, index) => (
               <Reveal key={item.title} delay={0.1 + index * 0.08}>
                 <div className="space-y-2">
-                  <span className="text-[10px] tracking-[0.16em] uppercase text-ink-light font-mono">
+                  <span className="text-[10px] tracking-[0.16em] uppercase text-[#888888] font-mono">
                     {item.tag}
                   </span>
-                  <h3 className="text-base text-ink-deep font-serif">{item.title}</h3>
-                  <p className="text-xs text-ink-muted leading-relaxed">{item.desc}</p>
+                  <h3 className="text-base text-black font-serif">{item.title}</h3>
+                  <p className="text-xs text-[#555555] leading-relaxed">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -202,7 +202,7 @@ export default function WeddingsHubPage() {
       </section>
 
       {/* ── Section 2: Envelopes, Liners & Seals ── */}
-      <section className="section bg-paper-creme" aria-label="Finishing & Details">
+      <section className="section bg-white" aria-label="Finishing & Details">
         <div className="container-wide">
           <div className="max-w-xl mb-12">
             <Reveal>
@@ -214,7 +214,7 @@ export default function WeddingsHubPage() {
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="text-sm text-ink-muted leading-relaxed">
+              <p className="text-sm text-[#555555] leading-relaxed">
                 Every detail of your wedding suite is customized. We craft bespoke envelope liners, pour custom wax seals with your monogram crest, and hand-bevel edges with mirror-finish foils.
               </p>
             </Reveal>
@@ -224,7 +224,7 @@ export default function WeddingsHubPage() {
             {tactileDetails.map((detail, index) => (
               <Reveal key={detail.title} delay={0.1 + index * 0.08}>
                 <div className="group block">
-                  <div className="relative aspect-square overflow-hidden bg-paper-sand mb-4">
+                  <div className="relative aspect-square overflow-hidden bg-[#F7F7F7] mb-4">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={detail.image}
@@ -232,8 +232,8 @@ export default function WeddingsHubPage() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
                   </div>
-                  <h3 className="text-sm font-serif text-ink-deep mb-1">{detail.title}</h3>
-                  <p className="text-xs text-ink-muted leading-relaxed">{detail.detail}</p>
+                  <h3 className="text-sm font-serif text-black mb-1">{detail.title}</h3>
+                  <p className="text-xs text-[#555555] leading-relaxed">{detail.detail}</p>
                 </div>
               </Reveal>
             ))}
@@ -242,7 +242,7 @@ export default function WeddingsHubPage() {
       </section>
 
       {/* ── Section 3: The Famous Wedding Sample Kit (Direct Commerce) ── */}
-      <section id="sample-kit" className="section bg-paper-white" aria-label="Wedding Sample Kit">
+      <section id="sample-kit" className="section bg-white" aria-label="Wedding Sample Kit">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left: Kit Story & Details */}
@@ -252,14 +252,14 @@ export default function WeddingsHubPage() {
                 <h2 className="mb-4 font-serif">
                   The Wedding <em className="font-light">Sample Kit</em>
                 </h2>
-                <p className="text-sm md:text-base text-ink-muted leading-relaxed mb-6">
+                <p className="text-sm md:text-base text-[#555555] leading-relaxed mb-6">
                   Screens cannot convey the texture of 600gsm cotton rag, the brilliance of hot foil under daylight, or the depth of a platen impression.
                   Hold our finished work in your hands before commissioning your suite.
                 </p>
               </Reveal>
 
               <Reveal delay={0.1}>
-                <div className="overflow-hidden bg-paper-sand border border-border-hairline">
+                <div className="overflow-hidden bg-[#F7F7F7] border border-[#E5E5E5]">
                   <div className="aspect-[4/3] relative overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -272,17 +272,17 @@ export default function WeddingsHubPage() {
               </Reveal>
 
               <Reveal delay={0.15}>
-                <div className="bg-paper-creme border border-border-hairline p-6 space-y-4">
-                  <h3 className="text-base font-serif text-ink-deep">What&apos;s Included in the Box:</h3>
+                <div className="bg-white border border-[#E5E5E5] p-6 space-y-4">
+                  <h3 className="text-base font-serif text-black">What&apos;s Included in the Box:</h3>
                   <ul className="space-y-2.5">
                     {weddingKit.includedItems.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs text-ink-muted">
-                        <span className="w-1.5 h-1.5 rounded-full bg-ink-deep mt-1.5 shrink-0" />
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-[#555555]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-black mt-1.5 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                  <p className="text-[11px] text-ink-light pt-2 border-t border-border-hairline">
+                  <p className="text-[11px] text-[#888888] pt-2 border-t border-[#E5E5E5]">
                     * The ₹{weddingKit.price} kit cost is 100% credited toward your final wedding order upon confirmation.
                   </p>
                 </div>
@@ -293,7 +293,7 @@ export default function WeddingsHubPage() {
             <div className="lg:col-span-6 lg:sticky lg:top-28">
               <Reveal delay={0.2}>
                 <div className="space-y-4">
-                  <div className="bg-ink-deep text-paper-creme p-4 text-center">
+                  <div className="bg-black text-white p-4 text-center">
                     <p className="text-[10px] tracking-[0.18em] uppercase font-sans">
                       Direct Dispatch · Ships Across India within 48 Hours
                     </p>
@@ -307,7 +307,7 @@ export default function WeddingsHubPage() {
       </section>
 
       {/* ── Section 4: 4-Stage Wedding Timeline ── */}
-      <section className="section bg-paper-creme" aria-label="Production Timeline">
+      <section className="section bg-white" aria-label="Production Timeline">
         <div className="container-wide">
           <div className="text-center max-w-xl mx-auto mb-14">
             <Reveal>
@@ -315,7 +315,7 @@ export default function WeddingsHubPage() {
               <h2 className="mb-4">
                 The Wedding <em className="font-light">Stationery Timeline</em>
               </h2>
-              <p className="text-xs md:text-sm text-ink-muted leading-relaxed">
+              <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
                 Letterpress is a meticulous physical process. We recommend reaching out early to ensure dedicated press time for your suite.
               </p>
             </Reveal>
@@ -324,15 +324,15 @@ export default function WeddingsHubPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {timelineSteps.map((step, index) => (
               <Reveal key={step.title} delay={0.1 + index * 0.08}>
-                <div className="bg-paper-white border border-border-hairline p-6 relative">
-                  <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-2">
+                <div className="bg-white border border-[#E5E5E5] p-6 relative">
+                  <span className="text-[10px] font-mono tracking-widest text-[#888888] block mb-2">
                     {step.step}
                   </span>
-                  <p className="text-[11px] tracking-wide uppercase text-ink-deep font-medium font-sans mb-1">
+                  <p className="text-[11px] tracking-wide uppercase text-black font-medium font-sans mb-1">
                     {step.time}
                   </p>
-                  <h3 className="text-sm font-serif text-ink-deep mb-2">{step.title}</h3>
-                  <p className="text-xs text-ink-muted leading-relaxed">{step.desc}</p>
+                  <h3 className="text-sm font-serif text-black mb-2">{step.title}</h3>
+                  <p className="text-xs text-[#555555] leading-relaxed">{step.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -341,20 +341,20 @@ export default function WeddingsHubPage() {
       </section>
 
       {/* ── Section 5: Consultation CTA ── */}
-      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
         <div className="container-narrow">
           <Reveal>
-            <p className="eyebrow !text-paper-creme/30 mb-3">Begin Your Suite</p>
-            <h2 className="!text-paper-creme mb-4">
+            <p className="eyebrow text-[#888888] mb-3">Begin Your Suite</p>
+            <h2 className="text-black mb-4">
               Ready to craft your <em className="font-light">heirloom suite?</em>
             </h2>
-            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
               Every Famous Letterpress suite is custom formulated. Share your wedding vision with us through our Early Bride consultation or message our founder directly on WhatsApp.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/weddings/early-bride"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
               >
                 Submit Early Bride Form
               </Link>
@@ -362,7 +362,7 @@ export default function WeddingsHubPage() {
                 href="https://wa.me/919366012345"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
               >
                 WhatsApp Founder Direct
               </a>

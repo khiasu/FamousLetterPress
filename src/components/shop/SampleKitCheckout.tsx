@@ -131,48 +131,48 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
 
   if (orderConfirmed) {
     return (
-      <div className="bg-paper-white border border-border-hairline p-8 md:p-12 text-center">
-        <div className="w-12 h-12 bg-ink-deep text-paper-creme rounded-full flex items-center justify-center mx-auto mb-5">
+      <div className="bg-white border border-[#E5E5E5] p-8 md:p-12 text-center">
+        <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-5">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
         <p className="eyebrow mb-2">Order Confirmed</p>
-        <h2 className="text-2xl md:text-3xl text-ink-deep mb-3 font-serif">Thank you for your order</h2>
-        <p className="text-sm text-ink-muted max-w-md mx-auto mb-8 leading-relaxed">
-          Your sample kit order <strong className="text-ink-deep font-mono">{orderConfirmed.orderNumber}</strong> has been logged.
-          A confirmation receipt has been sent to <span className="text-ink-deep font-medium">{orderConfirmed.customerEmail}</span>.
+        <h2 className="text-2xl md:text-3xl text-black mb-3 font-serif">Thank you for your order</h2>
+        <p className="text-sm text-[#555555] max-w-md mx-auto mb-8 leading-relaxed">
+          Your sample kit order <strong className="text-black font-mono">{orderConfirmed.orderNumber}</strong> has been logged.
+          A confirmation receipt has been sent to <span className="text-black font-medium">{orderConfirmed.customerEmail}</span>.
         </p>
 
-        <div className="bg-paper-creme p-6 max-w-sm mx-auto text-left border border-border-hairline mb-8 text-xs text-ink-muted space-y-2.5 font-sans">
+        <div className="bg-white p-6 max-w-sm mx-auto text-left border border-[#E5E5E5] mb-8 text-xs text-[#555555] space-y-2.5 font-sans">
           <div className="flex justify-between">
             <span>Item:</span>
-            <strong className="text-ink-deep">{kit.name}</strong>
+            <strong className="text-black">{kit.name}</strong>
           </div>
           <div className="flex justify-between">
             <span>Total Paid:</span>
-            <strong className="text-ink-deep font-serif text-sm">₹{orderConfirmed.amount}</strong>
+            <strong className="text-black font-serif text-sm">₹{orderConfirmed.amount}</strong>
           </div>
           <div className="flex justify-between">
             <span>Dispatch Timeline:</span>
-            <span className="text-ink-deep">Within 24–48 Hours</span>
+            <span className="text-black">Within 24–48 Hours</span>
           </div>
           <div className="flex justify-between">
             <span>Courier:</span>
-            <span className="text-ink-deep">Express Tracked Courier</span>
+            <span className="text-black">Express Tracked Courier</span>
           </div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/weddings"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
           >
             Explore Wedding Services
           </Link>
           <Link
             href="/"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/30 transition-colors"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/30 transition-colors"
           >
             Return to Home
           </Link>
@@ -185,21 +185,21 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
 
-      <form onSubmit={handleCheckout} className="bg-paper-white border border-border-hairline p-6 md:p-8">
-        <div className="border-b border-border-hairline pb-6 mb-6">
+      <form onSubmit={handleCheckout} className="bg-white border border-[#E5E5E5] p-6 md:p-8">
+        <div className="border-b border-[#E5E5E5] pb-6 mb-6">
           <div className="flex items-baseline justify-between mb-2">
-            <h3 className="text-xl font-serif text-ink-deep">{kit.name}</h3>
-            <div className="text-2xl font-serif text-ink-deep">
-              ₹{kit.price} <span className="text-xs font-sans text-ink-light">INR</span>
+            <h3 className="text-xl font-serif text-black">{kit.name}</h3>
+            <div className="text-2xl font-serif text-black">
+              ₹{kit.price} <span className="text-xs font-sans text-[#888888]">INR</span>
             </div>
           </div>
-          <p className="text-xs text-ink-muted leading-relaxed">
+          <p className="text-xs text-[#555555] leading-relaxed">
             All-inclusive price. Includes express courier shipping with real-time tracking across India.
           </p>
         </div>
 
         {errorMsg && (
-          <div className="mb-6 p-4 bg-ink-deep text-paper-creme text-xs">
+          <div className="mb-6 p-4 bg-black text-white text-xs">
             {errorMsg}
           </div>
         )}
@@ -208,7 +208,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
           <p className="eyebrow mb-2">1. Recipient Details</p>
 
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Full Name *
             </label>
             <input
@@ -218,13 +218,13 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               value={formData.customerName}
               onChange={handleChange}
               placeholder="e.g. Rongsen Jamir"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
                 Email Address *
               </label>
               <input
@@ -234,11 +234,11 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.customerEmail}
                 onChange={handleChange}
                 placeholder="you@domain.com"
-                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+                className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
                 Phone / WhatsApp *
               </label>
               <input
@@ -248,7 +248,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.customerPhone}
                 onChange={handleChange}
                 placeholder="+91 98765 43210"
-                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+                className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
               />
             </div>
           </div>
@@ -256,7 +256,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
           <p className="eyebrow pt-3 mb-2">2. Shipping Address (India)</p>
 
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Address Line 1 *
             </label>
             <input
@@ -266,12 +266,12 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               value={formData.addressLine1}
               onChange={handleChange}
               placeholder="Apartment, house number, street"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Address Line 2 (Optional)
             </label>
             <input
@@ -280,13 +280,13 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               value={formData.addressLine2}
               onChange={handleChange}
               placeholder="Landmark, building name, suite"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
                 City *
               </label>
               <input
@@ -296,11 +296,11 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.city}
                 onChange={handleChange}
                 placeholder="Dimapur / Delhi"
-                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+                className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
                 State *
               </label>
               <input
@@ -310,11 +310,11 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.state}
                 onChange={handleChange}
                 placeholder="Nagaland"
-                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+                className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
                 Postal Code *
               </label>
               <input
@@ -324,23 +324,23 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 value={formData.postalCode}
                 onChange={handleChange}
                 placeholder="PIN Code"
-                className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+                className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
               />
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-border-hairline">
+        <div className="mt-8 pt-6 border-t border-[#E5E5E5]">
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
+            className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
           >
             {isLoading ? "Preparing Order..." : `Proceed to Secure Payment · ₹${kit.price}`}
           </button>
 
-          <div className="flex items-center justify-center gap-2 mt-4 text-[10px] text-ink-light tracking-wide font-sans">
-            <svg className="w-3.5 h-3.5 text-ink-deep" fill="currentColor" viewBox="0 0 20 20">
+          <div className="flex items-center justify-center gap-2 mt-4 text-[10px] text-[#888888] tracking-wide font-sans">
+            <svg className="w-3.5 h-3.5 text-black" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
                 d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"

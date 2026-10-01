@@ -93,23 +93,23 @@ const packageTiers = [
 
 export default function PackagesPage() {
   return (
-    <div className="bg-paper-creme min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* ── Header ── */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
-                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-ink-deep">Packages</span>
+                <span className="text-black">Packages</span>
               </div>
               <p className="eyebrow mb-2">Editorial Collections</p>
-              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+              <h1 className="text-black mt-2 mb-6 font-serif">
                 Three ways to craft your{" "}
                 <em className="font-light">wedding suite.</em>
               </h1>
-              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 Whether you prefer the simplicity of our studio templates, the curated harmony of our 5 Readymades, or an entirely bespoke commission.
               </p>
             </div>
@@ -118,32 +118,32 @@ export default function PackagesPage() {
       </section>
 
       {/* ── The 3 Tiers ── */}
-      <section className="section bg-paper-white" aria-label="Package Paths">
+      <section className="section bg-white" aria-label="Package Paths">
         <div className="container-wide">
           <div className="grid md:grid-cols-3 gap-8">
             {packageTiers.map((tier, idx) => (
               <Reveal key={tier.name} delay={idx * 0.1}>
-                <div className="bg-paper-creme border border-border-hairline p-8 h-full flex flex-col justify-between">
+                <div className="bg-white border border-[#E5E5E5] p-8 h-full flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-2">
+                    <span className="text-[10px] font-mono tracking-widest text-[#888888] block mb-2">
                       Option {tier.tier}
                     </span>
-                    <h2 className="text-xl font-serif text-ink-deep mb-1">{tier.name}</h2>
-                    <p className="text-xs uppercase tracking-wider text-ink-light font-sans mb-4">
+                    <h2 className="text-xl font-serif text-black mb-1">{tier.name}</h2>
+                    <p className="text-xs uppercase tracking-wider text-[#888888] font-sans mb-4">
                       {tier.summary}
                     </p>
-                    <p className="text-xs md:text-sm text-ink-muted leading-relaxed mb-6 font-light">
+                    <p className="text-xs md:text-sm text-[#555555] leading-relaxed mb-6 font-light">
                       {tier.desc}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-border-hairline">
+                  <div className="pt-4 border-t border-[#E5E5E5]">
                     <div className="flex justify-between items-center mb-4 text-[11px] font-sans">
-                      <span className="text-ink-light">Production:</span>
-                      <span className="text-ink-deep font-medium">{tier.turnaround}</span>
+                      <span className="text-[#888888]">Production:</span>
+                      <span className="text-black font-medium">{tier.turnaround}</span>
                     </div>
                     <Link
                       href={tier.href}
-                      className="inline-flex w-full justify-center py-3 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                      className="inline-flex w-full justify-center py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
                     >
                       {tier.cta}
                     </Link>
@@ -156,7 +156,7 @@ export default function PackagesPage() {
       </section>
 
       {/* ── Section: The 5 Curated Readymades ── */}
-      <section id="readymades" className="section bg-paper-creme" aria-label="Curated Readymades">
+      <section id="readymades" className="section bg-white" aria-label="Curated Readymades">
         <div className="container-wide">
           <div className="max-w-xl mb-14">
             <Reveal>
@@ -164,7 +164,7 @@ export default function PackagesPage() {
               <h2 className="mb-4">
                 Five signature <em className="font-light">curated suites</em>
               </h2>
-              <p className="text-xs md:text-sm text-ink-muted leading-relaxed">
+              <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
                 Pre-formulated suites pairing harmonious cotton weights, envelope shapes, and finishes tested across hundreds of press hours.
               </p>
             </Reveal>
@@ -173,11 +173,11 @@ export default function PackagesPage() {
           <div className="space-y-12">
             {readymadeSuites.map((suite, idx) => (
               <Reveal key={suite.id} delay={0.1}>
-                <div className="bg-paper-white border border-border-hairline overflow-hidden">
+                <div className="bg-white border border-[#E5E5E5] overflow-hidden">
                   <div className="grid lg:grid-cols-12 items-center">
                     {/* Visual */}
                     <div className={`lg:col-span-6 ${idx % 2 === 1 ? "lg:order-2" : "lg:order-1"}`}>
-                      <div className="aspect-[4/3] bg-paper-sand relative overflow-hidden">
+                      <div className="aspect-[4/3] bg-[#F7F7F7] relative overflow-hidden">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={suite.image}
@@ -189,36 +189,36 @@ export default function PackagesPage() {
 
                     {/* Content */}
                     <div className={`lg:col-span-6 p-8 md:p-12 ${idx % 2 === 1 ? "lg:order-1" : "lg:order-2"}`}>
-                      <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-2">
+                      <span className="text-[10px] font-mono tracking-widest text-[#888888] block mb-2">
                         Suite 0{idx + 1}
                       </span>
-                      <h3 className="text-2xl md:text-3xl font-serif text-ink-deep mb-2">{suite.title}</h3>
-                      <p className="text-xs uppercase tracking-wider text-ink-muted font-sans mb-4">
+                      <h3 className="text-2xl md:text-3xl font-serif text-black mb-2">{suite.title}</h3>
+                      <p className="text-xs uppercase tracking-wider text-[#555555] font-sans mb-4">
                         {suite.tagline}
                       </p>
-                      <p className="text-xs md:text-sm text-ink-muted leading-relaxed mb-6 font-light">
+                      <p className="text-xs md:text-sm text-[#555555] leading-relaxed mb-6 font-light">
                         {suite.description}
                       </p>
 
-                      <div className="space-y-2 mb-6 text-xs text-ink-muted">
+                      <div className="space-y-2 mb-6 text-xs text-[#555555]">
                         <div className="flex gap-2">
-                          <strong className="text-ink-deep">Ideal for:</strong>
+                          <strong className="text-black">Ideal for:</strong>
                           <span>{suite.idealFor}</span>
                         </div>
                         <div className="flex flex-wrap gap-2 pt-2">
                           {suite.specs.map((spec) => (
-                            <span key={spec} className="px-2.5 py-1 bg-paper-creme border border-border-hairline text-[10px] tracking-wide uppercase text-ink-deep">
+                            <span key={spec} className="px-2.5 py-1 bg-white border border-[#E5E5E5] text-[10px] tracking-wide uppercase text-black">
                               {spec}
                             </span>
                           ))}
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-border-hairline">
-                        <div className="font-serif text-lg text-ink-deep">{suite.price}</div>
+                      <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[#E5E5E5]">
+                        <div className="font-serif text-lg text-black">{suite.price}</div>
                         <Link
                           href={`/weddings/early-bride?suite=${suite.id}`}
-                          className="inline-flex px-6 py-2.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                          className="inline-flex px-6 py-2.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
                         >
                           Select This Suite
                         </Link>
@@ -233,26 +233,26 @@ export default function PackagesPage() {
       </section>
 
       {/* ── Bottom CTA ── */}
-      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
         <div className="container-narrow">
           <Reveal>
-            <p className="eyebrow !text-paper-creme/30 mb-3">Questions &amp; Quotes</p>
-            <h2 className="!text-paper-creme mb-4">
+            <p className="eyebrow text-[#888888] mb-3">Questions &amp; Quotes</p>
+            <h2 className="text-black mb-4">
               Not sure which package <em className="font-light">fits your wedding?</em>
             </h2>
-            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
               Order our Wedding Sample Kit to feel the paper and foil variations in person, or chat with our founder to review guest counts and ballpark budgets.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/weddings/wedding-sample-kit"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
               >
                 Order Sample Kit (₹1,500)
               </Link>
               <Link
                 href="/weddings/early-bride"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
               >
                 Book a Consultation
               </Link>

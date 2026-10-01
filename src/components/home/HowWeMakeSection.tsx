@@ -1,52 +1,48 @@
+import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { Button } from "@/components/ui/Button";
+
+const techniques = [
+  { name: "Letterpress Impression", note: "Deep mechanical relief bite pressed into soft cotton rag" },
+  { name: "Hot Foil Stamping", note: "Heated brass dies fusing metallic and matte foils under calibrated pressure" },
+  { name: "Blind Debossing", note: "Sculpted three-dimensional relief without ink, creating pure light and shadow" },
+  { name: "Foil Edge Gilding", note: "Hand-sanded card profiles wrapped in mirror-finish reflective gold or silver" },
+];
 
 export function HowWeMakeSection() {
   return (
-    <section className="section bg-paper-creme" aria-label="How we make it">
+    <section className="section bg-white border-b border-[#E5E5E5]" aria-label="How We Make It">
       <div className="container-wide">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Left: Craft Story */}
-          <div>
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Authentic Craft Storytelling */}
+          <div className="lg:col-span-6 space-y-6">
             <Reveal>
-              <p className="eyebrow mb-4">How We Make It</p>
+              <p className="eyebrow mb-3">Artisanal Mechanics</p>
             </Reveal>
             <Reveal delay={0.1}>
-              <h2 className="mb-8">
-                The art of{" "}
-                <em className="font-light">impression</em>
+              <h2 className="text-black font-serif text-3xl sm:text-4xl lg:text-5xl leading-[1.08] mb-6">
+                The art of the <em className="font-light italic font-serif">permanent bite.</em>
               </h2>
             </Reveal>
+            <Reveal delay={0.15}>
+              <p className="text-base text-[#555555] font-light leading-relaxed">
+                Letterpress is a centuries-old relief printing technique where raised metal type or photopolymer plates are pressed with thousands of pounds of pressure deep into thick, soft cotton paper. The result is a tactile indentation you can feel with your fingertips—impossible to replicate with digital or offset printing.
+              </p>
+            </Reveal>
             <Reveal delay={0.2}>
-              <p className="text-ink-muted leading-relaxed mb-6">
-                Letterpress printing is a centuries-old technique where raised metal type or photopolymer plates are pressed deep into soft, thick paper using cast-iron platen presses. The result is a tactile &ldquo;bite&rdquo; you can feel with your fingertips — impossible to replicate with digital or offset printing.
-              </p>
-            </Reveal>
-            <Reveal delay={0.3}>
-              <p className="text-ink-muted leading-relaxed mb-6">
-                We print on 100% cotton papers ranging from 300 to 900 gsm. Combined with oil-based inks, genuine hot foil stamping, blind embossing, and hand-deckled edges, the result is print that feels as substantial as the occasions it marks.
-              </p>
-            </Reveal>
-            <Reveal delay={0.4}>
-              <p className="text-ink-muted leading-relaxed mb-8">
-                Every sheet is hand-fed one at a time through vintage Heidelberg platen presses that we refurbished in our Nagaland workshop. There are no shortcuts and no batch runs.
+              <p className="text-base text-[#555555] font-light leading-relaxed">
+                We print on 100% tree-free cotton stocks ranging from 300 to 900 gsm. Every sheet is hand-fed one at a time through vintage Heidelberg platen presses that we refurbished bolt by bolt in our Nagaland workshop. There are no shortcuts and no automated batch runs.
               </p>
             </Reveal>
 
-            {/* Technique list */}
-            <div className="border-t border-border-hairline pt-6 mb-8">
-              {[
-                { name: "Letterpress", note: "Deep mechanical bite into cotton" },
-                { name: "Foil Stamping", note: "Metallic, matte & pigment foils" },
-                { name: "Embossing", note: "Raised relief, no ink" },
-                { name: "Edge Gilding", note: "Gold, silver or custom painted edges" },
-              ].map((tech, i) => (
-                <Reveal key={tech.name} delay={0.45 + i * 0.06}>
-                  <div className="flex items-baseline justify-between py-3 border-b border-border-hairline/60">
-                    <span className="text-sm text-ink-deep font-medium font-sans">
+            {/* Architectural Hairline Technique Table */}
+            <div className="pt-6 border-t border-[#E5E5E5] space-y-0">
+              {techniques.map((tech, i) => (
+                <Reveal key={tech.name} delay={0.25 + i * 0.05}>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between py-4 border-b border-[#E5E5E5]">
+                    <span className="font-serif text-lg text-black font-normal">
                       {tech.name}
                     </span>
-                    <span className="text-[11px] text-ink-light tracking-wide">
+                    <span className="text-xs text-[#888888] font-sans tracking-wide mt-1 sm:mt-0">
                       {tech.note}
                     </span>
                   </div>
@@ -54,37 +50,44 @@ export function HowWeMakeSection() {
               ))}
             </div>
 
-            <Reveal delay={0.7}>
-              <Button href="/process" variant="outline">
-                See Our Full Process →
-              </Button>
+            <Reveal delay={0.5}>
+              <div className="pt-4">
+                <Link
+                  href="/process"
+                  className="inline-flex items-center justify-center px-8 py-3.5 text-[11px] tracking-[0.2em] uppercase font-medium border border-black text-black hover:bg-black hover:text-white transition-colors"
+                >
+                  Explore Studio Process →
+                </Link>
+              </div>
             </Reveal>
           </div>
 
-          {/* Right: Studio Photography */}
-          <div className="space-y-4">
+          {/* Right Column: Workshop Photography */}
+          <div className="lg:col-span-6 space-y-6">
             <Reveal delay={0.2} direction="right">
-              <div className="relative aspect-[3/4] overflow-hidden bg-paper-sand group">
+              <div className="relative aspect-[4/3] bg-[#F7F7F7] overflow-hidden border border-[#E5E5E5]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/home/how-we-make/FMS_6500.jpg"
                   alt="Craftsperson hand-feeding 600gsm cotton sheet into vintage platen press"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="w-full h-full object-cover"
                 />
+                <div className="absolute bottom-4 left-4 bg-white/95 px-3 py-1 text-[10px] font-mono tracking-widest uppercase text-black border border-[#E5E5E5]">
+                  Hand-Fed Presswork · Nagaland Atelier
+                </div>
               </div>
             </Reveal>
+
             <Reveal delay={0.35} direction="right">
-              <div className="relative aspect-[16/10] overflow-hidden bg-paper-sand group">
+              <div className="relative aspect-[16/10] bg-[#F7F7F7] overflow-hidden border border-[#E5E5E5]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/home/how-we-make/FMS_7617.jpg"
-                  alt="Hand-mixed oil inks and mineral pigments in our Nagaland atelier"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  alt="Hand-mixed mineral oil inks and ink knives in our Dimapur workshop"
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-4 left-4">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-white/70 font-sans">
-                    Hand-Mixed Mineral Inks · Nagaland Atelier
-                  </p>
+                <div className="absolute bottom-4 left-4 bg-white/95 px-3 py-1 text-[10px] font-mono tracking-widest uppercase text-black border border-[#E5E5E5]">
+                  Custom Mineral Pigments &amp; Oil Inks
                 </div>
               </div>
             </Reveal>

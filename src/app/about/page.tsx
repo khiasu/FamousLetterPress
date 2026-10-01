@@ -29,23 +29,23 @@ const studioValues = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-paper-creme min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* ── Header ── */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
-                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-ink-deep">Our Story</span>
+                <span className="text-black">Our Story</span>
               </div>
               <p className="eyebrow mb-2">Heritage &amp; Craft</p>
-              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+              <h1 className="text-black mt-2 mb-6 font-serif">
                 Designers turned printers,{" "}
                 <em className="font-light">rooted in Nagaland.</em>
               </h1>
-              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 Famous Letterpress was born from an unyielding devotion to typography and tactile paper. In an increasingly disposable digital landscape, we believe the printed word should carry substance, texture, and permanent emotional weight.
               </p>
             </div>
@@ -54,7 +54,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Studio Narrative ── */}
-      <section className="section bg-paper-white" aria-label="Studio Journey">
+      <section className="section bg-white" aria-label="Studio Journey">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-6 space-y-6">
@@ -64,7 +64,7 @@ export default function AboutPage() {
                   Where mechanical history meets{" "}
                   <em className="font-light">modern editorial design.</em>
                 </h2>
-                <div className="space-y-4 text-sm md:text-base text-ink-muted font-light leading-relaxed">
+                <div className="space-y-4 text-sm md:text-base text-[#555555] font-light leading-relaxed">
                   <p>
                     Famous Letterpress operates from Nagaland, in Northeast India. What began as a graphic design practice founded by <strong>Akanito</strong> in 2008 evolved into a dedicated letterpress printing atelier when we realized that commercial digital printing could never reproduce the sensory relief of cast-iron presswork.
                   </p>
@@ -80,7 +80,7 @@ export default function AboutPage() {
 
             <div className="lg:col-span-6 space-y-6">
               <Reveal delay={0.1}>
-                <div className="overflow-hidden bg-paper-sand border border-border-hairline">
+                <div className="overflow-hidden bg-[#F7F7F7] border border-[#E5E5E5]">
                   <div className="aspect-[16/10] relative overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -93,22 +93,22 @@ export default function AboutPage() {
               </Reveal>
 
               <Reveal delay={0.15}>
-                <div className="bg-paper-creme border border-border-hairline p-8">
+                <div className="bg-white border border-[#E5E5E5] p-8">
                   <p className="eyebrow mb-2">Our Physical Workshop</p>
-                  <h3 className="font-serif text-2xl text-ink-deep mb-4">
+                  <h3 className="font-serif text-2xl text-black mb-4">
                     The Machinery of Mindful Craft
                   </h3>
-                  <p className="text-xs md:text-sm text-ink-muted leading-relaxed mb-6 font-light">
+                  <p className="text-xs md:text-sm text-[#555555] leading-relaxed mb-6 font-light">
                     Our atelier houses vintage Heidelberg platen presses and cylinder proof presses. These machines, engineered with immense cast-iron precision, apply thousands of pounds of pressure per square inch to create an indelible deboss into soft cotton board.
                   </p>
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border-hairline text-xs font-sans">
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#E5E5E5] text-xs font-sans">
                     <div>
-                      <span className="text-ink-light uppercase text-[10px] tracking-wider block">Atelier Location</span>
-                      <span className="font-medium text-ink-deep mt-0.5 block">Dimapur, Nagaland, India</span>
+                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Atelier Location</span>
+                      <span className="font-medium text-black mt-0.5 block">Dimapur, Nagaland, India</span>
                     </div>
                     <div>
-                      <span className="text-ink-light uppercase text-[10px] tracking-wider block">Founding Heritage</span>
-                      <span className="font-medium text-ink-deep mt-0.5 block">Est. 2008 · Akanito</span>
+                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Founding Heritage</span>
+                      <span className="font-medium text-black mt-0.5 block">Est. 2008 · Akanito</span>
                     </div>
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Studio Pillars ── */}
-      <section className="section bg-paper-creme" aria-label="Core Pillars">
+      <section className="section bg-white" aria-label="Core Pillars">
         <div className="container-wide">
           <div className="text-center max-w-xl mx-auto mb-16">
             <Reveal>
@@ -133,12 +133,12 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 gap-8">
             {studioValues.map((val, idx) => (
               <Reveal key={val.title} delay={idx * 0.08}>
-                <div className="bg-paper-white border border-border-hairline p-8 h-full">
-                  <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-3">
+                <div className="bg-white border border-[#E5E5E5] p-8 h-full">
+                  <span className="text-[10px] font-mono tracking-widest text-[#888888] block mb-3">
                     0{idx + 1}
                   </span>
-                  <h3 className="font-serif text-xl text-ink-deep mb-3">{val.title}</h3>
-                  <p className="text-xs md:text-sm text-ink-muted leading-relaxed font-light">{val.desc}</p>
+                  <h3 className="font-serif text-xl text-black mb-3">{val.title}</h3>
+                  <p className="text-xs md:text-sm text-[#555555] leading-relaxed font-light">{val.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -147,26 +147,26 @@ export default function AboutPage() {
       </section>
 
       {/* ── Consultation CTA ── */}
-      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
         <div className="container-narrow">
           <Reveal>
-            <p className="eyebrow !text-paper-creme/30 mb-3">Work With Our Atelier</p>
-            <h2 className="!text-paper-creme mb-4">
+            <p className="eyebrow text-[#888888] mb-3">Work With Our Atelier</p>
+            <h2 className="text-black mb-4">
               Let&apos;s create something <em className="font-light">worth keeping forever.</em>
             </h2>
-            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
               We welcome commissions for bespoke wedding invitations, luxury business cards, and custom stationery suites.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/start-a-project"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
               >
                 Start a Conversation
               </Link>
               <Link
                 href="/weddings/wedding-sample-kit"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
               >
                 Order Sample Kit
               </Link>

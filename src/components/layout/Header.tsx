@@ -59,7 +59,7 @@ export function Header({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -75,19 +75,19 @@ export function Header({
     <>
       {/* Announcement Bar */}
       {announcementActive && announcementBarText && (
-        <div className="bg-ink-deep text-paper-creme text-[10px] font-sans tracking-[0.2em] uppercase py-2 px-4 text-center z-[60] relative">
+        <div className="bg-black text-white text-[10px] font-sans tracking-[0.25em] uppercase py-2 px-4 text-center z-[60] relative">
           {announcementBarText}
         </div>
       )}
 
       {/* Header */}
       <header
-        className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-[var(--ease-out-expo)] ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
           announcementActive && announcementBarText ? "top-[32px]" : "top-0"
         } ${
           isScrolled && !isMenuOpen
-            ? "bg-paper-creme/95 backdrop-blur-md border-b border-border-hairline/50"
-            : "bg-transparent"
+            ? "bg-white/95 backdrop-blur-md border-b border-[#E5E5E5]"
+            : "bg-white border-b border-[#E5E5E5]"
         }`}
       >
         <div className="container-wide">
@@ -98,13 +98,13 @@ export function Header({
             {/* Logo */}
             <Link
               href="/"
-              className="relative z-[60] group flex items-center gap-2"
+              className="relative z-[60] flex items-center gap-3"
               aria-label="Famous Letterpress — Home"
               onClick={closeMenu}
             >
               <span
-                className={`font-serif text-lg md:text-xl tracking-[0.02em] transition-colors duration-300 ${
-                  isMenuOpen ? "text-paper-creme" : "text-ink-deep"
+                className={`font-serif text-xl tracking-tight transition-colors duration-300 ${
+                  isMenuOpen ? "text-white" : "text-black"
                 }`}
               >
                 <span className="font-light">Famous</span>{" "}
@@ -112,50 +112,75 @@ export function Header({
               </span>
             </Link>
 
-            {/* Desktop Right Actions */}
-            <div className="hidden md:flex items-center gap-6">
+            {/* Direct Navigation Links (Desktop) */}
+            <div className="hidden lg:flex items-center gap-8">
+              <Link
+                href="/weddings"
+                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
+              >
+                Weddings
+              </Link>
+              <Link
+                href="/business-cards"
+                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
+              >
+                Business Cards
+              </Link>
+              <Link
+                href="/packages"
+                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
+              >
+                Packages
+              </Link>
+              <Link
+                href="/about"
+                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
+              >
+                Our Story
+              </Link>
               <Link
                 href="/weddings/wedding-sample-kit"
-                className="text-[11px] tracking-[0.14em] uppercase text-ink-muted hover:text-ink-deep transition-colors duration-300"
+                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
               >
                 Sample Kits
               </Link>
+            </div>
+
+            {/* Desktop Right Actions */}
+            <div className="hidden sm:flex items-center gap-4">
               <Link
                 href="/start-a-project"
-                className="text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme px-5 py-2.5 hover:bg-[#222] transition-colors duration-300"
+                className="text-[11px] tracking-[0.2em] uppercase font-medium bg-black text-white px-6 py-2.5 hover:bg-neutral-800 transition-colors"
               >
                 Book a Consult
               </Link>
-              {/* Menu Pill */}
+
+              {/* Menu Toggle Pill */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.14em] uppercase border transition-all duration-300 ${
+                className={`relative z-[60] flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.2em] uppercase font-medium border transition-colors ${
                   isMenuOpen
-                    ? "border-paper-creme/30 text-paper-creme"
-                    : "border-border-hairline hover:border-ink-deep/30 text-ink-deep"
+                    ? "border-white/40 text-white"
+                    : "border-[#E5E5E5] hover:border-black text-black"
                 }`}
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMenuOpen}
               >
                 <span>{isMenuOpen ? "Close" : "Menu"}</span>
-                <div className="w-4 h-3 flex flex-col justify-between">
+                <div className="w-3.5 h-2.5 flex flex-col justify-between">
                   <span
                     className={`block h-px transition-all duration-300 origin-center ${
-                      isMenuOpen
-                        ? "bg-paper-creme rotate-45 translate-y-[5px]"
-                        : "bg-ink-deep"
+                      isMenuOpen ? "bg-white rotate-45 translate-y-[4.5px]" : "bg-black"
                     }`}
                   />
                   <span
                     className={`block h-px transition-all duration-300 ${
-                      isMenuOpen ? "opacity-0 scale-x-0" : "bg-ink-deep"
+                      isMenuOpen ? "opacity-0" : "bg-black"
                     }`}
                   />
                   <span
                     className={`block h-px transition-all duration-300 origin-center ${
-                      isMenuOpen
-                        ? "bg-paper-creme -rotate-45 -translate-y-[5px]"
-                        : "bg-ink-deep"
+                      isMenuOpen ? "bg-white -rotate-45 -translate-y-[4.5px]" : "bg-black"
                     }`}
                   />
                 </div>
@@ -165,30 +190,24 @@ export function Header({
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="relative z-[60] md:hidden p-2 -mr-2"
+              className="relative z-[60] sm:hidden p-2 text-black"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
             >
-              <div className="w-6 h-4 flex flex-col justify-between">
+              <div className="w-5 h-3.5 flex flex-col justify-between">
                 <span
                   className={`block h-px transition-all duration-300 origin-center ${
-                    isMenuOpen
-                      ? "bg-paper-creme rotate-45 translate-y-[7px]"
-                      : "bg-ink-deep"
+                    isMenuOpen ? "bg-white rotate-45 translate-y-[6px]" : "bg-black"
                   }`}
                 />
                 <span
                   className={`block h-px transition-all duration-300 ${
-                    isMenuOpen
-                      ? "opacity-0 scale-x-0 bg-paper-creme"
-                      : "bg-ink-deep"
+                    isMenuOpen ? "opacity-0" : "bg-black"
                   }`}
                 />
                 <span
                   className={`block h-px transition-all duration-300 origin-center ${
-                    isMenuOpen
-                      ? "bg-paper-creme -rotate-45 -translate-y-[7px]"
-                      : "bg-ink-deep"
+                    isMenuOpen ? "bg-white -rotate-45 -translate-y-[6px]" : "bg-black"
                   }`}
                 />
               </div>
@@ -197,59 +216,49 @@ export function Header({
         </div>
       </header>
 
-      {/* ── Fullscreen Luxury Menu Overlay ── */}
+      {/* ── Fullscreen Editorial Menu Drawer ── */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-ink-deep"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-black text-white"
           >
-            <div className="h-full overflow-y-auto pt-20 md:pt-24 pb-12">
+            <div className="h-full overflow-y-auto pt-24 md:pt-28 pb-12">
               <div className="container-wide">
                 {/* Menu Sections Grid */}
-                <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-16">
+                <div className="grid md:grid-cols-3 gap-10 md:gap-12 mb-16">
                   {menuSections.map((section, sIndex) => (
                     <motion.div
                       key={section.title}
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: 0.15 + sIndex * 0.08,
-                        duration: 0.5,
-                        ease: [0.16, 1, 0.3, 1],
+                        delay: 0.1 + sIndex * 0.08,
+                        duration: 0.4,
                       }}
                     >
-                      <p className="text-[10px] tracking-[0.2em] uppercase text-paper-creme/30 mb-6 font-sans font-medium">
+                      <p className="text-[10px] tracking-[0.25em] uppercase text-white/40 mb-6 font-mono font-medium">
                         {section.title}
                       </p>
                       <div className="space-y-0">
-                        {section.items.map((item, iIndex) => (
-                          <motion.div
-                            key={item.href + item.label}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{
-                              delay: 0.25 + sIndex * 0.08 + iIndex * 0.05,
-                              duration: 0.4,
-                              ease: [0.16, 1, 0.3, 1],
-                            }}
-                          >
+                        {section.items.map((item) => (
+                          <div key={item.href + item.label}>
                             <Link
                               href={item.href}
                               onClick={closeMenu}
-                              className="group block py-4 border-b border-paper-creme/8 hover:border-paper-creme/20 transition-colors duration-300"
+                              className="group block py-4 border-b border-white/10 hover:border-white/30 transition-colors"
                             >
-                              <span className="block font-serif text-lg md:text-xl text-paper-creme/90 group-hover:text-paper-creme transition-colors duration-300">
+                              <span className="block font-serif text-xl text-white/90 group-hover:text-white transition-colors">
                                 {item.label}
                               </span>
-                              <span className="block text-[12px] text-paper-creme/30 mt-1 font-sans">
+                              <span className="block text-xs text-white/40 mt-1 font-light leading-relaxed">
                                 {item.description}
                               </span>
                             </Link>
-                          </motion.div>
+                          </div>
                         ))}
                       </div>
                     </motion.div>
@@ -257,56 +266,47 @@ export function Header({
                 </div>
 
                 {/* Bottom Row — CTAs & Contact */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  className="border-t border-paper-creme/10 pt-8"
-                >
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-                    {/* Quick CTAs */}
-                    <div className="flex flex-wrap gap-4">
-                      <Link
-                        href="/start-a-project"
-                        onClick={closeMenu}
-                        className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:bg-paper-creme hover:text-ink-deep transition-all duration-300"
-                      >
-                        Book a Consult
-                      </Link>
-                      <Link
-                        href="/weddings/wedding-sample-kit"
-                        onClick={closeMenu}
-                        className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase text-paper-creme/50 hover:text-paper-creme transition-colors duration-300"
-                      >
-                        Order Sample Kit →
-                      </Link>
-                    </div>
-
-                    {/* Contact */}
-                    <div className="flex items-center gap-6">
-                      <a
-                        href="https://www.instagram.com/famousletterpressindia/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] tracking-[0.14em] uppercase text-paper-creme/30 hover:text-paper-creme transition-colors duration-300"
-                      >
-                        Instagram
-                      </a>
-                      <a
-                        href="https://wa.me/919366012345"
-                        className="text-[11px] tracking-[0.14em] uppercase text-paper-creme/30 hover:text-paper-creme transition-colors duration-300"
-                      >
-                        WhatsApp
-                      </a>
-                      <a
-                        href="mailto:hello@famousletterpress.com"
-                        className="text-[11px] tracking-[0.14em] uppercase text-paper-creme/30 hover:text-paper-creme transition-colors duration-300"
-                      >
-                        Email
-                      </a>
-                    </div>
+                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                  <div className="flex flex-wrap gap-4">
+                    <Link
+                      href="/start-a-project"
+                      onClick={closeMenu}
+                      className="inline-flex px-7 py-3 text-[11px] tracking-[0.2em] uppercase font-medium bg-white text-black hover:bg-neutral-200 transition-colors"
+                    >
+                      Book a Consult
+                    </Link>
+                    <Link
+                      href="/weddings/wedding-sample-kit"
+                      onClick={closeMenu}
+                      className="inline-flex px-7 py-3 text-[11px] tracking-[0.2em] uppercase font-medium border border-white/30 text-white hover:border-white transition-colors"
+                    >
+                      Order Sample Kit →
+                    </Link>
                   </div>
-                </motion.div>
+
+                  <div className="flex items-center gap-6 text-[10px] tracking-[0.2em] uppercase text-white/40">
+                    <a
+                      href="https://www.instagram.com/famousletterpressindia/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition-colors"
+                    >
+                      Instagram
+                    </a>
+                    <a
+                      href="https://wa.me/919366012345"
+                      className="hover:text-white transition-colors"
+                    >
+                      WhatsApp
+                    </a>
+                    <a
+                      href="mailto:hello@famousletterpress.com"
+                      className="hover:text-white transition-colors"
+                    >
+                      Email
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>

@@ -66,29 +66,29 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
 
   if (submittedRef) {
     return (
-      <div className="bg-paper-white border border-border-hairline p-8 md:p-12 text-center max-w-xl mx-auto">
-        <div className="w-12 h-12 bg-ink-deep text-paper-creme rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="bg-white border border-[#E5E5E5] p-8 md:p-12 text-center max-w-xl mx-auto">
+        <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
         <p className="eyebrow mb-2">Enquiry Received</p>
-        <h2 className="text-2xl md:text-3xl text-ink-deep mb-3 font-serif">Thank you for contacting us</h2>
-        <p className="text-sm text-ink-muted mb-8 font-light leading-relaxed">
-          Your project reference is <strong className="text-ink-deep font-mono">{submittedRef}</strong>.
+        <h2 className="text-2xl md:text-3xl text-black mb-3 font-serif">Thank you for contacting us</h2>
+        <p className="text-sm text-[#555555] mb-8 font-light leading-relaxed">
+          Your project reference is <strong className="text-black font-mono">{submittedRef}</strong>.
           We will review your specifications and contact you via{" "}
-          <strong className="text-ink-deep">({formData.preferredContact})</strong> within 24 business hours.
+          <strong className="text-black">({formData.preferredContact})</strong> within 24 business hours.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
           >
             Return to Home
           </Link>
           <Link
             href="/work"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/30 transition-colors"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/30 transition-colors"
           >
             View More Work
           </Link>
@@ -98,7 +98,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-paper-white border border-border-hairline p-8 md:p-12 max-w-3xl mx-auto">
+    <form onSubmit={handleSubmit} className="bg-white border border-[#E5E5E5] p-8 md:p-12 max-w-3xl mx-auto">
       <input
         type="text"
         name="hpField"
@@ -109,16 +109,16 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         autoComplete="off"
       />
 
-      <div className="border-b border-border-hairline pb-6 mb-8">
+      <div className="border-b border-[#E5E5E5] pb-6 mb-8">
         <p className="eyebrow mb-2">Project Brief</p>
-        <h2 className="text-2xl md:text-3xl font-serif text-ink-deep">Project Details</h2>
-        <p className="text-xs md:text-sm text-ink-muted mt-2 font-light leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-serif text-black">Project Details</h2>
+        <p className="text-xs md:text-sm text-[#555555] mt-2 font-light leading-relaxed">
           Tell us about what you would like to print. We review every brief individually to determine paper options, die requirements, and timing.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="mb-6 p-4 bg-ink-deep text-paper-creme text-xs">
+        <div className="mb-6 p-4 bg-black text-white text-xs">
           {errorMsg}
         </div>
       )}
@@ -127,7 +127,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Name & Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Your Name *
             </label>
             <input
@@ -137,11 +137,11 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.name}
               onChange={handleChange}
               placeholder="e.g. Rongsen Jamir"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Email Address *
             </label>
             <input
@@ -151,7 +151,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.email}
               onChange={handleChange}
               placeholder="you@domain.com"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
         </div>
@@ -159,7 +159,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Phone & City */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Phone / WhatsApp
             </label>
             <input
@@ -168,11 +168,11 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.phone}
               onChange={handleChange}
               placeholder="+91 98765 43210"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               City / Location
             </label>
             <input
@@ -181,7 +181,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.city}
               onChange={handleChange}
               placeholder="e.g. Dimapur, Mumbai, London"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
         </div>
@@ -189,14 +189,14 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Service & Quantity */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Service Needed
             </label>
             <select
               name="serviceNeeded"
               value={formData.serviceNeeded}
               onChange={handleChange}
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-xs text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-xs text-black focus:outline-none focus:border-black transition-colors"
             >
               <option value="Wedding Stationery">Wedding Stationery / Suites</option>
               <option value="Business Cards">Luxury Letterpress Business Cards</option>
@@ -206,7 +206,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             </select>
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Estimated Quantity
             </label>
             <input
@@ -215,7 +215,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.quantity}
               onChange={handleChange}
               placeholder="e.g. 100 suites / 200 cards"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
         </div>
@@ -223,7 +223,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Timeline & Budget */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Target Delivery Date / Month
             </label>
             <input
@@ -232,11 +232,11 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.timeline}
               onChange={handleChange}
               placeholder="e.g. November 2026"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
               Estimated Budget (Optional)
             </label>
             <input
@@ -245,14 +245,14 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               value={formData.budget}
               onChange={handleChange}
               placeholder="e.g. Flexible / approx range"
-              className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
             />
           </div>
         </div>
 
         {/* Message */}
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-1 font-sans">
+          <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
             Project Description / Message *
           </label>
           <textarea
@@ -262,18 +262,18 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             value={formData.message}
             onChange={handleChange}
             placeholder="Share details on techniques (letterpress, foil, embossing), paper preferences, or design ideas..."
-            className="w-full bg-paper-creme border border-border-hairline px-3.5 py-2.5 text-sm text-ink-deep focus:outline-none focus:border-ink-deep transition-colors"
+            className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black transition-colors"
           />
         </div>
 
         {/* Preferred Contact Method */}
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-ink-muted mb-2 font-sans">
+          <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-2 font-sans">
             Preferred Contact Method
           </label>
           <div className="flex gap-6">
             {(["WhatsApp", "Email", "Phone"] as const).map((method) => (
-              <label key={method} className="flex items-center gap-2 text-xs text-ink-deep cursor-pointer font-sans">
+              <label key={method} className="flex items-center gap-2 text-xs text-black cursor-pointer font-sans">
                 <input
                   type="radio"
                   name="preferredContact"
@@ -289,15 +289,15 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-border-hairline">
+      <div className="mt-8 pt-6 border-t border-[#E5E5E5]">
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
+          className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
         >
           {isLoading ? "Submitting Brief..." : "Submit Project Brief"}
         </button>
-        <p className="text-[11px] text-ink-light text-center mt-3 font-sans">
+        <p className="text-[11px] text-[#888888] text-center mt-3 font-sans">
           We reply promptly within 24 hours. Your details are strictly confidential.
         </p>
       </div>

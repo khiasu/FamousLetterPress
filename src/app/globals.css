@@ -1,55 +1,61 @@
 @import "tailwindcss";
 
 /* ========================================================================
-   FAMOUS LETTERPRESS — LUXURY DESIGN SYSTEM
-   Simple · Black & White · Creme · Feminine · Editorial · Tactile
+   FAMOUS LETTERPRESS — PURE EDITORIAL LUXURY
+   Plain White Background · Deep Black Typography · Architectural Hairlines
    ======================================================================== */
 
 :root {
-  /* ── Restricted Luxury Palette ──
-     Only these colors exist in the brand world.
-     No sage, no gold, no blush, no terracotta — ever. */
-  --color-paper-white:    #FFFFFF;
-  --color-paper-creme:    #FBF9F5;
-  --color-paper-sand:     #F5F2EB;
-  --color-border-hairline:#E8E3DA;
-  --color-ink-deep:       #111111;
-  --color-ink-muted:      #66615B;
-  --color-ink-light:      #99928A;
+  /* ── Pure Monochrome Luxury Palette ── */
+  --color-white:          #FFFFFF;
+  --color-black:          #0A0A0A;
+  --color-black-pure:     #000000;
+  --color-muted:          #555555;
+  --color-subtle:         #888888;
+  --color-border:         #E5E5E5;
+  --color-border-dark:    #111111;
+  --color-surface-hover:  #F7F7F7;
 
-  /* ── Semantic Aliases ── */
-  --background:           var(--color-paper-creme);
-  --foreground:           var(--color-ink-deep);
+  /* ── Background & Foreground ── */
+  --background:           #FFFFFF;
+  --foreground:           #0A0A0A;
 
-  /* ── Motion ── */
-  --ease-out-expo:        cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart:       cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-in-out-smooth:   cubic-bezier(0.65, 0, 0.35, 1);
-  --duration-fast:        150ms;
-  --duration-normal:      300ms;
-  --duration-slow:        600ms;
-  --duration-reveal:      900ms;
+  /* ── Motion Curves ── */
+  --ease-editorial:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth:          cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @theme inline {
-  /* ── Color tokens for Tailwind v4 ── */
   --color-background:       var(--background);
   --color-foreground:       var(--foreground);
-  --color-paper-white:      var(--color-paper-white);
-  --color-paper-creme:      var(--color-paper-creme);
-  --color-paper-sand:       var(--color-paper-sand);
-  --color-border-hairline:  var(--color-border-hairline);
-  --color-ink-deep:         var(--color-ink-deep);
-  --color-ink-muted:        var(--color-ink-muted);
-  --color-ink-light:        var(--color-ink-light);
+  --color-white:            var(--color-white);
+  --color-black:            var(--color-black);
+  --color-black-pure:       var(--color-black-pure);
+  --color-muted:            var(--color-muted);
+  --color-subtle:           var(--color-subtle);
+  --color-border:           var(--color-border);
+  --color-border-dark:      var(--color-border-dark);
+  --color-surface-hover:    var(--color-surface-hover);
 
-  /* ── Fonts ── */
+  /* Legacy aliases mapping strictly to pure monochrome palette */
+  --color-paper-creme:      #FFFFFF;
+  --color-paper-white:      #FFFFFF;
+  --color-paper-sand:       #F7F7F7;
+  --color-paper-warm:       #FFFFFF;
+  --color-ink:              #0A0A0A;
+  --color-ink-deep:         #0A0A0A;
+  --color-ink-muted:        #555555;
+  --color-ink-sand:         #888888;
+  --color-border-hairline:  #E5E5E5;
+  --color-border-subtle:    #E5E5E5;
+  --color-terracotta:       #0A0A0A;
+  --color-terracotta-light: #555555;
+
   --font-serif:   var(--font-cormorant-garamond);
   --font-sans:    var(--font-inter);
 
-  /* ── Spacing ── */
-  --spacing-section:        clamp(4rem, 8vw, 7rem);
-  --spacing-section-lg:     clamp(5rem, 10vw, 10rem);
+  --spacing-section:        clamp(4.5rem, 9vw, 8rem);
+  --spacing-section-lg:     clamp(6rem, 12vw, 11rem);
 }
 
 /* ========================================================================
@@ -57,6 +63,8 @@
    ======================================================================== */
 
 html {
+  background-color: #FFFFFF;
+  color: #0A0A0A;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -64,64 +72,68 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: #FFFFFF;
+  color: #0A0A0A;
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  line-height: 1.7;
+  line-height: 1.65;
   overflow-x: hidden;
 }
 
-/* ── Typography ── */
+/* ── Typography Scale ── */
 
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif), 'Georgia', serif;
     font-weight: 300;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    color: var(--color-ink-deep);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #0A0A0A;
   }
 
   h1 {
-    font-size: clamp(2.25rem, 5vw + 0.5rem, 4rem);
-    letter-spacing: -0.02em;
+    font-size: clamp(2.5rem, 6vw + 0.5rem, 4.75rem);
+    letter-spacing: -0.025em;
     font-weight: 300;
   }
 
   h2 {
-    font-size: clamp(1.75rem, 3.5vw + 0.25rem, 2.75rem);
+    font-size: clamp(2rem, 4vw + 0.25rem, 3.25rem);
+    letter-spacing: -0.02em;
   }
 
   h3 {
-    font-size: clamp(1.375rem, 2vw + 0.25rem, 1.875rem);
+    font-size: clamp(1.35rem, 2vw + 0.25rem, 2rem);
   }
 
   h4 {
-    font-size: clamp(1.125rem, 1.5vw + 0.125rem, 1.375rem);
+    font-size: clamp(1.15rem, 1.5vw + 0.125rem, 1.45rem);
   }
 
   p {
-    max-width: 60ch;
-    color: var(--color-ink-muted);
+    color: #555555;
   }
 
   a {
     color: inherit;
     text-decoration: none;
-    transition: color var(--duration-normal) var(--ease-out-quart);
+    transition: opacity 250ms ease, color 250ms ease;
+  }
+
+  a:hover {
+    opacity: 0.7;
   }
 }
 
 /* ── Selection ── */
 ::selection {
-  background-color: var(--color-paper-sand);
-  color: var(--color-ink-deep);
+  background-color: #000000;
+  color: #FFFFFF;
 }
 
 /* ── Focus ── */
 :focus-visible {
-  outline: 1px solid var(--color-ink-deep);
-  outline-offset: 3px;
+  outline: 1px solid #000000;
+  outline-offset: 2px;
 }
 
 /* ── Images ── */
@@ -135,32 +147,32 @@ img {
    UTILITY CLASSES
    ======================================================================== */
 
-/* Section spacing */
 .section {
   padding-top: var(--spacing-section);
   padding-bottom: var(--spacing-section);
+  background-color: #FFFFFF;
 }
 
 .section-lg {
   padding-top: var(--spacing-section-lg);
   padding-bottom: var(--spacing-section-lg);
+  background-color: #FFFFFF;
 }
 
-/* Container */
 .container-wide {
-  max-width: 1340px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.25rem, 5vw, 3rem);
-  padding-right: clamp(1.25rem, 5vw, 3rem);
+  padding-left: clamp(1.25rem, 5vw, 3.5rem);
+  padding-right: clamp(1.25rem, 5vw, 3.5rem);
 }
 
 .container-narrow {
-  max-width: 860px;
+  max-width: 880px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.25rem, 5vw, 3rem);
-  padding-right: clamp(1.25rem, 5vw, 3rem);
+  padding-left: clamp(1.25rem, 5vw, 3.5rem);
+  padding-right: clamp(1.25rem, 5vw, 3.5rem);
 }
 
 /* Eyebrow label */
@@ -168,67 +180,28 @@ img {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-ink-light);
+  color: #888888;
 }
 
 /* Hairline divider */
 .divider {
-  width: 2.5rem;
+  width: 100%;
   height: 1px;
-  background-color: var(--color-border-hairline);
+  background-color: #E5E5E5;
   border: none;
 }
 
-/* ========================================================================
-   REDUCED MOTION
-   ======================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* ========================================================================
-   SCROLLBAR
-   ======================================================================== */
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-paper-creme);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-border-hairline);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ink-light);
-}
-
-/* ========================================================================
-   HORIZONTAL SCROLL CAROUSEL (IG-Style)
-   ======================================================================== */
-
+/* Horizontal reel scroll */
 .carousel-scroll {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding-bottom: 0.5rem;
+  padding-bottom: 1rem;
 }
 
 .carousel-scroll::-webkit-scrollbar {
@@ -238,4 +211,22 @@ img {
 .carousel-scroll > * {
   scroll-snap-align: start;
   flex-shrink: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4D4D4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
 }

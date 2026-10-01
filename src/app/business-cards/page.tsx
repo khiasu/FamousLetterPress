@@ -57,35 +57,35 @@ export default function BusinessCardsPage() {
   const cardPortfolio = getCMSPortfolio().filter((item) => item.category === "business-cards");
 
   return (
-    <div className="bg-paper-creme min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* ── Header ── */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
-                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-ink-deep">Business Cards</span>
+                <span className="text-black">Business Cards</span>
               </div>
               <p className="eyebrow mb-2">Executive Identity</p>
-              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+              <h1 className="text-black mt-2 mb-6 font-serif">
                 Business cards that make an{" "}
                 <em className="font-light">unforgettable impression.</em>
               </h1>
-              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 In a digital world, tangible quality is your most persuasive competitive edge. Hand-fed on vintage platen presses into 600–900gsm pure cotton board.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   href="/start-a-project?service=business-cards"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
                 >
                   Request Card Quote
                 </Link>
                 <Link
                   href="/business-cards/business-card-sample-kit"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/40 transition-colors"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/40 transition-colors"
                 >
                   Order Sample Kit (₹{sampleKit.price})
                 </Link>
@@ -96,7 +96,7 @@ export default function BusinessCardsPage() {
       </section>
 
       {/* ── Showcase Carousel Reel ── */}
-      <section className="section bg-paper-white" aria-label="Business Cards Showcase">
+      <section className="section bg-white" aria-label="Business Cards Showcase">
         <div className="container-wide mb-8 md:mb-12">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
@@ -112,7 +112,7 @@ export default function BusinessCardsPage() {
             <Reveal delay={0.15}>
               <Link
                 href="/work"
-                className="text-[11px] tracking-[0.14em] uppercase text-ink-light hover:text-ink-deep transition-colors"
+                className="text-[11px] tracking-[0.14em] uppercase text-[#888888] hover:text-black transition-colors"
               >
                 View Studio Archive →
               </Link>
@@ -152,7 +152,7 @@ export default function BusinessCardsPage() {
               key={i}
               className="w-[75vw] md:w-[40vw] lg:w-[28vw] min-w-[280px] max-w-[420px]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-paper-sand group mb-4">
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#F7F7F7] group mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={card.image}
@@ -161,7 +161,7 @@ export default function BusinessCardsPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <span className="text-[10px] tracking-[0.16em] uppercase text-white/70 font-sans">
+                  <span className="text-[10px] tracking-[0.16em] uppercase text-[#555555] font-sans">
                     {card.stock}
                   </span>
                   <p className="font-serif text-base text-white mt-1 leading-snug">
@@ -175,7 +175,7 @@ export default function BusinessCardsPage() {
       </section>
 
       {/* ── Section 2: The Tactile Standard & Finishes ── */}
-      <section className="section bg-paper-creme" aria-label="Finishes">
+      <section className="section bg-white" aria-label="Finishes">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">
@@ -184,7 +184,7 @@ export default function BusinessCardsPage() {
                 <h2 className="mb-6 font-serif">
                   The physics of an <em className="font-light">unbendable card.</em>
                 </h2>
-                <div className="space-y-4 text-sm text-ink-muted leading-relaxed">
+                <div className="space-y-4 text-sm text-[#555555] leading-relaxed">
                   <p>
                     Commercial digital cards printed on 300gsm artboard bend easily, peel at the edges, and feel flimsy. We print on 100% cotton board ranging from 600 to 900 gsm — up to three times thicker than conventional corporate stationery.
                   </p>
@@ -193,19 +193,19 @@ export default function BusinessCardsPage() {
                   </p>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-border-hairline space-y-2">
+                <div className="mt-8 pt-6 border-t border-[#E5E5E5] space-y-2">
                   <p className="eyebrow">Production Specifications</p>
-                  <div className="flex justify-between py-2 border-b border-border-hairline text-xs font-sans">
-                    <span className="text-ink-muted">Standard Lead Time:</span>
-                    <span className="text-ink-deep font-medium">{service.leadTime}</span>
+                  <div className="flex justify-between py-2 border-b border-[#E5E5E5] text-xs font-sans">
+                    <span className="text-[#555555]">Standard Lead Time:</span>
+                    <span className="text-black font-medium">{service.leadTime}</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-border-hairline text-xs font-sans">
-                    <span className="text-ink-muted">Minimum Order:</span>
-                    <span className="text-ink-deep font-medium">100 cards per name / artwork</span>
+                  <div className="flex justify-between py-2 border-b border-[#E5E5E5] text-xs font-sans">
+                    <span className="text-[#555555]">Minimum Order:</span>
+                    <span className="text-black font-medium">100 cards per name / artwork</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-border-hairline text-xs font-sans">
-                    <span className="text-ink-muted">Turnaround:</span>
-                    <span className="text-ink-deep font-medium">Inspected & dispatched from Nagaland</span>
+                  <div className="flex justify-between py-2 border-b border-[#E5E5E5] text-xs font-sans">
+                    <span className="text-[#555555]">Turnaround:</span>
+                    <span className="text-black font-medium">Inspected & dispatched from Nagaland</span>
                   </div>
                 </div>
               </Reveal>
@@ -214,15 +214,15 @@ export default function BusinessCardsPage() {
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-6">
               {cardFinishes.map((item, idx) => (
                 <Reveal key={item.title} delay={idx * 0.08}>
-                  <div className="bg-paper-white border border-border-hairline p-6 h-full flex flex-col justify-between">
+                  <div className="bg-white border border-[#E5E5E5] p-6 h-full flex flex-col justify-between">
                     <div>
-                      <span className="text-[10px] font-mono tracking-widest text-ink-light block mb-2">
+                      <span className="text-[10px] font-mono tracking-widest text-[#888888] block mb-2">
                         0{idx + 1}
                       </span>
-                      <h3 className="font-serif text-lg text-ink-deep mb-2">{item.title}</h3>
-                      <p className="text-xs text-ink-muted leading-relaxed mb-4">{item.desc}</p>
+                      <h3 className="font-serif text-lg text-black mb-2">{item.title}</h3>
+                      <p className="text-xs text-[#555555] leading-relaxed mb-4">{item.desc}</p>
                     </div>
-                    <span className="text-[10px] tracking-[0.14em] uppercase text-ink-light font-sans pt-3 border-t border-border-hairline">
+                    <span className="text-[10px] tracking-[0.14em] uppercase text-[#888888] font-sans pt-3 border-t border-[#E5E5E5]">
                       {item.detail}
                     </span>
                   </div>
@@ -234,7 +234,7 @@ export default function BusinessCardsPage() {
       </section>
 
       {/* ── Section 3: Technical Artwork Guidelines ── */}
-      <section className="section bg-paper-white" aria-label="Technical Guidelines">
+      <section className="section bg-white" aria-label="Technical Guidelines">
         <div className="container-wide">
           <div className="max-w-xl mb-12">
             <Reveal>
@@ -242,7 +242,7 @@ export default function BusinessCardsPage() {
               <h2 className="mb-4">
                 Preparing artwork for <em className="font-light">letterpress bite</em>
               </h2>
-              <p className="text-xs md:text-sm text-ink-muted leading-relaxed">
+              <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
                 Letterpress is a relief process. Follow these specifications to ensure maximum impression depth and razor-sharp type reproduction.
               </p>
             </Reveal>
@@ -251,9 +251,9 @@ export default function BusinessCardsPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {technicalSpecs.map((spec, i) => (
               <Reveal key={spec.title} delay={i * 0.08}>
-                <div className="bg-paper-creme border border-border-hairline p-6 space-y-2">
-                  <h3 className="text-sm font-serif text-ink-deep">{spec.title}</h3>
-                  <p className="text-xs text-ink-muted leading-relaxed">{spec.detail}</p>
+                <div className="bg-white border border-[#E5E5E5] p-6 space-y-2">
+                  <h3 className="text-sm font-serif text-black">{spec.title}</h3>
+                  <p className="text-xs text-[#555555] leading-relaxed">{spec.detail}</p>
                 </div>
               </Reveal>
             ))}
@@ -262,26 +262,26 @@ export default function BusinessCardsPage() {
       </section>
 
       {/* ── Section 4: Sample Kit CTA ── */}
-      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
         <div className="container-narrow">
           <Reveal>
-            <p className="eyebrow !text-paper-creme/30 mb-3">Tactile Proof</p>
-            <h2 className="!text-paper-creme mb-4">
+            <p className="eyebrow text-[#888888] mb-3">Tactile Proof</p>
+            <h2 className="text-black mb-4">
               Hold the cards in your hands <em className="font-light">before committing.</em>
             </h2>
-            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
               Order our Business Card Sample Kit to inspect 600gsm cotton board, mirror edge gilding, blind deboss, and foil tones in person.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/business-cards/business-card-sample-kit"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
               >
                 Order Card Sample Kit (₹{sampleKit.price})
               </Link>
               <Link
                 href="/start-a-project?service=business-cards"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
               >
                 Submit Artwork for Estimate
               </Link>

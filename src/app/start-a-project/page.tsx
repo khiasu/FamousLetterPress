@@ -27,22 +27,22 @@ async function FormContainer({ searchParams }: { searchParams: Promise<{ service
 
 export default function StartAProjectPage({ searchParams }: StartProjectPageProps) {
   return (
-    <div className="bg-paper-creme min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-border-hairline">
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
-                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+              <div className="flex items-center justify-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-ink-deep">Start a Project</span>
+                <span className="text-black">Start a Project</span>
               </div>
               <p className="eyebrow mb-2">Project Initiation</p>
-              <h1 className="text-ink-deep mb-4 font-serif">
+              <h1 className="text-black mb-4 font-serif">
                 Start a Commission
               </h1>
-              <p className="text-sm md:text-base text-ink-muted font-light leading-relaxed">
+              <p className="text-sm md:text-base text-[#555555] font-light leading-relaxed">
                 Whether you have an upcoming wedding celebration, need executive identity cards, or are planning bespoke personal stationery, our atelier is ready to bring it to life.
               </p>
             </div>
@@ -51,10 +51,10 @@ export default function StartAProjectPage({ searchParams }: StartProjectPageProp
       </section>
 
       {/* Form Area */}
-      <section className="section bg-paper-white">
+      <section className="section bg-white">
         <div className="container-wide">
           <Reveal>
-            <Suspense fallback={<div className="text-center py-12 text-ink-light text-xs font-sans">Loading brief form...</div>}>
+            <Suspense fallback={<div className="text-center py-12 text-[#888888] text-xs font-sans">Loading brief form...</div>}>
               <FormContainer searchParams={searchParams} />
             </Suspense>
           </Reveal>

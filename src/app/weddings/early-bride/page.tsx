@@ -11,24 +11,24 @@ export const metadata: Metadata = {
 
 export default function EarlyBridePage() {
   return (
-    <div className="bg-paper-creme min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* Header */}
-      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-border-hairline">
+      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-2xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light">
-                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+              <div className="flex items-center justify-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888]">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <Link href="/weddings" className="hover:text-ink-deep transition-colors">Weddings</Link>
+                <Link href="/weddings" className="hover:text-black transition-colors">Weddings</Link>
                 <span>/</span>
-                <span className="text-ink-deep">Early Bride</span>
+                <span className="text-black">Early Bride</span>
               </div>
               <p className="eyebrow mb-2">Dedicated Consultation</p>
-              <h1 className="text-ink-deep mb-4 font-serif">
+              <h1 className="text-black mb-4 font-serif">
                 The Early Bride Experience
               </h1>
-              <p className="text-sm md:text-base text-ink-muted font-light leading-relaxed">
+              <p className="text-sm md:text-base text-[#555555] font-light leading-relaxed">
                 Whether you have an exact visual concept or are just beginning to explore tactile letterpress, our Early Bride inquiry helps us understand your celebration and propose the best artisanal path forward.
               </p>
             </div>
@@ -37,7 +37,7 @@ export default function EarlyBridePage() {
       </section>
 
       {/* Form Section */}
-      <section className="section bg-paper-white">
+      <section className="section bg-white">
         <div className="container-wide">
           <Reveal>
             <EarlyBrideForm />

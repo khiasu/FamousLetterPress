@@ -16,11 +16,11 @@ interface ButtonProps {
 
 const variants = {
   primary:
-    "bg-ink-deep hover:bg-[#222] active:bg-ink-deep text-paper-creme",
+    "bg-black text-white hover:bg-neutral-800 active:bg-black border border-black transition-colors",
   outline:
-    "bg-transparent border border-border-hairline hover:border-ink-deep/30 text-ink-deep",
+    "bg-white text-black border border-black hover:bg-black hover:text-white transition-colors",
   ghost:
-    "bg-transparent hover:bg-paper-sand/50 text-ink-muted hover:text-ink-deep",
+    "bg-transparent text-black hover:bg-[#F7F7F7] transition-colors",
 };
 
 const sizes = {

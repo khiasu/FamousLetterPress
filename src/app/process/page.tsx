@@ -62,35 +62,35 @@ const fullProcessSteps = [
 
 export default function ProcessPage() {
   return (
-    <div className="bg-paper-creme min-h-screen">
+    <div className="bg-white min-h-screen">
       {/* ── Header ── */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-border-hairline">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-ink-light font-sans">
-                <Link href="/" className="hover:text-ink-deep transition-colors">Home</Link>
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+                <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-ink-deep">Process</span>
+                <span className="text-black">Process</span>
               </div>
               <p className="eyebrow mb-2">Step by Step</p>
-              <h1 className="text-ink-deep mt-2 mb-6 font-serif">
+              <h1 className="text-black mt-2 mb-6 font-serif">
                 From raw cotton to{" "}
                 <em className="font-light">cast-iron impression.</em>
               </h1>
-              <p className="text-base md:text-lg text-ink-muted max-w-2xl font-light leading-relaxed mb-8">
+              <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 Letterpress printing is a deliberate, meditative craft. Here is how your stationery journeys from conceptual design in Nagaland to the finished heirlooms in your hands.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   href="/start-a-project"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-ink-deep text-paper-creme hover:bg-[#222] transition-colors"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
                 >
                   Start Your Project
                 </Link>
                 <Link
                   href="/weddings/wedding-sample-kit"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-border-hairline text-ink-deep hover:border-ink-deep/40 transition-colors"
+                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/40 transition-colors"
                 >
                   Order Sample Kit First
                 </Link>
@@ -101,31 +101,31 @@ export default function ProcessPage() {
       </section>
 
       {/* ── Step by Step Timeline ── */}
-      <section className="section bg-paper-white" aria-label="Production Steps">
+      <section className="section bg-white" aria-label="Production Steps">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-8">
             {fullProcessSteps.map((item, idx) => (
               <Reveal key={item.step} delay={idx * 0.06}>
-                <div className="bg-paper-creme border border-border-hairline p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 items-start">
+                <div className="bg-white border border-[#E5E5E5] p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 items-start">
                   <div className="shrink-0 flex items-center gap-3">
-                    <span className="font-mono text-2xl text-ink-deep font-light">
+                    <span className="font-mono text-2xl text-black font-light">
                       {item.step}
                     </span>
                     <div className="h-px w-8 bg-border-hairline hidden md:block" />
                   </div>
                   <div className="flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-                      <h2 className="text-xl md:text-2xl font-serif text-ink-deep">
+                      <h2 className="text-xl md:text-2xl font-serif text-black">
                         {item.title}
                       </h2>
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-ink-light px-2.5 py-1 bg-paper-white border border-border-hairline">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-[#888888] px-2.5 py-1 bg-white border border-[#E5E5E5]">
                         {item.timeline}
                       </span>
                     </div>
-                    <p className="text-xs uppercase tracking-wider text-ink-light font-sans mb-3">
+                    <p className="text-xs uppercase tracking-wider text-[#888888] font-sans mb-3">
                       {item.subtitle}
                     </p>
-                    <p className="text-xs md:text-sm text-ink-muted leading-relaxed font-light">
+                    <p className="text-xs md:text-sm text-[#555555] leading-relaxed font-light">
                       {item.desc}
                     </p>
                   </div>
@@ -137,26 +137,26 @@ export default function ProcessPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="section-lg bg-ink-deep text-paper-creme text-center">
+      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
         <div className="container-narrow">
           <Reveal>
-            <p className="eyebrow !text-paper-creme/30 mb-3">Ready to Begin?</p>
-            <h2 className="!text-paper-creme mb-4">
+            <p className="eyebrow text-[#888888] mb-3">Ready to Begin?</p>
+            <h2 className="text-black mb-4">
               Let&apos;s start your <em className="font-light">production run.</em>
             </h2>
-            <p className="text-sm md:text-base text-paper-creme/50 mb-8 max-w-lg mx-auto leading-relaxed">
+            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
               Reach out with your wedding date, artwork, or corporate card inquiry. We reply within 24 hours.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/start-a-project"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-paper-creme text-ink-deep hover:bg-white transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
               >
                 Start a Commission
               </Link>
               <Link
                 href="/weddings/early-bride"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-paper-creme/30 text-paper-creme hover:border-paper-creme transition-colors"
+                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
               >
                 Early Bride Form
               </Link>
