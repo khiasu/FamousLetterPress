@@ -153,11 +153,13 @@ export function WhatWeMakeSection() {
         const ry = (-d * 36).toFixed(2);
         const sc = (1 - a * 0.05).toFixed(3);
         const op = clamp(1 - a * 0.55, 0.25, 1).toFixed(3);
-        const zi = 10 - Math.min(9, Math.round(a * 2));
+        const zi = 20 - Math.min(18, Math.round(a * 4));
 
         c.style.transform = `translate3d(${tx}px,0,${tz}px) rotateY(${ry}deg) scale(${sc})`;
         c.style.opacity = op;
         c.style.zIndex = `${zi}`;
+        // The active card is easily clickable, while background cards don't intercept clicks
+        c.style.pointerEvents = a < 0.6 ? "auto" : "none";
       }
     };
 
@@ -191,11 +193,42 @@ export function WhatWeMakeSection() {
       }
     };
 
-    // Scroll listener: only update when not dragging and not locked
+    let scrollTimeout: NodeJS.Timeout | null = null;
+
+    // Scroll listener: update spring and auto-snap when scrolling pauses
     const onScroll = () => {
       if (isPointerDown || isScrollLocked) return;
-      targetProg = computeScrollProg();
+      const rawProg = computeScrollProg();
+      targetProg = rawProg;
       requestTick();
+
+      // Magnetic snap: when the user stops scrolling, lock to the nearest slide if scrolled past 50%
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (isPointerDown || isScrollLocked) return;
+        const rect = sec.getBoundingClientRect();
+        // Only snap when the section is actively in view and taking over the screen
+        if (rect.top <= 10 && rect.bottom >= window.innerHeight - 10) {
+          const nearestCard = Math.round(computeScrollProg());
+          const scrollableDist = rect.height - window.innerHeight;
+          if (scrollableDist > 0) {
+            const targetScrollY =
+              window.scrollY +
+              rect.top +
+              (nearestCard / (n - 1)) * scrollableDist;
+
+            // Only smooth-align if difference is notable
+            if (Math.abs(window.scrollY - targetScrollY) > 8) {
+              isScrollLocked = true;
+              targetProg = nearestCard;
+              window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+              setTimeout(() => {
+                isScrollLocked = false;
+              }, 450);
+            }
+          }
+        }
+      }, 120);
     };
 
     // Passive scroll listener for maximum 120fps smoothness
@@ -233,7 +266,7 @@ export function WhatWeMakeSection() {
           isDraggingRef.current = false;
         }, 150);
 
-        // Snap to nearest integer card
+        // Snap to nearest card (>50% locks to next slide)
         targetProg = Math.round(targetProg);
 
         // Sync page scroll position to the current card so subsequent scroll is seamless
@@ -268,6 +301,7 @@ export function WhatWeMakeSection() {
     requestTick();
 
     return () => {
+      if (scrollTimeout) clearTimeout(scrollTimeout);
       cancelAnimationFrame(animId);
       window.removeEventListener("scroll", onScroll);
       stage.removeEventListener("pointerdown", onPointerDown);

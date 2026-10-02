@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { SOCIAL_PROFILES } from "@/components/ui/SocialIcons";
 
@@ -51,9 +54,40 @@ const FOOTER_SECTIONS = [
 ];
 
 export function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = footerRef.current;
+      if (!footer) return;
+
+      const rect = footer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // When footer starts coming into the viewport
+      if (rect.top <= windowHeight - 40) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Check initial position
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <footer
-      className="bg-white border-t border-[rgba(14,14,14,0.12)] text-[#0e0e0e]"
+      ref={footerRef}
+      className={`relative bg-[#FAF7F2] border-t-2 border-[#E5E0D5] text-[#0e0e0e] transition-all duration-700 ease-out will-change-transform ${
+        isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-40 translate-y-8"
+      }`}
       role="contentinfo"
     >
       <div className="w py-14 sm:py-20">
