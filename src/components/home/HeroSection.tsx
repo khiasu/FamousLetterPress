@@ -230,112 +230,79 @@ export function HeroSection() {
   const activeItem = HERO_ITEMS[activeIndex];
 
   return (
-    <section
-      className="hero pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 overflow-hidden relative border-b border-[rgba(14,14,14,0.08)]"
-      style={{
-        background: "linear-gradient(180deg, #ffffff 0%, #faf8f5 100%)",
-      }}
-      aria-label="Famous Letterpress Hero"
-    >
+    <section className="hero pt-28 md:pt-36 pb-16 overflow-hidden relative" aria-label="Famous Letterpress Hero">
       <div className="w">
-        {/* ── 2-Column Responsive Layout: Headlines + Imagery Both Visible Above Fold ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[calc(100vh-140px)] max-h-[920px]">
-          {/* Left Column: Headlines & Narrative */}
-          <div className="lg:col-span-5 flex flex-col justify-center text-center lg:text-left z-10 pt-2 lg:pt-0">
-            <p className="k mb-3 sm:mb-4 tracking-[0.32em] text-[#7b7566]">
-              Letterpress &amp; Foil &middot; Handcrafted in Nagaland
-            </p>
+        <p className="k mb-6 tracking-[0.32em] text-[#7b7566]">
+          Letterpress &amp; Foil &middot; Handcrafted in Nagaland
+        </p>
 
-            <h1 className="d text-[clamp(44px,7.5vw,76px)] leading-[0.93] tracking-[-0.035em] text-[#0e0e0e] mb-5 font-serif">
-              <span>Intimate.</span>
-              <br className="hidden sm:inline" />
-              <span className="italic pl-2 sm:pl-4">Elegant.</span>
-              <br className="hidden sm:inline" />
-              <span>Timeless.</span>
-            </h1>
+        {/* Clean single-line headline */}
+        <h1 className="d text-[clamp(48px,13vw,120px)] leading-[0.92] tracking-[-0.035em] pb-[0.06em]">
+          Designers turned <i>printers.</i>
+        </h1>
 
-            <p className="text-[#3b372e] text-[14px] sm:text-[15px] leading-[1.65] font-light max-w-[42ch] mx-auto lg:mx-0 mb-7">
-              The ageless craft of relief letterpress on 600–900gsm cotton rag. Hand-fed one sheet at a time on vintage platen presses in our Nagaland atelier.
-            </p>
-
-            <div className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 flex-wrap">
-              <Link
-                href="https://wa.me/+918416099340"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn"
-              >
-                Book a consult
-              </Link>
-              <a href="#svc" className="ln">
-                Explore craft
-              </a>
-            </div>
-
-            {/* Desktop Slide Indicator */}
-            <div className="hidden lg:block mt-10 pt-6 border-t border-[rgba(14,14,14,0.1)]">
-              <div className="flex items-baseline justify-between">
-                <div>
-                  <h4 className="font-serif text-base text-black font-medium tracking-tight">
-                    {activeItem.title}
-                  </h4>
-                  <p className="text-[11px] text-[#7b7566] font-sans tracking-wide mt-0.5">
-                    {activeItem.sub}
-                  </p>
-                </div>
-                <span className="text-[11px] font-mono tracking-widest text-[#7b7566]">
-                  0{activeIndex + 1} / 0{m}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Centered Focus Interactive Carousel (Immediately Visible Above Fold) */}
-          <div className="lg:col-span-7 flex flex-col items-center justify-center relative w-full overflow-hidden">
-            <div
-              ref={crRef}
-              className="cr w-full relative h-[360px] sm:h-[440px] md:h-[480px] touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
-              style={{
-                perspective: "1000px",
-              }}
-              aria-label="Studio Work Showcase"
+        {/* Brand sub-sentence */}
+        <div className="grid gap-5 mt-8 max-w-[520px]">
+          <p className="text-[#3b372e] text-[14.5px] sm:text-[15.5px] leading-[1.7] font-light">
+            We press ink into cotton, one impression at a time — creating heirloom stationery that you can feel with your fingertips. Handcrafted on vintage platens in Nagaland.
+          </p>
+          <div className="flex gap-5 items-center flex-wrap mt-1">
+            <Link
+              href="https://wa.me/+918416099340"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
             >
-              {HERO_ITEMS.map((item, index) => (
-                <div
-                  key={index}
-                  className="cs absolute left-1/2 top-0 w-[min(72vw,360px)] h-full -ml-[min(36vw,180px)] shadow-[0_24px_45px_-18px_rgba(60,45,20,0.4),0_2px_4px_rgba(60,45,20,0.12)] bg-[#faf5ea] will-change-transform rounded-xs overflow-hidden border border-[rgba(14,14,14,0.1)]"
-                >
-                  <div className="ph absolute inset-0 overflow-hidden bg-[#faf5ea]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      draggable={false}
-                      className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
-                      loading={index < 2 ? "eager" : "lazy"}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile / Tablet Caption Under Carousel */}
-            <div className="lg:hidden text-center mt-4 px-4 w-full">
-              <Link href={activeItem.href} className="group inline-block">
-                <h4 className="font-serif font-medium text-lg text-black tracking-tight">
-                  {activeItem.title}
-                </h4>
-                <p className="text-xs text-[#7b7566] tracking-[0.06em] mt-0.5 font-sans">
-                  {activeItem.sub}
-                </p>
-              </Link>
-              <p className="k text-center mt-2 tracking-[0.24em] text-[10px]">
-                0{activeIndex + 1} / 0{m} &middot; Swipe
-              </p>
-            </div>
+              Book a consult
+            </Link>
+            <a href="#svc" className="ln">
+              Explore our work
+            </a>
           </div>
         </div>
       </div>
+
+      {/* ── 6-Image Centered Focus Carousel with Spring Physics ── */}
+      <div
+        ref={crRef}
+        className="cr w-full relative h-[clamp(280px,50vw,420px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        aria-label="Studio Work Showcase"
+      >
+        {HERO_ITEMS.map((item, index) => (
+          <div
+            key={index}
+            className="cs absolute left-1/2 top-0 w-[min(74vw,440px)] h-full -ml-[min(37vw,220px)] shadow-[0_20px_35px_-15px_rgba(60,45,20,0.35),0_2px_4px_rgba(60,45,20,0.12)] bg-[#faf5ea] will-change-transform"
+          >
+            <div className="ph absolute inset-0 overflow-hidden bg-[#faf5ea]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.img}
+                alt={item.title}
+                draggable={false}
+                className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+                loading={index < 2 ? "eager" : "lazy"}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Dynamic Slide Caption Under Carousel */}
+      <div className="text-center mt-5 min-h-[50px] px-4 transition-opacity duration-300">
+        <Link href={activeItem.href} className="group inline-block">
+          <h3 className="font-serif font-medium text-xl sm:text-2xl text-black tracking-tight group-hover:opacity-70 transition-opacity">
+            {activeItem.title}
+          </h3>
+          <p className="text-xs text-[#7b7566] tracking-[0.1em] mt-1 font-sans">
+            {activeItem.sub}
+          </p>
+        </Link>
+      </div>
+
+      {/* Slide Counter — no "Swipe" text */}
+      <p className="k text-center mt-3.5 tracking-[0.28em]">
+        0{activeIndex + 1} / 0{m}
+      </p>
     </section>
   );
 }
