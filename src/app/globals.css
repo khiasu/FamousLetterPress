@@ -249,3 +249,76 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #000000;
 }
+
+/* ── Prototype Menu Drawer ── */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--cr) var(--grain);
+  overflow-y: auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 20px) 24px 60px;
+  clip-path: circle(0 at calc(100% - 44px) 36px);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: clip-path 0.75s cubic-bezier(0.7, 0, 0.2, 1), visibility 0s 0.75s, opacity 0.4s ease;
+}
+.menu.o {
+  clip-path: circle(160% at calc(100% - 44px) 36px);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: clip-path 0.75s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.4s ease;
+}
+.mt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.mg {
+  padding: 18px 0 20px;
+  border-top: 1px solid var(--hair);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(0.12s + var(--i) * 0.08s);
+}
+.menu.o .mg {
+  opacity: 1;
+  transform: none;
+}
+.mg h3 {
+  font: 400 32px / 1.05 var(--d);
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  color: #000;
+}
+.mg h3 span {
+  font: 400 10.5px var(--s);
+  letter-spacing: 0.22em;
+  color: var(--mute);
+  margin-right: 14px;
+  vertical-align: middle;
+}
+.mg div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-left: 32px;
+}
+.mg a {
+  font-size: 14px;
+  color: #4a463c;
+  transition: color 0.3s;
+}
+.mg a:hover {
+  color: #000;
+}
+.mf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
