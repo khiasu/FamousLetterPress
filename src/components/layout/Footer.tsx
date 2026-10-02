@@ -1,138 +1,117 @@
 import Link from "next/link";
 
-const footerNav = {
-  services: {
-    title: "Atelier Work",
-    links: [
-      { label: "Wedding Stationery", href: "/weddings/wedding-stationery" },
-      { label: "Business Cards", href: "/business-cards" },
-      { label: "Personalised Stationery", href: "/personalised-stationery" },
-      { label: "Wax Seals & Embellishments", href: "/work" },
-    ],
+const FOOTER_LINKS = [
+  { label: "Weddings", href: "/weddings" },
+  { label: "Business Cards", href: "/business-cards" },
+  { label: "Materials", href: "/materials" },
+  { label: "Process", href: "/process" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
+  { label: "Start a Project", href: "/start-a-project" },
+];
+
+const SOCIAL_LINKS = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/famousletterpressindia/",
   },
-  craft: {
-    title: "The Craft",
-    links: [
-      { label: "Letterpress Method", href: "/process" },
-      { label: "Pure Cotton Papers", href: "/materials" },
-      { label: "Workshop Journal", href: "/journal" },
-      { label: "About Atelier", href: "/about" },
-    ],
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/channel/UCpRrZSVggl79UKEQ3650WMQ",
   },
-  samples: {
-    title: "Sample Kits",
-    links: [
-      { label: "Wedding Sample Box", href: "/weddings/wedding-sample-kit" },
-      { label: "Business Card Kit", href: "/business-cards/business-card-sample-kit" },
-      { label: "Channel Partners", href: "/channel-partners" },
-      { label: "Start a Project", href: "/start-a-project" },
-    ],
+  {
+    label: "Pinterest",
+    href: "https://www.pinterest.com/famousletterpress/",
   },
-};
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/+918416099340",
+  },
+];
 
 export function Footer() {
   return (
     <footer
-      style={{
-        background: "var(--cr) var(--grain)",
-        paddingTop: "64px",
-        overflow: "hidden",
-        borderTop: "1px solid var(--hair)",
-      }}
+      className="bg-white border-t border-[rgba(14,14,14,0.12)]"
       role="contentinfo"
     >
-      <div className="w">
-        {/* Top Atelier Info & Nav */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-16 border-b border-[rgba(14,14,14,0.14)]">
-          {/* Atelier Brand Column */}
-          <div className="md:col-span-1">
-            <Link href="/" className="lg mb-4 inline-flex">
-              <i className="mk">F</i>
-              <span>
-                <b>FAMOUS</b>
-                <em>Letterpress</em>
+      {/* Main Footer Content */}
+      <div className="w py-14 sm:py-16">
+        {/* Top: Brand + Description */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-8 mb-10 pb-10 border-b border-[rgba(14,14,14,0.1)]">
+          <div className="max-w-sm">
+            <Link href="/" className="inline-block mb-3">
+              <span
+                className="font-serif text-xl sm:text-2xl font-medium tracking-[-0.01em] text-[#0e0e0e]"
+                style={{
+                  fontFamily:
+                    "var(--font-cormorant-garamond), 'Cormorant Garamond', 'Bodoni Moda', serif",
+                }}
+              >
+                Famous Letterpress
               </span>
             </Link>
-            <p className="text-[13px] leading-relaxed text-[#3b372e] mt-4 max-w-xs font-light">
-              Letterpress &amp; Foil printing studio based in Nagaland, India. Pressed one impression at a time on 600–900gsm cotton rag.
+            <p className="text-[13px] text-[#3b372e] font-light leading-relaxed">
+              Letterpress &amp; foil printing studio in Nagaland, India.
+              Pressed one impression at a time on 600–900gsm cotton rag.
             </p>
           </div>
 
-          {/* Links Grid */}
-          <div className="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-8">
-            {Object.values(footerNav).map((col) => (
-              <div key={col.title}>
-                <p className="k mb-4">{col.title}</p>
-                <ul className="space-y-2.5">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-[13px] text-[#4a463c] hover:text-black transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {/* Social Links */}
+          <div className="flex items-center gap-5 sm:gap-6">
+            {SOCIAL_LINKS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10.5px] uppercase tracking-[0.2em] text-[#7b7566] hover:text-black transition-colors font-mono"
+              >
+                {social.label}
+              </a>
             ))}
           </div>
         </div>
 
-        {/* Secondary Row: Quick Nav & Socials */}
-        <div className="pt-8 pb-4 flex flex-wrap items-center justify-between gap-6">
-          <nav className="flex flex-wrap gap-6 text-[10.5px] uppercase tracking-[0.24em] text-[#0e0e0e]">
-            <Link href="/faq" className="hover:opacity-60 transition-opacity">FAQ</Link>
-            <a href="https://famousletterpress.com/terms-conditions/" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">T&amp;C</a>
-            <Link href="/start-a-project" className="hover:opacity-60 transition-opacity">Design Guidelines</Link>
-          </nav>
+        {/* Navigation Links — single horizontal row */}
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 mb-10">
+          {FOOTER_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-[13px] text-[#4a463c] hover:text-black transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
-          <p className="text-[12px] tracking-[0.1em] text-[var(--mute)]">
-            <a href="https://www.instagram.com/famousletterpressindia/" target="_blank" rel="noopener noreferrer" className="hover:text-black">Instagram</a>
-            {" "}&middot;{" "}
-            <a href="https://www.facebook.com/FamousLetterpress/" target="_blank" rel="noopener noreferrer" className="hover:text-black">Facebook</a>
-            {" "}&middot;{" "}
-            <a href="https://www.youtube.com/channel/UCpRrZSVggl79UKEQ3650WMQ" target="_blank" rel="noopener noreferrer" className="hover:text-black">YouTube</a>
-            {" "}&middot;{" "}
-            <a href="https://wa.me/+918416099340" target="_blank" rel="noopener noreferrer" className="hover:text-black">WhatsApp</a>
+        {/* Bottom: Copyright + Legal */}
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[rgba(14,14,14,0.08)]">
+          <p className="text-[10.5px] tracking-[0.12em] text-[#7b7566] font-mono">
+            &copy; 2026 Famous Letterpress Atelier. All rights reserved.
           </p>
+          <div className="flex gap-5 text-[10.5px] tracking-[0.12em] text-[#7b7566] font-mono">
+            <a
+              href="https://famousletterpress.com/terms-conditions/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-black transition-colors"
+            >
+              Terms
+            </a>
+            <a
+              href="https://famousletterpress.com/privacy-policy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-black transition-colors"
+            >
+              Privacy
+            </a>
+          </div>
         </div>
       </div>
-
-      {/* Monumental Watermark */}
-      <div
-        className="d select-none pointer-events-none"
-        style={{
-          fontSize: "27vw",
-          lineHeight: 0.74,
-          whiteSpace: "nowrap",
-          margin: "0 0 0 -1.5vw",
-          color: "rgba(14,14,14,0.92)",
-          paddingTop: "0.1em",
-          height: "0.62em",
-          overflow: "hidden",
-        }}
-        aria-hidden="true"
-      >
-        Famous
-      </div>
-
-      {/* Bottom Bar */}
-      <small
-        style={{
-          display: "block",
-          padding: "14px 22px",
-          fontSize: "10px",
-          letterSpacing: "0.14em",
-          color: "var(--mute)",
-          background: "#fff",
-          borderTop: "1px solid var(--hair)",
-        }}
-      >
-        &copy; 2026 Famous Letterpress Atelier. All rights reserved. Handcrafted in Nagaland, India.
-      </small>
     </footer>
   );
 }
-
