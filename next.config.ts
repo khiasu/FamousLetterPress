@@ -289,7 +289,17 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/what-is-letterperess",
-        destination: "/journal/what-is-letterpress-printing",
+        destination: "/process",
+        permanent: true,
+      },
+      {
+        source: "/journal",
+        destination: "/process",
+        permanent: true,
+      },
+      {
+        source: "/journal/:path*",
+        destination: "/process",
         permanent: true,
       },
     ];

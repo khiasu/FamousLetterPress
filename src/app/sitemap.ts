@@ -1,5 +1,4 @@
 import { MetadataRoute } from "next";
-import { journalArticles } from "@/lib/data/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://famousletterpress.com";
@@ -21,7 +20,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/faq",
     "/contact",
     "/start-a-project",
-    "/journal",
   ];
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
@@ -31,12 +29,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1.0 : route.startsWith("/weddings") || route.startsWith("/business-cards") ? 0.9 : 0.8,
   }));
 
-  const articleEntries: MetadataRoute.Sitemap = journalArticles.map((article) => ({
-    url: `${baseUrl}/journal/${article.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
-
-  return [...staticEntries, ...articleEntries];
+  return staticEntries;
 }

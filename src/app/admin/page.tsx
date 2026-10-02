@@ -5,7 +5,6 @@ export default function AdminDashboardPage() {
   const store = readCMSStore();
   const serviceCount = Object.keys(store.services).length;
   const portfolioCount = store.portfolio.length;
-  const articleCount = store.articles.length;
   const faqCount = store.faqs.length;
 
   const recentLeads = store.leads.slice(0, 4);
@@ -30,7 +29,7 @@ export default function AdminDashboardPage() {
           { label: "Leads", value: store.leads.length, sub: newLeadsCount > 0 ? `${newLeadsCount} new` : "All reviewed", href: "/admin/leads" },
           { label: "Orders", value: store.orders.length, sub: pendingOrders > 0 ? `${pendingOrders} pending` : "All fulfilled", href: "/admin/orders" },
           { label: "Services", value: serviceCount, sub: "Published", href: "/admin/services" },
-          { label: "Portfolio", value: portfolioCount, sub: `${articleCount} articles`, href: "/admin/portfolio" },
+          { label: "Portfolio", value: portfolioCount, sub: "Selected work", href: "/admin/portfolio" },
         ].map((m) => (
           <Link
             key={m.label}
@@ -125,7 +124,6 @@ export default function AdminDashboardPage() {
         {[
           { label: "Sample Kits", desc: "Pricing, inclusions, images", href: "/admin/sample-kits" },
           { label: "Portfolio", desc: "Manage selected work", href: "/admin/portfolio" },
-          { label: "Journal", desc: `${articleCount} articles`, href: "/admin/journal" },
           { label: "FAQs", desc: `${faqCount} questions`, href: "/admin/faqs" },
           { label: "Services", desc: "Edit service details", href: "/admin/services" },
           { label: "Settings", desc: "Studio info, logo, banner", href: "/admin/settings" },

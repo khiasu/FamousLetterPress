@@ -13,7 +13,6 @@ const adminNav = [
   { label: "Services", href: "/admin/services" },
   { label: "Sample Kits", href: "/admin/sample-kits" },
   { label: "Portfolio", href: "/admin/portfolio" },
-  { label: "Journal", href: "/admin/journal" },
   { label: "FAQs", href: "/admin/faqs" },
   { label: "Settings", href: "/admin/settings" },
 ];

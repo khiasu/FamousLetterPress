@@ -3,7 +3,6 @@ import path from "path";
 import { servicesData } from "@/lib/data/services";
 import { sampleKitsData } from "@/lib/data/sample-kits";
 import { portfolioData } from "@/lib/data/portfolio";
-import { journalArticles, JournalArticle } from "@/lib/data/articles";
 import { initialFaqs, FAQSectionItem } from "@/lib/data/faqs";
 import { initialSiteSettings, StudioSiteSettings } from "@/lib/data/settings";
 import { ServiceItem, SampleKitItem, PortfolioPiece } from "@/types";
@@ -12,7 +11,6 @@ export interface CMSStoreData {
   services: Record<string, ServiceItem>;
   sampleKits: Record<string, SampleKitItem>;
   portfolio: PortfolioPiece[];
-  articles: JournalArticle[];
   faqs: FAQSectionItem[];
   settings: StudioSiteSettings;
   leads: any[];
@@ -107,7 +105,6 @@ function getDefaultStore(): CMSStoreData {
     services: servicesData,
     sampleKits: sampleKitsData,
     portfolio: portfolioData,
-    articles: journalArticles,
     faqs: initialFaqs,
     settings: initialSiteSettings,
     leads: initialLeads,
@@ -155,10 +152,6 @@ export function getCMSServices(): Record<string, ServiceItem> {
 
 export function getCMSSampleKits(): Record<string, SampleKitItem> {
   return readCMSStore().sampleKits;
-}
-
-export function getCMSArticles(): JournalArticle[] {
-  return readCMSStore().articles;
 }
 
 export function getCMSFAQs(): FAQSectionItem[] {

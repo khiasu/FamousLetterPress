@@ -362,13 +362,6 @@ export function Header({
 
               <div className="flex items-center gap-4 sm:gap-5 font-mono text-[10.5px] uppercase tracking-widest">
                 <Link
-                  href="/journal"
-                  onClick={closeMenu}
-                  className="hover:text-black transition-colors"
-                >
-                  Journal
-                </Link>
-                <Link
                   href="/faq"
                   onClick={closeMenu}
                   className="hover:text-black transition-colors"
