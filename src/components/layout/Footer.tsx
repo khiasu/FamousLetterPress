@@ -57,12 +57,12 @@ export function Footer() {
       }`}
       role="contentinfo"
     >
-      <div className="w py-8 sm:py-10">
+      <div className="max-w-[1100px] mx-auto px-6 sm:px-10 md:px-14 pt-10 sm:pt-14 pb-12 sm:pb-16">
         {/* Top: Brand Header with Logo + Social Handles */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pb-6 border-b border-[rgba(14,14,14,0.09)]">
-          {/* Brand Identity with Circular Seal Logo and gentle left breathing room */}
-          <div className="pl-1.5 sm:pl-2.5">
-            <Link href="/" className="inline-flex items-center gap-3.5 group select-none">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-[rgba(14,14,14,0.09)]">
+          {/* Brand Identity with Circular Seal Logo and clean spacing */}
+          <div className="pl-1 sm:pl-2">
+            <Link href="/" className="inline-flex items-center gap-3.5 sm:gap-4 group select-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/logo.png"
@@ -87,7 +87,7 @@ export function Footer() {
           </div>
 
           {/* Social Icons — Clean Monochrome Geometry */}
-          <div className="flex items-center gap-2.5 pr-1">
+          <div className="flex items-center gap-2.5 pl-1 sm:pl-0 sm:pr-2">
             {SOCIAL_PROFILES.map((social) => {
               const Icon = social.icon;
               return (
@@ -108,8 +108,8 @@ export function Footer() {
         </div>
 
         {/* Middle: Streamlined Quick Links Grid (Core Critical Pages) */}
-        <div className="pt-6 pl-1.5 sm:pl-2.5">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="pt-8 pl-1 sm:pl-2">
+          <div className="flex items-center gap-2 mb-5">
             <span className="text-[9.5px] font-mono tracking-widest text-[#888]">
               01
             </span>
@@ -118,7 +118,7 @@ export function Footer() {
             </h4>
           </div>
 
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-3 gap-x-6">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-4 gap-x-6 pb-2">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
                 {"external" in link && link.external ? (
@@ -126,14 +126,14 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13px] text-[#444] hover:text-black transition-colors block leading-snug"
+                    className="text-[13.5px] text-[#444] hover:text-black transition-colors block leading-snug"
                   >
                     {link.label}
                   </a>
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-[13px] text-[#444] hover:text-black transition-colors block leading-snug"
+                    className="text-[13.5px] text-[#444] hover:text-black transition-colors block leading-snug"
                   >
                     {link.label}
                   </Link>
