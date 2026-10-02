@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import Link from "next/link";
+import { useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 interface WorkItem {
   title: string;
@@ -77,12 +77,18 @@ class Spring {
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
 export function WhatWeMakeSection() {
+  const router = useRouter();
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLParagraphElement>(null);
-  const [modalItem, setModalItem] = useState<WorkItem | null>(null);
+  const isDraggingRef = useRef(false);
 
   const n = WORK_ITEMS.length;
+
+  const handleCardClick = (href: string) => {
+    if (isDraggingRef.current) return;
+    router.push(href);
+  };
 
   useEffect(() => {
     const sec = sectionRef.current;
@@ -201,6 +207,7 @@ export function WhatWeMakeSection() {
       startX = e.clientX;
       startTarget = targetProg;
       moved = 0;
+      isDraggingRef.current = false;
       requestTick();
     };
 
@@ -208,6 +215,9 @@ export function WhatWeMakeSection() {
       if (!isPointerDown) return;
       const dx = e.clientX - startX;
       moved = Math.max(moved, Math.abs(dx));
+      if (moved > 8) {
+        isDraggingRef.current = true;
+      }
       const cardWidth = cards[0]?.offsetWidth || 300;
       // Sensitive, responsive swipe sensitivity
       targetProg = clamp(startTarget - dx / (cardWidth * 0.75), 0, n - 1);
@@ -218,7 +228,11 @@ export function WhatWeMakeSection() {
       if (!isPointerDown) return;
       isPointerDown = false;
 
-      if (moved > 10) {
+      if (moved > 8) {
+        setTimeout(() => {
+          isDraggingRef.current = false;
+        }, 150);
+
         // Snap to nearest integer card
         targetProg = Math.round(targetProg);
 
@@ -238,6 +252,8 @@ export function WhatWeMakeSection() {
             isScrollLocked = false;
           }, 200);
         }
+      } else {
+        isDraggingRef.current = false;
       }
       requestTick();
     };
@@ -303,100 +319,48 @@ export function WhatWeMakeSection() {
             }}
           >
             {WORK_ITEMS.map((item, index) => (
-              <button
+              <div
                 key={index}
-                onClick={() => setModalItem(item)}
-                className="sc absolute left-1/2 top-[44%] w-[min(72vw,360px)] h-[calc(min(72vw,360px)*1.38)] -mt-[calc(min(72vw,360px)*0.69)] -ml-[calc(min(72vw,360px)/2)] border border-[rgba(14,14,14,0.14)] cursor-pointer text-left p-4 flex flex-col bg-white shadow-[0_24px_36px_-20px_rgba(0,0,0,0.2),0_2px_4px_rgba(0,0,0,0.06)] text-black will-change-transform group"
+                onClick={() => handleCardClick(item.href)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    router.push(item.href);
+                  }
+                }}
+                className="sc absolute left-1/2 top-[44%] w-[min(72vw,360px)] h-[calc(min(72vw,360px)*1.38)] -mt-[calc(min(72vw,360px)*0.69)] -ml-[calc(min(72vw,360px)/2)] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left p-4 sm:p-5 flex flex-col bg-[#FAF8F5] shadow-[0_20px_35px_-20px_rgba(0,0,0,0.16),0_2px_4px_rgba(0,0,0,0.04)] text-black will-change-transform group transition-colors duration-200 hover:border-black/30 select-none"
                 style={{
                   transformStyle: "preserve-3d",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
                 }}
-                aria-label={item.title}
+                aria-label={`View ${item.title}`}
               >
-                <div className="art relative flex-1 mb-3 overflow-hidden bg-[#F7F7F7] rounded-xs">
+                <div className="art relative flex-1 mb-3.5 overflow-hidden bg-[#F0ECE1] rounded-xs">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
                     alt={item.title}
                     draggable={false}
-                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-103"
                     loading={index < 3 ? "eager" : "lazy"}
                   />
                 </div>
                 <h3 className="font-serif font-medium text-[clamp(24px,6vw,30px)] leading-[1.05] tracking-[-0.02em]">
                   {item.title}
                 </h3>
-                <p className="text-[12.5px] leading-[1.5] text-[#333] my-1.5 line-clamp-2">
+                <p className="text-[12.5px] leading-[1.5] text-[#444] my-1.5 line-clamp-2">
                   {item.desc}
                 </p>
-                <span className="ln self-start mt-1">Explore craft</span>
-              </button>
+                <span className="ln self-start mt-1 text-[11px] font-mono uppercase tracking-[0.16em]">
+                  Explore {item.title} &rarr;
+                </span>
+              </div>
             ))}
           </div>
         </div>
       </section>
-
-
-      {/* Fullscreen Expand Card Modal */}
-      {modalItem && (
-        <div
-          className="fixed inset-0 z-[70] bg-white overflow-y-auto p-6 md:p-12 animate-[fadeIn_0.4s_ease-out]"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="max-w-[880px] mx-auto min-h-full flex flex-col justify-between">
-            <div>
-              <div className="flex justify-between items-center mb-8 border-b border-[#E5E5E5] pb-4">
-                <div className="flex items-center gap-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/assets/logo.png" alt="Logo" className="w-8 h-8 rounded-full border border-black/20 p-0.5" />
-                  <span className="font-serif font-medium text-lg tracking-widest uppercase">
-                    Famous Letterpress
-                  </span>
-                </div>
-                <button
-                  onClick={() => setModalItem(null)}
-                  className="ln text-xs uppercase tracking-widest cursor-pointer"
-                >
-                  Close &times;
-                </button>
-              </div>
-
-              <p className="k mb-2">Our Craft &middot; Bespoke Detail</p>
-              <h1 className="d text-[clamp(44px,12vw,96px)] leading-[0.95] tracking-tight mb-4 font-serif">
-                {modalItem.title}
-              </h1>
-              <p className="text-base sm:text-lg text-[#3b372e] font-light max-w-xl leading-relaxed mb-6">
-                {modalItem.desc}
-              </p>
-
-              <div className="relative aspect-[16/10] max-w-xl overflow-hidden shadow-[0_20px_35px_-15px_rgba(60,45,20,0.4)] my-8">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={modalItem.img}
-                  alt={modalItem.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-5 pt-6 border-t border-[#E5E5E5]">
-              <Link href={modalItem.href} className="btn">
-                Commission {modalItem.title}
-              </Link>
-              <Link
-                href="https://wa.me/+918416099340"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ln"
-              >
-                Inquire on WhatsApp
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
