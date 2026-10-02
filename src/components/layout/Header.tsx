@@ -132,7 +132,7 @@ export function Header({
               Famous Letterpress
             </span>
             <span className="text-[8.5px] uppercase tracking-[0.26em] text-[var(--mute)] mt-1 font-sans">
-              Letterpress &middot; Foil &middot; India
+              Handcrafted in Nagaland
             </span>
           </div>
         </Link>
@@ -235,7 +235,7 @@ export function Header({
                   Famous Letterpress
                 </span>
                 <span className="text-[8.5px] uppercase tracking-[0.26em] text-[var(--mute)] mt-1 font-sans">
-                  Atelier &middot; Nagaland
+                  Handcrafted in Nagaland
                 </span>
               </div>
             </Link>

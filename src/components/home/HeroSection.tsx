@@ -233,7 +233,7 @@ export function HeroSection() {
     <section className="hero pt-28 md:pt-36 pb-16 overflow-hidden relative" aria-label="Famous Letterpress Hero">
       <div className="w">
         <p className="k mb-6 tracking-[0.32em] text-[#7b7566]">
-          Letterpress &amp; Foil &middot; Handcrafted in Nagaland
+          Luxury Letterpress &amp; Foil Wedding Invitations in India
         </p>
 
         {/* Clean single-line headline */}
@@ -243,8 +243,8 @@ export function HeroSection() {
 
         {/* Brand sub-sentence */}
         <div className="grid gap-5 mt-8 max-w-[520px]">
-          <p className="text-[#3b372e] text-[14.5px] sm:text-[15.5px] leading-[1.7] font-light">
-            We press ink into cotton, one impression at a time — creating heirloom stationery that you can feel with your fingertips. Handcrafted on vintage platens in Nagaland.
+          <p className="text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed">
+            Keep scrolling and discover how we make your prints stand out.
           </p>
           <div className="flex gap-5 items-center flex-wrap mt-1">
             <Link
