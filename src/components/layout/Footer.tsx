@@ -13,13 +13,11 @@ const QUICK_LINKS = [
   { label: "Contact & Consult", href: "/contact" },
   {
     label: "Terms & Conditions",
-    href: "https://famousletterpress.com/terms-conditions/",
-    external: true,
+    href: "/terms-conditions",
   },
   {
     label: "Privacy Policy",
-    href: "https://famousletterpress.com/privacy-policy/",
-    external: true,
+    href: "/privacy-policy",
   },
 ];
 
