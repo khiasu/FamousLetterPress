@@ -276,13 +276,16 @@ export function WhatWeMakeSection() {
           <div className="w svh flex justify-between items-end w-full mb-3">
             <div>
               <p className="k">What we make</p>
-              <h2 className="d text-[clamp(38px,10vw,70px)] mt-1.5 font-serif">
+              <h2 className="d text-[clamp(36px,9vw,64px)] mt-1.5 font-serif text-black leading-[0.95]">
                 Our <i>work</i>
               </h2>
+              <p className="text-xs sm:text-sm text-[#444] font-light max-w-[46ch] leading-relaxed mt-2.5">
+                Our expertise lies in working with our clients to deliver transcending experiences and timeless products, find out more about how we can help you
+              </p>
             </div>
             <p
               ref={counterRef}
-              className="k text-[10px] tracking-[0.28em] text-[#7b7566] select-none"
+              className="k text-[10px] tracking-[0.28em] text-[#7b7566] select-none self-start sm:self-end shrink-0"
             >
               01 / 0{n}
             </p>
