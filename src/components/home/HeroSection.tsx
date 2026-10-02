@@ -4,367 +4,368 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
 interface HeroSlide {
+  id: string;
   image: string;
   alt: string;
   category: string;
-  tag: string;
   title: string;
   specs: string;
-  description: string;
   href: string;
   ctaText: string;
 }
 
-const heroSlides: HeroSlide[] = [
+const baseSlides: HeroSlide[] = [
   {
+    id: "heirloom-suite",
     image: "/assets/home/carousel/FMS_7392.jpg",
     alt: "Bespoke cotton letterpress wedding suite with gold foil detailing",
     category: "Wedding Stationery",
-    tag: "01 / WEDDINGS",
     title: "The Florentine Heirloom Suite",
     specs: "600gsm Wild Cotton Rag · Matte Gold Foil · Deep Platen Impression",
-    description: "Deep relief mechanical impression that catches natural light, pressed into 100% tree-free cotton with hand-mixed mineral inks.",
     href: "/weddings",
     ctaText: "Explore Wedding Suites",
   },
   {
+    id: "edge-gilded-cards",
     image: "/assets/business-cards/FMS_3462.jpg",
     alt: "Luxury letterpress business cards with edge gilding and blind deboss",
     category: "Corporate Identity",
-    tag: "02 / BUSINESS CARDS",
     title: "Edge-Gilded Executive Cards",
     specs: "600gsm Pure Cotton · Mirror Gold Edge Gilding · Blind Relief",
-    description: "Substantial, unbendable cards with hand-applied foil edges and sculptural deboss for founders and design directors.",
     href: "/business-cards",
     ctaText: "View Business Cards",
   },
   {
+    id: "sample-kit",
     image: "/assets/wed-kit/FMS_3749.jpg",
     alt: "Letterpress wedding sample kit with cotton swatches and foil samples",
     category: "Sample Kit",
-    tag: "03 / SAMPLE KITS",
     title: "The Curated Wedding Sample Box",
     specs: "300–900gsm Swatches · Real Foil Library · Wax Seals · Bite Depths",
-    description: "Hold the cotton weights, inspect bite depth, and see metallic foils in person. ₹1,500 fee is credited back on your final order.",
     href: "/weddings/wedding-sample-kit",
     ctaText: "Order Sample Box (₹1,500)",
   },
   {
+    id: "botanical-crest",
     image: "/assets/wedding-stationery/invites/FMS_2762.jpg",
     alt: "Artisanal deckled edge wedding invite with botanical calligraphy",
     category: "Wedding Stationery",
-    tag: "04 / WEDDINGS",
     title: "Botanical Crest & Deckled Edges",
     specs: "Handmade Deckled Cotton · Custom Wax Seal · Vellum Wrapper",
-    description: "Old-world romance meets precision typography. Hand-torn deckled edges paired with artisanal botanical letterpress.",
     href: "/weddings",
     ctaText: "Explore Wedding Suites",
   },
   {
+    id: "atelier-presswork",
     image: "/assets/home/carousel/FMS_7358.jpg",
     alt: "Artisan mixing mineral inks and calibrating vintage platen press",
     category: "Atelier Presswork",
-    tag: "05 / THE ATELIER",
     title: "Hand-Calibrated Vintage Presswork",
     specs: "Refurbished Heidelberg Platen Presses · Hand-Fed · Nagaland",
-    description: "Every sheet is hand-fed one-by-one by our master printers in Dimapur, ensuring microscopic precision across ink film and depth.",
     href: "/about",
     ctaText: "Our Story & Workshop",
   },
   {
+    id: "monochrome-identity",
     image: "/assets/business-cards/FMS_3764.jpg",
     alt: "Heavyweight monochrome business card suite",
     category: "Corporate Identity",
-    tag: "06 / BUSINESS CARDS",
     title: "Architectural Minimalist Identity",
     specs: "900gsm Ultra-Heavy Cotton · Deep Relief Deboss · Crisp Black",
-    description: "Crafted for architectural practices and luxury brands requiring uncompromising tactile authority and presence.",
     href: "/business-cards",
     ctaText: "View Business Cards",
   },
 ];
 
-const categoryTabs = [
-  { label: "All Work", index: 0 },
-  { label: "Weddings", index: 0 },
-  { label: "Business Cards", index: 1 },
-  { label: "Sample Kits", index: 2 },
-  { label: "Atelier", index: 4 },
-];
+// 3 repeated sets to allow a continuous, seamless ribbon with edge bleeds
+const repeatedSlides = [...baseSlides, ...baseSlides, ...baseSlides];
+const TOTAL_BASE = baseSlides.length; // 6
+const INITIAL_INDEX = TOTAL_BASE; // 6 (first item of middle set)
 
 export function HeroSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const [currentIndex, setCurrentIndex] = useState(INITIAL_INDEX);
+  const [trackOffset, setTrackOffset] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const dragState = useRef({ startX: 0, scrollLeft: 0, isDown: false });
+  const dragStartRef = useRef({ x: 0, time: 0 });
 
-  const activeSlide = heroSlides[activeIndex];
+  // Compute exact pixel translation to center slide `index` in viewport
+  const computeOffsetForIndex = useCallback((index: number) => {
+    const container = containerRef.current;
+    const slide = slideRefs.current[index];
+    if (!container || !slide) return 0;
 
-  const scrollToSlide = useCallback((index: number) => {
-    const el = scrollRef.current;
-    if (!el || !el.children[0]) return;
-    const card = el.children[0] as HTMLElement;
-    const cardWidth = card.clientWidth + 20; // width + gap
-    el.scrollTo({ left: cardWidth * index, behavior: "smooth" });
-    setActiveIndex(index);
+    const containerWidth = container.offsetWidth;
+    const containerCenter = containerWidth / 2;
+    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+
+    return containerCenter - slideCenter;
   }, []);
+
+  // Update track position whenever currentIndex or window size changes
+  const updatePosition = useCallback((index: number, animate = true) => {
+    setIsAnimating(animate);
+    const offset = computeOffsetForIndex(index);
+    setTrackOffset(offset);
+  }, [computeOffsetForIndex]);
+
+  useEffect(() => {
+    // Initial centering once mounted
+    const timer = setTimeout(() => {
+      updatePosition(currentIndex, false);
+    }, 50);
+
+    const handleResize = () => {
+      updatePosition(currentIndex, false);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [currentIndex, updatePosition]);
+
+  // Navigate to slide
+  const goToIndex = useCallback((newIndex: number) => {
+    setCurrentIndex(newIndex);
+    updatePosition(newIndex, true);
+  }, [updatePosition]);
 
   const handleNext = useCallback(() => {
-    const nextIdx = (activeIndex + 1) % heroSlides.length;
-    scrollToSlide(nextIdx);
-  }, [activeIndex, scrollToSlide]);
+    const nextIdx = currentIndex + 1;
+    goToIndex(nextIdx);
+  }, [currentIndex, goToIndex]);
 
   const handlePrev = useCallback(() => {
-    const prevIdx = activeIndex === 0 ? heroSlides.length - 1 : activeIndex - 1;
-    scrollToSlide(prevIdx);
-  }, [activeIndex, scrollToSlide]);
+    const prevIdx = currentIndex - 1;
+    goToIndex(prevIdx);
+  }, [currentIndex, goToIndex]);
 
-  // Sync active slide index on user scroll/swipe
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
+  // Loop back seamlessly to the middle set when reaching outer boundaries
+  const handleTransitionEnd = useCallback(() => {
+    if (currentIndex >= TOTAL_BASE * 2) {
+      const normalized = currentIndex - TOTAL_BASE;
+      setCurrentIndex(normalized);
+      updatePosition(normalized, false);
+    } else if (currentIndex < TOTAL_BASE) {
+      const normalized = currentIndex + TOTAL_BASE;
+      setCurrentIndex(normalized);
+      updatePosition(normalized, false);
+    }
+  }, [currentIndex, updatePosition]);
 
-    let timeoutId: NodeJS.Timeout;
-    const handleScroll = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        const scrollLeft = el.scrollLeft;
-        const card = el.children[0] as HTMLElement;
-        if (!card) return;
-        const cardWidth = card.clientWidth + 20;
-        const index = Math.round(scrollLeft / cardWidth);
-        const clampedIndex = Math.max(0, Math.min(index, heroSlides.length - 1));
-        setActiveIndex(clampedIndex);
-      }, 50);
-    };
-
-    el.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      el.removeEventListener("scroll", handleScroll);
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
-  // Smooth auto-cycle story progress
+  // Auto-play timer (paused on hover or drag)
   useEffect(() => {
     if (isPaused || isDragging) return;
-    const timer = setInterval(() => {
+    const interval = setInterval(() => {
       handleNext();
-    }, 6000);
-    return () => clearInterval(timer);
+    }, 6500);
+    return () => clearInterval(interval);
   }, [isPaused, isDragging, handleNext]);
 
-  // Mouse drag physics
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    dragState.current = {
-      startX: e.pageX - el.offsetLeft,
-      scrollLeft: el.scrollLeft,
-      isDown: true,
+  // Keyboard navigation (Left / Right Arrow)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
     };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handlePrev, handleNext]);
+
+  // Mouse & Touch Dragging Mechanics
+  const handlePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
+    setIsPaused(true);
+    dragStartRef.current = { x: e.clientX, time: Date.now() };
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!dragState.current.isDown) return;
-    const el = scrollRef.current;
-    if (!el) return;
-    e.preventDefault();
-    const x = e.pageX - el.offsetLeft;
-    const walk = (x - dragState.current.startX) * 1.4;
-    el.scrollLeft = dragState.current.scrollLeft - walk;
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging) return;
+    const diff = e.clientX - dragStartRef.current.x;
+    setDragOffset(diff);
   };
 
-  const handleMouseUp = () => {
-    dragState.current.isDown = false;
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (!isDragging) return;
     setIsDragging(false);
+    setIsPaused(false);
+    const diff = e.clientX - dragStartRef.current.x;
+    const time = Date.now() - dragStartRef.current.time;
+    setDragOffset(0);
+
+    // If dragged sufficiently or flicked quickly
+    if (diff < -50 || (diff < -20 && time < 250)) {
+      handleNext();
+    } else if (diff > 50 || (diff > 20 && time < 250)) {
+      handlePrev();
+    } else {
+      updatePosition(currentIndex, true);
+    }
   };
+
+  // Active base index (0 to 5) for counter
+  const activeBaseIndex = currentIndex % TOTAL_BASE;
 
   return (
     <section
-      className="bg-white pt-24 md:pt-32 pb-16 md:pb-24 border-b border-[#E5E5E5] relative"
-      aria-label="Editorial Letterpress Lookbook"
+      className="bg-white pt-20 md:pt-28 pb-12 md:pb-16 border-b border-[#E5E5E5] overflow-hidden select-none"
+      aria-label="Atelier Project Reel"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* ── Top Masthead Bar ── */}
-      <div className="container-wide mb-6 md:mb-10">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E5E5E5] pb-3 mb-6">
-          <p className="font-mono text-[10px] md:text-[11px] tracking-[0.22em] uppercase text-[#666666]">
-            EST. 2018 · NAGALAND, INDIA · BESPOKE LETTERPRESS ATELIER
-          </p>
-          <div className="hidden sm:flex items-center gap-4 text-[10px] font-mono tracking-widest text-[#888888] uppercase">
-            <span>HEIDELBERG PLATEN PRESSES</span>
-            <span>·</span>
-            <span>600–900GSM COTTON</span>
-          </div>
-        </div>
-
-        {/* ── Editorial Headline & Navigation ── */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <div className="max-w-2xl">
-            <h1 className="text-black font-serif font-light text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.08] mb-3">
-              Pressed by Hand, <em className="italic font-light">Kept Forever.</em>
-            </h1>
-            <p className="text-sm sm:text-base text-[#555555] font-light leading-relaxed">
-              India&apos;s artisanal atelier for heirloom wedding suites and executive paper goods, deeply pressed on 600–900gsm pure cotton rag.
+      {/* ── Snøhetta-Style Hero Statement ── */}
+      <div className="container-wide mb-6 md:mb-8">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-4 border-b border-[#E5E5E5]">
+          <div className="max-w-3xl">
+            <p className="font-mono text-[10px] md:text-[11px] tracking-[0.25em] uppercase text-[#777777] mb-2">
+              EST. 2018 · NAGALAND, INDIA · BESPOKE LETTERPRESS ATELIER
             </p>
+            <h1 className="text-black font-serif font-light text-2xl sm:text-4xl lg:text-[2.85rem] tracking-tight leading-[1.12]">
+              Famous Letterpress is an artisanal atelier in Nagaland, crafting bespoke letterpress and foil stationery on 600–900gsm cotton.
+            </h1>
           </div>
 
-          {/* Category Tabs & Slider Controls */}
-          <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-3">
-            <div className="flex flex-wrap items-center gap-1.5">
-              {categoryTabs.map((tab, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => scrollToSlide(tab.index)}
-                  className={`px-3 py-1.5 text-[10px] font-mono tracking-[0.16em] uppercase border transition-colors cursor-pointer ${
-                    heroSlides[activeIndex].category.toLowerCase().includes(tab.label.toLowerCase().slice(0, 4)) ||
-                    (tab.label === "All Work")
-                      ? "border-black bg-black text-white"
-                      : "border-[#E5E5E5] text-[#555555] hover:border-black hover:text-black bg-white"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Slide Counter & Arrow Controls */}
-            <div className="flex items-center gap-4 pt-1">
-              <span className="font-mono text-xs tracking-widest text-black font-medium">
-                0{activeIndex + 1} <span className="text-[#888888]">/ 0{heroSlides.length}</span>
-              </span>
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={handlePrev}
-                  className="w-10 h-10 border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors cursor-pointer"
-                  aria-label="Previous slide"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                  </svg>
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="w-10 h-10 border border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors cursor-pointer"
-                  aria-label="Next slide"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </button>
-              </div>
+          {/* Minimalist Slide Counter & Navigation Controls */}
+          <div className="flex items-center gap-5 pt-1">
+            <span className="font-mono text-xs tracking-widest text-black font-medium">
+              0{activeBaseIndex + 1} <span className="text-[#888888]">/ 0{TOTAL_BASE}</span>
+            </span>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={handlePrev}
+                className="w-9 h-9 border border-[#E5E5E5] flex items-center justify-center text-black hover:border-black transition-colors cursor-pointer"
+                aria-label="Previous project"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+              </button>
+              <button
+                onClick={handleNext}
+                className="w-9 h-9 border border-[#E5E5E5] flex items-center justify-center text-black hover:border-black transition-colors cursor-pointer"
+                aria-label="Next project"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── Large-Scale Editorial Lookbook Carousel ── */}
-      <div className="relative">
+      {/* ── Snøhetta Continuous Ribbon Carousel ── */}
+      <div
+        ref={containerRef}
+        className="w-full relative overflow-visible cursor-grab active:cursor-grabbing"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+      >
         <div
-          ref={scrollRef}
-          className={`carousel-scroll pl-[clamp(1.25rem,5vw,3.5rem)] pr-8 select-none ${
-            isDragging ? "cursor-grabbing" : "cursor-grab"
-          }`}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          role="region"
-          aria-label="Studio work reel"
+          ref={trackRef}
+          className="flex items-start gap-3 sm:gap-5 lg:gap-6 will-change-transform"
+          style={{
+            transform: `translateX(${trackOffset + dragOffset}px)`,
+            transition: isAnimating && !isDragging ? "transform 750ms cubic-bezier(0.16, 1, 0.3, 1)" : "none",
+          }}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {heroSlides.map((slide, index) => (
-            <div
-              key={index}
-              className="w-[86vw] sm:w-[60vw] lg:w-[42vw] max-w-[620px] flex-shrink-0 group"
-            >
-              <div className="block bg-white border border-[#E5E5E5] transition-all duration-300 hover:border-black">
-                {/* Image Frame */}
-                <div className="relative aspect-[4/3] sm:aspect-[16/11] bg-[#F7F7F7] overflow-hidden border-b border-[#E5E5E5]">
+          {repeatedSlides.map((slide, index) => {
+            const isCenter = index === currentIndex;
+            return (
+              <div
+                key={`${slide.id}-${index}`}
+                ref={(el) => {
+                  slideRefs.current[index] = el;
+                }}
+                onClick={() => {
+                  if (!isCenter && !isDragging) {
+                    goToIndex(index);
+                  }
+                }}
+                className="w-[78vw] sm:w-[50vw] lg:w-[38vw] max-w-[540px] flex-shrink-0"
+              >
+                {/* Image Frame — Top Aligned, Side Cards Scaled Down */}
+                <div
+                  className={`relative aspect-[16/10] bg-[#F7F7F7] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isCenter
+                      ? "scale-100 opacity-100 cursor-default"
+                      : "scale-[0.80] origin-top opacity-60 hover:opacity-85 cursor-pointer"
+                  }`}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={slide.image}
                     alt={slide.alt}
                     draggable={false}
-                    loading={index < 2 ? "eager" : "lazy"}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                    loading={index >= TOTAL_BASE && index < TOTAL_BASE + 3 ? "eager" : "lazy"}
+                    className="w-full h-full object-cover select-none"
                   />
-
-                  {/* Top Status Tags */}
-                  <div className="absolute top-3 left-3 bg-white px-2.5 py-1 text-[10px] font-mono tracking-widest uppercase text-black border border-[#E5E5E5]">
-                    0{index + 1}
-                  </div>
-                  <div className="absolute top-3 right-3 bg-black text-white px-2.5 py-1 text-[9px] font-mono tracking-widest uppercase">
-                    {slide.category}
-                  </div>
                 </div>
 
-                {/* Editorial Specification Card */}
-                <div className="p-5 sm:p-6 md:p-7 space-y-3">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-[#888888] uppercase">
-                      {slide.tag}
-                    </span>
-                    <span className="h-px bg-[#E5E5E5] flex-1" />
-                  </div>
-
-                  <h2 className="font-serif text-xl sm:text-2xl text-black font-light leading-snug group-hover:opacity-75 transition-opacity">
-                    {slide.title}
-                  </h2>
-
-                  <p className="font-mono text-[10px] sm:text-[11px] tracking-wide text-black bg-[#F7F7F7] border border-[#EAEAEA] px-3 py-1.5">
-                    {slide.specs}
-                  </p>
-
-                  <p className="text-xs sm:text-sm text-[#555555] font-light leading-relaxed line-clamp-2">
-                    {slide.description}
-                  </p>
-
-                  <div className="pt-2">
-                    <Link
-                      href={slide.href}
-                      className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.18em] uppercase text-black font-medium hover:opacity-60 transition-opacity"
-                    >
-                      <span>{slide.ctaText}</span>
-                      <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-                    </Link>
-                  </div>
+                {/* Snøhetta Caption: Only Visible Directly Under Active Center Slide */}
+                <div
+                  className={`transition-all duration-500 ease-out ${
+                    isCenter
+                      ? "opacity-100 pt-3.5 pointer-events-auto"
+                      : "opacity-0 h-0 overflow-hidden pointer-events-none"
+                  }`}
+                >
+                  <Link href={slide.href} className="group block">
+                    <h2 className="font-serif text-lg sm:text-2xl text-black font-light leading-snug group-hover:opacity-70 transition-opacity">
+                      {slide.title}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-[#777777] font-light leading-relaxed mt-0.5">
+                      {slide.specs}
+                    </p>
+                    <div className="pt-1.5">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono tracking-[0.18em] uppercase text-black font-medium group-hover:translate-x-1 transition-transform">
+                        <span>{slide.ctaText}</span>
+                        <span>→</span>
+                      </span>
+                    </div>
+                  </Link>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+      </div>
 
-        {/* ── Story Progress Track & Swipe Indicator ── */}
-        <div className="container-wide mt-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#E5E5E5] pt-4">
-            {/* Story-style Progress Bars */}
-            <div className="w-full sm:w-auto flex-1 flex gap-2 max-w-md">
-              {heroSlides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => scrollToSlide(i)}
-                  className="flex-1 h-[3px] bg-[#E5E5E5] overflow-hidden relative cursor-pointer group"
-                  aria-label={`Jump to slide 0${i + 1}`}
-                >
-                  <span
-                    className={`block h-full bg-black transition-all duration-300 ${
-                      i === activeIndex ? "w-full" : "w-0 group-hover:w-full group-hover:bg-[#888888]"
-                    }`}
-                  />
-                </button>
-              ))}
-            </div>
-
-            {/* Swipe Instruction */}
-            <div className="text-[10px] tracking-[0.2em] uppercase text-[#666666] font-mono flex items-center gap-2">
-              <span>Drag or swipe to explore suites</span>
-              <span className="animate-pulse">→</span>
-            </div>
+      {/* ── Minimalist Story Indicator Track ── */}
+      <div className="container-wide mt-6">
+        <div className="flex items-center justify-between gap-6 pt-3.5 border-t border-[#E5E5E5]">
+          <div className="flex gap-2 flex-1 max-w-xs">
+            {baseSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToIndex(TOTAL_BASE + i)}
+                className="flex-1 h-[2px] bg-[#E5E5E5] overflow-hidden relative cursor-pointer"
+                aria-label={`Jump to project 0${i + 1}`}
+              >
+                <span
+                  className={`block h-full bg-black transition-all duration-300 ${
+                    i === activeBaseIndex ? "w-full" : "w-0"
+                  }`}
+                />
+              </button>
+            ))}
           </div>
+
+          <p className="text-[10px] font-mono tracking-[0.2em] text-[#888888] uppercase">
+            Drag ribbon to explore commissions
+          </p>
         </div>
       </div>
     </section>
