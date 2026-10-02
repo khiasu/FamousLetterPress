@@ -51,7 +51,12 @@ const INSTAGRAM_ITEMS: InstagramPost[] = [
 ];
 
 export function InstagramSection() {
-  const [activeItem, setActiveItem] = useState<InstagramPost | null>(null);
+  const [playingId, setPlayingId] = useState<string | null>(null);
+
+  const togglePlay = (id: string, isVideo: boolean) => {
+    if (!isVideo) return;
+    setPlayingId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <section
@@ -60,12 +65,12 @@ export function InstagramSection() {
       aria-label="From our Instagram"
     >
       <div className="w">
-        {/* Header */}
+        {/* Header with adjusted line-height to prevent letter clash between 'y' and 'i' */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div>
-            <p className="k mb-2">From our Instagram</p>
-            <h2 className="d text-[clamp(32px,7vw,64px)] leading-[0.95] font-serif text-black">
-              Daily presswork at the <i>studio.</i>
+            <p className="k mb-3">From our Instagram</p>
+            <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1.14] font-serif text-black tracking-tight">
+              Daily presswork at the <span className="inline-block mt-0.5"><i>studio.</i></span>
             </h2>
           </div>
 
@@ -73,175 +78,99 @@ export function InstagramSection() {
             href="https://www.instagram.com/famousletterpressindia/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.16em] text-black border-b border-black pb-0.5 hover:opacity-60 transition-opacity w-fit"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black border-b border-black pb-0.5 hover:opacity-60 transition-opacity w-fit"
           >
             <span>@famousletterpressindia</span>
-            <span aria-hidden="true">&nearr;</span>
+            <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
 
-        {/* 2x2 Grid on Mobile (< sm), 4 Columns on Desktop (lg) */}
+        {/* 4 Clean Boxes: 2x2 on Mobile, 4 Columns on Desktop */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-          {INSTAGRAM_ITEMS.map((item) => (
-            <article
-              key={item.id}
-              onClick={() => setActiveItem(item)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  setActiveItem(item);
-                }
-              }}
-              className="border border-[#E5E5E5] bg-white flex flex-col justify-between group transition-all duration-300 hover:border-black/50 cursor-pointer overflow-hidden text-left"
-              aria-label={`View ${item.title}`}
-            >
-              {/* Media Thumbnail Container */}
-              <div className="relative aspect-[4/5] bg-[#F7F7F7] overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
+          {INSTAGRAM_ITEMS.map((item) => {
+            const isPlaying = playingId === item.id;
+            const isVideo = item.type === "video";
 
-                {/* Subtle dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+            return (
+              <div
+                key={item.id}
+                className="relative aspect-[4/5] bg-[#F7F7F7] border border-[#E5E5E5] rounded-xs overflow-hidden group select-none transition-all duration-300 hover:border-black/50"
+              >
+                {/* Media Layer: Image or In-Box HTML5 Video */}
+                {isPlaying && isVideo && item.videoSrc ? (
+                  <video
+                    src={item.videoSrc}
+                    autoPlay
+                    controls
+                    playsInline
+                    className="w-full h-full object-cover bg-black"
+                    onEnded={() => setPlayingId(null)}
+                  />
+                ) : (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
 
-                {/* Top Badge: Reel vs Photo */}
-                <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3">
-                  <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white text-black text-[8.5px] sm:text-[9px] font-mono tracking-widest uppercase font-medium">
-                    {item.type === "video" ? "Reel" : "Post"}
-                  </span>
-                </div>
+                    {/* Gradient overlay for title contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent pointer-events-none" />
 
-                {/* Play Trigger Indicator for Video */}
-                {item.type === "video" && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 text-black flex items-center justify-center shadow-md transition-transform duration-200 group-hover:scale-110">
-                      <svg
-                        className="w-4 h-4 sm:w-5 sm:h-5 translate-x-0.5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
+                    {/* Play Button Trigger on Box (for video) */}
+                    {isVideo && (
+                      <button
+                        type="button"
+                        onClick={() => togglePlay(item.id, true)}
+                        className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer z-10"
+                        aria-label={`Play ${item.title}`}
                       >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                        <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/95 text-black flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
+                          <svg
+                            className="w-4 h-4 sm:w-5 sm:h-5 translate-x-0.5 text-black"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </button>
+                    )}
+
+                    {/* Top Badge: Type Indicator */}
+                    <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 pointer-events-none z-10">
+                      <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white/90 backdrop-blur-xs text-black text-[8.5px] sm:text-[9px] font-mono tracking-widest uppercase font-medium">
+                        {item.type === "video" ? "Reel" : "Post"}
+                      </span>
                     </div>
-                  </div>
+
+                    {/* Bottom Title & Subtle Instagram Direct Link */}
+                    <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 flex items-end justify-between gap-2 z-10 pointer-events-none">
+                      <h3 className="font-serif text-sm sm:text-base text-white font-medium leading-snug line-clamp-1 drop-shadow-xs">
+                        {item.title}
+                      </h3>
+
+                      <a
+                        href={item.instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="pointer-events-auto shrink-0 w-7 h-7 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-80 hover:opacity-100 backdrop-blur-xs text-xs"
+                        title="View on Instagram"
+                        aria-label="View on Instagram"
+                      >
+                        <span aria-hidden="true">&rarr;</span>
+                      </a>
+                    </div>
+                  </>
                 )}
-
-                {/* Title on bottom of media */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 text-white">
-                  <h3 className="font-serif text-xs sm:text-base font-medium leading-snug line-clamp-1">
-                    {item.title}
-                  </h3>
-                </div>
               </div>
-
-              {/* Caption & Subtle Bottom Hover Link */}
-              <div className="p-2.5 sm:p-4 flex flex-col justify-between flex-1">
-                <p className="text-[11px] sm:text-xs text-[#555] font-light leading-relaxed mb-3 line-clamp-2">
-                  {item.caption}
-                </p>
-
-                {/* Subtle bottom bar: default views on website, subtle IG hover link */}
-                <div className="pt-2 sm:pt-2.5 border-t border-[#EBEBEB] flex items-center justify-between text-[10px] font-mono">
-                  <span className="text-[#888] tracking-wider uppercase text-[8.5px] sm:text-[9.5px]">
-                    {item.type === "video" ? "Watch video" : "View photo"}
-                  </span>
-
-                  <a
-                    href={item.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1 text-[#888] hover:text-black transition-colors opacity-70 group-hover:opacity-100 uppercase tracking-widest text-[8.5px] sm:text-[9.5px]"
-                    title="View on Instagram"
-                  >
-                    <span>IG</span>
-                    <span aria-hidden="true">&nearr;</span>
-                  </a>
-                </div>
-              </div>
-            </article>
-          ))}
+            );
+          })}
         </div>
       </div>
-
-      {/* ── IN-PAGE VIEWER MODAL (PLAYS REEL OR VIEWS PHOTO DIRECTLY ON WEBSITE) ── */}
-      {activeItem && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setActiveItem(null)}
-        >
-          <div
-            className="relative w-full max-w-[420px] bg-black text-white rounded-sm overflow-hidden border border-white/20 shadow-2xl flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Top Bar */}
-            <div className="p-3.5 bg-neutral-900 border-b border-white/10 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium text-white line-clamp-1">
-                  {activeItem.title}
-                </p>
-                <p className="text-[10px] text-white/60 font-mono">
-                  Famous Letterpress &middot; Nagaland
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <a
-                  href={activeItem.instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[10px] font-mono uppercase tracking-wider text-white/80 hover:text-white hover:underline"
-                >
-                  IG &nearr;
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setActiveItem(null)}
-                  className="w-7 h-7 flex items-center justify-center text-white/70 hover:text-white text-lg cursor-pointer"
-                  aria-label="Close"
-                >
-                  &times;
-                </button>
-              </div>
-            </div>
-
-            {/* Media Content */}
-            <div className="relative aspect-[9/16] bg-black">
-              {activeItem.videoSrc && activeItem.type === "video" ? (
-                <video
-                  src={activeItem.videoSrc}
-                  autoPlay
-                  controls
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={activeItem.image}
-                  alt={activeItem.title}
-                  className="w-full h-full object-cover"
-                />
-              )}
-            </div>
-
-            {/* Caption in player */}
-            <div className="p-3.5 bg-neutral-900 border-t border-white/10">
-              <p className="text-xs text-white/80 font-light leading-relaxed">
-                {activeItem.caption}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
