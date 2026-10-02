@@ -104,7 +104,7 @@ export function Header({
       {/* ── Fixed Studio Header ── */}
       <header
         id="hd"
-        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-5 sm:px-12 py-3.5 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 sm:px-14 md:px-16 py-3.5 transition-all duration-300 ${
           isScrolled
             ? "bg-white/95 backdrop-blur-md border-b border-[rgba(14,14,14,0.12)] shadow-xs"
             : "bg-white border-b border-[rgba(14,14,14,0.08)]"
@@ -113,7 +113,7 @@ export function Header({
         {/* Authentic Famous Letterpress Logo & Wordmark from famousletterpress.com */}
         <Link
           href="/"
-          className="flex items-center gap-3 select-none group"
+          className="flex items-center gap-3.5 sm:gap-4 select-none group pl-1 sm:pl-2"
           onClick={closeMenu}
           aria-label="Famous Letterpress — Home"
         >
