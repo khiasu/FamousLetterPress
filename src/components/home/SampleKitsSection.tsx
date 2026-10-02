@@ -10,8 +10,6 @@ const KITS = [
       "Contains 300, 600 & 900gsm cotton boards, blind deboss relief swatches, matte & metallic foil library, illustrated envelope liners, and wax seal variations.",
     img: "/assets/revamp/sample-kits/FMS_3749.jpg",
     detailHref: "/weddings/wedding-sample-kit",
-    orderHref:
-      "https://wa.me/+918416099340?text=I%20would%20like%20to%20order%20the%20Wedding%20Sample%20Kit",
   },
   {
     eyebrow: "Executive & Corporate",
@@ -22,8 +20,6 @@ const KITS = [
       "Thick unbendable cotton cards featuring mirror gold edge gilding, sculpted blind deboss, duplexed color cores, and luxury stationery finishes for distinguished practices.",
     img: "/assets/revamp/what-we-make/FMS_3462.jpg",
     detailHref: "/business-cards/business-card-sample-kit",
-    orderHref:
-      "https://wa.me/+918416099340?text=I%20would%20like%20to%20order%20the%20Business%20Card%20Sample%20Kit",
   },
 ];
 
@@ -90,14 +86,9 @@ export function SampleKitsSection() {
 
                 {/* Dual CTAs: View Details + Order */}
                 <div className="flex items-center gap-5 mt-auto">
-                  <a
-                    href={kit.orderHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn"
-                  >
+                  <Link href={kit.detailHref} className="btn">
                     Order kit
-                  </a>
+                  </Link>
                   <Link href={kit.detailHref} className="ln">
                     View details
                   </Link>
