@@ -57,8 +57,8 @@ const baseSlides: HeroSlide[] = [
   },
   {
     id: "atelier-presswork",
-    image: "/assets/home/carousel/FMS_7358.jpg",
-    alt: "Artisan mixing mineral inks and calibrating vintage platen press",
+    image: "/assets/home/how-we-make/FMS_6999.jpg",
+    alt: "Artisan hands feeding and calibrating vintage Heidelberg platen press",
     category: "Atelier Presswork",
     title: "Hand-Calibrated Vintage Presswork",
     specs: "Refurbished Heidelberg Platen Presses · Hand-Fed · Nagaland",
@@ -80,7 +80,7 @@ const baseSlides: HeroSlide[] = [
 // 3 repeated sets to allow a continuous, seamless ribbon with edge bleeds
 const repeatedSlides = [...baseSlides, ...baseSlides, ...baseSlides];
 const TOTAL_BASE = baseSlides.length; // 6
-const INITIAL_INDEX = TOTAL_BASE; // 6 (first item of middle set)
+const INITIAL_INDEX = TOTAL_BASE; // 6 (middle set)
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -93,7 +93,7 @@ export function HeroSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const dragStartRef = useRef({ x: 0, time: 0 });
+  const touchStartRef = useRef({ x: 0, y: 0, time: 0 });
 
   // Compute exact pixel translation to center slide `index` in viewport
   const computeOffsetForIndex = useCallback((index: number) => {
@@ -148,7 +148,7 @@ export function HeroSection() {
     goToIndex(prevIdx);
   }, [currentIndex, goToIndex]);
 
-  // Loop back seamlessly to the middle set when reaching outer boundaries
+  // Seamless virtual infinite looping
   const handleTransitionEnd = useCallback(() => {
     if (currentIndex >= TOTAL_BASE * 2) {
       const normalized = currentIndex - TOTAL_BASE;
@@ -180,32 +180,68 @@ export function HeroSection() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handlePrev, handleNext]);
 
-  // Mouse & Touch Dragging Mechanics
-  const handlePointerDown = (e: React.PointerEvent) => {
+  // Touch Swipe Handlers for Mobile (Snøhetta Mobile UX)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY, time: Date.now() };
     setIsDragging(true);
     setIsPaused(true);
-    dragStartRef.current = { x: e.clientX, time: Date.now() };
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    const diffX = touch.clientX - touchStartRef.current.x;
+    const diffY = touch.clientY - touchStartRef.current.y;
+
+    // Only drag horizontally if user isn't scrolling vertically
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      setDragOffset(diffX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    setIsPaused(false);
+    const diff = dragOffset;
+    setDragOffset(0);
+
+    if (diff < -40) {
+      handleNext();
+    } else if (diff > 40) {
+      handlePrev();
+    } else {
+      updatePosition(currentIndex, true);
+    }
+  };
+
+  // Pointer Handlers for Desktop Mouse Drag
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType === "touch") return; // Handled by touch events
+    setIsDragging(true);
+    setIsPaused(true);
+    touchStartRef.current = { x: e.clientX, y: e.clientY, time: Date.now() };
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDragging) return;
-    const diff = e.clientX - dragStartRef.current.x;
+    if (e.pointerType === "touch" || !isDragging) return;
+    const diff = e.clientX - touchStartRef.current.x;
     setDragOffset(diff);
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    if (!isDragging) return;
+    if (e.pointerType === "touch" || !isDragging) return;
     setIsDragging(false);
     setIsPaused(false);
-    const diff = e.clientX - dragStartRef.current.x;
-    const time = Date.now() - dragStartRef.current.time;
+    const diff = e.clientX - touchStartRef.current.x;
+    const time = Date.now() - touchStartRef.current.time;
     setDragOffset(0);
 
-    // If dragged sufficiently or flicked quickly
-    if (diff < -50 || (diff < -20 && time < 250)) {
+    if (diff < -45 || (diff < -20 && time < 250)) {
       handleNext();
-    } else if (diff > 50 || (diff > 20 && time < 250)) {
+    } else if (diff > 45 || (diff > 20 && time < 250)) {
       handlePrev();
     } else {
       updatePosition(currentIndex, true);
@@ -217,16 +253,16 @@ export function HeroSection() {
 
   return (
     <section
-      className="bg-white pt-20 md:pt-28 pb-12 md:pb-16 border-b border-[#E5E5E5] overflow-hidden select-none"
+      className="bg-white pt-20 md:pt-28 pb-10 md:pb-16 border-b border-[#E5E5E5] overflow-hidden select-none"
       aria-label="Atelier Project Reel"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* ── Snøhetta-Style Hero Statement ── */}
-      <div className="container-wide mb-6 md:mb-8">
+      {/* ── Snøhetta-Style Statement Header ── */}
+      <div className="container-wide mb-5 md:mb-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-4 border-b border-[#E5E5E5]">
           <div className="max-w-3xl">
-            <p className="font-mono text-[10px] md:text-[11px] tracking-[0.25em] uppercase text-[#777777] mb-2">
+            <p className="font-mono text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-[#777777] mb-2">
               EST. 2018 · NAGALAND, INDIA · BESPOKE LETTERPRESS ATELIER
             </p>
             <h1 className="text-black font-serif font-light text-2xl sm:text-4xl lg:text-[2.85rem] tracking-tight leading-[1.12]">
@@ -234,7 +270,7 @@ export function HeroSection() {
             </h1>
           </div>
 
-          {/* Minimalist Slide Counter & Navigation Controls */}
+          {/* Minimalist Slide Counter & Arrow Controls */}
           <div className="flex items-center gap-5 pt-1">
             <span className="font-mono text-xs tracking-widest text-black font-medium">
               0{activeBaseIndex + 1} <span className="text-[#888888]">/ 0{TOTAL_BASE}</span>
@@ -263,10 +299,13 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── Snøhetta Continuous Ribbon Carousel ── */}
+      {/* ── Snøhetta Continuous Ribbon Carousel (Mobile & Desktop) ── */}
       <div
         ref={containerRef}
-        className="w-full relative overflow-visible cursor-grab active:cursor-grabbing"
+        className="w-full relative overflow-visible cursor-grab active:cursor-grabbing touch-pan-y"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -274,7 +313,7 @@ export function HeroSection() {
       >
         <div
           ref={trackRef}
-          className="flex items-start gap-3 sm:gap-5 lg:gap-6 will-change-transform"
+          className="flex items-center gap-3 sm:gap-5 lg:gap-6 will-change-transform"
           style={{
             transform: `translateX(${trackOffset + dragOffset}px)`,
             transition: isAnimating && !isDragging ? "transform 750ms cubic-bezier(0.16, 1, 0.3, 1)" : "none",
@@ -294,14 +333,14 @@ export function HeroSection() {
                     goToIndex(index);
                   }
                 }}
-                className="w-[78vw] sm:w-[50vw] lg:w-[38vw] max-w-[540px] flex-shrink-0"
+                className="w-[74vw] sm:w-[50vw] lg:w-[38vw] max-w-[540px] flex-shrink-0"
               >
-                {/* Image Frame — Top Aligned, Side Cards Scaled Down */}
+                {/* Image Frame — Vertically Centered, Side Cards Scaled Down */}
                 <div
-                  className={`relative aspect-[16/10] bg-[#F7F7F7] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`relative aspect-[16/11] sm:aspect-[16/10] bg-[#F7F7F7] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isCenter
                       ? "scale-100 opacity-100 cursor-default"
-                      : "scale-[0.80] origin-top opacity-60 hover:opacity-85 cursor-pointer"
+                      : "scale-[0.82] origin-center opacity-60 hover:opacity-85 cursor-pointer"
                   }`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -310,26 +349,26 @@ export function HeroSection() {
                     alt={slide.alt}
                     draggable={false}
                     loading={index >= TOTAL_BASE && index < TOTAL_BASE + 3 ? "eager" : "lazy"}
-                    className="w-full h-full object-cover select-none"
+                    className="w-full h-full object-cover select-none pointer-events-none"
                   />
                 </div>
 
                 {/* Snøhetta Caption: Only Visible Directly Under Active Center Slide */}
                 <div
-                  className={`transition-all duration-500 ease-out ${
+                  className={`transition-all duration-500 ease-out text-left ${
                     isCenter
-                      ? "opacity-100 pt-3.5 pointer-events-auto"
+                      ? "opacity-100 pt-3 sm:pt-3.5 pointer-events-auto"
                       : "opacity-0 h-0 overflow-hidden pointer-events-none"
                   }`}
                 >
                   <Link href={slide.href} className="group block">
-                    <h2 className="font-serif text-lg sm:text-2xl text-black font-light leading-snug group-hover:opacity-70 transition-opacity">
+                    <h2 className="font-serif text-base sm:text-2xl text-black font-light leading-snug group-hover:opacity-70 transition-opacity">
                       {slide.title}
                     </h2>
-                    <p className="text-xs sm:text-sm text-[#777777] font-light leading-relaxed mt-0.5">
+                    <p className="text-[11px] sm:text-sm text-[#777777] font-light leading-relaxed mt-0.5">
                       {slide.specs}
                     </p>
-                    <div className="pt-1.5">
+                    <div className="pt-1 sm:pt-1.5">
                       <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono tracking-[0.18em] uppercase text-black font-medium group-hover:translate-x-1 transition-transform">
                         <span>{slide.ctaText}</span>
                         <span>→</span>
@@ -344,8 +383,8 @@ export function HeroSection() {
       </div>
 
       {/* ── Minimalist Story Indicator Track ── */}
-      <div className="container-wide mt-6">
-        <div className="flex items-center justify-between gap-6 pt-3.5 border-t border-[#E5E5E5]">
+      <div className="container-wide mt-5 md:mt-6">
+        <div className="flex items-center justify-between gap-6 pt-3 border-t border-[#E5E5E5]">
           <div className="flex gap-2 flex-1 max-w-xs">
             {baseSlides.map((_, i) => (
               <button
@@ -363,7 +402,7 @@ export function HeroSection() {
             ))}
           </div>
 
-          <p className="text-[10px] font-mono tracking-[0.2em] text-[#888888] uppercase">
+          <p className="text-[9px] sm:text-[10px] font-mono tracking-[0.2em] text-[#888888] uppercase">
             Drag ribbon to explore commissions
           </p>
         </div>

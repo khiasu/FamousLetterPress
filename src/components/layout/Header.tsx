@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* ── Menu Architecture (matches founder's web-2 & web-3 spec) ── */
+/* ── Menu Architecture ── */
 const menuSections = [
   {
     title: "What We Make",
@@ -15,7 +15,7 @@ const menuSections = [
         href: "/weddings",
       },
       {
-        label: "Business Cards & Letterheads",
+        label: "Business Cards & Stationery",
         description: "Thick cotton cards with deep impression, foil & edge gilding",
         href: "/business-cards",
       },
@@ -24,23 +24,29 @@ const menuSections = [
         description: "Monogrammed correspondence, custom note cards & envelopes",
         href: "/personalised-stationery",
       },
+      {
+        label: "Curated Packages & Collections",
+        description: "Readymade suites, design templates, and bespoke options",
+        href: "/packages",
+      },
     ],
   },
   {
     title: "How We Make It",
     items: [
-      { label: "Material", description: "Pure cotton & handmade paper stocks", href: "/materials" },
-      { label: "Process", description: "Letterpress mechanics, the bite & the kiss", href: "/process" },
-      { label: "Craftsmanship", description: "Handcrafted in our Nagaland atelier", href: "/about" },
-      { label: "Our Story", description: "Since 2008 — Akanito's founding journey", href: "/about" },
+      { label: "Paper & Materials", description: "Pure cotton & handmade paper stocks (300–900gsm)", href: "/materials" },
+      { label: "Letterpress Process", description: "Mechanical relief, the bite & tactile impression", href: "/process" },
+      { label: "Our Story & Atelier", description: "Handcrafted in Nagaland on restored Heidelberg presses", href: "/about" },
+      { label: "Studio Portfolio", description: "Selected commissions archive", href: "/work" },
     ],
   },
   {
-    title: "Who We Make For",
+    title: "Sample Kits & Consultations",
     items: [
-      { label: "Couples", description: "Wedding stationery consultations", href: "/weddings" },
-      { label: "Channel Partners", description: "For designers, planners & agencies", href: "/channel-partners" },
-      { label: "B2B & Corporate", description: "Luxury packaging, boxes & branding", href: "/business-cards" },
+      { label: "The Wedding Sample Kit (₹1,500)", description: "Feel the paper weights and foil samples in your hands", href: "/weddings/wedding-sample-kit" },
+      { label: "Business Card Sample Kit (₹1,000)", description: "Cotton weights, edge gilding & deboss swatches", href: "/business-cards/business-card-sample-kit" },
+      { label: "Early Bride Consultation", description: "Plan your stationery timeline and bespoke suite", href: "/weddings/early-bride" },
+      { label: "For Designers & Planners", description: "Trade collaboration & channel partner program", href: "/channel-partners" },
     ],
   },
 ];
@@ -52,6 +58,7 @@ export interface HeaderProps {
 }
 
 export function Header({
+  logoUrl = "/assets/logo.png",
   announcementActive = false,
   announcementBarText,
 }: HeaderProps) {
@@ -66,7 +73,9 @@ export function Header({
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isMenuOpen]);
 
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
@@ -80,7 +89,7 @@ export function Header({
         </div>
       )}
 
-      {/* Header */}
+      {/* ── Snøhetta-Inspired Minimalist Header ── */}
       <header
         className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
           announcementActive && announcementBarText ? "top-[32px]" : "top-0"
@@ -92,155 +101,80 @@ export function Header({
       >
         <div className="container-wide">
           <nav
-            className="flex items-center justify-between h-16 md:h-20"
+            className="flex items-center justify-between h-16 md:h-20 relative"
             aria-label="Primary navigation"
           >
-            {/* Logo */}
+            {/* Left: Famous Letterpress Seal Logo & Wordmark */}
             <Link
               href="/"
-              className="relative z-[60] flex items-center gap-3"
+              className="relative z-[60] flex items-center gap-2.5 sm:gap-3 group"
               aria-label="Famous Letterpress — Home"
               onClick={closeMenu}
             >
-              <span
-                className={`font-serif text-xl tracking-tight transition-colors duration-300 ${
-                  isMenuOpen ? "text-white" : "text-black"
-                }`}
-              >
+              {/* Authentic Famous Letterpress Seal */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={logoUrl || "/assets/logo.png"}
+                alt="Famous Letterpress Seal"
+                className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-full border border-[#E5E5E5] p-0.5 group-hover:scale-105 transition-transform"
+              />
+              <span className="font-serif text-lg sm:text-xl tracking-tight text-black">
                 <span className="font-light">Famous</span>{" "}
                 <span className="font-semibold">Letterpress</span>
               </span>
             </Link>
 
-            {/* Direct Navigation Links (Desktop) */}
-            <div className="hidden lg:flex items-center gap-8">
-              <Link
-                href="/weddings"
-                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
-              >
-                Weddings
-              </Link>
-              <Link
-                href="/business-cards"
-                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
-              >
-                Business Cards
-              </Link>
-              <Link
-                href="/packages"
-                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
-              >
-                Packages
-              </Link>
-              <Link
-                href="/about"
-                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
-              >
-                Our Story
-              </Link>
-              <Link
-                href="/weddings/wedding-sample-kit"
-                className="text-[11px] tracking-[0.2em] uppercase text-[#555555] hover:text-black transition-colors"
-              >
-                Sample Kits
-              </Link>
-            </div>
-
-            {/* Desktop Right Actions */}
-            <div className="hidden sm:flex items-center gap-4">
-              <Link
-                href="/start-a-project"
-                className="text-[11px] tracking-[0.2em] uppercase font-medium bg-black text-white px-6 py-2.5 hover:bg-neutral-800 transition-colors"
-              >
-                Book a Consult
-              </Link>
-
-              {/* Menu Toggle Pill */}
+            {/* Center: Snøhetta-Style Text Menu Button (Desktop & Mobile) */}
+            <div className="absolute left-1/2 -translate-x-1/2 z-[60]">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`relative z-[60] flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.2em] uppercase font-medium border transition-colors ${
-                  isMenuOpen
-                    ? "border-white/40 text-white"
-                    : "border-[#E5E5E5] hover:border-black text-black"
-                }`}
-                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                className="text-xs sm:text-sm font-sans tracking-[0.16em] uppercase text-black font-medium hover:opacity-60 transition-opacity py-2 px-3 cursor-pointer select-none"
+                aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={isMenuOpen}
               >
-                <span>{isMenuOpen ? "Close" : "Menu"}</span>
-                <div className="w-3.5 h-2.5 flex flex-col justify-between">
-                  <span
-                    className={`block h-px transition-all duration-300 origin-center ${
-                      isMenuOpen ? "bg-white rotate-45 translate-y-[4.5px]" : "bg-black"
-                    }`}
-                  />
-                  <span
-                    className={`block h-px transition-all duration-300 ${
-                      isMenuOpen ? "opacity-0" : "bg-black"
-                    }`}
-                  />
-                  <span
-                    className={`block h-px transition-all duration-300 origin-center ${
-                      isMenuOpen ? "bg-white -rotate-45 -translate-y-[4.5px]" : "bg-black"
-                    }`}
-                  />
-                </div>
+                {isMenuOpen ? "Close" : "Menu"}
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="relative z-[60] sm:hidden p-2 text-black"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isMenuOpen}
-            >
-              <div className="w-5 h-3.5 flex flex-col justify-between">
-                <span
-                  className={`block h-px transition-all duration-300 origin-center ${
-                    isMenuOpen ? "bg-white rotate-45 translate-y-[6px]" : "bg-black"
-                  }`}
-                />
-                <span
-                  className={`block h-px transition-all duration-300 ${
-                    isMenuOpen ? "opacity-0" : "bg-black"
-                  }`}
-                />
-                <span
-                  className={`block h-px transition-all duration-300 origin-center ${
-                    isMenuOpen ? "bg-white -rotate-45 -translate-y-[6px]" : "bg-black"
-                  }`}
-                />
-              </div>
-            </button>
+            {/* Right: Book a Consult Action */}
+            <div className="relative z-[60] flex items-center gap-4">
+              <Link
+                href="/start-a-project"
+                className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase font-medium bg-black text-white px-4 sm:px-6 py-2 sm:py-2.5 hover:bg-neutral-800 transition-colors"
+                onClick={closeMenu}
+              >
+                Book a Consult
+              </Link>
+            </div>
           </nav>
         </div>
       </header>
 
-      {/* ── Fullscreen Editorial Menu Drawer ── */}
+      {/* ── Snøhetta-Style Pristine Pure White Menu Drawer ── */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-black text-white"
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-white text-black"
           >
-            <div className="h-full overflow-y-auto pt-24 md:pt-28 pb-12">
+            <div className="h-full overflow-y-auto pt-24 md:pt-32 pb-12">
               <div className="container-wide">
                 {/* Menu Sections Grid */}
-                <div className="grid md:grid-cols-3 gap-10 md:gap-12 mb-16">
+                <div className="grid md:grid-cols-3 gap-10 md:gap-14 mb-16">
                   {menuSections.map((section, sIndex) => (
                     <motion.div
                       key={section.title}
-                      initial={{ opacity: 0, y: 15 }}
+                      initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: 0.1 + sIndex * 0.08,
-                        duration: 0.4,
+                        delay: 0.08 + sIndex * 0.06,
+                        duration: 0.35,
                       }}
                     >
-                      <p className="text-[10px] tracking-[0.25em] uppercase text-white/40 mb-6 font-mono font-medium">
+                      <p className="text-[10px] tracking-[0.25em] uppercase text-[#888888] mb-6 font-mono font-medium">
                         {section.title}
                       </p>
                       <div className="space-y-0">
@@ -249,12 +183,12 @@ export function Header({
                             <Link
                               href={item.href}
                               onClick={closeMenu}
-                              className="group block py-4 border-b border-white/10 hover:border-white/30 transition-colors"
+                              className="group block py-3.5 border-b border-[#E5E5E5] hover:border-black transition-colors"
                             >
-                              <span className="block font-serif text-xl text-white/90 group-hover:text-white transition-colors">
+                              <span className="block font-serif text-xl sm:text-2xl text-black font-light group-hover:opacity-60 transition-opacity">
                                 {item.label}
                               </span>
-                              <span className="block text-xs text-white/40 mt-1 font-light leading-relaxed">
+                              <span className="block text-xs text-[#666666] mt-1 font-light leading-relaxed">
                                 {item.description}
                               </span>
                             </Link>
@@ -265,43 +199,45 @@ export function Header({
                   ))}
                 </div>
 
-                {/* Bottom Row — CTAs & Contact */}
-                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                {/* Bottom Row — Direct Contact & Coordinates */}
+                <div className="border-t border-[#E5E5E5] pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                   <div className="flex flex-wrap gap-4">
                     <Link
                       href="/start-a-project"
                       onClick={closeMenu}
-                      className="inline-flex px-7 py-3 text-[11px] tracking-[0.2em] uppercase font-medium bg-white text-black hover:bg-neutral-200 transition-colors"
+                      className="px-7 py-3 text-[11px] tracking-[0.16em] uppercase font-medium bg-black text-white hover:bg-neutral-800 transition-colors"
                     >
-                      Book a Consult
+                      Start a Project
                     </Link>
                     <Link
                       href="/weddings/wedding-sample-kit"
                       onClick={closeMenu}
-                      className="inline-flex px-7 py-3 text-[11px] tracking-[0.2em] uppercase font-medium border border-white/30 text-white hover:border-white transition-colors"
+                      className="px-7 py-3 text-[11px] tracking-[0.16em] uppercase font-medium border border-black text-black hover:bg-black hover:text-white transition-colors"
                     >
-                      Order Sample Kit →
+                      Order Sample Kit
                     </Link>
                   </div>
 
-                  <div className="flex items-center gap-6 text-[10px] tracking-[0.2em] uppercase text-white/40">
+                  <div className="flex items-center gap-6">
                     <a
                       href="https://www.instagram.com/famousletterpressindia/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-white transition-colors"
+                      className="text-xs font-mono tracking-widest uppercase text-[#666666] hover:text-black transition-colors"
                     >
                       Instagram
                     </a>
                     <a
                       href="https://wa.me/919366012345"
-                      className="hover:text-white transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-mono tracking-widest uppercase text-[#666666] hover:text-black transition-colors"
                     >
                       WhatsApp
                     </a>
                     <a
                       href="mailto:hello@famousletterpress.com"
-                      className="hover:text-white transition-colors"
+                      className="text-xs font-mono tracking-widest uppercase text-[#666666] hover:text-black transition-colors"
                     >
                       Email
                     </a>
