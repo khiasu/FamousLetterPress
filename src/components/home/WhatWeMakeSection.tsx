@@ -92,8 +92,8 @@ export function WhatWeMakeSection() {
     const cards = Array.from(stage.querySelectorAll<HTMLElement>(".sc"));
     if (cards.length === 0) return;
 
-    // Smooth critically damped spring (glides like silk without jitter)
-    const spring = new Spring(0, 48, 14);
+    // Smooth critically damped spring — silk-smooth, no oscillation
+    const spring = new Spring(0, 42, 16);
     let targetProg = 0;
     let isPointerDown = false;
     let startX = 0;
@@ -132,7 +132,7 @@ export function WhatWeMakeSection() {
       if (activeIdx !== lastActiveIdx) {
         lastActiveIdx = activeIdx;
         if (counterRef.current) {
-          counterRef.current.textContent = `0${activeIdx + 1} / 0${n} · Swipe / Scroll`;
+          counterRef.current.textContent = `0${activeIdx + 1} / 0${n}`;
         }
       }
 
@@ -160,7 +160,12 @@ export function WhatWeMakeSection() {
       lastTime = now;
 
       spring.t = targetProg;
-      spring.step(dt);
+      // Sub-step for smoother integration
+      const steps = 3;
+      const subDt = dt / steps;
+      for (let s = 0; s < steps; s++) {
+        spring.step(subDt);
+      }
 
       updateCardsVisual();
 
@@ -227,10 +232,11 @@ export function WhatWeMakeSection() {
             (targetProg / (n - 1)) * scrollableDist;
 
           isScrollLocked = true;
-          window.scrollTo({ top: targetScrollY, behavior: "auto" });
+          window.scrollTo({ top: targetScrollY, behavior: "instant" });
+          // Extended debounce for seamless handoff
           setTimeout(() => {
             isScrollLocked = false;
-          }, 120);
+          }, 200);
         }
       }
       requestTick();
@@ -278,7 +284,7 @@ export function WhatWeMakeSection() {
               ref={counterRef}
               className="k text-[10px] tracking-[0.28em] text-[#7b7566] select-none"
             >
-              01 / 0{n} &nbsp;·&nbsp; Swipe / Scroll
+              01 / 0{n}
             </p>
           </div>
 
