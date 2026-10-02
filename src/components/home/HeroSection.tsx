@@ -126,29 +126,25 @@ export function HeroSection() {
       }
     };
 
-    cr.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
-    window.addEventListener("pointercancel", onPointerUp);
 
-    // Auto-advance every 4.8 seconds
-    const interval = setInterval(() => {
-      const rect = cr.getBoundingClientRect();
-      if (!isDragging && !document.hidden && rect.bottom > 0 && rect.top < window.innerHeight) {
-        target = Math.round(target) + 1;
-      }
-    }, 4800);
-
+    let isRunning = false;
     let animId: number;
-    const tick = () => {
-      spring.t = target;
-      for (let k = 0; k < 2; k++) {
-        spring.step(1 / 120);
-      }
+    let lastActiveIdx = -1;
 
+    const requestTick = () => {
+      if (!isRunning) {
+        isRunning = true;
+        animId = requestAnimationFrame(tick);
+      }
+    };
+
+    const updateCards = () => {
       const sp = getSpacing();
       const currentIdx = ((Math.round(spring.x) % m) + m) % m;
-      setActiveIndex(currentIdx);
+      if (currentIdx !== lastActiveIdx) {
+        lastActiveIdx = currentIdx;
+        setActiveIndex(currentIdx);
+      }
 
       cards.forEach((card, i) => {
         let diff = i - spring.x;
@@ -163,21 +159,73 @@ export function HeroSection() {
         card.style.opacity = `${opacity}`;
         card.style.zIndex = `${zIndex}`;
       });
-
-      animId = requestAnimationFrame(tick);
     };
 
-    animId = requestAnimationFrame(tick);
+    const tick = () => {
+      spring.t = target;
+      for (let k = 0; k < 2; k++) {
+        spring.step(1 / 120);
+      }
+
+      updateCards();
+
+      const isResting =
+        !isDragging &&
+        Math.abs(spring.v) < 0.001 &&
+        Math.abs(spring.x - spring.t) < 0.001;
+
+      if (isResting) {
+        spring.x = spring.t;
+        spring.v = 0;
+        updateCards();
+        isRunning = false;
+      } else {
+        animId = requestAnimationFrame(tick);
+      }
+    };
+
+    // Auto-advance every 4.8 seconds
+    const interval = setInterval(() => {
+      const rect = cr.getBoundingClientRect();
+      if (!isDragging && !document.hidden && rect.bottom > 0 && rect.top < window.innerHeight) {
+        target = Math.round(target) + 1;
+        requestTick();
+      }
+    }, 4800);
+
+    const onPointerDownWithWakeup = (e: PointerEvent) => {
+      onPointerDown(e);
+      requestTick();
+    };
+
+    const onPointerMoveWithWakeup = (e: PointerEvent) => {
+      onPointerMove(e);
+      requestTick();
+    };
+
+    const onPointerUpWithWakeup = (e: PointerEvent) => {
+      onPointerUp(e);
+      requestTick();
+    };
+
+    cr.addEventListener("pointerdown", onPointerDownWithWakeup, { passive: true });
+    window.addEventListener("pointermove", onPointerMoveWithWakeup, { passive: true });
+    window.addEventListener("pointerup", onPointerUpWithWakeup, { passive: true });
+    window.addEventListener("pointercancel", onPointerUpWithWakeup, { passive: true });
+
+    updateCards();
+    requestTick();
 
     return () => {
       cancelAnimationFrame(animId);
       clearInterval(interval);
-      cr.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerUp);
-      window.removeEventListener("pointercancel", onPointerUp);
+      cr.removeEventListener("pointerdown", onPointerDownWithWakeup);
+      window.removeEventListener("pointermove", onPointerMoveWithWakeup);
+      window.removeEventListener("pointerup", onPointerUpWithWakeup);
+      window.removeEventListener("pointercancel", onPointerUpWithWakeup);
     };
   }, [m]);
+
 
   const activeItem = HERO_ITEMS[activeIndex];
 

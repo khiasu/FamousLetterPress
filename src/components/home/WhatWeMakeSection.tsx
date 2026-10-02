@@ -79,7 +79,7 @@ const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(mi
 export function WhatWeMakeSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-  const [activeCard, setActiveCard] = useState(0);
+  const counterRef = useRef<HTMLParagraphElement>(null);
   const [modalItem, setModalItem] = useState<WorkItem | null>(null);
 
   const n = WORK_ITEMS.length;
@@ -89,82 +89,161 @@ export function WhatWeMakeSection() {
     const stage = stageRef.current;
     if (!sec || !stage) return;
 
-    const cards = Array.from(stage.children) as HTMLElement[];
+    const cards = Array.from(stage.querySelectorAll<HTMLElement>(".sc"));
     if (cards.length === 0) return;
 
-    const spring = new Spring(0, 70, 13);
+    // Smooth critically damped spring (glides like silk without jitter)
+    const spring = new Spring(0, 48, 14);
     let targetProg = 0;
     let isPointerDown = false;
     let startX = 0;
     let startTarget = 0;
     let moved = 0;
+    let lastTime = performance.now();
+    let isRunning = false;
+    let animId: number;
+    let isScrollLocked = false;
+    let lastActiveIdx = -1;
 
     const computeScrollProg = () => {
       const rect = sec.getBoundingClientRect();
-      const progress = clamp(-rect.top / (rect.height - window.innerHeight), 0, 1) * (n - 1);
-      return progress;
+      const scrollableDist = rect.height - window.innerHeight;
+      if (scrollableDist <= 0) return 0;
+      return clamp(-rect.top / scrollableDist, 0, 1) * (n - 1);
     };
 
     targetProg = computeScrollProg();
+    spring.x = targetProg;
+    spring.t = targetProg;
 
-    const onScroll = () => {
-      if (!isPointerDown) {
-        targetProg = computeScrollProg();
+    const requestTick = () => {
+      if (!isRunning) {
+        isRunning = true;
+        lastTime = performance.now();
+        animId = requestAnimationFrame(tick);
       }
     };
+
+    const updateCardsVisual = () => {
+      const cardWidth = cards[0]?.offsetWidth || 300;
+      const w = cardWidth * 0.86;
+
+      const activeIdx = clamp(Math.round(spring.x), 0, n - 1);
+      if (activeIdx !== lastActiveIdx) {
+        lastActiveIdx = activeIdx;
+        if (counterRef.current) {
+          counterRef.current.textContent = `0${activeIdx + 1} / 0${n} · Swipe / Scroll`;
+        }
+      }
+
+      for (let i = 0; i < n; i++) {
+        const c = cards[i];
+        const d = i - spring.x;
+        const a = Math.abs(d);
+
+        // Optimized 3D transform with depth and subtle perspective rotation
+        const tx = (d * w).toFixed(2);
+        const tz = (-a * 220).toFixed(2);
+        const ry = (-d * 36).toFixed(2);
+        const sc = (1 - a * 0.05).toFixed(3);
+        const op = clamp(1 - a * 0.55, 0.25, 1).toFixed(3);
+        const zi = 10 - Math.min(9, Math.round(a * 2));
+
+        c.style.transform = `translate3d(${tx}px,0,${tz}px) rotateY(${ry}deg) scale(${sc})`;
+        c.style.opacity = op;
+        c.style.zIndex = `${zi}`;
+      }
+    };
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.05); // Clamp dt to prevent jumping
+      lastTime = now;
+
+      spring.t = targetProg;
+      spring.step(dt);
+
+      updateCardsVisual();
+
+      // Check if spring has reached rest
+      const isResting =
+        !isPointerDown &&
+        Math.abs(spring.v) < 0.001 &&
+        Math.abs(spring.x - spring.t) < 0.001;
+
+      if (isResting) {
+        spring.x = spring.t;
+        spring.v = 0;
+        updateCardsVisual();
+        isRunning = false;
+      } else {
+        animId = requestAnimationFrame(tick);
+      }
+    };
+
+    // Scroll listener: only update when not dragging and not locked
+    const onScroll = () => {
+      if (isPointerDown || isScrollLocked) return;
+      targetProg = computeScrollProg();
+      requestTick();
+    };
+
+    // Passive scroll listener for maximum 120fps smoothness
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // Pointer events for smooth touch & mouse swipe
     const onPointerDown = (e: PointerEvent) => {
       isPointerDown = true;
       startX = e.clientX;
       startTarget = targetProg;
       moved = 0;
+      requestTick();
     };
 
     const onPointerMove = (e: PointerEvent) => {
       if (!isPointerDown) return;
       const dx = e.clientX - startX;
       moved = Math.max(moved, Math.abs(dx));
-      const cardWidth = cards[0].offsetWidth * 0.6;
-      targetProg = clamp(startTarget - dx / cardWidth, 0, n - 1);
+      const cardWidth = cards[0]?.offsetWidth || 300;
+      // Sensitive, responsive swipe sensitivity
+      targetProg = clamp(startTarget - dx / (cardWidth * 0.75), 0, n - 1);
+      requestTick();
     };
 
     const onPointerUp = () => {
       if (!isPointerDown) return;
       isPointerDown = false;
-      if (moved > 6) {
+
+      if (moved > 10) {
+        // Snap to nearest integer card
         targetProg = Math.round(targetProg);
+
+        // Sync page scroll position to the current card so subsequent scroll is seamless
+        const rect = sec.getBoundingClientRect();
+        const scrollableDist = rect.height - window.innerHeight;
+        if (scrollableDist > 0) {
+          const targetScrollY =
+            window.scrollY +
+            rect.top +
+            (targetProg / (n - 1)) * scrollableDist;
+
+          isScrollLocked = true;
+          window.scrollTo({ top: targetScrollY, behavior: "auto" });
+          setTimeout(() => {
+            isScrollLocked = false;
+          }, 120);
+        }
       }
+      requestTick();
     };
 
-    stage.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
-    window.addEventListener("pointercancel", onPointerUp);
+    stage.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerup", onPointerUp, { passive: true });
+    window.addEventListener("pointercancel", onPointerUp, { passive: true });
 
-    let animId: number;
-    const tick = () => {
-      spring.t = targetProg;
-      for (let k = 0; k < 2; k++) {
-        spring.step(1 / 120);
-      }
-
-      const activeIdx = clamp(Math.round(spring.x), 0, n - 1);
-      setActiveCard(activeIdx);
-
-      const w = cards[0].offsetWidth * 0.86;
-      cards.forEach((c, i) => {
-        const d = i - spring.x;
-        const a = Math.abs(d);
-        c.style.transform = `translate3d(${d * w}px,0,${-a * 240}px) rotateY(${-d * 40}deg) scale(${1 - a * 0.05})`;
-        c.style.opacity = `${clamp(1 - a * 0.55, 0.25, 1)}`;
-        c.style.zIndex = `${10 - Math.round(a * 3)}`;
-      });
-
-      animId = requestAnimationFrame(tick);
-    };
-
-    animId = requestAnimationFrame(tick);
+    // Initial render
+    updateCardsVisual();
+    requestTick();
 
     return () => {
       cancelAnimationFrame(animId);
@@ -181,8 +260,11 @@ export function WhatWeMakeSection() {
       <section
         ref={sectionRef}
         id="svc"
-        className="sv relative h-[600vh] bg-white select-none"
+        className="sv relative h-[420vh] bg-white select-none"
         aria-label="What We Make: 3D Rotating Cards"
+        style={{
+          contain: "paint layout",
+        }}
       >
         <div className="svs sticky top-0 h-screen overflow-hidden flex flex-col pt-24 md:pt-28 pb-8 bg-white">
           <div className="w svh flex justify-between items-end w-full mb-3">
@@ -192,8 +274,11 @@ export function WhatWeMakeSection() {
                 Our <i>work</i>
               </h2>
             </div>
-            <p className="k text-[10px] tracking-[0.28em] text-[#7b7566]">
-              0{activeCard + 1} / 0{n} &nbsp;·&nbsp; Swipe / Scroll
+            <p
+              ref={counterRef}
+              className="k text-[10px] tracking-[0.28em] text-[#7b7566] select-none"
+            >
+              01 / 0{n} &nbsp;·&nbsp; Swipe / Scroll
             </p>
           </div>
 
@@ -201,22 +286,33 @@ export function WhatWeMakeSection() {
           <div
             ref={stageRef}
             className="svst relative flex-1 touch-pan-y cursor-grab active:cursor-grabbing mb-5"
-            style={{ perspective: "1200px", perspectiveOrigin: "50% 40%" }}
+            style={{
+              perspective: "1200px",
+              perspectiveOrigin: "50% 42%",
+              transformStyle: "preserve-3d",
+              contain: "layout style",
+            }}
           >
             {WORK_ITEMS.map((item, index) => (
               <button
                 key={index}
                 onClick={() => setModalItem(item)}
-                className="sc absolute left-1/2 top-[44%] w-[min(72vw,360px)] h-[calc(min(72vw,360px)*1.38)] -mt-[calc(min(72vw,360px)*0.69)] -ml-[calc(min(72vw,360px)/2)] border-0 cursor-pointer text-left p-4 flex flex-col bg-[#faf5ea] shadow-[0_30px_40px_-24px_rgba(60,45,20,0.55),0_2px_4px_rgba(60,45,20,0.15)] text-black will-change-transform group"
+                className="sc absolute left-1/2 top-[44%] w-[min(72vw,360px)] h-[calc(min(72vw,360px)*1.38)] -mt-[calc(min(72vw,360px)*0.69)] -ml-[calc(min(72vw,360px)/2)] border-0 cursor-pointer text-left p-4 flex flex-col bg-[#faf5ea] shadow-[0_24px_36px_-20px_rgba(60,45,20,0.5),0_2px_4px_rgba(60,45,20,0.12)] text-black will-change-transform group"
+                style={{
+                  transformStyle: "preserve-3d",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                }}
                 aria-label={item.title}
               >
-                <div className="art relative flex-1 mb-3 overflow-hidden bg-[#eee]">
+                <div className="art relative flex-1 mb-3 overflow-hidden bg-[#e8e2d5] rounded-xs">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
                     alt={item.title}
                     draggable={false}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    loading={index < 3 ? "eager" : "lazy"}
                   />
                 </div>
                 <h3 className="font-serif font-medium text-[clamp(24px,6vw,30px)] leading-[1.05] tracking-[-0.02em]">
@@ -231,6 +327,7 @@ export function WhatWeMakeSection() {
           </div>
         </div>
       </section>
+
 
       {/* Fullscreen Expand Card Modal */}
       {modalItem && (
