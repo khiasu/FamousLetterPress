@@ -270,16 +270,19 @@ body {
 .menu-standalone {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 99999;
   height: 100vh;
   height: 100svh;
   max-height: 100svh;
   overflow: hidden;
-  background: var(--cr) var(--grain);
+  background: #FCFAF7 var(--grain);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px) scale(0.99);
+  transform: translateY(-8px) scale(0.99) translateZ(0);
+  -webkit-transform: translateY(-8px) scale(0.99) translateZ(0);
+  isolation: isolate;
+  will-change: opacity, transform;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s 0.4s;
 }
 
@@ -287,7 +290,8 @@ body {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) scale(1) translateZ(0);
+  -webkit-transform: translateY(0) scale(1) translateZ(0);
   transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

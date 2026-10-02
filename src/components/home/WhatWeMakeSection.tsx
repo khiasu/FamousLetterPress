@@ -316,10 +316,11 @@ export function WhatWeMakeSection() {
       <section
         ref={sectionRef}
         id="svc"
-        className="sv relative h-[420vh] bg-white select-none"
+        className="sv relative h-[420vh] bg-white select-none z-0"
         aria-label="What We Make: 3D Rotating Cards"
         style={{
           contain: "paint layout",
+          isolation: "isolate",
         }}
       >
         <div className="svs sticky top-0 h-screen overflow-hidden flex flex-col pt-24 md:pt-28 pb-8 bg-white">
