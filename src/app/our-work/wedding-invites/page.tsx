@@ -9,34 +9,74 @@ export const metadata: Metadata = {
 
 const WEDDING_GALLERY = [
   {
-    title: "Heritage Botanical Suite",
-    desc: "Single-color deep letterpress on 600gsm Wild Ivory cotton cardstock with custom monogram.",
-    img: "/assets/our-work/wedding-invites/wedding_p1.jpg",
+    title: "Daniella & Minot",
+    desc: "Letterpress wedding invitation suite debossed on heavy pure cotton paper with custom envelopes.",
+    img: "/assets/our-work/wedding-invites/daniella-minot.jpg",
   },
   {
-    title: "Gold Foil Ceremonial Suite",
-    desc: "24k metallic hot foil stamping paired with hand-mixed oil pigments on heavy cotton paper.",
-    img: "/assets/our-work/wedding-invites/wedding_p2.jpg",
+    title: "Livika & Gideon",
+    desc: "Handcrafted letterpress wedding cards with delicate typography, blind debossing and fine details.",
+    img: "/assets/our-work/wedding-invites/livika-gideon.jpg",
   },
   {
-    title: "Deckled Edge Invitation",
-    desc: "Organic hand-torn deckled edges with deep tactile sculptural bite and RSVP insert.",
-    img: "/assets/our-work/wedding-invites/wedding_p3.jpg",
+    title: "Anita & Jeffrey",
+    desc: "Multi-piece ceremonial wedding suite on ultra-thick cotton cardstock with matching reply cards.",
+    img: "/assets/our-work/wedding-invites/anita-jeffrey.jpg",
   },
   {
-    title: "Minimalist Typographic Suite",
-    desc: "Refined modern serif typography debossed deep into pure cotton rag with euro-flap envelope.",
-    img: "/assets/our-work/wedding-invites/1-Wedding-card-A.jpg",
+    title: "Durga & Viceroy",
+    desc: "Rose gold metallic foil stamping paired with deep letterpress impression on archival cotton paper.",
+    img: "/assets/our-work/wedding-invites/durga-viceroy.jpg",
   },
   {
-    title: "Custom Crest & Liner Set",
-    desc: "Bespoke couple's crest with matching illustrated envelope liner and wax seal closure.",
-    img: "/assets/our-work/wedding-invites/2-Wedding-card-A.jpg",
+    title: "Sakune & Toito",
+    desc: "Bespoke Indian wedding suite with traditional motifs debossed into textured cotton stock.",
+    img: "/assets/our-work/wedding-invites/sakune-toito.jpg",
   },
   {
-    title: "Editorial Wedding Invitation",
-    desc: "Classic letterpress layout with delicate blind debossing and hand-mixed warm grey ink.",
-    img: "/assets/our-work/wedding-invites/3-Wedding-card-A.jpg",
+    title: "Sohan & Akshatha",
+    desc: "Vibrant red and blind impression letterpress wedding cards with custom monogram crest.",
+    img: "/assets/our-work/wedding-invites/sohan-akshatha.jpg",
+  },
+  {
+    title: "Himaka & Helika",
+    desc: "Classic letterpress invitation featuring refined serif typography and hand-mixed ink tones.",
+    img: "/assets/our-work/wedding-invites/himaka-helika.jpg",
+  },
+  {
+    title: "Mimi & Seyie",
+    desc: "Handcrafted floral wedding invitation suite with bespoke layout and coordinating inserts.",
+    img: "/assets/our-work/wedding-invites/mimi-seyie.jpg",
+  },
+  {
+    title: "Atif & Narjis",
+    desc: "Sophisticated grey letterpress wedding invitation with timeless calligraphy typography.",
+    img: "/assets/our-work/wedding-invites/atif-narjis.jpg",
+  },
+  {
+    title: "Awala Lkr & Sangro Aier",
+    desc: "Warm beige cotton suite with crisp deep bite impression and matching custom envelopes.",
+    img: "/assets/our-work/wedding-invites/awala-sangro.jpg",
+  },
+  {
+    title: "Chumchanbeni & Wonashi",
+    desc: "Artisanal grey letterpress wedding suite with custom layout and subtle debossed details.",
+    img: "/assets/our-work/wedding-invites/chumchanbeni-wonashi.jpg",
+  },
+  {
+    title: "Jaremdi & Daniel",
+    desc: "Hand-crafted wedding stationery set printed on vintage platen presses with rich ink density.",
+    img: "/assets/our-work/wedding-invites/jaremdi-daniel.jpg",
+  },
+  {
+    title: "Nesser Sangma & Neliyan",
+    desc: "Letterpress grey suite on premium cotton cardstock with crisp typographic hierarchy.",
+    img: "/assets/our-work/wedding-invites/nesser-neliyan.jpg",
+  },
+  {
+    title: "Weku-u Therie & Vitho David",
+    desc: "Bespoke wedding stationery suite debossed on heavy paper stock with coordinating stationery items.",
+    img: "/assets/our-work/wedding-invites/weku-vitho.jpg",
   },
 ];
 

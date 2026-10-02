@@ -9,34 +9,64 @@ export const metadata: Metadata = {
 
 const CUSTOM_GALLERY = [
   {
-    title: "Letterpress Cotton Coasters",
-    desc: "Printed on heavy 1000gsm absorbent pulpboard with deep relief impression that absorbs moisture without warping.",
-    img: "/assets/our-work/custom-works/st_coasters-3.jpg",
+    title: "Government of Karnataka",
+    desc: "Bespoke letterpress notebooks and executive presentation suites bound with debossed covers.",
+    img: "/assets/our-work/custom-works/govt-karnataka.jpg",
   },
   {
-    title: "Kraft Board Debossed Beer Mats",
-    desc: "Custom rustic kraft pulp coasters with high-contrast black letterpress impression.",
-    img: "/assets/our-work/custom-works/Coaster-Kraft-Closeup-2.jpg",
+    title: "SCAD",
+    desc: "Custom invitation and presentation pieces with clean black typography debossed into cotton stock.",
+    img: "/assets/our-work/custom-works/scad.jpg",
   },
   {
-    title: "Geometric Pattern Bar Coasters",
-    desc: "Double-sided letterpress coasters with crisp geometric patterns and branding.",
-    img: "/assets/our-work/custom-works/Coaster-Kraft-Front-1.jpg",
+    title: "Angry Mother",
+    desc: "Custom letterpress soap packaging boxes handcrafted with tactile artisanal finishes.",
+    img: "/assets/our-work/custom-works/angry-mother.jpg",
   },
   {
-    title: "Mizo Cultural Heritage Coasters",
-    desc: "Bespoke regional artwork debossed deep into circular cotton pulp mats.",
-    img: "/assets/our-work/custom-works/Coaster-Mizo.jpg",
+    title: "Beauty Barn",
+    desc: "Foil stamped luxury merchandise presentation bags with bespoke brand detailing.",
+    img: "/assets/our-work/custom-works/beauty-barn.jpg",
   },
   {
-    title: "Bespoke Personal Stationery Sets",
-    desc: "Custom stationery, correspondence cards, and personalized folders on luxury cotton paper.",
-    img: "/assets/our-work/custom-works/Custom-Stationery.jpg",
+    title: "Mizo Brewery",
+    desc: "Authentic pulpboard absorbent beer coasters with deep dimensional letterpress impression.",
+    img: "/assets/our-work/custom-works/mizo-brewery.jpg",
   },
   {
-    title: "Custom Artisanal Packaging",
-    desc: "Hand-folded presentation boxes, custom rigid sleeves, and luxury product boxes with foil stamping.",
-    img: "/assets/our-work/custom-works/Custom-Packaging2.jpg",
+    title: "Vekutholu",
+    desc: "Gold hot foil stamped luxury invite boxes with matching custom presentation inserts.",
+    img: "/assets/our-work/custom-works/vekutholu.jpg",
+  },
+  {
+    title: "Gayatri Mantra",
+    desc: "Gold metallic foil stamped spiritual broadsides printed on archival cotton art paper.",
+    img: "/assets/our-work/custom-works/gayatri-mantra.jpg",
+  },
+  {
+    title: "T R Zeliang",
+    desc: "Bespoke festive greeting cards with multi-color letterpress printing and hand-finishing.",
+    img: "/assets/our-work/custom-works/tr-zeliang.jpg",
+  },
+  {
+    title: "Mhathung Yanthan",
+    desc: "Metallic gold and blind debossed greeting cards with tactile sculptural embossing.",
+    img: "/assets/our-work/custom-works/mhathung-yanthan.jpg",
+  },
+  {
+    title: "Gifting Solutions",
+    desc: "Handcrafted letterpress greeting and celebration cards with bespoke typography.",
+    img: "/assets/our-work/custom-works/gifting-solutions.jpg",
+  },
+  {
+    title: "Feather Print",
+    desc: "High-detail fine art tactile letterpress print on heavy handmade deckled paper.",
+    img: "/assets/our-work/custom-works/feather-print.jpg",
+  },
+  {
+    title: "Jaaziel",
+    desc: "Letterpress celebration cards and bespoke stationery with vibrant pigment density.",
+    img: "/assets/our-work/custom-works/jaaziel.jpg",
   },
 ];
 

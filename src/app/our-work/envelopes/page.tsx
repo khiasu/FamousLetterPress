@@ -9,39 +9,64 @@ export const metadata: Metadata = {
 
 const ENVELOPE_GALLERY = [
   {
-    title: "Hand-Lined Wedding Suite Envelopes",
-    desc: "Custom euro-flap envelopes with watercolor illustrated botanical liners.",
+    title: "Euro-Flap Monogram Envelopes (Set 1)",
+    desc: "Letterpress debossed return addressing and bespoke crest on premium pointed euro-flap cotton envelopes.",
     img: "/assets/our-work/envelopes/printed-envelopes-1.jpg",
   },
   {
-    title: "Monogram Letterpress Flap",
-    desc: "Debossed crest relief on the pointed rear flap with matching RSVP envelopes.",
+    title: "Handcrafted Invitation Envelopes (Set 2)",
+    desc: "Custom heavy paper stock envelopes with crisp typography debossing and elegant proportions.",
+    img: "/assets/our-work/envelopes/printed-envelopes-2.jpg",
+  },
+  {
+    title: "Classic Pointed Flap Envelopes (Set 3)",
+    desc: "Archival cotton envelopes tailored for bespoke wedding suites and formal correspondence.",
     img: "/assets/our-work/envelopes/printed-envelopes-3.jpg",
   },
   {
-    title: "Terracotta Cotton Envelopes",
-    desc: "Custom pigmented earth-toned heavy envelope stock with metallic gold foil liner.",
+    title: "Terracotta & Warm Toned Envelopes (Set 4)",
+    desc: "Custom pigmented earth-toned envelope paper with rich letterpress printing on the flap.",
     img: "/assets/our-work/envelopes/printed-envelopes-4.jpg",
   },
   {
-    title: "Classic White Euro-Flap Set",
-    desc: "Deep pointed euro-flap envelopes printed on thick 250gsm Wild Ivory paper.",
+    title: "Wild Ivory Cotton Envelopes (Set 5)",
+    desc: "Deep pointed flap envelopes crafted from thick 250gsm pure cotton paper stock.",
     img: "/assets/our-work/envelopes/printed-envelopes-5.jpg",
   },
   {
-    title: "Deckled Flap Luxury Envelopes",
-    desc: "Organic deckle along the envelope closure paired with calligraphy guest addressing.",
+    title: "Artisanal Wedding Envelopes (Set 6)",
+    desc: "Bespoke stationery envelopes with sculpted letterpress impression for wedding invitations.",
     img: "/assets/our-work/envelopes/printed-envelopes-6.jpg",
   },
   {
-    title: "Botanical Illustrated Liners",
-    desc: "Full-bleed interior envelope lining printed with delicate botanical foliage.",
+    title: "Botanical Liner Envelopes (Set 7)",
+    desc: "Hand-lined wedding envelopes with custom illustrated interior patterns and foil debossing.",
     img: "/assets/our-work/envelopes/printed-envelopes-7.jpg",
   },
   {
-    title: "Executive Correspondence Envelopes",
-    desc: "Letterpress business envelopes crafted for corporate stationery and executive suites.",
+    title: "Executive Flap Envelopes (Set 8)",
+    desc: "Precision printed business and personal stationery envelopes for professional correspondence.",
     img: "/assets/our-work/envelopes/printed-envelopes-8.jpg",
+  },
+  {
+    title: "Custom Monogram Envelopes (Set 9)",
+    desc: "Handcrafted envelope sets with personalized blind debossed crest on back flap.",
+    img: "/assets/our-work/envelopes/printed-envelopes-9.jpg",
+  },
+  {
+    title: "Fine Art Letterpress Envelopes (Set 10)",
+    desc: "Bespoke cotton envelopes printed on vintage platen presses with rich pigment inks.",
+    img: "/assets/our-work/envelopes/printed-envelopes-10.jpg",
+  },
+  {
+    title: "Luxury Event Envelopes (Set 11)",
+    desc: "Heavyweight tactile envelopes designed to protect and elevate fine invitation cards.",
+    img: "/assets/our-work/envelopes/printed-envelopes-11.jpg",
+  },
+  {
+    title: "Suite Presentation Envelopes (Set 12)",
+    desc: "Coordinated envelope sizing with matching RSVP and enclosure envelopes.",
+    img: "/assets/our-work/envelopes/printed-envelopes-12.jpg",
   },
 ];
 

@@ -48,6 +48,26 @@ const ARTWORKS_GALLERY = [
     category: "Custom Letterpress Die Matrices",
     img: "/assets/our-work/design-illustrations/Design-Illustration-1.jpg",
   },
+  {
+    title: "Fitness Brand Identity",
+    category: "Brand Logo & Vector Mark",
+    img: "/assets/our-work/design-illustrations/fitness-logo.jpg",
+  },
+  {
+    title: "Custom Logo Design Studio",
+    category: "Brand Mark & Vector Illustration",
+    img: "/assets/our-work/design-illustrations/BackgroundLOGO-DESIGN.jpg",
+  },
+  {
+    title: "Sumi Indigenous Portraiture",
+    category: "Cultural Line Art",
+    img: "/assets/our-work/design-illustrations/sumi-gal.jpg",
+  },
+  {
+    title: "Warrior Spear Kick Study",
+    category: "Dynamic Motion Illustration",
+    img: "/assets/our-work/design-illustrations/spear-kick.jpg",
+  },
 ];
 
 export default function DesignIllustrationPage() {

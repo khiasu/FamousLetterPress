@@ -11,62 +11,62 @@ const CLIENT_CARDS = [
   {
     client: "Alicia Souza",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 300 GSM • Letterpress (Single Colour)",
-    img: "/assets/our-work/business-cards/1.jpg",
+    img: "/assets/our-work/business-cards/alicia-souza.jpg",
   },
   {
     client: "Avinash",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Gold)",
-    img: "/assets/our-work/business-cards/2.jpg",
+    img: "/assets/our-work/business-cards/avinash.jpg",
   },
   {
     client: "Cold Mountain",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Single Colour - Green)",
-    img: "/assets/our-work/business-cards/3.jpg",
+    img: "/assets/our-work/business-cards/cold-mountain.jpg",
   },
   {
     client: "Lideu",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Single Colour - Dusty Pink)",
-    img: "/assets/our-work/business-cards/4.jpg",
+    img: "/assets/our-work/business-cards/lideu.jpg",
   },
   {
     client: "Lucy Ngullie",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 300 GSM • Letterpress (Single Colour)",
-    img: "/assets/our-work/business-cards/5.jpg",
+    img: "/assets/our-work/business-cards/lucy-ngullie.jpg",
   },
   {
     client: "M for Apples",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Blind + Grey)",
-    img: "/assets/our-work/business-cards/6.jpg",
+    img: "/assets/our-work/business-cards/m-for-apples.jpg",
   },
   {
     client: "Nilaya",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Single Colour - Grey)",
-    img: "/assets/our-work/business-cards/7.jpg",
+    img: "/assets/our-work/business-cards/nilaya.jpg",
   },
   {
     client: "Rachna Takawale",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Pantone & Die-cut)",
-    img: "/assets/our-work/business-cards/8.jpg",
+    img: "/assets/our-work/business-cards/rachna-takawale.jpg",
   },
   {
     client: "Space Man",
     specs: "Wild Ivory White 450 GSM • Letterpress in single colour black",
-    img: "/assets/our-work/business-cards/9.jpg",
+    img: "/assets/our-work/business-cards/space-man.jpg",
   },
   {
     client: "Theyievino Whiso",
     specs: "8.5 × 5.4 cm rectangle • Wild ivory white 540 GSM • Letterpress in 3 colour (Black, Red, Green)",
-    img: "/assets/our-work/business-cards/10.jpg",
+    img: "/assets/our-work/business-cards/theyievino.jpg",
   },
   {
     client: "Universal Thirst",
     specs: "8.5 × 5.4 cm rectangle • Wild ivory white 300 GSM • Letterpress in single colour black",
-    img: "/assets/our-work/business-cards/11.jpg",
+    img: "/assets/our-work/business-cards/universal-thirst.jpg",
   },
   {
     client: "Winstar Realtors",
     specs: "8.5 × 5.4 cm rectangle • Wild ivory white 450 GSM • Letterpress in single colour black",
-    img: "/assets/our-work/business-cards/12.jpg",
+    img: "/assets/our-work/business-cards/winstar-realtors.jpg",
   },
 ];
 

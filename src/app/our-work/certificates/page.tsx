@@ -9,34 +9,44 @@ export const metadata: Metadata = {
 
 const CERTIFICATE_GALLERY = [
   {
-    title: "Presidential & University Diplomas",
-    desc: "Printed on acid-free cotton papers with deep brass die debossing and mirror gold foil.",
-    img: "/assets/our-work/certificates/letterpress-certificates-india1.jpg",
+    title: "Tetushi",
+    desc: "Archival letterpress certificates on acid-free cotton papers with deep debossed borders and foil stamped crest.",
+    img: "/assets/our-work/certificates/tetushi.jpg",
   },
   {
-    title: "Letterpress Award Cards",
-    desc: "Heavy 600gsm cotton certificate presentation cards with sculptural relief seals.",
-    img: "/assets/our-work/certificates/letterpress-certificate-cards.jpg",
+    title: "Kohima Education Society",
+    desc: "Official educational honors certificate with intricate border matrices and gold foil authentication seals.",
+    img: "/assets/our-work/certificates/kohima-education.jpg",
   },
   {
-    title: "Archival Art Print Certificate",
-    desc: "Numbered limited edition authentication broadsides with letterpress provenance stamp.",
-    img: "/assets/our-work/certificates/letterpress-artprint-certificate.jpg",
+    title: "St. John",
+    desc: "Distinguished letterpress certificate printed on heavy cotton stock with clean typographic hierarchy.",
+    img: "/assets/our-work/certificates/st-john.jpg",
   },
   {
-    title: "Institutional Honors Certificate",
-    desc: "Ornate border relief matrices and hand-signed calligraphy lines on vintage platen presses.",
-    img: "/assets/our-work/certificates/letterpress-certificates-india3.jpg",
+    title: "NECU",
+    desc: "Institutional convocation certificate with royal foil stamping and deep dimensional impression.",
+    img: "/assets/our-work/certificates/necu.jpg",
   },
   {
-    title: "Hot Foil Stamped Official Seals",
-    desc: "Metallic gold and bronze foil-fused crests that cannot be replicated by desktop printers.",
-    img: "/assets/our-work/certificates/letterpress-certificates-india5.jpg",
+    title: "DCCI",
+    desc: "Chamber of Commerce & Industry excellence certificate printed on acid-free archival cotton paper.",
+    img: "/assets/our-work/certificates/dcci.jpg",
   },
   {
-    title: "Acid-Free Cotton Achievement Suite",
-    desc: "Permanent archival durability designed to resist yellowing or degradation across decades.",
-    img: "/assets/our-work/certificates/letterpress-certificates-india8.jpg",
+    title: "Her & Now",
+    desc: "Entrepreneurship award certificate with custom embossed insignia and metallic pigment detailing.",
+    img: "/assets/our-work/certificates/her-now.jpg",
+  },
+  {
+    title: "Maple Tree",
+    desc: "Archival graduation and merit certificates designed to preserve lifetime achievements without fading.",
+    img: "/assets/our-work/certificates/maple-tree.jpg",
+  },
+  {
+    title: "Moaso",
+    desc: "Fine art provenance and honor certificate with rich black ink impression and tactile debossed seal.",
+    img: "/assets/our-work/certificates/moaso.jpg",
   },
 ];
 

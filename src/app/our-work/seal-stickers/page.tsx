@@ -38,6 +38,36 @@ const SEAL_GALLERY = [
     desc: "Personalized couple initials and wedding date relief printed for swift, pristine invitation assembly.",
     img: "/assets/our-work/seal-stickers/Layer-19seals.jpg",
   },
+  {
+    title: "Terracotta Wax Seal Stickers",
+    desc: "Hand-cast earthy wax seals with custom initials and self-adhesive peel release backing.",
+    img: "/assets/our-work/seal-stickers/Layer-8seals.jpg",
+  },
+  {
+    title: "Metallic Gold Crest Seals",
+    desc: "Foil-stamped monogram stickers on pure cotton paper with clean kiss-cut perimeter.",
+    img: "/assets/our-work/seal-stickers/Layer-13seals.jpg",
+  },
+  {
+    title: "Bespoke Couple Monogram Seals",
+    desc: "Custom illustrated monogram die-cut seals for effortless, mess-free envelope closure.",
+    img: "/assets/our-work/seal-stickers/Layer-3seals.jpg",
+  },
+  {
+    title: "Copper & Bronze Wax Seals",
+    desc: "Deep metallic luster wax seals individually poured and stamped with custom brass dies.",
+    img: "/assets/our-work/seal-stickers/Layer-20seals.jpg",
+  },
+  {
+    title: "Letterpress Cotton Stickers",
+    desc: "Heavy cotton paper seal stickers debossed on vintage presses with rich pigment ink.",
+    img: "/assets/our-work/seal-stickers/Seal-stickers-2.jpg",
+  },
+  {
+    title: "Classic Wedding Wax Seals",
+    desc: "Traditional sealing wax stamped with ornate couple insignia for luxurious presentation.",
+    img: "/assets/our-work/seal-stickers/letterpress-wedding-wax-seals.jpg",
+  },
 ];
 
 export default function SealStickersPage() {
