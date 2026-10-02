@@ -4,39 +4,39 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Wedding Invites Portfolio | Famous Letterpress",
   description:
-    "Handcrafted, custom, and ready-made letterpress wedding stationery suites pressed on 100% cotton paper in Nagaland, India.",
+    "We offer a wide selection of handcrafted, custom, and ready-made wedding stationery that can be personalized to make a big impression on your big day.",
 };
 
 const WEDDING_GALLERY = [
   {
-    title: "Livika & Gedeon Suite",
-    desc: "Letterpress and warm gold foil on 600gsm pure cotton rag with custom calligraphy.",
-    img: "/assets/revamp/what-we-make/FMS_6975.jpg",
+    title: "Heritage Botanical Suite",
+    desc: "Single-color deep letterpress on 600gsm Wild Ivory cotton cardstock with custom monogram.",
+    img: "/assets/our-work/wedding-invites/wedding_p1.jpg",
   },
   {
-    title: "Botanical Crest Invitation",
-    desc: "Blind debossed floral foliage with single-color forest green impression.",
-    img: "/assets/wedding stationery/invites/FMS_2762.jpg",
+    title: "Gold Foil Ceremonial Suite",
+    desc: "24k metallic hot foil stamping paired with hand-mixed oil pigments on heavy cotton paper.",
+    img: "/assets/our-work/wedding-invites/wedding_p2.jpg",
   },
   {
-    title: "Minimalist Modern Suite",
-    desc: "Crisp architectural typography, blind letterpress impression, and hand-deckled edges.",
-    img: "/assets/revamp/what-we-make/FMS_6427.jpg",
+    title: "Deckled Edge Invitation",
+    desc: "Organic hand-torn deckled edges with deep tactile sculptural bite and RSVP insert.",
+    img: "/assets/our-work/wedding-invites/wedding_p3.jpg",
   },
   {
-    title: "Heritage Gold Foil Suite",
-    desc: "24k hot foil stamped monogram with matching RSVP and custom euro-flap liner.",
-    img: "/assets/revamp/what-we-make/FMS_8669.jpg",
+    title: "Minimalist Typographic Suite",
+    desc: "Refined modern serif typography debossed deep into pure cotton rag with euro-flap envelope.",
+    img: "/assets/our-work/wedding-invites/1-Wedding-card-A.jpg",
   },
   {
-    title: "Monochrome Black Letterpress",
-    desc: "Deep bite oil-based black ink on 600gsm Wild Ivory cotton cardstock.",
-    img: "/assets/revamp/what-we-make/FMS_3781.jpg",
+    title: "Custom Crest & Liner Set",
+    desc: "Bespoke couple's crest with matching illustrated envelope liner and wax seal closure.",
+    img: "/assets/our-work/wedding-invites/2-Wedding-card-A.jpg",
   },
   {
-    title: "Wax Sealed Ceremonial Suite",
-    desc: "Complete invitation set finished with hand-poured custom crest wax seals.",
-    img: "/assets/revamp/what-we-make/FMS_4043.jpg",
+    title: "Editorial Wedding Invitation",
+    desc: "Classic letterpress layout with delicate blind debossing and hand-mixed warm grey ink.",
+    img: "/assets/our-work/wedding-invites/3-Wedding-card-A.jpg",
   },
 ];
 
@@ -78,10 +78,10 @@ export default function WeddingInvitesPage() {
         <div className="w">
           <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
-              Selected Client Suites
+              Portfolio Gallery
             </span>
             <span className="text-xs text-[#888] font-light">
-              600–900 GSM Pure Cotton
+              600–900 GSM Pure Cotton Paper
             </span>
           </div>
 

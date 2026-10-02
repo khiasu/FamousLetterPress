@@ -4,29 +4,39 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Archival Certificates & Diplomas | Famous Letterpress",
   description:
-    "Letterpress and hot foil stamped archival certificates printed on acid-free cotton paper with royal debossed finish in Nagaland, India.",
+    "Certificates are a symbol of achievements, and we believe that they should feel like that as well. All our certificates are printed on acid-free cotton papers (ideal for archival purposes), debossed on our press, and then foil stamped, giving them a royal finish that is very hard to duplicate with a regular printer or press.",
 };
 
-const CERTIFICATE_SPECS = [
+const CERTIFICATE_GALLERY = [
   {
-    title: "Acid-Free Cotton Rag",
-    desc: "100% archival cotton paper resistant to yellowing, humidity, and aging over decades.",
-    img: "/assets/our-work/certificates.jpg",
+    title: "Presidential & University Diplomas",
+    desc: "Printed on acid-free cotton papers with deep brass die debossing and mirror gold foil.",
+    img: "/assets/our-work/certificates/letterpress-certificates-india1.jpg",
   },
   {
-    title: "Precision Metal Die Relief",
-    desc: "Bespoke brass dies debossing official seal insignias and regal ornate borders into the paper fiber.",
-    img: "/assets/revamp/what-we-make/FMS_6999.jpg",
+    title: "Letterpress Award Cards",
+    desc: "Heavy 600gsm cotton certificate presentation cards with sculptural relief seals.",
+    img: "/assets/our-work/certificates/letterpress-certificate-cards.jpg",
   },
   {
-    title: "Metallic Hot Foil Stamping",
-    desc: "Mirror gold, satin silver, and bronze hot foil stamping that cannot be replicated by desktop printers.",
-    img: "/assets/revamp/what-we-make/FMS_3781.jpg",
+    title: "Archival Art Print Certificate",
+    desc: "Numbered limited edition authentication broadsides with letterpress provenance stamp.",
+    img: "/assets/our-work/certificates/letterpress-artprint-certificate.jpg",
   },
   {
-    title: "Hand-Numbered Editions",
-    desc: "Individual numbering and calligraphy signature lines for prestigious honors and degree conferrals.",
-    img: "/assets/revamp/what-we-make/FMS_6500.jpg",
+    title: "Institutional Honors Certificate",
+    desc: "Ornate border relief matrices and hand-signed calligraphy lines on vintage platen presses.",
+    img: "/assets/our-work/certificates/letterpress-certificates-india3.jpg",
+  },
+  {
+    title: "Hot Foil Stamped Official Seals",
+    desc: "Metallic gold and bronze foil-fused crests that cannot be replicated by desktop printers.",
+    img: "/assets/our-work/certificates/letterpress-certificates-india5.jpg",
+  },
+  {
+    title: "Acid-Free Cotton Achievement Suite",
+    desc: "Permanent archival durability designed to resist yellowing or degradation across decades.",
+    img: "/assets/our-work/certificates/letterpress-certificates-india8.jpg",
   },
 ];
 
@@ -63,16 +73,25 @@ export default function CertificatesPage() {
         </div>
       </section>
 
-      {/* ── Certificate Specifications ── */}
-      <section className="py-16 md:py-24" aria-label="Certificate Details">
+      {/* ── Gallery Showcase ── */}
+      <section className="py-16 md:py-24" aria-label="Certificate Gallery">
         <div className="w">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
-            {CERTIFICATE_SPECS.map((item) => (
+          <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
+              Archival Certificates & Honors
+            </span>
+            <span className="text-xs text-[#888] font-light">
+              Acid-Free Cotton &bull; Debossed &bull; Foil Stamped
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {CERTIFICATE_GALLERY.map((item) => (
               <div
                 key={item.title}
-                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-5 sm:p-6 rounded-xs shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
+                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-4 sm:p-5 flex flex-col rounded-xs transition-all duration-300 hover:border-black/35 hover:-translate-y-1 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
               >
-                <div className="relative aspect-[16/10] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
+                <div className="relative aspect-[4/3] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
@@ -80,10 +99,10 @@ export default function CertificatesPage() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <h3 className="font-serif font-medium text-2xl text-black mb-2">
+                <h3 className="font-serif font-medium text-xl text-black mb-1.5">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#555] font-light leading-relaxed">
+                <p className="text-xs text-[#555] font-light leading-relaxed">
                   {item.desc}
                 </p>
               </div>

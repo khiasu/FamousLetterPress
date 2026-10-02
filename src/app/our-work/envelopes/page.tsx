@@ -4,29 +4,44 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Letterpress Envelopes & Liners | Famous Letterpress",
   description:
-    "Personalized, handcrafted letterpress envelopes and custom illustrated euro-flap liners printed on heavy vintage presses in Nagaland, India.",
+    "Our vintage presses provide us the unique ability to print on thick paper stock and irregular shapes to make stunning personalized envelopes.",
 };
 
-const ENVELOPE_FEATURES = [
+const ENVELOPE_GALLERY = [
   {
-    title: "Euro-Flap Pointed Geometry",
-    desc: "Custom deep pointed euro flaps cut to perfection with smooth tactile contours.",
-    img: "/assets/revamp/what-we-make/FMS_6427.jpg",
+    title: "Hand-Lined Wedding Suite Envelopes",
+    desc: "Custom euro-flap envelopes with watercolor illustrated botanical liners.",
+    img: "/assets/our-work/envelopes/printed-envelopes-1.jpg",
   },
   {
-    title: "Bespoke Illustrated Liners",
-    desc: "Patterned, watercolor, or architectural sketches printed on lightweight archival lining paper.",
-    img: "/assets/wedding stationery/invites/FMS_2762.jpg",
+    title: "Monogram Letterpress Flap",
+    desc: "Debossed crest relief on the pointed rear flap with matching RSVP envelopes.",
+    img: "/assets/our-work/envelopes/printed-envelopes-3.jpg",
   },
   {
-    title: "Letterpress Return Addressing",
-    desc: "Crisp debossed relief addressing on the rear flap for a prestigious mail presentation.",
-    img: "/assets/revamp/what-we-make/FMS_6975.jpg",
+    title: "Terracotta Cotton Envelopes",
+    desc: "Custom pigmented earth-toned heavy envelope stock with metallic gold foil liner.",
+    img: "/assets/our-work/envelopes/printed-envelopes-4.jpg",
   },
   {
-    title: "Wax Seal & Calligraphy Pairing",
-    desc: "Designed to support organic hand-poured wax seals and liquid calligraphy inks without bleeding.",
-    img: "/assets/revamp/what-we-make/FMS_4043.jpg",
+    title: "Classic White Euro-Flap Set",
+    desc: "Deep pointed euro-flap envelopes printed on thick 250gsm Wild Ivory paper.",
+    img: "/assets/our-work/envelopes/printed-envelopes-5.jpg",
+  },
+  {
+    title: "Deckled Flap Luxury Envelopes",
+    desc: "Organic deckle along the envelope closure paired with calligraphy guest addressing.",
+    img: "/assets/our-work/envelopes/printed-envelopes-6.jpg",
+  },
+  {
+    title: "Botanical Illustrated Liners",
+    desc: "Full-bleed interior envelope lining printed with delicate botanical foliage.",
+    img: "/assets/our-work/envelopes/printed-envelopes-7.jpg",
+  },
+  {
+    title: "Executive Correspondence Envelopes",
+    desc: "Letterpress business envelopes crafted for corporate stationery and executive suites.",
+    img: "/assets/our-work/envelopes/printed-envelopes-8.jpg",
   },
 ];
 
@@ -63,16 +78,25 @@ export default function EnvelopesPage() {
         </div>
       </section>
 
-      {/* ── Envelope Details & Showcase ── */}
-      <section className="py-16 md:py-24" aria-label="Envelope Showcase">
+      {/* ── Gallery Showcase ── */}
+      <section className="py-16 md:py-24" aria-label="Envelope Gallery">
         <div className="w">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
-            {ENVELOPE_FEATURES.map((item) => (
+          <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
+              Printed Envelopes & Liners
+            </span>
+            <span className="text-xs text-[#888] font-light">
+              Euro-Flap &bull; Custom Liners &bull; Thick Stock
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {ENVELOPE_GALLERY.map((item) => (
               <div
                 key={item.title}
-                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-5 sm:p-6 rounded-xs shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
+                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-4 sm:p-5 flex flex-col rounded-xs transition-all duration-300 hover:border-black/35 hover:-translate-y-1 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
               >
-                <div className="relative aspect-[16/10] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
+                <div className="relative aspect-[4/3] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
@@ -80,10 +104,10 @@ export default function EnvelopesPage() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <h3 className="font-serif font-medium text-2xl text-black mb-2">
+                <h3 className="font-serif font-medium text-xl text-black mb-1.5">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#555] font-light leading-relaxed">
+                <p className="text-xs text-[#555] font-light leading-relaxed">
                   {item.desc}
                 </p>
               </div>

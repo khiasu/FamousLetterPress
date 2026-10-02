@@ -4,39 +4,69 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Business Cards Portfolio | Famous Letterpress",
   description:
-    "Luxury letterpress business cards crafted on 300 to 540+ GSM Wild Ivory cotton cardstock with gilded edges and deep relief impression in Nagaland, India.",
+    "The use of business cards dates back to the 15th Century. Today, the business card is an extension of your brand’s identity and plays a crucial role in your first impression.",
 };
 
 const CLIENT_CARDS = [
   {
     client: "Alicia Souza",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 300 GSM • Letterpress (Single Colour)",
-    img: "/assets/revamp/what-we-make/FMS_3781.jpg",
+    img: "/assets/our-work/business-cards/1.jpg",
   },
   {
     client: "Avinash",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Gold)",
-    img: "/assets/revamp/what-we-make/FMS_8669.jpg",
+    img: "/assets/our-work/business-cards/2.jpg",
   },
   {
     client: "Cold Mountain",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Single Colour - Green)",
-    img: "/assets/revamp/what-we-make/FMS_6999.jpg",
+    img: "/assets/our-work/business-cards/3.jpg",
   },
   {
     client: "Lideu",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Single Colour - Dusty Pink)",
-    img: "/assets/revamp/what-we-make/FMS_6500.jpg",
+    img: "/assets/our-work/business-cards/4.jpg",
   },
   {
     client: "Lucy Ngullie",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 300 GSM • Letterpress (Single Colour)",
-    img: "/assets/revamp/what-we-make/FMS_7617.jpg",
+    img: "/assets/our-work/business-cards/5.jpg",
   },
   {
     client: "M for Apples",
     specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Blind + Grey)",
-    img: "/assets/revamp/what-we-make/FMS_4039.jpg",
+    img: "/assets/our-work/business-cards/6.jpg",
+  },
+  {
+    client: "Nilaya",
+    specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Single Colour - Grey)",
+    img: "/assets/our-work/business-cards/7.jpg",
+  },
+  {
+    client: "Rachna Takawale",
+    specs: "8.5 × 5.4 cm (Rounded) • Wild Ivory White 450 GSM • Letterpress (Pantone & Die-cut)",
+    img: "/assets/our-work/business-cards/8.jpg",
+  },
+  {
+    client: "Space Man",
+    specs: "Wild Ivory White 450 GSM • Letterpress in single colour black",
+    img: "/assets/our-work/business-cards/9.jpg",
+  },
+  {
+    client: "Theyievino Whiso",
+    specs: "8.5 × 5.4 cm rectangle • Wild ivory white 540 GSM • Letterpress in 3 colour (Black, Red, Green)",
+    img: "/assets/our-work/business-cards/10.jpg",
+  },
+  {
+    client: "Universal Thirst",
+    specs: "8.5 × 5.4 cm rectangle • Wild ivory white 300 GSM • Letterpress in single colour black",
+    img: "/assets/our-work/business-cards/11.jpg",
+  },
+  {
+    client: "Winstar Realtors",
+    specs: "8.5 × 5.4 cm rectangle • Wild ivory white 450 GSM • Letterpress in single colour black",
+    img: "/assets/our-work/business-cards/12.jpg",
   },
 ];
 
@@ -78,14 +108,14 @@ export default function BusinessCardsWorkPage() {
         <div className="w">
           <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
-              Client Archive Showcase
+              Our Clients Archive
             </span>
             <span className="text-xs text-[#888] font-light">
-              300–540 GSM Cotton Blends
+              300–540 GSM Wild Ivory Cotton Blends
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             {CLIENT_CARDS.map((card) => (
               <div
                 key={card.client}
@@ -99,10 +129,10 @@ export default function BusinessCardsWorkPage() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <h3 className="font-serif font-medium text-xl text-black mb-1">
+                <h3 className="font-serif font-medium text-lg text-black mb-1">
                   {card.client}
                 </h3>
-                <p className="text-xs text-[#666] font-light leading-relaxed">
+                <p className="text-[11.5px] text-[#666] font-light leading-relaxed">
                   {card.specs}
                 </p>
               </div>

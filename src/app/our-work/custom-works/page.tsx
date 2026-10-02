@@ -4,29 +4,39 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Custom Works & Special Commissions | Famous Letterpress",
   description:
-    "Bespoke coasters, notebooks, presentation boxes, blind debossed prints, and custom artisanal stationery handcrafted in Dimapur, Nagaland.",
+    "Our team is always up for a challenge. Coasters, notebooks, Pamphlets, decor pieces, we’ve done it all! Have a custom job in mind? Tell us all about it!",
 };
 
-const CUSTOM_PROJECTS = [
+const CUSTOM_GALLERY = [
   {
-    title: "Letterpress Coasters & Beer Mats",
-    desc: "Printed on 1000gsm absorbent cotton pulpboard with deep relief impressions that hold drinks without warping.",
-    img: "/assets/our-work/custom-works.jpg",
+    title: "Letterpress Cotton Coasters",
+    desc: "Printed on heavy 1000gsm absorbent pulpboard with deep relief impression that absorbs moisture without warping.",
+    img: "/assets/our-work/custom-works/st_coasters-3.jpg",
   },
   {
-    title: "Artisanal Hardcover Notebooks",
-    desc: "Hand-bound notebooks with letterpress debossed covers and smooth archival fountain-pen friendly internal pages.",
-    img: "/assets/revamp/what-we-make/FMS_6500.jpg",
+    title: "Kraft Board Debossed Beer Mats",
+    desc: "Custom rustic kraft pulp coasters with high-contrast black letterpress impression.",
+    img: "/assets/our-work/custom-works/Coaster-Kraft-Closeup-2.jpg",
   },
   {
-    title: "Bespoke Packaging & Rigid Boxes",
-    desc: "Custom presentation boxes with magnetic closures, hot foil stamping, and velvet or cotton paper wrapped trays.",
-    img: "/assets/revamp/what-we-make/FMS_8669.jpg",
+    title: "Geometric Pattern Bar Coasters",
+    desc: "Double-sided letterpress coasters with crisp geometric patterns and branding.",
+    img: "/assets/our-work/custom-works/Coaster-Kraft-Front-1.jpg",
   },
   {
-    title: "Fine Art Prints & Poetry Broadsides",
-    desc: "Limited-edition numbered relief prints on oversized heavy cotton paper with raw hand-torn deckle edges.",
-    img: "/assets/wedding stationery/invites/FMS_2762.jpg",
+    title: "Mizo Cultural Heritage Coasters",
+    desc: "Bespoke regional artwork debossed deep into circular cotton pulp mats.",
+    img: "/assets/our-work/custom-works/Coaster-Mizo.jpg",
+  },
+  {
+    title: "Bespoke Personal Stationery Sets",
+    desc: "Custom stationery, correspondence cards, and personalized folders on luxury cotton paper.",
+    img: "/assets/our-work/custom-works/Custom-Stationery.jpg",
+  },
+  {
+    title: "Custom Artisanal Packaging",
+    desc: "Hand-folded presentation boxes, custom rigid sleeves, and luxury product boxes with foil stamping.",
+    img: "/assets/our-work/custom-works/Custom-Packaging2.jpg",
   },
 ];
 
@@ -63,16 +73,25 @@ export default function CustomWorksPage() {
         </div>
       </section>
 
-      {/* ── Custom Projects Showcase ── */}
-      <section className="py-16 md:py-24" aria-label="Custom Works Showcase">
+      {/* ── Gallery Showcase ── */}
+      <section className="py-16 md:py-24" aria-label="Custom Works Gallery">
         <div className="w">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
-            {CUSTOM_PROJECTS.map((item) => (
+          <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
+              Coasters, Packaging & Bespoke Projects
+            </span>
+            <span className="text-xs text-[#888] font-light">
+              Pulpboard &bull; Cotton &bull; Handcrafted
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {CUSTOM_GALLERY.map((item) => (
               <div
                 key={item.title}
-                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-5 sm:p-6 rounded-xs shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
+                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-4 sm:p-5 flex flex-col rounded-xs transition-all duration-300 hover:border-black/35 hover:-translate-y-1 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
               >
-                <div className="relative aspect-[16/10] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
+                <div className="relative aspect-[4/3] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
@@ -80,10 +99,10 @@ export default function CustomWorksPage() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <h3 className="font-serif font-medium text-2xl text-black mb-2">
+                <h3 className="font-serif font-medium text-xl text-black mb-1.5">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#555] font-light leading-relaxed">
+                <p className="text-xs text-[#555] font-light leading-relaxed">
                   {item.desc}
                 </p>
               </div>

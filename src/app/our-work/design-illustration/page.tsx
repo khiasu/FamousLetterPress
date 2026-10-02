@@ -2,41 +2,51 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Design & Illustration Portfolio | Famous Letterpress",
+  title: "Design & Illustrations Portfolio | Famous Letterpress",
   description:
-    "In-house bespoke design, hand illustration, typography, and calligraphy crafted specifically for letterpress tactile printing in Nagaland, India.",
+    "Our team of experienced in house designers works with our clients to help manifest their vision. Our approach to design and illustration coupled with our collaborative approach makes for engaging works that are guaranteed to leave a lasting impression.",
 };
 
-const ARTWORKS = [
+const ARTWORKS_GALLERY = [
   {
-    title: "Alobo Naga Identity",
-    category: "Brand & Logo Matrix",
-    img: "/assets/our-work/design-illustrations.jpg",
+    title: "Poems & Literary Broadsides",
+    category: "Illustrated Typography",
+    img: "/assets/our-work/design-illustrations/poems-sumi-gal.jpg",
   },
   {
-    title: "Wander Nagaland",
-    category: "Illustrated Heritage Series",
-    img: "/assets/revamp/what-we-make/FMS_6975.jpg",
+    title: "Velvetten Dreams Art Print",
+    category: "Fine Art Illustration",
+    img: "/assets/our-work/design-illustrations/Design-Velvetten-Dreams.jpg",
   },
   {
-    title: "Velvetten Dreams",
-    category: "Fine Art Print Suite",
-    img: "/assets/revamp/what-we-make/FMS_6427.jpg",
+    title: "Wander Nagaland Heritage Series",
+    category: "Regional Illustrated Identity",
+    img: "/assets/our-work/design-illustrations/Design-Wander-Nagaland.jpg",
   },
   {
-    title: "Tribal Folklore Vectors",
-    category: "Northeastern Cultural Motifs",
-    img: "/assets/revamp/what-we-make/FMS_6999.jpg",
+    title: "Sumi Folklore & Spear Kick",
+    category: "Indigenous Cultural Motifs",
+    img: "/assets/our-work/design-illustrations/sumi-spear-kick.jpg",
   },
   {
-    title: "Bespoke Monograms & Crests",
-    category: "Calligraphic Monogram Matrices",
-    img: "/assets/revamp/what-we-make/FMS_4043.jpg",
+    title: "Bamboo Pole Naga Architecture",
+    category: "Vector Line Matrices",
+    img: "/assets/our-work/design-illustrations/bamboo-pole-square.jpg",
   },
   {
-    title: "Architectural Letterpress Line Art",
-    category: "Venue & Estate Illustrations",
-    img: "/assets/revamp/what-we-make/FMS_3781.jpg",
+    title: "Litsabo Traditional Study",
+    category: "Botanical & Cultural Vector",
+    img: "/assets/our-work/design-illustrations/litsabo-square.jpg",
+  },
+  {
+    title: "Hand Caricature & Portraiture",
+    category: "Custom Editorial Drawing",
+    img: "/assets/our-work/design-illustrations/caricature-tombo.jpg",
+  },
+  {
+    title: "Bespoke Book & Event Artwork",
+    category: "Custom Letterpress Die Matrices",
+    img: "/assets/our-work/design-illustrations/Design-Illustration-1.jpg",
   },
 ];
 
@@ -52,11 +62,11 @@ export default function DesignIllustrationPage() {
               <span>/</span>
               <Link href="/our-work" className="hover:text-black transition-colors">Our Work</Link>
               <span>/</span>
-              <span className="text-black font-medium">Design & Illustration</span>
+              <span className="text-black font-medium">Design & Illustrations</span>
             </div>
             <p className="k mb-2">Category 06 &bull; In-House Design & Artwork</p>
             <h1 className="d text-[clamp(36px,7.5vw,72px)] leading-[1.0] mt-2 mb-6 font-serif text-black">
-              Design & <i>Illustration.</i>
+              Design & <i>Illustrations.</i>
             </h1>
             <p className="text-base sm:text-lg text-[#444] max-w-2xl font-light leading-relaxed mb-8">
               Our team of experienced in house designers works with our clients to help manifest their vision. Our approach to design and illustration coupled with our collaborative approach makes for engaging works that are guaranteed to leave a lasting impression.
@@ -85,8 +95,8 @@ export default function DesignIllustrationPage() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {ARTWORKS.map((item) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {ARTWORKS_GALLERY.map((item) => (
               <div
                 key={item.title}
                 className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-4 sm:p-5 flex flex-col rounded-xs transition-all duration-300 hover:border-black/35 hover:-translate-y-1 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
@@ -99,10 +109,10 @@ export default function DesignIllustrationPage() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <h3 className="font-serif font-medium text-xl text-black mb-1">
+                <h3 className="font-serif font-medium text-lg text-black mb-1">
                   {item.title}
                 </h3>
-                <p className="text-xs text-[#7b7566] font-mono uppercase tracking-wider">
+                <p className="text-[11.5px] text-[#7b7566] font-mono uppercase tracking-wider">
                   {item.category}
                 </p>
               </div>

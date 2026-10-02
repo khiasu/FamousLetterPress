@@ -4,29 +4,39 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Seal Stickers & Wax Seals | Famous Letterpress",
   description:
-    "Handcrafted die-cut cotton paper seal stickers and hand-poured custom crest wax seals made in Dimapur, Nagaland.",
+    "Our die-cut seals are made from thick cotton paper and are easy to use and durable. Simply remove the release paper and seal your invite. No mess, no waste of envelopes.",
 };
 
-const SEAL_COLLECTIONS = [
+const SEAL_GALLERY = [
   {
-    title: "Die-Cut Cotton Seal Stickers",
-    desc: "Pressed on 300–450gsm pure cotton paper with high-tack backing. Simply peel and seal without wax residue.",
-    img: "/assets/revamp/what-we-make/FMS_4043.jpg",
+    title: "Gold Foil Botanical Seal Stickers",
+    desc: "Precision circular die-cut seals with metallic gold foil impression and permanent high-tack backing.",
+    img: "/assets/our-work/seal-stickers/Layer-26seals.jpg",
   },
   {
-    title: "Hand-Poured Wax Seals",
-    desc: "Organic pliable wax cast with engraved custom brass matrices, pre-backed with 3M adhesive tabs.",
-    img: "/assets/revamp/what-we-make/FMS_6975.jpg",
+    title: "Black Letterpress Cotton Seals",
+    desc: "Crisp deep bite monogram seals printed on 450gsm thick cotton stock.",
+    img: "/assets/our-work/seal-stickers/Layer-16seals.jpg",
   },
   {
-    title: "Gold Foil Monogram Seals",
-    desc: "Metallic mirror and matte gold hot foil stamped crests with precise die-cut circular edges.",
-    img: "/assets/revamp/what-we-make/FMS_8669.jpg",
+    title: "Sage Green Wax Seal Die-Cut",
+    desc: "Organic contoured seals designed to evoke the tactile beauty of hand-poured wax with peel-and-stick ease.",
+    img: "/assets/our-work/seal-stickers/letterpress-wedding-green-wax-seal.jpg",
   },
   {
-    title: "Blind Debossed Botanical Seals",
-    desc: "Deep tactile relief without ink, creating an organic artisanal impression on invitation flaps.",
-    img: "/assets/revamp/what-we-make/FMS_4039.jpg",
+    title: "Embossed Crest Seal Stickers",
+    desc: "Sculptural debossed seal matrices creating three-dimensional tactile texture on envelope flaps.",
+    img: "/assets/our-work/seal-stickers/Layer-25seals.jpg",
+  },
+  {
+    title: "Organic Hand-Cast Wax Seals",
+    desc: "Hand-poured flexible sealing wax stamped with custom brass monogram seals, complete with self-adhesive backing.",
+    img: "/assets/our-work/seal-stickers/letterpress-wedding-wax-seal-diecut.jpg",
+  },
+  {
+    title: "Custom Monogram Cotton Seals",
+    desc: "Personalized couple initials and wedding date relief printed for swift, pristine invitation assembly.",
+    img: "/assets/our-work/seal-stickers/Layer-19seals.jpg",
   },
 ];
 
@@ -63,16 +73,25 @@ export default function SealStickersPage() {
         </div>
       </section>
 
-      {/* ── Showcase ── */}
-      <section className="py-16 md:py-24" aria-label="Seal Stickers Showcase">
+      {/* ── Gallery Showcase ── */}
+      <section className="py-16 md:py-24" aria-label="Seal Stickers Gallery">
         <div className="w">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
-            {SEAL_COLLECTIONS.map((item) => (
+          <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
+              Die-Cut Cotton Seals & Wax Seals
+            </span>
+            <span className="text-xs text-[#888] font-light">
+              Peel &bull; Stick &bull; Mess-Free
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {SEAL_GALLERY.map((item) => (
               <div
                 key={item.title}
-                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-5 sm:p-6 rounded-xs shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
+                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-4 sm:p-5 flex flex-col rounded-xs transition-all duration-300 hover:border-black/35 hover:-translate-y-1 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
               >
-                <div className="relative aspect-[16/10] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
+                <div className="relative aspect-[4/3] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
@@ -80,10 +99,10 @@ export default function SealStickersPage() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
-                <h3 className="font-serif font-medium text-2xl text-black mb-2">
+                <h3 className="font-serif font-medium text-xl text-black mb-1.5">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#555] font-light leading-relaxed">
+                <p className="text-xs text-[#555] font-light leading-relaxed">
                   {item.desc}
                 </p>
               </div>
