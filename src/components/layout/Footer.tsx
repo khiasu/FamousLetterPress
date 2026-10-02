@@ -57,11 +57,11 @@ export function Footer() {
       }`}
       role="contentinfo"
     >
-      <div className="w py-12 sm:py-16">
+      <div className="w py-8 sm:py-10">
         {/* Top: Brand Header with Logo + Social Handles */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-10 border-b border-[rgba(14,14,14,0.1)]">
-          {/* Brand Identity with Circular Seal Logo */}
-          <div>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 pb-6 border-b border-[rgba(14,14,14,0.09)]">
+          {/* Brand Identity with Circular Seal Logo and gentle left breathing room */}
+          <div className="pl-1.5 sm:pl-2.5">
             <Link href="/" className="inline-flex items-center gap-3.5 group select-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -71,7 +71,7 @@ export function Footer() {
               />
               <div className="flex flex-col leading-none">
                 <span
-                  className="font-serif text-2xl sm:text-[26px] font-semibold tracking-[-0.015em] text-[#0e0e0e]"
+                  className="font-serif text-2xl sm:text-[25px] font-semibold tracking-[-0.015em] text-[#0e0e0e]"
                   style={{
                     fontFamily:
                       "var(--font-cormorant-garamond), 'Cormorant Garamond', 'Bodoni Moda', serif",
@@ -87,7 +87,7 @@ export function Footer() {
           </div>
 
           {/* Social Icons — Clean Monochrome Geometry */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 pr-1">
             {SOCIAL_PROFILES.map((social) => {
               const Icon = social.icon;
               return (
@@ -98,9 +98,9 @@ export function Footer() {
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   title={social.label}
-                  className="w-9 h-9 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-black text-black hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
+                  className="w-8.5 h-8.5 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-black text-black hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
                 >
-                  <Icon className="w-4 h-4 transition-colors" />
+                  <Icon className="w-3.5 h-3.5 transition-colors" />
                 </a>
               );
             })}
@@ -108,8 +108,8 @@ export function Footer() {
         </div>
 
         {/* Middle: Streamlined Quick Links Grid (Core Critical Pages) */}
-        <div className="py-10 border-b border-[rgba(14,14,14,0.08)]">
-          <div className="flex items-center gap-2 mb-6">
+        <div className="pt-6 pl-1.5 sm:pl-2.5">
+          <div className="flex items-center gap-2 mb-4">
             <span className="text-[9.5px] font-mono tracking-widest text-[#888]">
               01
             </span>
@@ -118,7 +118,7 @@ export function Footer() {
             </h4>
           </div>
 
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-3.5 gap-x-6">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-3 gap-x-6">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
                 {"external" in link && link.external ? (
@@ -126,14 +126,14 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13.5px] text-[#444] hover:text-black transition-colors block leading-snug"
+                    className="text-[13px] text-[#444] hover:text-black transition-colors block leading-snug"
                   >
                     {link.label}
                   </a>
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-[13.5px] text-[#444] hover:text-black transition-colors block leading-snug"
+                    className="text-[13px] text-[#444] hover:text-black transition-colors block leading-snug"
                   >
                     {link.label}
                   </Link>
@@ -141,12 +141,6 @@ export function Footer() {
               </li>
             ))}
           </ul>
-        </div>
-
-        {/* Bottom: Legal & Copyright Only */}
-        <div className="pt-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] font-mono tracking-wider text-[#888]">
-          <p>&copy; 2026 Famous Letterpress Studio. All rights reserved.</p>
-          <p className="text-[10.5px]">Dimapur, Nagaland, India</p>
         </div>
       </div>
     </footer>
