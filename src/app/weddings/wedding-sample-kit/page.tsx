@@ -24,7 +24,7 @@ export default function WeddingSampleKitPage() {
               <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888]">
                 <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <Link href="/weddings" className="hover:text-black transition-colors">Weddings</Link>
+                <Link href="/our-work/wedding-invites" className="hover:text-black transition-colors">Wedding Invites</Link>
                 <span>/</span>
                 <span className="text-black">Sample Kit</span>
               </div>

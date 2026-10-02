@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Business Cards Portfolio | Famous Letterpress",
+  title: "Luxury Letterpress Business Cards | Famous Letterpress",
   description:
-    "The use of business cards dates back to the 15th Century. Today, the business card is an extension of your brand’s identity and plays a crucial role in your first impression.",
+    "Handcrafted letterpress business cards on 600gsm cotton board, hot foil stamping, and foil edge gilding. Printed on vintage platen presses in Nagaland, India.",
 };
 
 const CLIENT_CARDS = [
@@ -70,6 +70,29 @@ const CLIENT_CARDS = [
   },
 ];
 
+const CARD_FINISHES = [
+  {
+    title: "600gsm & 900gsm Cotton",
+    desc: "Unbendable, ultra-heavyweight cotton board that makes an immediate, unforgettable physical impression.",
+    detail: "100% Tree-Free Cotton Rag",
+  },
+  {
+    title: "Precision Hot Foil Stamping",
+    desc: "Mirror gold, satin silver, copper, rose gold, or high-contrast gloss black applied under calibrated heat and pressure.",
+    detail: "Imported German Stamping Foils",
+  },
+  {
+    title: "Metallic Edge Gilding",
+    desc: "Hand-applied reflective foil gilding or custom Pantone color painted edges that elevate the profile of every stack.",
+    detail: "Beveled & Hand-Polished",
+  },
+  {
+    title: "Double-Sided Duplexing",
+    desc: "Two distinct stocks bonded back-to-back, allowing deep bite impressions on both sides with zero opposite-side show-through.",
+    detail: "Up to 1200gsm Combined Stock",
+  },
+];
+
 export default function BusinessCardsWorkPage() {
   return (
     <div className="min-h-screen text-black select-none">
@@ -92,8 +115,8 @@ export default function BusinessCardsWorkPage() {
               The use of business cards dates back to the 15th Century. Today, the business card is an extension of your brand’s identity and plays a crucial role in your first impression. Our business cards help reinforce your image and leave a lasting impression.
             </p>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-              <Link href="/business-cards" className="btn">
-                Explore Full Business Cards Page
+              <Link href="/start-a-project" className="btn">
+                Request Price
               </Link>
               <Link href="/business-cards/business-card-sample-kit" className="ln">
                 Order Card Sample Kit &rarr;
@@ -141,22 +164,61 @@ export default function BusinessCardsWorkPage() {
         </div>
       </section>
 
+      {/* ── Finishes & Tactile Options ── */}
+      <section className="py-20 md:py-28 bg-[#FAF8F5] border-y border-[rgba(14,14,14,0.08)]" aria-label="Finishes and Specs">
+        <div className="w">
+          <div className="max-w-xl mb-12">
+            <p className="k mb-2">Tactile Finishes</p>
+            <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+              Finishes built to <i>distinguish.</i>
+            </h2>
+            <p className="text-xs sm:text-sm text-[#444] font-light leading-relaxed">
+              Every detail is calibrated for distinction: ultra-thick tree-free cotton rag, hand-mixed Pantone inks, mirror foils, and beveled edge gilding.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CARD_FINISHES.map((finish) => (
+              <div
+                key={finish.title}
+                className="bg-white border border-[rgba(14,14,14,0.12)] p-6 flex flex-col justify-between rounded-xs"
+              >
+                <div>
+                  <span className="text-[10px] font-mono tracking-widest text-[#7b7566] block mb-2 uppercase">
+                    {finish.detail}
+                  </span>
+                  <h3 className="text-base font-serif text-black font-medium mb-2">
+                    {finish.title}
+                  </h3>
+                  <p className="text-xs text-[#555] font-light leading-relaxed">
+                    {finish.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Bottom CTA ── */}
-      <section className="py-20 md:py-28 text-center border-t border-[rgba(14,14,14,0.08)]">
+      <section className="py-20 md:py-28 text-center bg-white">
         <div className="max-w-2xl mx-auto px-6">
           <p className="k mb-2">Corporate & Identity Commissions</p>
           <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
             Command attention with every <i>handshake.</i>
           </h2>
           <p className="text-sm sm:text-base text-[#555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-            Choose from single or multi-color letterpress, edge gilding, debossing, and custom die cuts.
+            Choose from single or multi-color letterpress, edge gilding, debossing, and custom die cuts. We provide digital proofs and paper guidance within 24 hours.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
             <Link href="/start-a-project" className="btn">
-              Request Card Quote
+              Request Price
             </Link>
-            <Link href="/business-cards" className="ln">
-              View Business Cards Suite &rarr;
+            <Link href="/business-cards/business-card-sample-kit" className="btn bg-transparent text-black border border-black hover:bg-black hover:text-white">
+              Order Sample Kit
+            </Link>
+            <Link href="/our-work" className="ln">
+              &larr; Back to Our Work
             </Link>
           </div>
         </div>

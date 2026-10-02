@@ -27,7 +27,7 @@ const AUDIENCES = [
     description:
       "Uncompromising executive cards, luxury packaging sleeves, certificates, and bespoke letterheads for discerning brands seeking physical authority and tactile distinction.",
     cta: "Inquire B2B",
-    href: "/business-cards",
+    href: "/our-work/business-cards",
     external: false,
     img: "/assets/revamp/what-we-make/FMS_3781.jpg",
   },

@@ -21,7 +21,7 @@ export function ServicesSection() {
       description:
         servicesMap["business-cards"]?.tagline ||
         "Thick cotton business cards with deep impression, foil detailing, and custom edge painting. Printed one card at a time to make sure each one feels substantial.",
-      href: "/business-cards",
+      href: "/our-work/business-cards",
       label: "Explore business cards",
       image:
         servicesMap["business-cards"]?.featuredImage ||

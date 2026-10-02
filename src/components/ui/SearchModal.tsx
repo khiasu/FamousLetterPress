@@ -13,13 +13,13 @@ export interface NavigationTarget {
 
 const SITE_NAVIGATION_TARGETS: NavigationTarget[] = [
   // Core services & pages
-  { id: "weddings", title: "Wedding Invitations", section: "Services", href: "/weddings", keywords: ["wedding", "invite", "invitations", "marriage", "suite", "bride", "foil"] },
+  { id: "weddings", title: "Wedding Invitations", section: "Services", href: "/our-work/wedding-invites", keywords: ["wedding", "invite", "invitations", "marriage", "suite", "bride", "foil"] },
   { id: "wedding-stationery", title: "Wedding Stationery Suites", section: "Services", href: "/weddings/wedding-stationery", keywords: ["stationery", "rsvp", "save the date", "event card", "menu", "envelope"] },
   { id: "early-bride", title: "Early Bride Consultation", section: "Services", href: "/weddings/early-bride", keywords: ["early bride", "consult", "booking", "custom"] },
-  { id: "business-cards", title: "Executive Business Cards", section: "Services", href: "/business-cards", keywords: ["business", "visiting card", "executive", "cards", "corporate", "edge gilding"] },
+  { id: "business-cards", title: "Business Cards", section: "Services", href: "/our-work/business-cards", keywords: ["business", "visiting card", "executive", "cards", "corporate", "edge gilding"] },
   { id: "personalised-stationery", title: "Personalised Stationery", section: "Services", href: "/personalised-stationery", keywords: ["personalised", "notecard", "letterhead", "monogram", "correspondence"] },
   { id: "sample-wedding", title: "Wedding Sample Kit (₹1,500)", section: "Sample Kits", href: "/weddings/wedding-sample-kit", keywords: ["sample", "kit", "box", "wedding sample", "swatch", "paper"] },
-  { id: "sample-business", title: "Business Card Sample Kit (₹1,000)", section: "Sample Kits", href: "/business-cards/business-card-sample-kit", keywords: ["business sample", "card kit", "sample pack", "cotton sample"] },
+
   { id: "our-work", title: "Our Work & Portfolio", section: "Explore", href: "/our-work", keywords: ["work", "portfolio", "archive", "projects", "gallery", "commissions"] },
   { id: "work-wedding-invites", title: "Our Work: Wedding Invites", section: "Our Work", href: "/our-work/wedding-invites", keywords: ["wedding invites", "wedding invitations", "suite", "marriage", "cards"] },
   { id: "work-envelopes", title: "Our Work: Envelopes & Liners", section: "Our Work", href: "/our-work/envelopes", keywords: ["envelopes", "liners", "euro flap", "addressing"] },

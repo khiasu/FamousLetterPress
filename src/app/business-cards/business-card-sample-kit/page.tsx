@@ -24,7 +24,7 @@ export default function BusinessCardSampleKitPage() {
               <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
                 <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <Link href="/business-cards" className="hover:text-black transition-colors">Business Cards</Link>
+                <Link href="/our-work/business-cards" className="hover:text-black transition-colors">Business Cards</Link>
                 <span>/</span>
                 <span className="text-black">Sample Kit</span>
               </div>

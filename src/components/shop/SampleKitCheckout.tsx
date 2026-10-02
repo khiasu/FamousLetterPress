@@ -165,7 +165,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
 
         <div className="flex flex-wrap justify-center gap-4">
           <Link
-            href="/weddings"
+            href="/our-work/wedding-invites"
             className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
           >
             Explore Wedding Services

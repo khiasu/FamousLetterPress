@@ -11,10 +11,10 @@ const menuGroups = [
     num: "01",
     title: "What we make",
     links: [
-      { label: "Wedding Invites & Suites", href: "/weddings" },
-      { label: "Cards + Letterheads", href: "/business-cards" },
+      { label: "Wedding Invites & Suites", href: "/our-work/wedding-invites" },
+      { label: "Cards + Letterheads", href: "/our-work/business-cards" },
       { label: "Personalised Stationery", href: "/personalised-stationery" },
-      { label: "Wax Seals & Embellishments", href: "/work" },
+      { label: "Wax Seals & Embellishments", href: "/our-work/seal-stickers" },
     ],
   },
   {
@@ -31,9 +31,9 @@ const menuGroups = [
     num: "03",
     title: "Who we make it for",
     links: [
-      { label: "Couples & Brides", href: "/weddings" },
+      { label: "Couples & Brides", href: "/our-work/wedding-invites" },
       { label: "Channel Partners & Designers", href: "/channel-partners" },
-      { label: "Brands & B2B", href: "/business-cards" },
+      { label: "Brands & B2B", href: "/our-work/business-cards" },
     ],
   },
   {
@@ -41,7 +41,6 @@ const menuGroups = [
     title: "Sample Kits & Packages",
     links: [
       { label: "Wedding Sample Box (₹1,500)", href: "/weddings/wedding-sample-kit" },
-      { label: "Business Card Kit (₹1,000)", href: "/business-cards/business-card-sample-kit" },
       { label: "Design Templates & Curated Suites", href: "/packages" },
     ],
   },

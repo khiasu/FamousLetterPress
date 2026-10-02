@@ -15,13 +15,13 @@ const HERO_ITEMS: HeroItem[] = [
     title: "The Florentine Heirloom Suite",
     sub: "600gsm Wild Cotton Rag · Matte Gold Foil",
     img: "/assets/revamp/carousel/FMS_7392.jpg",
-    href: "/weddings",
+    href: "/our-work/wedding-invites",
   },
   {
     title: "Edge-Gilded Executive Cards",
     sub: "600gsm Pure Cotton · Mirror Gold Edge Gilding",
     img: "/assets/revamp/what-we-make/FMS_3462.jpg",
-    href: "/business-cards",
+    href: "/our-work/business-cards",
   },
   {
     title: "The Curated Wedding Sample Box",
@@ -33,7 +33,7 @@ const HERO_ITEMS: HeroItem[] = [
     title: "Botanical Crest & Deckled Edges",
     sub: "Handmade Deckled Cotton · Custom Wax Seal",
     img: "/assets/wedding stationery/invites/FMS_2762.jpg",
-    href: "/weddings",
+    href: "/our-work/wedding-invites",
   },
   {
     title: "Hand-Calibrated Vintage Presswork",
@@ -45,7 +45,7 @@ const HERO_ITEMS: HeroItem[] = [
     title: "Architectural Minimalist Identity",
     sub: "900gsm Ultra-Heavy Cotton · Deep Relief Deboss",
     img: "/assets/revamp/what-we-make/FMS_3764.jpg",
-    href: "/business-cards",
+    href: "/our-work/business-cards",
   },
 ];
 

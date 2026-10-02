@@ -155,7 +155,7 @@ export default function ProcessPage() {
                 Start a Commission
               </Link>
               <Link
-                href="/weddings/early-bride"
+                href="/our-work/wedding-invites#early-bride"
                 className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
               >
                 Early Bride Form

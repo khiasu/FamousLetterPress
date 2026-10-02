@@ -5,20 +5,14 @@ import Link from "next/link";
 import { SOCIAL_PROFILES } from "@/components/ui/SocialIcons";
 
 const QUICK_LINKS = [
-  { label: "Wedding Invitations", href: "/weddings" },
-  { label: "Executive Business Cards", href: "/business-cards" },
+  { label: "Wedding Invitations", href: "/our-work/wedding-invites" },
+  { label: "Business Cards", href: "/our-work/business-cards" },
   { label: "Our Process & Craft", href: "/process" },
   { label: "Order Sample Kit", href: "/weddings/wedding-sample-kit" },
   { label: "Frequently Asked Questions", href: "/faq" },
   { label: "Contact & Consult", href: "/contact" },
-  {
-    label: "Terms & Conditions",
-    href: "/terms-conditions",
-  },
-  {
-    label: "Privacy Policy",
-    href: "/privacy-policy",
-  },
+  { label: "Terms & Conditions", href: "/terms-conditions" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
 ];
 
 export function Footer() {
@@ -107,14 +101,9 @@ export function Footer() {
 
         {/* Middle: Streamlined Quick Links Grid (Core Critical Pages) */}
         <div className="pt-8 pl-1 sm:pl-2">
-          <div className="flex items-center gap-2 mb-5">
-            <span className="text-[9.5px] font-mono tracking-widest text-[#888]">
-              01
-            </span>
-            <h4 className="text-[11px] uppercase tracking-[0.2em] font-mono font-medium text-black">
-              Quick Links
-            </h4>
-          </div>
+          <h4 className="text-[11px] uppercase tracking-[0.2em] font-mono font-medium text-black mb-5">
+            Quick Links
+          </h4>
 
           <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-4 gap-x-6 pb-2">
             {QUICK_LINKS.map((link) => (
