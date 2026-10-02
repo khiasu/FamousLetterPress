@@ -62,7 +62,7 @@ export default function FAQPage() {
                   {sec.items.map((item, idx) => (
                     <Reveal key={item.q} delay={idx * 0.04}>
                       <div className="bg-white border border-[#E5E5E5] p-6 md:p-8">
-                        <h3 className="font-serif text-lg text-black mb-2">{item.q}</h3>
+                        <h3 className="font-sans text-base md:text-lg font-medium text-black mb-2 tracking-[-0.01em]">{item.q}</h3>
                         <p className="text-xs md:text-sm text-[#555555] font-light leading-relaxed">{item.a}</p>
                       </div>
                     </Reveal>

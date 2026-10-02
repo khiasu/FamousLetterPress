@@ -62,20 +62,21 @@ export function HomeFAQSection() {
       aria-label="Frequently Asked Questions"
     >
       <div className="w">
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-14">
-          <div className="max-w-xl">
-            <p className="k mb-2">Common Questions</p>
-            <h2 className="d text-[clamp(32px,8vw,68px)] leading-[0.95] mt-1 font-serif text-black">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div>
+            <p className="k mb-3">Common Questions</p>
+            <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1] font-serif text-black tracking-tight">
               Frequently asked <i>questions.</i>
             </h2>
           </div>
 
-          <div className="max-w-xs md:text-right">
-            <p className="text-xs text-[#555] font-light leading-relaxed mb-4">
-              Everything you need to know about timelines, minimums, paper stocks, and printing in our Dimapur studio.
-            </p>
-            <Link href="/faq" className="ln text-[11px] font-mono uppercase tracking-[0.16em]">
-              View all FAQs &rarr;
+          <div className="shrink-0">
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
+            >
+              <span>View all FAQs</span>
+              <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
         </div>
@@ -92,29 +93,30 @@ export function HomeFAQSection() {
                 <button
                   type="button"
                   onClick={() => toggle(faq.id)}
-                  className="w-full py-6 sm:py-7 flex items-baseline justify-between text-left gap-6 group cursor-pointer"
+                  className="w-full py-5 sm:py-6 flex items-center justify-between text-left gap-6 group cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <h3 className="font-serif text-xl sm:text-2xl text-black font-medium tracking-tight group-hover:opacity-70 transition-opacity">
+                  <h3 className="font-sans text-base sm:text-lg md:text-xl font-medium text-[#111111] tracking-[-0.01em] group-hover:text-black transition-colors pr-2">
                     {faq.question}
                   </h3>
 
                   <span
-                    className={`text-2xl sm:text-3xl font-light text-black transition-transform duration-300 shrink-0 select-none ${
-                      isOpen ? "rotate-45" : "rotate-0"
+                    className={`w-8 h-8 rounded-full border border-[#D5D5D5] flex items-center justify-center text-base font-light text-black transition-all duration-300 shrink-0 select-none group-hover:border-black ${
+                      isOpen ? "rotate-45 bg-black text-white border-black" : "rotate-0 bg-transparent"
                     }`}
+                    aria-hidden="true"
                   >
                     +
                   </span>
                 </button>
 
                 <div
-                  className={`overflow-hidden transition-all duration-400 ease-in-out ${
-                    isOpen ? "max-h-96 pb-7 opacity-100" : "max-h-0 opacity-0"
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "max-h-96 pb-6 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="pl-8 sm:pl-12 pr-4 sm:pr-12">
-                    <p className="text-sm sm:text-base text-[#3b372e] font-light leading-relaxed max-w-3xl">
+                  <div className="pr-4 sm:pr-12">
+                    <p className="text-sm sm:text-[15px] text-[#444444] font-light leading-relaxed max-w-3xl">
                       {faq.answer}
                     </p>
                   </div>
@@ -125,22 +127,18 @@ export function HomeFAQSection() {
         </div>
 
         {/* Bottom Contact / Link note */}
-        <div className="mt-12 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-[#666]">
+        <div className="mt-12 pt-6 border-t border-[#EAEAEA] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-[#666]">
           <p className="font-light">
             Have a custom timeline or bespoke commission inquiry?
           </p>
-          <div className="flex items-center gap-6">
-            <Link href="/faq" className="ln text-[11px] font-mono uppercase tracking-widest">
-              Read comprehensive FAQ &rarr;
-            </Link>
-            <a
-              href="https://wa.me/+918416099340"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] font-mono uppercase tracking-widest text-black hover:opacity-60 transition-opacity"
+          <div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
             >
-              Ask on WhatsApp &nearr;
-            </a>
+              <span>Contact our studio</span>
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
         </div>
       </div>
