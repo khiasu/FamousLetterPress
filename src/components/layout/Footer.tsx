@@ -3,8 +3,10 @@ import Link from "next/link";
 const FOOTER_LINKS = [
   { label: "Weddings", href: "/weddings" },
   { label: "Business Cards", href: "/business-cards" },
+  { label: "Work", href: "/work" },
   { label: "Materials", href: "/materials" },
   { label: "Process", href: "/process" },
+  { label: "Journal", href: "/journal" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },

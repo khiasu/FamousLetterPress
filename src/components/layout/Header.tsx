@@ -354,6 +354,13 @@ export function Header({
                 Instagram
               </a>
               <Link
+                href="/journal"
+                onClick={closeMenu}
+                className="hover:text-black transition-colors"
+              >
+                Journal
+              </Link>
+              <Link
                 href="/faq"
                 onClick={closeMenu}
                 className="hover:text-black transition-colors"

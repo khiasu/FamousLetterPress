@@ -3,6 +3,8 @@ import { WhatWeMakeSection } from "@/components/home/WhatWeMakeSection";
 import { HowWeMakeSection } from "@/components/home/HowWeMakeSection";
 import { WhoWeMakeForSection } from "@/components/home/WhoWeMakeForSection";
 import { SampleKitsSection } from "@/components/home/SampleKitsSection";
+import { InstagramSection } from "@/components/home/InstagramSection";
+import { HomeFAQSection } from "@/components/home/HomeFAQSection";
 import { CTASection } from "@/components/home/CTASection";
 
 export const metadata = {
@@ -29,7 +31,13 @@ export default function HomePage() {
       {/* 5. Sample Kits: Tactile Commerce Discovery */}
       <SampleKitsSection />
 
-      {/* 6. Direct Inquiry & Consultation CTA */}
+      {/* 6. From Our Instagram: Top 4 Curated Reels & Posts (Playable in-page or open in IG) */}
+      <InstagramSection />
+
+      {/* 7. Frequently Asked Questions */}
+      <HomeFAQSection />
+
+      {/* 8. Direct Inquiry & Consultation CTA */}
       <CTASection />
     </main>
   );
