@@ -142,15 +142,15 @@ export function Header({
           {/* Fast Responsive Search Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs text-[#444] hover:text-black transition-all rounded-full border border-[rgba(14,14,14,0.16)] hover:border-black bg-[#faf8f4] cursor-pointer shadow-2xs"
+            className="flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs text-[#333] hover:text-black transition-all rounded-[4px] border border-[rgba(14,14,14,0.14)] hover:border-[rgba(14,14,14,0.4)] bg-white cursor-pointer"
             aria-label="Search Famous Letterpress"
           >
             <svg
-              className="w-3.5 h-3.5 text-[#555]"
+              className="w-3.5 h-3.5 text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1.8}
             >
               <path
                 strokeLinecap="round"
@@ -158,10 +158,10 @@ export function Header({
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-            <span className="hidden sm:inline font-sans text-[11px] tracking-wide uppercase text-[#333]">
+            <span className="hidden sm:inline font-sans text-[10.5px] tracking-[0.18em] uppercase text-black">
               Search
             </span>
-            <kbd className="hidden md:inline-block text-[9px] font-mono px-1.5 py-0.5 bg-white border border-[#DDD] text-[#666] rounded-xs select-none">
+            <kbd className="hidden md:inline-block text-[9px] font-mono px-1.5 py-0.5 bg-[#f5f5f5] border border-[#e0e0e0] text-[#555] rounded-[2px] select-none">
               ⌘K
             </kbd>
           </button>
@@ -176,7 +176,7 @@ export function Header({
 
           {/* Redesigned Menu Button with Sleek Morphing Architectural Lines & State Animation */}
           <button
-            className="group relative flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-[#faf8f4] active:scale-[0.98] transition-all cursor-pointer select-none shadow-2xs"
+            className="group relative flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2 rounded-[4px] border border-[rgba(14,14,14,0.14)] hover:border-[rgba(14,14,14,0.4)] bg-white active:scale-[0.98] transition-all cursor-pointer select-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
@@ -184,22 +184,22 @@ export function Header({
             {/* Morphing 2-Bar Architectural Icon */}
             <div className="w-4 h-3 relative flex flex-col justify-between items-center pointer-events-none">
               <span
-                className={`h-[1.5px] bg-black rounded-full transition-all duration-300 origin-center ${
+                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
                   isMenuOpen
                     ? "w-4 rotate-45 translate-y-[5.25px]"
-                    : "w-4 group-hover:w-4"
+                    : "w-4"
                 }`}
               />
               <span
-                className={`h-[1.5px] bg-black rounded-full transition-all duration-300 origin-center ${
+                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
                   isMenuOpen
                     ? "w-4 -rotate-45 -translate-y-[5.25px]"
-                    : "w-2.5 group-hover:w-4 self-start"
+                    : "w-2.5 self-start group-hover:w-4"
                 }`}
               />
             </div>
 
-            <span className="text-[11px] font-sans font-medium tracking-[0.22em] uppercase text-black">
+            <span className="text-[10.5px] font-sans font-medium tracking-[0.2em] uppercase text-black">
               {isMenuOpen ? "Close" : "Menu"}
             </span>
           </button>

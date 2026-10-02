@@ -235,14 +235,14 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       aria-label="Search Famous Letterpress"
     >
       <div
-        className="w-full max-w-2xl bg-white shadow-2xl overflow-hidden border border-[#E5E5E5] flex flex-col max-h-[80vh] transition-all"
+        className="w-full max-w-2xl bg-white shadow-2xl overflow-hidden border border-[#E5E5E5] flex flex-col max-h-[80vh] rounded-[6px]"
         style={{
           boxShadow: "0 25px 50px -12px rgba(14, 14, 14, 0.25)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Header Bar */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-[#E5E5E5] bg-[#faf8f4]">
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-[#E5E5E5] bg-white">
           <svg
             className="w-5 h-5 text-[#888888] shrink-0"
             fill="none"
@@ -277,7 +277,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             </button>
           )}
 
-          <kbd className="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-mono px-2 py-1 bg-white border border-[#DDD] text-[#666] rounded-xs select-none">
+          <kbd className="hidden sm:inline-flex items-center gap-1 text-[10px] uppercase font-mono px-2 py-1 bg-[#f5f5f5] border border-[#e0e0e0] text-[#555] rounded-[2px] select-none">
             ESC
           </kbd>
         </div>
@@ -291,10 +291,10 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`text-xs px-3 py-1 rounded-full whitespace-nowrap transition-colors cursor-pointer ${
+              className={`text-xs px-3 py-1 rounded-[3px] whitespace-nowrap transition-colors cursor-pointer ${
                 activeCategory === cat
                   ? "bg-[#0e0e0e] text-white"
-                  : "bg-[#f5f2eb] text-[#4a463c] hover:bg-[#eae4d5]"
+                  : "bg-[#f5f5f5] text-[#333] hover:bg-[#eaeaea]"
               }`}
             >
               {cat}
@@ -366,7 +366,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         </div>
 
         {/* Footer shortcuts */}
-        <div className="px-5 py-2.5 border-t border-[#E5E5E5] bg-[#faf8f4] flex items-center justify-between text-[11px] text-[#7b7566] font-mono">
+        <div className="px-5 py-2.5 border-t border-[#E5E5E5] bg-white flex items-center justify-between text-[11px] text-[#7b7566] font-mono">
           <div className="flex items-center gap-4">
             <span className="hidden sm:inline-flex items-center gap-1.5">
               <kbd className="px-1.5 py-0.5 bg-white border border-[#DDD] text-[10px]">↑</kbd>
