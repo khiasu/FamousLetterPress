@@ -303,7 +303,7 @@ export function WhatWeMakeSection() {
               <button
                 key={index}
                 onClick={() => setModalItem(item)}
-                className="sc absolute left-1/2 top-[44%] w-[min(72vw,360px)] h-[calc(min(72vw,360px)*1.38)] -mt-[calc(min(72vw,360px)*0.69)] -ml-[calc(min(72vw,360px)/2)] border-0 cursor-pointer text-left p-4 flex flex-col bg-[#faf5ea] shadow-[0_24px_36px_-20px_rgba(60,45,20,0.5),0_2px_4px_rgba(60,45,20,0.12)] text-black will-change-transform group"
+                className="sc absolute left-1/2 top-[44%] w-[min(72vw,360px)] h-[calc(min(72vw,360px)*1.38)] -mt-[calc(min(72vw,360px)*0.69)] -ml-[calc(min(72vw,360px)/2)] border border-[rgba(14,14,14,0.14)] cursor-pointer text-left p-4 flex flex-col bg-white shadow-[0_24px_36px_-20px_rgba(0,0,0,0.2),0_2px_4px_rgba(0,0,0,0.06)] text-black will-change-transform group"
                 style={{
                   transformStyle: "preserve-3d",
                   backfaceVisibility: "hidden",
@@ -311,7 +311,7 @@ export function WhatWeMakeSection() {
                 }}
                 aria-label={item.title}
               >
-                <div className="art relative flex-1 mb-3 overflow-hidden bg-[#e8e2d5] rounded-xs">
+                <div className="art relative flex-1 mb-3 overflow-hidden bg-[#F7F7F7] rounded-xs">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
@@ -324,7 +324,7 @@ export function WhatWeMakeSection() {
                 <h3 className="font-serif font-medium text-[clamp(24px,6vw,30px)] leading-[1.05] tracking-[-0.02em]">
                   {item.title}
                 </h3>
-                <p className="text-[12.5px] leading-[1.5] text-[#3b372e] my-1.5 line-clamp-2">
+                <p className="text-[12.5px] leading-[1.5] text-[#333] my-1.5 line-clamp-2">
                   {item.desc}
                 </p>
                 <span className="ln self-start mt-1">Explore craft</span>
@@ -338,7 +338,7 @@ export function WhatWeMakeSection() {
       {/* Fullscreen Expand Card Modal */}
       {modalItem && (
         <div
-          className="fixed inset-0 z-[70] bg-[#faf5ea] overflow-y-auto p-6 md:p-12 animate-[fadeIn_0.4s_ease-out]"
+          className="fixed inset-0 z-[70] bg-white overflow-y-auto p-6 md:p-12 animate-[fadeIn_0.4s_ease-out]"
           role="dialog"
           aria-modal="true"
         >

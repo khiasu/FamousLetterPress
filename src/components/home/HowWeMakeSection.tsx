@@ -57,11 +57,10 @@ export function HowWeMakeSection() {
   }, []);
 
   return (
-    <section id="how" className="hw bg-[#faf5ea] py-24 md:py-32 border-b border-[#E5E5E5]" aria-label="How We Make It">
+    <section id="how" className="hw bg-white py-24 md:py-32 border-b border-[#E5E5E5]" aria-label="How We Make It">
       <div className="w">
-        <div className="flex justify-between items-center mb-6">
+        <div className="mb-6">
           <p className="k">How we make</p>
-          <p className="k">(02)</p>
         </div>
 
         {/* Illuminated Text Scroll Effect */}
@@ -72,7 +71,7 @@ export function HowWeMakeSection() {
           Paper, ink, machines, hands &mdash; and plenty of attention to detail.
         </p>
 
-        <p className="text-sm sm:text-base text-[#3b372e] max-w-xl font-light leading-relaxed mb-12">
+        <p className="text-sm sm:text-base text-[#333] max-w-xl font-light leading-relaxed mb-12">
           From the first digital proof to the physical press run, every piece is made slowly and pressed one impression at a time on restored vintage Heidelberg platen presses in our Nagaland atelier.
         </p>
 
@@ -80,10 +79,10 @@ export function HowWeMakeSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {TECHNIQUES.map((tech) => (
             <div
-              key={tech.step}
-              className="bg-white border border-black/10 p-4 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_24px_-12px_rgba(60,45,20,0.25)] group"
+              key={tech.title}
+              className="bg-white border border-[#E5E5E5] p-4 transition-all duration-300 hover:border-black group"
             >
-              <div className="relative aspect-[4/3] overflow-hidden mb-3.5 bg-[#f1e8d4]">
+              <div className="relative aspect-[4/3] overflow-hidden mb-3.5 bg-[#F7F7F7]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={tech.img}
@@ -91,9 +90,6 @@ export function HowWeMakeSection() {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <span className="font-mono text-[9px] tracking-widest text-[#7b7566] uppercase block mb-1">
-                {tech.step}
-              </span>
               <h4 className="font-serif font-medium text-xl text-black tracking-tight mb-1.5">
                 {tech.title}
               </h4>

@@ -271,9 +271,9 @@ export function HeroSection() {
         {HERO_ITEMS.map((item, index) => (
           <div
             key={index}
-            className="cs absolute left-1/2 top-0 w-[min(74vw,440px)] h-full -ml-[min(37vw,220px)] shadow-[0_20px_35px_-15px_rgba(60,45,20,0.35),0_2px_4px_rgba(60,45,20,0.12)] bg-[#faf5ea] will-change-transform"
+            className="cs absolute left-1/2 top-0 w-[min(74vw,440px)] h-full -ml-[min(37vw,220px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
           >
-            <div className="ph absolute inset-0 overflow-hidden bg-[#faf5ea]">
+            <div className="ph absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.img}

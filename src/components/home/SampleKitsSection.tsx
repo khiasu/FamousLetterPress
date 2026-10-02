@@ -31,9 +31,8 @@ export function SampleKitsSection() {
       aria-label="Sample Kits"
     >
       <div className="w">
-        <div className="flex justify-between items-center mb-6">
+        <div className="mb-6">
           <p className="k">Sample Kits &amp; Discovery</p>
-          <p className="k">(05)</p>
         </div>
 
         <h2 className="d text-[clamp(36px,8vw,64px)] leading-[0.98] mt-2 mb-4 font-serif">
@@ -56,7 +55,7 @@ export function SampleKitsSection() {
               {/* Image — clickable to detail page */}
               <Link
                 href={kit.detailHref}
-                className="relative aspect-[16/11] overflow-hidden bg-[#f5f2ed] block"
+                className="relative aspect-[16/11] overflow-hidden bg-[#F7F7F7] block"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

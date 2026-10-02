@@ -41,15 +41,14 @@ export function WhoWeMakeForSection() {
       aria-label="Who We Make For"
     >
       <div className="w">
-        <div className="flex justify-between items-center mb-6">
+        <div className="mb-6">
           <p className="k">Who we make for</p>
-          <p className="k">(04)</p>
         </div>
 
         <h2 className="d text-[clamp(42px,11vw,84px)] leading-[0.95] mt-2 mb-4 font-serif">
           Made for <i>you</i>
         </h2>
-        <p className="text-[#3b372e] text-sm sm:text-base max-w-xl font-light leading-relaxed mb-14">
+        <p className="text-[#333] text-sm sm:text-base max-w-xl font-light leading-relaxed mb-14">
           Whether you&rsquo;re a couple planning your wedding day, a designer seeking a print partner, or a brand that demands tactile distinction &mdash; we make for people who value craft.
         </p>
 
@@ -57,20 +56,17 @@ export function WhoWeMakeForSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {AUDIENCES.map((audience) => (
             <div
-              key={audience.num}
-              className="group border border-[rgba(14,14,14,0.1)] bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_24px_-12px_rgba(60,45,20,0.2)]"
+              key={audience.title}
+              className="group border border-[#E5E5E5] bg-white transition-all duration-300 hover:border-black"
             >
               {/* Image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-[#f5f2ed]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-[#F7F7F7]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={audience.img}
                   alt={audience.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <span className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-white/80 uppercase bg-black/30 backdrop-blur-sm px-2 py-0.5">
-                  {audience.num}
-                </span>
               </div>
 
               {/* Content */}

@@ -58,14 +58,14 @@ export function HomeFAQSection() {
   return (
     <section
       id="faq"
-      className="py-24 md:py-32 bg-[#faf9f6] border-b border-[#E5E5E5]"
+      className="py-24 md:py-32 bg-white border-b border-[#E5E5E5]"
       aria-label="Frequently Asked Questions"
     >
       <div className="w">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 mb-14">
           <div className="max-w-xl">
-            <p className="k mb-2">Common Inquiries &middot; (06)</p>
-            <h2 className="d text-[clamp(36px,9vw,76px)] leading-[0.95] mt-1 font-serif">
+            <p className="k mb-2">Common Questions</p>
+            <h2 className="d text-[clamp(32px,8vw,68px)] leading-[0.95] mt-1 font-serif text-black">
               Frequently asked <i>questions.</i>
             </h2>
           </div>
@@ -81,13 +81,13 @@ export function HomeFAQSection() {
         </div>
 
         {/* Clean Atelier Accordion */}
-        <div className="max-w-4xl border-t border-[rgba(14,14,14,0.14)]">
-          {TOP_FAQS.map((faq, idx) => {
+        <div className="max-w-4xl border-t border-[#E5E5E5]">
+          {TOP_FAQS.map((faq) => {
             const isOpen = openId === faq.id;
             return (
               <div
                 key={faq.id}
-                className="border-b border-[rgba(14,14,14,0.12)] transition-colors"
+                className="border-b border-[#E5E5E5] transition-colors"
               >
                 <button
                   type="button"
@@ -95,14 +95,9 @@ export function HomeFAQSection() {
                   className="w-full py-6 sm:py-7 flex items-baseline justify-between text-left gap-6 group cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <div className="flex items-baseline gap-4 sm:gap-6">
-                    <span className="text-[11px] font-mono tracking-widest text-[var(--mute)] shrink-0">
-                      0{idx + 1}
-                    </span>
-                    <h3 className="font-serif text-xl sm:text-2xl text-black font-medium tracking-tight group-hover:opacity-70 transition-opacity">
-                      {faq.question}
-                    </h3>
-                  </div>
+                  <h3 className="font-serif text-xl sm:text-2xl text-black font-medium tracking-tight group-hover:opacity-70 transition-opacity">
+                    {faq.question}
+                  </h3>
 
                   <span
                     className={`text-2xl sm:text-3xl font-light text-black transition-transform duration-300 shrink-0 select-none ${
