@@ -59,14 +59,34 @@ export function Header({
   announcementBarText,
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled((window.scrollY || 0) > 20);
+    let lastScrollY = window.scrollY || 0;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY || 0;
+      setIsScrolled(currentScrollY > 20);
+
+      // Keep header visible when menu is open or at top of page
+      if (isMenuOpen || currentScrollY < 50) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down -> slide out to top
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up -> slide in from top
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMenuOpen]);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -101,16 +121,18 @@ export function Header({
         </div>
       )}
 
-      {/* ── Fixed Studio Header ── */}
+      {/* ── Fixed Studio Header with Scroll Slide In/Out ── */}
       <header
         id="hd"
-        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 sm:px-14 md:px-16 py-3.5 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 sm:px-14 md:px-16 py-3 transition-all duration-300 ease-out will-change-transform ${
+          isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
+        } ${
           isScrolled
             ? "bg-white/95 backdrop-blur-md border-b border-[rgba(14,14,14,0.12)] shadow-xs"
             : "bg-white border-b border-[rgba(14,14,14,0.08)]"
         }`}
       >
-        {/* Authentic Famous Letterpress Logo & Wordmark from famousletterpress.com */}
+        {/* Authentic Famous Letterpress Logo & Wordmark */}
         <Link
           href="/"
           className="flex items-center gap-3.5 sm:gap-4 select-none group pl-1 sm:pl-2"
@@ -138,16 +160,16 @@ export function Header({
           </div>
         </Link>
 
-        {/* Right Nav Actions: Instant Search, Book a Consult & Menu Toggle */}
-        <div className="flex items-center gap-3 sm:gap-6">
-          {/* Fast Responsive Search Button */}
+        {/* Right Nav Actions: Simple Rounded Search Icon with Text, Book a Consult & Icon-Only Toggle */}
+        <div className="flex items-center gap-3 sm:gap-5">
+          {/* Simple Rounded Search Pill with "Search" Text Inside */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs text-[#333] hover:text-black transition-all rounded-[4px] border border-[rgba(14,14,14,0.14)] hover:border-[rgba(14,14,14,0.4)] bg-white cursor-pointer"
+            className="flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-1.5 text-xs text-[#222] hover:text-black transition-all rounded-full border border-[rgba(14,14,14,0.2)] hover:border-black bg-white cursor-pointer group shadow-2xs"
             aria-label="Search Famous Letterpress"
           >
             <svg
-              className="w-3.5 h-3.5 text-black"
+              className="w-3.5 h-3.5 text-black group-hover:scale-105 transition-transform"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -159,30 +181,27 @@ export function Header({
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-            <span className="hidden sm:inline font-sans text-[10.5px] tracking-[0.18em] uppercase text-black">
+            <span className="font-sans text-[11px] tracking-[0.14em] uppercase text-black font-medium">
               Search
             </span>
-            <kbd className="hidden md:inline-block text-[9px] font-mono px-1.5 py-0.5 bg-[#f5f5f5] border border-[#e0e0e0] text-[#555] rounded-[2px] select-none">
-              ⌘K
-            </kbd>
           </button>
 
           {/* Book a consult link */}
           <Link
             href="/start-a-project"
-            className="hidden sm:inline-flex items-center gap-2 text-[10.5px] uppercase tracking-[0.22em] text-[#0e0e0e] hover:opacity-60 transition-opacity font-medium"
+            className="hidden sm:inline-flex items-center text-[10.5px] uppercase tracking-[0.22em] text-[#0e0e0e] hover:opacity-60 transition-opacity font-medium"
           >
             Book a consult
           </Link>
 
-          {/* Redesigned Menu Button with Sleek Morphing Architectural Lines & State Animation */}
+          {/* Icon-Only Clean Toggle Button (no 'Menu' text) */}
           <button
-            className="group relative flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-2 rounded-[4px] border border-[rgba(14,14,14,0.14)] hover:border-[rgba(14,14,14,0.4)] bg-white active:scale-[0.98] transition-all cursor-pointer select-none"
+            className="w-10 h-10 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white active:scale-95 transition-all flex items-center justify-center cursor-pointer select-none group shadow-2xs"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
           >
-            {/* Morphing 2-Bar Architectural Icon */}
+            {/* Morphing 2-Bar Architectural Lines */}
             <div className="w-4 h-3 relative flex flex-col justify-between items-center pointer-events-none">
               <span
                 className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
@@ -199,10 +218,6 @@ export function Header({
                 }`}
               />
             </div>
-
-            <span className="text-[10.5px] font-sans font-medium tracking-[0.2em] uppercase text-black">
-              {isMenuOpen ? "Close" : "Menu"}
-            </span>
           </button>
         </div>
       </header>
