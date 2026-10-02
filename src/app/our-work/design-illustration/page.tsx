@@ -11,7 +11,7 @@ const ARTWORKS = [
   {
     title: "Alobo Naga Identity",
     category: "Brand & Logo Matrix",
-    img: "/assets/wedding stationery/invites/FMS_2762.jpg",
+    img: "/assets/our-work/design-illustrations.jpg",
   },
   {
     title: "Wander Nagaland",

@@ -11,7 +11,7 @@ const CUSTOM_PROJECTS = [
   {
     title: "Letterpress Coasters & Beer Mats",
     desc: "Printed on 1000gsm absorbent cotton pulpboard with deep relief impressions that hold drinks without warping.",
-    img: "/assets/revamp/what-we-make/FMS_4039.jpg",
+    img: "/assets/our-work/custom-works.jpg",
   },
   {
     title: "Artisanal Hardcover Notebooks",

@@ -11,7 +11,7 @@ const CERTIFICATE_SPECS = [
   {
     title: "Acid-Free Cotton Rag",
     desc: "100% archival cotton paper resistant to yellowing, humidity, and aging over decades.",
-    img: "/assets/revamp/what-we-make/FMS_8669.jpg",
+    img: "/assets/our-work/certificates.jpg",
   },
   {
     title: "Precision Metal Die Relief",
