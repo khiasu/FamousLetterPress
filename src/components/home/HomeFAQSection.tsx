@@ -13,38 +13,45 @@ interface FAQItem {
 const TOP_FAQS: FAQItem[] = [
   {
     id: "hfaq-1",
-    category: "Ordering & Timeline",
-    question: "How far in advance should we order our wedding invitations?",
+    category: "Letterpress Basics",
+    question: "What are letterpress wedding invitations?",
     answer:
-      "We recommend starting your consultation 3 to 5 months before your wedding date. This allows ample time for proof iterations, paper sourcing, die making, letterpress production, and mailing invitations to your guests 6–8 weeks before your celebration.",
+      "Letterpress wedding invitations are printed using a traditional process that creates a tactile impression in the paper. The result is an invitation that can be both seen and felt — making it a popular choice for couples who want stationery that feels personal, thoughtful, and memorable.",
   },
   {
     id: "hfaq-2",
-    category: "Craft & Printing",
-    question: "What makes letterpress different from digital flat printing?",
+    category: "Letterpress Basics",
+    question: "Why choose letterpress over regular wedding invitations?",
     answer:
-      "Digital printing sprays toner or pigment onto flat paper. Letterpress is an artisanal relief process where custom metal or photopolymer plates press hand-mixed inks deeply into thick, tree-free cotton rag. You get tangible sculptural bite, deep shadow, and permanent physical presence that pixels and toner cannot duplicate.",
+      "Letterpress offers a tactile quality that standard printing cannot replicate. The impression in the paper, combined with carefully selected materials and thoughtful design, creates an experience that feels more intentional and lasting than ordinary printed invitations.",
   },
   {
     id: "hfaq-3",
-    category: "Minimum Order Quantity",
-    question: "What is your minimum order quantity (MOQ)?",
+    category: "Letterpress Basics",
+    question: "Is letterpress suitable for Indian weddings?",
     answer:
-      "Our standard minimum order is 50 invitation suites or 100 business cards. Because letterpress involves custom metal plates and extensive mechanical press calibration on our vintage Heidelberg platens, fixed setup costs apply regardless of quantity.",
+      "Yes. Letterpress works beautifully for Indian weddings, whether traditional, contemporary, or a blend of both. Multi-event invitation suites, cultural motifs, monograms, and detailed guest information can all be incorporated into the design.",
   },
   {
     id: "hfaq-4",
-    category: "Custom Designs",
-    question: "Can you letterpress a design created by our own graphic designer or calligrapher?",
+    category: "Paper & Finishes",
+    question: "What paper is used for premium letterpress invitations?",
     answer:
-      "Absolutely. A substantial portion of our commissions are trade collaborations with independent graphic designers, illustrators, and calligraphy artists. We review your print-ready vector artwork (.AI or .PDF) and provide pre-press guidelines for line weights, deep deboss, and foil registration.",
+      "Cotton paper is one of the most popular choices because it creates a beautiful letterpress impression. We also work with carefully selected handmade papers and other premium stocks depending on the design and project requirements.",
   },
   {
     id: "hfaq-5",
-    category: "Samples",
-    question: "Can we hold and feel the paper, foils, and embossing before placing an order?",
+    category: "Pricing & Timeline",
+    question: "How much do letterpress wedding invitations cost?",
     answer:
-      "Yes. Screen pixels cannot communicate the weight of 600–900gsm cotton or the tactile bite of our presses. We offer curated Wedding Sample Boxes and Business Card Sample Kits dispatched directly from our Nagaland studio, the cost of which is 100% credited toward your commissioned order.",
+      "Projects at Famous Letterpress typically start from around ₹40 per card, with a minimum project value of ₹25,000. The final investment depends on quantity, paper selection, inserts, printing techniques, packaging, and finishing requirements.",
+  },
+  {
+    id: "hfaq-6",
+    category: "Samples & Delivery",
+    question: "Can we see samples before placing a full order?",
+    answer:
+      "Yes. Sample packs are available for purchase and can help couples understand the paper, printing techniques, and overall quality before committing to a full project.",
   },
 ];
 
