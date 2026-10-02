@@ -86,8 +86,8 @@ export function Footer() {
             </Link>
           </div>
 
-          {/* Social Icons — Clean Monochrome Geometry */}
-          <div className="flex items-center gap-2.5 pl-1 sm:pl-0 sm:pr-2">
+          {/* Social Icons — Facebook, Instagram, YouTube matching screenshot */}
+          <div className="flex items-center gap-4 pl-1 sm:pl-0 sm:pr-2 text-black">
             {SOCIAL_PROFILES.map((social) => {
               const Icon = social.icon;
               return (
@@ -98,9 +98,9 @@ export function Footer() {
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   title={social.label}
-                  className="w-8.5 h-8.5 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-black text-black hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
+                  className="text-black hover:opacity-65 transition-opacity flex items-center justify-center cursor-pointer"
                 >
-                  <Icon className="w-3.5 h-3.5 transition-colors" />
+                  <Icon className="w-6 h-6" />
                 </a>
               );
             })}

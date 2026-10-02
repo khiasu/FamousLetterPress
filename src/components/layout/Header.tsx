@@ -357,7 +357,7 @@ export function Header({
           <div className="pt-4 border-t border-[rgba(14,14,14,0.1)] flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--mute)]">
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               {/* Black & White Social Icons matching UI */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3.5 text-black">
                 {SOCIAL_PROFILES.map((social) => {
                   const Icon = social.icon;
                   return (
@@ -368,9 +368,9 @@ export function Header({
                       rel="noopener noreferrer"
                       aria-label={social.label}
                       title={social.label}
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[rgba(14,14,14,0.2)] hover:border-black bg-white hover:bg-black text-black hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
+                      className="text-black hover:opacity-65 transition-opacity flex items-center justify-center cursor-pointer"
                     >
-                      <Icon className="w-3.5 h-3.5 transition-colors" />
+                      <Icon className="w-5 h-5" />
                     </a>
                   );
                 })}
