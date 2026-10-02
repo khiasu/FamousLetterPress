@@ -246,16 +246,16 @@ export function HeroSection() {
           <p className="text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed">
             Keep scrolling and discover how we make your prints stand out.
           </p>
-          <div className="flex gap-5 items-center flex-wrap mt-1">
+          <div className="flex flex-row items-center gap-3 sm:gap-6 mt-1 flex-nowrap">
             <Link
               href="https://wa.me/+918416099340"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn"
+              className="btn whitespace-nowrap shrink-0"
             >
               Book a consult
             </Link>
-            <a href="#svc" className="ln">
+            <a href="#svc" className="ln whitespace-nowrap shrink-0">
               Explore our work
             </a>
           </div>

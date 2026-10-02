@@ -146,6 +146,22 @@ body {
   width: 34px;
 }
 
+@media (max-width: 640px) {
+  .btn {
+    padding: 12px 18px;
+    font-size: 9px;
+    letter-spacing: .2em;
+    gap: 8px;
+  }
+  .btn::after {
+    width: 14px;
+  }
+  .ln {
+    font-size: 9px;
+    letter-spacing: .2em;
+  }
+}
+
 .btn-out {
   background: transparent;
   color: var(--ink);
