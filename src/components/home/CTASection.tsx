@@ -1,45 +1,31 @@
-import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
 
 export function CTASection() {
   return (
-    <section className="section-lg bg-white" aria-label="Start a project">
-      <div className="container-narrow text-center">
-        <Reveal>
-          <p className="eyebrow mb-3">Project Initiation</p>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <h2 className="mb-6 font-serif text-black text-3xl sm:text-4xl lg:text-5xl">
-            Have something <em className="font-light italic font-serif">worth printing?</em>
-          </h2>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <p className="text-sm md:text-base text-[#555555] mb-10 max-w-lg mx-auto font-light leading-relaxed">
-            Whether it&apos;s bespoke wedding stationery for an intimate ceremony,
-            edge-gilded business cards for your practice, or monogrammed correspondence
-            on thick cotton—send us a note. We reply within 24 hours with ideas,
-            timelines, and ballpark estimates.
-          </p>
-        </Reveal>
-        <Reveal delay={0.2}>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/start-a-project"
-              className="inline-flex items-center justify-center px-8 py-3.5 text-[11px] tracking-[0.2em] uppercase font-medium bg-black text-white hover:bg-neutral-800 transition-colors"
-            >
-              Start a Project
-            </Link>
-            <a
-              href="https://wa.me/919366012345"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-8 py-3.5 text-[11px] tracking-[0.2em] uppercase font-medium border border-black text-black hover:bg-black hover:text-white transition-colors"
-            >
-              WhatsApp Us
-            </a>
-          </div>
-        </Reveal>
+    <section className="fin border-t border-[rgba(14,14,14,0.14)] bg-white py-24 sm:py-32" id="consultation">
+      <div className="w">
+        <p className="k mb-6">Begin &middot; Consultation</p>
+        <h2 className="d text-[clamp(46px,11vw,110px)] leading-[0.95] tracking-[-0.035em] my-6">
+          Let&rsquo;s figure it out <i>together.</i>
+        </h2>
+        <p className="text-[#3b372e] text-base sm:text-lg max-w-[38ch] mb-10 leading-relaxed font-light">
+          Tell us about your day, your brand, or your bespoke idea. We reply with material recommendations, estimates, and complimentary mockups within 24 hours.
+        </p>
+        <div className="flex flex-wrap items-center gap-6">
+          <a
+            className="btn"
+            href="https://wa.me/+918416099340"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Book a consult
+          </a>
+          <Link href="/start-a-project" className="ln">
+            Start a project
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
+

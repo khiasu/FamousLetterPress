@@ -2,51 +2,45 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 
-/* ── Menu Architecture ── */
-const menuSections = [
+/* ── Menu Architecture with exact prototype categories & numbers ── */
+const menuGroups = [
   {
-    title: "What We Make",
-    items: [
-      {
-        label: "Wedding Invitations & Suites",
-        description: "Bespoke letterpress, foil & embossed wedding stationery on heavy cotton",
-        href: "/weddings",
-      },
-      {
-        label: "Business Cards & Stationery",
-        description: "Thick cotton cards with deep impression, foil & edge gilding",
-        href: "/business-cards",
-      },
-      {
-        label: "Personalised Stationery",
-        description: "Monogrammed correspondence, custom note cards & envelopes",
-        href: "/personalised-stationery",
-      },
-      {
-        label: "Curated Packages & Collections",
-        description: "Readymade suites, design templates, and bespoke options",
-        href: "/packages",
-      },
+    num: "01",
+    title: "What we make",
+    links: [
+      { label: "Wedding Invites & Suites", href: "/weddings" },
+      { label: "Cards + Letterheads", href: "/business-cards" },
+      { label: "Personalised Stationery", href: "/personalised-stationery" },
+      { label: "Wax Seals & Embellishments", href: "/work" },
     ],
   },
   {
-    title: "How We Make It",
-    items: [
-      { label: "Paper & Materials", description: "Pure cotton & handmade paper stocks (300–900gsm)", href: "/materials" },
-      { label: "Letterpress Process", description: "Mechanical relief, the bite & tactile impression", href: "/process" },
-      { label: "Our Story & Atelier", description: "Handcrafted in Nagaland on restored Heidelberg presses", href: "/about" },
-      { label: "Studio Portfolio", description: "Selected commissions archive", href: "/work" },
+    num: "02",
+    title: "How we make it",
+    links: [
+      { label: "Cotton & Handmade Paper", href: "/materials" },
+      { label: "Letterpress Craft & Bite", href: "/process" },
+      { label: "Hot Foil & Emboss", href: "/process" },
+      { label: "Our Story & Atelier", href: "/about" },
     ],
   },
   {
-    title: "Sample Kits & Consultations",
-    items: [
-      { label: "The Wedding Sample Kit (₹1,500)", description: "Feel the paper weights and foil samples in your hands", href: "/weddings/wedding-sample-kit" },
-      { label: "Business Card Sample Kit (₹1,000)", description: "Cotton weights, edge gilding & deboss swatches", href: "/business-cards/business-card-sample-kit" },
-      { label: "Early Bride Consultation", description: "Plan your stationery timeline and bespoke suite", href: "/weddings/early-bride" },
-      { label: "For Designers & Planners", description: "Trade collaboration & channel partner program", href: "/channel-partners" },
+    num: "03",
+    title: "Who we make it for",
+    links: [
+      { label: "Couples & Brides", href: "/weddings" },
+      { label: "Channel Partners & Designers", href: "/channel-partners" },
+      { label: "Brands & B2B", href: "/business-cards" },
+    ],
+  },
+  {
+    num: "04",
+    title: "Sample Kits & Packages",
+    links: [
+      { label: "Wedding Sample Box (₹1,500)", href: "/weddings/wedding-sample-kit" },
+      { label: "Business Card Kit (₹1,000)", href: "/business-cards/business-card-sample-kit" },
+      { label: "Design Templates & Curated Suites", href: "/packages" },
     ],
   },
 ];
@@ -58,7 +52,6 @@ export interface HeaderProps {
 }
 
 export function Header({
-  logoUrl = "/assets/logo.png",
   announcementActive = false,
   announcementBarText,
 }: HeaderProps) {
@@ -66,7 +59,7 @@ export function Header({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled((window.scrollY || 0) > 30);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -82,172 +75,127 @@ export function Header({
 
   return (
     <>
-      {/* Announcement Bar */}
+      {/* Optional Announcement */}
       {announcementActive && announcementBarText && (
-        <div className="bg-black text-white text-[10px] font-sans tracking-[0.25em] uppercase py-2 px-4 text-center z-[60] relative">
+        <div className="bg-[#0e0e0e] text-[#faf5ea] text-[10px] font-sans tracking-[0.25em] uppercase py-2 px-4 text-center z-[60] relative">
           {announcementBarText}
         </div>
       )}
 
-      {/* ── Snøhetta-Inspired Minimalist Header ── */}
+      {/* ── Fixed Prototype Header ── */}
       <header
-        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
-          announcementActive && announcementBarText ? "top-[32px]" : "top-0"
-        } ${
-          isScrolled && !isMenuOpen
-            ? "bg-white/95 backdrop-blur-md border-b border-[#E5E5E5]"
-            : "bg-white border-b border-[#E5E5E5]"
+        id="hd"
+        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 sm:px-14 py-5 transition-all duration-500 ${
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md border-b border-[rgba(14,14,14,0.1)] shadow-xs"
+            : "bg-white"
         }`}
       >
-        <div className="container-wide">
-          <nav
-            className="flex items-center justify-between h-16 md:h-20 relative"
-            aria-label="Primary navigation"
+        {/* Prototype Logo with Monogram Seal & Bodoni Wordmark */}
+        <Link href="/" className="lg select-none" onClick={closeMenu}>
+          <i className="mk">F</i>
+          <span>
+            <b>FAMOUS</b>
+            <em>Letterpress</em>
+          </span>
+        </Link>
+
+        {/* Right Nav Action: Menu button with twin dot indicator & Book Consult */}
+        <div className="flex items-center gap-6 sm:gap-8">
+          <Link
+            href="/start-a-project"
+            className="hidden sm:inline-flex items-center gap-3 text-[10.5px] uppercase tracking-[0.25em] text-[#0e0e0e] hover:opacity-60 transition-opacity"
           >
-            {/* Left: Famous Letterpress Seal Logo & Wordmark */}
-            <Link
-              href="/"
-              className="relative z-[60] flex items-center gap-2.5 sm:gap-3 group"
-              aria-label="Famous Letterpress — Home"
-              onClick={closeMenu}
-            >
-              {/* Authentic Famous Letterpress Seal */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={logoUrl || "/assets/logo.png"}
-                alt="Famous Letterpress Seal"
-                className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-full border border-[#E5E5E5] p-0.5 group-hover:scale-105 transition-transform"
-              />
-              <span className="font-serif text-lg sm:text-xl tracking-tight text-black">
-                <span className="font-light">Famous</span>{" "}
-                <span className="font-semibold">Letterpress</span>
-              </span>
-            </Link>
+            Book a consult
+          </Link>
 
-            {/* Center: Snøhetta-Style Text Menu Button (Desktop & Mobile) */}
-            <div className="absolute left-1/2 -translate-x-1/2 z-[60]">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-xs sm:text-sm font-sans tracking-[0.16em] uppercase text-black font-medium hover:opacity-60 transition-opacity py-2 px-3 cursor-pointer select-none"
-                aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                aria-expanded={isMenuOpen}
-              >
-                {isMenuOpen ? "Close" : "Menu"}
-              </button>
-            </div>
-
-            {/* Right: Book a Consult Action */}
-            <div className="relative z-[60] flex items-center gap-4">
-              <Link
-                href="/start-a-project"
-                className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase font-medium bg-black text-white px-4 sm:px-6 py-2 sm:py-2.5 hover:bg-neutral-800 transition-colors"
-                onClick={closeMenu}
-              >
-                Book a Consult
-              </Link>
-            </div>
-          </nav>
+          <button
+            className="mb cursor-pointer select-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            <b></b>
+            {isMenuOpen ? "Close" : "Menu"}
+          </button>
         </div>
       </header>
 
-      {/* ── Snøhetta-Style Pristine Pure White Menu Drawer ── */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-white text-black"
+      {/* ── Prototype Menu Drawer with Circular Clip-Path ── */}
+      <div
+        className={`menu ${isMenuOpen ? "o" : ""}`}
+        aria-hidden={!isMenuOpen}
+        style={{
+          zIndex: 60,
+        }}
+      >
+        <div className="mt max-w-[1100px] mx-auto w-full flex justify-between items-center">
+          <Link href="/" className="lg" onClick={closeMenu}>
+            <i className="mk">F</i>
+            <span>
+              <b>FAMOUS</b>
+              <em>Letterpress</em>
+            </span>
+          </Link>
+          <button
+            className="mb text-[12px] cursor-pointer"
+            onClick={closeMenu}
+            aria-label="Close menu"
           >
-            <div className="h-full overflow-y-auto pt-24 md:pt-32 pb-12">
-              <div className="container-wide">
-                {/* Menu Sections Grid */}
-                <div className="grid md:grid-cols-3 gap-10 md:gap-14 mb-16">
-                  {menuSections.map((section, sIndex) => (
-                    <motion.div
-                      key={section.title}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: 0.08 + sIndex * 0.06,
-                        duration: 0.35,
-                      }}
-                    >
-                      <p className="text-[10px] tracking-[0.25em] uppercase text-[#888888] mb-6 font-mono font-medium">
-                        {section.title}
-                      </p>
-                      <div className="space-y-0">
-                        {section.items.map((item) => (
-                          <div key={item.href + item.label}>
-                            <Link
-                              href={item.href}
-                              onClick={closeMenu}
-                              className="group block py-3.5 border-b border-[#E5E5E5] hover:border-black transition-colors"
-                            >
-                              <span className="block font-serif text-xl sm:text-2xl text-black font-light group-hover:opacity-60 transition-opacity">
-                                {item.label}
-                              </span>
-                              <span className="block text-xs text-[#666666] mt-1 font-light leading-relaxed">
-                                {item.description}
-                              </span>
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+            Close &times;
+          </button>
+        </div>
 
-                {/* Bottom Row — Direct Contact & Coordinates */}
-                <div className="border-t border-[#E5E5E5] pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                  <div className="flex flex-wrap gap-4">
-                    <Link
-                      href="/start-a-project"
-                      onClick={closeMenu}
-                      className="px-7 py-3 text-[11px] tracking-[0.16em] uppercase font-medium bg-black text-white hover:bg-neutral-800 transition-colors"
-                    >
-                      Start a Project
-                    </Link>
-                    <Link
-                      href="/weddings/wedding-sample-kit"
-                      onClick={closeMenu}
-                      className="px-7 py-3 text-[11px] tracking-[0.16em] uppercase font-medium border border-black text-black hover:bg-black hover:text-white transition-colors"
-                    >
-                      Order Sample Kit
-                    </Link>
-                  </div>
-
-                  <div className="flex items-center gap-6">
-                    <a
-                      href="https://www.instagram.com/famousletterpressindia/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono tracking-widest uppercase text-[#666666] hover:text-black transition-colors"
-                    >
-                      Instagram
-                    </a>
-                    <a
-                      href="https://wa.me/919366012345"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono tracking-widest uppercase text-[#666666] hover:text-black transition-colors"
-                    >
-                      WhatsApp
-                    </a>
-                    <a
-                      href="mailto:hello@famousletterpress.com"
-                      className="text-xs font-mono tracking-widest uppercase text-[#666666] hover:text-black transition-colors"
-                    >
-                      Email
-                    </a>
-                  </div>
-                </div>
+        <div className="max-w-[1100px] mx-auto w-full pt-8 pb-12">
+          {menuGroups.map((group, idx) => (
+            <div
+              key={group.num}
+              className="mg"
+              style={{ "--i": idx } as React.CSSProperties}
+            >
+              <h3>
+                <span>{group.num}</span>
+                {group.title}
+              </h3>
+              <div>
+                {group.links.map((link) => (
+                  <Link
+                    key={link.href + link.label}
+                    href={link.href}
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+
+          {/* Socials & Direct WhatsApp Links */}
+          <div className="mf pt-8 border-t border-[var(--hair)] mt-6">
+            <a
+              className="ln"
+              href="https://wa.me/+918416099340"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
+            <a
+              className="ln"
+              href="https://www.instagram.com/famousletterpressindia/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </a>
+            <Link className="ln" href="/contact" onClick={closeMenu}>
+              Contact Studio
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
+

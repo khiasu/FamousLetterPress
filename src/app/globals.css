@@ -1,26 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Hanken+Grotesk:wght@300;400;500&display=swap');
 @import "tailwindcss";
 
 /* ========================================================================
-   FAMOUS LETTERPRESS — PURE EDITORIAL LUXURY
-   Plain White Background · Deep Black Typography · Architectural Hairlines
+   FAMOUS LETTERPRESS — 3D LUXURY ATELIER AESTHETIC
+   Bodoni Moda Display Serif · Hanken Grotesk Architectural Sans
+   Tactile Cotton Grain · 3D Rotating Decks · Indelible Letterpress Impression
    ======================================================================== */
 
 :root {
-  /* ── Pure Monochrome Luxury Palette ── */
+  --ink: #0e0e0e;
+  --mute: #7b7566;
+  --cr: #faf5ea;
+  --cr2: #f1e8d4;
+  --hair: rgba(14,14,14,.14);
+  --d: 'Bodoni Moda', 'Bodoni 72', Didot, 'Playfair Display', Georgia, serif;
+  --s: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4 0 0 0 0 .33 0 0 0 0 .2 0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+
   --color-white:          #FFFFFF;
-  --color-black:          #0A0A0A;
+  --color-black:          #0e0e0e;
   --color-black-pure:     #000000;
-  --color-muted:          #555555;
+  --color-muted:          #7b7566;
   --color-subtle:         #888888;
   --color-border:         #E5E5E5;
   --color-border-dark:    #111111;
   --color-surface-hover:  #F7F7F7;
 
-  /* ── Background & Foreground ── */
   --background:           #FFFFFF;
-  --foreground:           #0A0A0A;
+  --foreground:           #0e0e0e;
 
-  /* ── Motion Curves ── */
   --ease-editorial:       cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth:          cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -37,22 +45,21 @@
   --color-border-dark:      var(--color-border-dark);
   --color-surface-hover:    var(--color-surface-hover);
 
-  /* Legacy aliases mapping strictly to pure monochrome palette */
-  --color-paper-creme:      #FFFFFF;
+  --color-paper-creme:      #faf5ea;
   --color-paper-white:      #FFFFFF;
-  --color-paper-sand:       #F7F7F7;
-  --color-paper-warm:       #FFFFFF;
-  --color-ink:              #0A0A0A;
-  --color-ink-deep:         #0A0A0A;
-  --color-ink-muted:        #555555;
+  --color-paper-sand:       #f1e8d4;
+  --color-paper-warm:       #faf5ea;
+  --color-ink:              #0e0e0e;
+  --color-ink-deep:         #0e0e0e;
+  --color-ink-muted:        #7b7566;
   --color-ink-sand:         #888888;
   --color-border-hairline:  #E5E5E5;
   --color-border-subtle:    #E5E5E5;
-  --color-terracotta:       #0A0A0A;
-  --color-terracotta-light: #555555;
+  --color-terracotta:       #0e0e0e;
+  --color-terracotta-light: #7b7566;
 
-  --font-serif:   var(--font-cormorant-garamond);
-  --font-sans:    var(--font-inter);
+  --font-serif:   var(--d);
+  --font-sans:    var(--s);
 
   --spacing-section:        clamp(4.5rem, 9vw, 8rem);
   --spacing-section-lg:     clamp(6rem, 12vw, 11rem);
@@ -64,99 +71,122 @@
 
 html {
   background-color: #FFFFFF;
-  color: #0A0A0A;
+  color: var(--ink);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
 }
 
 body {
   background-color: #FFFFFF;
-  color: #0A0A0A;
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  line-height: 1.65;
+  color: var(--ink);
+  font-family: var(--s);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
-/* ── Typography Scale ── */
-
-@layer base {
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif), 'Georgia', serif;
-    font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #0A0A0A;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 6vw + 0.5rem, 4.75rem);
-    letter-spacing: -0.025em;
-    font-weight: 300;
-  }
-
-  h2 {
-    font-size: clamp(2rem, 4vw + 0.25rem, 3.25rem);
-    letter-spacing: -0.02em;
-  }
-
-  h3 {
-    font-size: clamp(1.35rem, 2vw + 0.25rem, 2rem);
-  }
-
-  h4 {
-    font-size: clamp(1.15rem, 1.5vw + 0.125rem, 1.45rem);
-  }
-
-  p {
-    color: #555555;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    transition: opacity 250ms ease, color 250ms ease;
-  }
-
-  a:hover {
-    opacity: 0.7;
-  }
+/* ── Typography Classes ── */
+.k {
+  font-size: 10px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--mute);
+  font-family: var(--s);
 }
 
-/* ── Selection ── */
-::selection {
-  background-color: #000000;
-  color: #FFFFFF;
+.d {
+  font-family: var(--d);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.035em;
+  font-variation-settings: "opsz" 24;
+  color: #000;
 }
 
-/* ── Focus ── */
-:focus-visible {
-  outline: 1px solid #000000;
-  outline-offset: 2px;
+.d i {
+  font-style: italic;
+  letter-spacing: -.02em;
 }
 
-/* ── Images ── */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* ── High-Fashion Button System ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font: 400 10.5px var(--s);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  padding: 18px 28px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition: gap .5s, background .5s, color .5s;
+  user-select: none;
+}
+.btn::after {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition: width .5s;
+}
+.btn:hover {
+  gap: 20px;
+  background: #222;
+}
+.btn:hover::after {
+  width: 34px;
 }
 
-/* ========================================================================
-   UTILITY CLASSES
-   ======================================================================== */
-
-.section {
-  padding-top: var(--spacing-section);
-  padding-bottom: var(--spacing-section);
-  background-color: #FFFFFF;
+.btn-out {
+  background: transparent;
+  color: var(--ink);
+}
+.btn-out:hover {
+  background: var(--ink);
+  color: #fff;
 }
 
-.section-lg {
-  padding-top: var(--spacing-section-lg);
-  padding-bottom: var(--spacing-section-lg);
-  background-color: #FFFFFF;
+.ln {
+  font-size: 10.5px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-weight: 400;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 5px;
+  transition: letter-spacing .5s, opacity .3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.ln:hover {
+  letter-spacing: .36em;
+  opacity: .7;
+}
+
+/* ── Tactile Paper & Emboss Tokens ── */
+.paper {
+  background: var(--cr) var(--grain);
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 18px 30px -18px rgba(60,45,20,.45), 0 2px 4px rgba(60,45,20,.12);
+}
+
+.deb {
+  color: #8c7852;
+  text-shadow: 0 1px 0 rgba(255,255,255,.95), 0 -1px 0 rgba(40,30,10,.28);
+}
+
+/* ── Utilities ── */
+.w {
+  padding: 0 22px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .container-wide {
@@ -175,42 +205,34 @@ img {
   padding-right: clamp(1.25rem, 5vw, 3.5rem);
 }
 
+.section {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+  background-color: #FFFFFF;
+}
+
+.section-lg {
+  padding-top: var(--spacing-section-lg);
+  padding-bottom: var(--spacing-section-lg);
+  background-color: #FFFFFF;
+}
+
 /* Eyebrow label */
 .eyebrow {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-family: var(--s);
+  font-size: 10px;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: #888888;
+  color: var(--mute);
+  font-weight: 400;
 }
 
 /* Hairline divider */
 .divider {
   width: 100%;
   height: 1px;
-  background-color: #E5E5E5;
+  background-color: var(--hair);
   border: none;
-}
-
-/* Horizontal reel scroll */
-.carousel-scroll {
-  display: flex;
-  gap: 1.25rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 1rem;
-}
-
-.carousel-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel-scroll > * {
-  scroll-snap-align: start;
-  flex-shrink: 0;
 }
 
 /* Custom scrollbar */
@@ -218,15 +240,12 @@ img {
   width: 5px;
   height: 5px;
 }
-
 ::-webkit-scrollbar-track {
   background: #FFFFFF;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #D4D4D4;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #000000;
 }
