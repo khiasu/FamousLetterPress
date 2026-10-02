@@ -26,7 +26,7 @@
   --color-border-dark:    #111111;
   --color-surface-hover:  #F7F7F7;
 
-  --background:           #FFFFFF;
+  --background:           #FCFAF7;
   --foreground:           #0e0e0e;
 
   --ease-editorial:       cubic-bezier(0.16, 1, 0.3, 1);
@@ -46,7 +46,7 @@
   --color-surface-hover:    var(--color-surface-hover);
 
   --color-paper-creme:      #faf5ea;
-  --color-paper-white:      #FFFFFF;
+  --color-paper-white:      #FCFAF7;
   --color-paper-sand:       #f1e8d4;
   --color-paper-warm:       #faf5ea;
   --color-ink:              #0e0e0e;
@@ -70,7 +70,7 @@
    ======================================================================== */
 
 html {
-  background-color: #FFFFFF;
+  background-color: #FCFAF7;
   color: var(--ink);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -80,7 +80,7 @@ html {
 }
 
 body {
-  background-color: #FFFFFF;
+  background-color: #FCFAF7;
   color: var(--ink);
   font-family: var(--s);
   font-weight: 300;

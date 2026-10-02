@@ -194,26 +194,26 @@ export function Header({
             Book a consult
           </Link>
 
-          {/* Icon-Only Clean Toggle Button (no 'Menu' text) */}
+          {/* Icon-Only Clean Toggle Button (Stays in exact position, animated X mark) */}
           <button
-            className="w-10 h-10 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white active:scale-95 transition-all flex items-center justify-center cursor-pointer select-none group shadow-2xs"
+            className="w-10 h-10 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white active:scale-95 transition-all flex items-center justify-center cursor-pointer select-none group shadow-2xs z-[70]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
           >
-            {/* Morphing 2-Bar Architectural Lines */}
-            <div className="w-4 h-3 relative flex flex-col justify-between items-center pointer-events-none">
+            {/* Morphing 2-Bar Animated X Architectural Lines with hover response */}
+            <div className="w-4 h-3.5 relative flex flex-col justify-between items-center pointer-events-none">
               <span
                 className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
                   isMenuOpen
-                    ? "w-4 rotate-45 translate-y-[5.25px]"
-                    : "w-4"
+                    ? "w-4 rotate-45 translate-y-[6px] group-hover:scale-110"
+                    : "w-4 group-hover:scale-105"
                 }`}
               />
               <span
                 className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
                   isMenuOpen
-                    ? "w-4 -rotate-45 -translate-y-[5.25px]"
+                    ? "w-4 -rotate-45 -translate-y-[6px] group-hover:scale-110"
                     : "w-2.5 self-start group-hover:w-4"
                 }`}
               />
@@ -227,23 +227,23 @@ export function Header({
         className={`menu-standalone ${isMenuOpen ? "open" : ""}`}
         aria-hidden={!isMenuOpen}
       >
-        <div className="h-full flex flex-col justify-between px-5 sm:px-12 py-4 sm:py-7 max-w-[1240px] mx-auto w-full">
-          {/* Top Row: Logo & Close Trigger */}
-          <div className="flex justify-between items-center pb-4 border-b border-[rgba(14,14,14,0.1)]">
+        <div className="h-full flex flex-col justify-between px-6 sm:px-14 md:px-16 py-3.5 max-w-[1400px] mx-auto w-full">
+          {/* Top Row: Logo & Close Trigger in exact same navbar alignment */}
+          <div className="flex justify-between items-center pb-3 border-b border-[rgba(14,14,14,0.1)]">
             <Link
               href="/"
-              className="flex items-center gap-3 select-none"
+              className="flex items-center gap-3.5 sm:gap-4 select-none group pl-1 sm:pl-2"
               onClick={closeMenu}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={logoUrl || "/assets/logo.png"}
                 alt="Famous Letterpress Seal"
-                className="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded-full border border-[rgba(14,14,14,0.14)] p-0.5 bg-[#faf8f4]"
+                className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full border border-[rgba(14,14,14,0.14)] p-0.5 bg-white"
               />
-              <div className="flex flex-col leading-none">
+              <div className="flex flex-col justify-center leading-none">
                 <span
-                  className="font-serif text-lg sm:text-xl font-semibold tracking-[-0.01em] text-[#0e0e0e]"
+                  className="font-serif text-lg sm:text-xl md:text-2xl font-semibold tracking-[-0.01em] text-[#0e0e0e]"
                   style={{
                     fontFamily: "var(--font-cormorant-garamond), 'Cormorant Garamond', 'Bodoni Moda', serif",
                   }}
@@ -256,13 +256,16 @@ export function Header({
               </div>
             </Link>
 
+            {/* Same position close button matching toggle geometry */}
             <button
               onClick={closeMenu}
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-[#faf8f4] text-[11px] uppercase tracking-[0.2em] font-sans font-medium text-black transition-all cursor-pointer shadow-2xs"
-              aria-label="Close menu"
+              className="w-10 h-10 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-black text-black hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-2xs group active:scale-95"
+              aria-label="Close navigation menu"
             >
-              <span>Close</span>
-              <span className="text-sm leading-none">&times;</span>
+              <div className="w-4 h-4 relative flex items-center justify-center pointer-events-none">
+                <span className="absolute h-[1.5px] w-4 bg-current rotate-45 transition-transform duration-300 group-hover:scale-110" />
+                <span className="absolute h-[1.5px] w-4 bg-current -rotate-45 transition-transform duration-300 group-hover:scale-110" />
+              </div>
             </button>
           </div>
 
