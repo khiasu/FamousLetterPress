@@ -100,7 +100,7 @@ export const servicesData: Record<string, ServiceItem> = {
       "Uncompromising business cards pressed on ultra-thick 600gsm cotton board, duplex colored stocks, hot foil stamping, and edge gilding.",
     fullDescription: [
       "In high-stakes introductions, a digital contact exchange is quickly forgotten. A heavyweight letterpress business card possesses physical gravity that commands respect the instant it touches someone's fingertips.",
-      "We produce cards for architects, creative directors, medical professionals, luxury ateliers, and founders who understand that paper choice and tactile impression represent their brand standard.",
+      "We produce cards for architects, creative directors, medical professionals, design studios, and founders who understand that paper choice and tactile impression represent their brand standard.",
       "Each batch is hand-printed with custom formulated inks on premium European and American cotton stocks, calibrated to yield a tactile relief that machine printing cannot replicate.",
     ],
     materials: [

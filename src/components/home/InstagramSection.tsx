@@ -65,7 +65,7 @@ export function InstagramSection() {
           <div>
             <p className="k mb-2">From our Instagram</p>
             <h2 className="d text-[clamp(32px,7vw,64px)] leading-[0.95] font-serif text-black">
-              Daily presswork at the <i>atelier.</i>
+              Daily presswork at the <i>studio.</i>
             </h2>
           </div>
 
@@ -169,7 +169,7 @@ export function InstagramSection() {
         </div>
       </div>
 
-      {/* ── REAL ATELIER VIDEO PLAYER MODAL ── */}
+      {/* ── REAL STUDIO VIDEO PLAYER MODAL ── */}
       {activeVideo && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm"

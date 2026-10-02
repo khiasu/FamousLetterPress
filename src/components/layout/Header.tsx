@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { SearchModal } from "@/components/ui/SearchModal";
+import { SOCIAL_PROFILES } from "@/components/ui/SocialIcons";
 
 /* ── Menu Architecture with exact prototype categories & numbers ── */
 const menuGroups = [
@@ -23,7 +24,7 @@ const menuGroups = [
       { label: "Cotton & Handmade Paper", href: "/materials" },
       { label: "Letterpress Craft & Bite", href: "/process" },
       { label: "Hot Foil & Emboss", href: "/process" },
-      { label: "Our Story & Atelier", href: "/about" },
+      { label: "Our Story & Studio", href: "/about" },
     ],
   },
   {
@@ -100,7 +101,7 @@ export function Header({
         </div>
       )}
 
-      {/* ── Fixed Atelier Header ── */}
+      {/* ── Fixed Studio Header ── */}
       <header
         id="hd"
         className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-5 sm:px-12 py-3.5 transition-all duration-300 ${
@@ -336,44 +337,52 @@ export function Header({
 
           {/* Bottom Coordinates Bar (No scroll required) */}
           <div className="pt-4 border-t border-[rgba(14,14,14,0.1)] flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--mute)]">
-            <div className="flex items-center gap-5 sm:gap-6 font-mono text-[10.5px] uppercase tracking-widest">
-              <a
-                href="https://wa.me/+918416099340"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-black transition-colors"
-              >
-                WhatsApp
-              </a>
-              <a
-                href="https://www.instagram.com/famousletterpressindia/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-black transition-colors"
-              >
-                Instagram
-              </a>
-              <Link
-                href="/journal"
-                onClick={closeMenu}
-                className="hover:text-black transition-colors"
-              >
-                Journal
-              </Link>
-              <Link
-                href="/faq"
-                onClick={closeMenu}
-                className="hover:text-black transition-colors"
-              >
-                FAQs
-              </Link>
-              <Link
-                href="/contact"
-                onClick={closeMenu}
-                className="hover:text-black transition-colors"
-              >
-                Contact
-              </Link>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              {/* Black & White Social Icons matching UI */}
+              <div className="flex items-center gap-2">
+                {SOCIAL_PROFILES.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      title={social.label}
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-[rgba(14,14,14,0.2)] hover:border-black bg-white hover:bg-black text-black hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
+                    >
+                      <Icon className="w-3.5 h-3.5 transition-colors" />
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="h-3 w-[1px] bg-[rgba(14,14,14,0.15)] hidden sm:block" />
+
+              <div className="flex items-center gap-4 sm:gap-5 font-mono text-[10.5px] uppercase tracking-widest">
+                <Link
+                  href="/journal"
+                  onClick={closeMenu}
+                  className="hover:text-black transition-colors"
+                >
+                  Journal
+                </Link>
+                <Link
+                  href="/faq"
+                  onClick={closeMenu}
+                  className="hover:text-black transition-colors"
+                >
+                  FAQs
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={closeMenu}
+                  className="hover:text-black transition-colors"
+                >
+                  Contact
+                </Link>
+              </div>
             </div>
 
             <p className="text-[10.5px] font-mono tracking-wider">

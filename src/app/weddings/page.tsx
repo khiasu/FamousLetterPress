@@ -248,7 +248,7 @@ export default function WeddingsHubPage() {
                 </div>
 
                 <div className="px-5 pb-5 pt-3 border-t border-[#E5E5E5] flex items-center justify-between text-[10.5px] font-mono uppercase tracking-wider text-[#777]">
-                  <span>Nagaland Atelier</span>
+                  <span>Nagaland Studio</span>
                   <Link href="/weddings/early-bride" className="text-black hover:opacity-60 transition-opacity font-medium">
                     Commission &rarr;
                   </Link>

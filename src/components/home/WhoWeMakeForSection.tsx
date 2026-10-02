@@ -15,7 +15,7 @@ const AUDIENCES = [
     num: "II",
     title: "Designers & Planners",
     description:
-      "Trade collaboration for wedding planners, graphic designers, and art directors. Send us print-ready artwork or let our atelier assist with formulation, paper selection, and die making.",
+      "Trade collaboration for wedding planners, graphic designers, and art directors. Send us print-ready artwork or let our studio team assist with formulation, paper selection, and die making.",
     cta: "Join partner program",
     href: "/channel-partners",
     external: false,

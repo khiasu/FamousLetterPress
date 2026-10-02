@@ -30,7 +30,7 @@ export const journalArticles: JournalArticle[] = [
     title: "What is Letterpress Printing? The Art of the Mechanical Impression",
     subtitle: "A deep dive into cast-iron platen presses, relief plate chemistry, and why digital printing cannot match physical bite.",
     excerpt:
-      "Letterpress is the oldest form of printing, invented in the 15th century. Today, in our Nagaland atelier, it is practiced not for high-speed utility, but as an artisanal craft that debosses ink deeply into 100% cotton paper.",
+      "Letterpress is the oldest form of printing, invented in the 15th century. Today, in our Nagaland studio, it is practiced not for high-speed utility, but as an artisanal craft that debosses ink deeply into 100% cotton paper.",
     category: "Craft & Printing",
     publishedAt: "September 15, 2026",
     readTime: "6 min read",

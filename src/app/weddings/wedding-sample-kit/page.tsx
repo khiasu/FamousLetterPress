@@ -100,7 +100,7 @@ export default function WeddingSampleKitPage() {
                   <p className="eyebrow mb-2">Dispatch & Shipping Guarantee</p>
                   <h3 className="text-lg md:text-xl text-black mb-3 font-serif">Courier Delivery Across India</h3>
                   <p className="text-xs sm:text-sm text-[#555555] leading-relaxed">
-                    Every kit is assembled by hand in our Nagaland atelier and dispatched via express courier with full tracking. Expect delivery within 3–5 working days anywhere in India.
+                    Every kit is assembled by hand in our Nagaland studio and dispatched via express courier with full tracking. Expect delivery within 3–5 working days anywhere in India.
                   </p>
                 </div>
               </Reveal>

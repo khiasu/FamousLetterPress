@@ -43,7 +43,7 @@ export default function StartAProjectPage({ searchParams }: StartProjectPageProp
                 Start a Commission
               </h1>
               <p className="text-sm md:text-base text-[#555555] font-light leading-relaxed">
-                Whether you have an upcoming wedding celebration, need executive identity cards, or are planning bespoke personal stationery, our atelier is ready to bring it to life.
+                Whether you have an upcoming wedding celebration, need executive identity cards, or are planning bespoke personal stationery, our studio is ready to bring it to life.
               </p>
             </div>
           </Reveal>

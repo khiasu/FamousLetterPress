@@ -126,7 +126,7 @@ export default function BusinessCardsPage() {
             {
               image: "/assets/business-cards/FMS_3462.jpg",
               fallback: "https://famousletterpress.com/wp-content/uploads/2026/04/bizkit-01-1200x1200.jpg",
-              title: "Atelier Duplexed Edge-Gilded Card",
+              title: "Studio Duplexed Edge-Gilded Card",
               stock: "600gsm Cotton · Gold Edge Foil",
             },
             {

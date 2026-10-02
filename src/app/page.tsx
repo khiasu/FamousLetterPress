@@ -10,7 +10,7 @@ import { CTASection } from "@/components/home/CTASection";
 export const metadata = {
   title: "Famous Letterpress — Handcrafted Letterpress & Foil Studio",
   description:
-    "India's premier artisanal letterpress atelier. Bespoke wedding invitations, luxury business cards, and custom stationery pressed by hand on vintage platen presses in Nagaland.",
+    "India's premier artisanal letterpress studio. Bespoke wedding invitations, luxury business cards, and custom stationery pressed by hand on vintage platen presses in Nagaland.",
 };
 
 export default function HomePage() {

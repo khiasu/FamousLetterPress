@@ -63,7 +63,7 @@ export default function PersonalisedStationeryPage() {
                   href="/contact"
                   className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/40 transition-colors"
                 >
-                  Speak With Atelier
+                  Speak With Studio
                 </Link>
               </div>
             </div>
@@ -173,7 +173,7 @@ export default function PersonalisedStationeryPage() {
               Start your personal <em className="font-light">writing collection.</em>
             </h2>
             <p className="text-sm md:text-base text-[#555555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-              Share your monogram ideas or correspondence needs. Our atelier will prepare paper recommendations and typographic layouts.
+              Share your monogram ideas or correspondence needs. Our studio will prepare paper recommendations and typographic layouts.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link

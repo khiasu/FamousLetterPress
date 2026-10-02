@@ -72,7 +72,7 @@ export function HowWeMakeSection() {
         </p>
 
         <p className="text-sm sm:text-base text-[#333] max-w-xl font-light leading-relaxed mb-12">
-          From the first digital proof to the physical press run, every piece is made slowly and pressed one impression at a time on restored vintage Heidelberg platen presses in our Nagaland atelier.
+          From the first digital proof to the physical press run, every piece is made slowly and pressed one impression at a time on restored vintage Heidelberg platen presses in our Nagaland studio.
         </p>
 
         {/* 4 Craft Pillars Grid */}

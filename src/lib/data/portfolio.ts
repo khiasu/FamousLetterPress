@@ -17,8 +17,8 @@ export const portfolioData: PortfolioPiece[] = [
   },
   {
     id: "port-2",
-    title: "Atelier Architecture Business Cards",
-    slug: "atelier-architecture-business-cards",
+    title: "Architectural Studio Business Cards",
+    slug: "architectural-studio-business-cards",
     category: "business-cards",
     categoryLabel: "Business Cards",
     clientOrProject: "Studio K Architecture",
@@ -101,8 +101,8 @@ export const portfolioData: PortfolioPiece[] = [
   },
   {
     id: "port-8",
-    title: "Elysian Atelier Minimalist Stationery",
-    slug: "elysian-atelier-minimalist-stationery",
+    title: "Elysian Studio Minimalist Stationery",
+    slug: "elysian-studio-minimalist-stationery",
     category: "personalised",
     categoryLabel: "Personalised Stationery",
     clientOrProject: "Editorial Series",

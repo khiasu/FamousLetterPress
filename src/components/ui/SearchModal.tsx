@@ -87,12 +87,12 @@ const SEARCH_DATABASE: SearchItem[] = [
     keywords: ["portfolio", "work", "archive", "commissions", "gallery", "photos", "client work"],
   },
   {
-    id: "about-atelier",
-    title: "Our Story & Atelier",
+    id: "about-studio",
+    title: "Our Story & Studio",
     category: "Studio",
     description: "Designers turned printers. Founded in Dimapur, Nagaland, celebrating heirloom craft.",
     href: "/about",
-    keywords: ["about", "story", "nagaland", "dimapur", "atelier", "founder", "printers"],
+    keywords: ["about", "story", "nagaland", "dimapur", "studio", "workshop", "founder", "printers"],
   },
   {
     id: "early-bride",

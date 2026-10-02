@@ -74,7 +74,7 @@ export default function WorkPage() {
               href="/contact"
               className="ln"
             >
-              Contact Atelier &rarr;
+              Contact Studio &rarr;
             </Link>
           </div>
         </div>

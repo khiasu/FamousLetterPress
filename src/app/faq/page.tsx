@@ -90,7 +90,7 @@ export default function FAQPage() {
                 href="/contact"
                 className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
               >
-                Contact Atelier
+                Contact Studio
               </Link>
               <Link
                 href="/start-a-project"

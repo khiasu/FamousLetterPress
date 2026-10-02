@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 export const metadata: Metadata = {
   title: "Our Story | Designers Turned Printers | Famous Letterpress",
   description:
-    "Famous Letterpress is a boutique letterpress atelier founded by Akanito in Nagaland, India. Designers turned printers handcrafting bespoke wedding stationery and luxury business cards.",
+    "Famous Letterpress is a boutique letterpress studio founded by Akanito in Nagaland, India. Designers turned printers handcrafting bespoke wedding stationery and luxury business cards.",
 };
 
 const studioValues = [
@@ -15,7 +15,7 @@ const studioValues = [
   },
   {
     title: "Handcrafted in Nagaland",
-    desc: "From our workshop in Dimapur, Nagaland, our atelier operates with deliberate slowness and reverence for time-honored artisanal mechanics.",
+    desc: "From our workshop in Dimapur, Nagaland, our studio operates with deliberate slowness and reverence for time-honored artisanal mechanics.",
   },
   {
     title: "Pure Cotton Integrity",
@@ -66,13 +66,13 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-4 text-sm md:text-base text-[#555555] font-light leading-relaxed">
                   <p>
-                    Famous Letterpress operates from Nagaland, in Northeast India. What began as a graphic design practice founded by <strong>Akanito</strong> in 2008 evolved into a dedicated letterpress printing atelier when we realized that commercial digital printing could never reproduce the sensory relief of cast-iron presswork.
+                    Famous Letterpress operates from Nagaland, in Northeast India. What began as a graphic design practice founded by <strong>Akanito</strong> in 2008 evolved into a dedicated letterpress printing studio when we realized that commercial digital printing could never reproduce the sensory relief of cast-iron presswork.
                   </p>
                   <p>
                     Letterpress printing is not an automated push-button process. Each sheet of 600gsm cotton rag is hand-fed one at a time. Each run requires meticulous manual tuning of ink tack, packing hardness, register pins, and platen pressure to achieve the signature &ldquo;bite&rdquo;.
                   </p>
                   <p>
-                    We tracked down and salvaged vintage Heidelberg platen presses, restoring them bolt by bolt in our Nagaland workshop. Today, our atelier is trusted by couples, luxury brands, and creative agencies throughout India and across the world.
+                    We tracked down and salvaged vintage Heidelberg platen presses, restoring them bolt by bolt in our Nagaland workshop. Today, our studio is trusted by couples, luxury brands, and creative agencies throughout India and across the world.
                   </p>
                 </div>
               </Reveal>
@@ -99,11 +99,11 @@ export default function AboutPage() {
                     The Machinery of Mindful Craft
                   </h3>
                   <p className="text-xs md:text-sm text-[#555555] leading-relaxed mb-6 font-light">
-                    Our atelier houses vintage Heidelberg platen presses and cylinder proof presses. These machines, engineered with immense cast-iron precision, apply thousands of pounds of pressure per square inch to create an indelible deboss into soft cotton board.
+                    Our workshop houses vintage Heidelberg platen presses and cylinder proof presses. These machines, engineered with immense cast-iron precision, apply thousands of pounds of pressure per square inch to create an indelible deboss into soft cotton board.
                   </p>
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#E5E5E5] text-xs font-sans">
                     <div>
-                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Atelier Location</span>
+                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Studio Location</span>
                       <span className="font-medium text-black mt-0.5 block">Dimapur, Nagaland, India</span>
                     </div>
                     <div>
@@ -125,7 +125,7 @@ export default function AboutPage() {
             <Reveal>
               <p className="eyebrow mb-2">What We Stand For</p>
               <h2 className="mb-4">
-                The four pillars of <em className="font-light">our atelier</em>
+                The four pillars of <em className="font-light">our craft</em>
               </h2>
             </Reveal>
           </div>
@@ -150,7 +150,7 @@ export default function AboutPage() {
       <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
         <div className="container-narrow">
           <Reveal>
-            <p className="eyebrow text-[#888888] mb-3">Work With Our Atelier</p>
+            <p className="eyebrow text-[#888888] mb-3">Work With Our Studio</p>
             <h2 className="text-black mb-4">
               Let&apos;s create something <em className="font-light">worth keeping forever.</em>
             </h2>

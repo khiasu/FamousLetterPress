@@ -44,7 +44,7 @@ const TOP_FAQS: FAQItem[] = [
     category: "Samples",
     question: "Can we hold and feel the paper, foils, and embossing before placing an order?",
     answer:
-      "Yes. Screen pixels cannot communicate the weight of 600–900gsm cotton or the tactile bite of our presses. We offer curated Wedding Sample Boxes and Business Card Sample Kits dispatched directly from our Nagaland atelier, the cost of which is 100% credited toward your commissioned order.",
+      "Yes. Screen pixels cannot communicate the weight of 600–900gsm cotton or the tactile bite of our presses. We offer curated Wedding Sample Boxes and Business Card Sample Kits dispatched directly from our Nagaland studio, the cost of which is 100% credited toward your commissioned order.",
   },
 ];
 
@@ -80,7 +80,7 @@ export function HomeFAQSection() {
           </div>
         </div>
 
-        {/* Clean Atelier Accordion */}
+        {/* Clean Accordion */}
         <div className="max-w-4xl border-t border-[#E5E5E5]">
           {TOP_FAQS.map((faq) => {
             const isOpen = openId === faq.id;

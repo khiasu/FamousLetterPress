@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SOCIAL_PROFILES } from "@/components/ui/SocialIcons";
 
 const FOOTER_LINKS = [
   { label: "Weddings", href: "/weddings" },
@@ -11,25 +12,6 @@ const FOOTER_LINKS = [
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
   { label: "Start a Project", href: "/start-a-project" },
-];
-
-const SOCIAL_LINKS = [
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/famousletterpressindia/",
-  },
-  {
-    label: "YouTube",
-    href: "https://www.youtube.com/channel/UCpRrZSVggl79UKEQ3650WMQ",
-  },
-  {
-    label: "Pinterest",
-    href: "https://www.pinterest.com/famousletterpress/",
-  },
-  {
-    label: "WhatsApp",
-    href: "https://wa.me/+918416099340",
-  },
 ];
 
 export function Footer() {
@@ -60,19 +42,24 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-5 sm:gap-6">
-            {SOCIAL_LINKS.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10.5px] uppercase tracking-[0.2em] text-[#7b7566] hover:text-black transition-colors font-mono"
-              >
-                {social.label}
-              </a>
-            ))}
+          {/* Social Links — Crisp Black & White Icons */}
+          <div className="flex items-center gap-3">
+            {SOCIAL_PROFILES.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  title={social.label}
+                  className="w-9 h-9 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-black text-black hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-2xs group"
+                >
+                  <Icon className="w-4 h-4 transition-colors" />
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -92,7 +79,7 @@ export function Footer() {
         {/* Bottom: Copyright + Legal */}
         <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-[rgba(14,14,14,0.08)]">
           <p className="text-[10.5px] tracking-[0.12em] text-[#7b7566] font-mono">
-            &copy; 2026 Famous Letterpress Atelier. All rights reserved.
+            &copy; 2026 Famous Letterpress Studio. All rights reserved.
           </p>
           <div className="flex gap-5 text-[10.5px] tracking-[0.12em] text-[#7b7566] font-mono">
             <a

@@ -3,13 +3,13 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Contact Famous Letterpress | Nagaland Atelier",
+  title: "Contact Famous Letterpress | Nagaland Studio",
   description:
-    "Get in touch with Famous Letterpress. Contact our atelier via WhatsApp, email, or schedule a consultation for your upcoming wedding or brand stationery.",
+    "Get in touch with Famous Letterpress. Contact our studio via WhatsApp, email, or schedule a consultation for your upcoming wedding or brand stationery.",
 };
 
 const studioDetails = {
-  name: "Famous Letterpress Atelier",
+  name: "Famous Letterpress Studio",
   location: "Dimapur, Nagaland, India",
   email: "hello@famousletterpress.com",
   phone: "+91 93660 12345",
@@ -34,7 +34,7 @@ export default function ContactPage() {
               </div>
               <p className="eyebrow mb-2">Get In Touch</p>
               <h1 className="text-black mt-2 mb-6 font-serif">
-                Connect with our <em className="font-light">atelier.</em>
+                Connect with our <em className="font-light">studio.</em>
               </h1>
               <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 Whether you have an upcoming wedding celebration, need executive business cards, or wish to explore a trade collaboration, we welcome your conversation.
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 <div className="bg-[#F7F7F7] border border-[#E5E5E5] p-8 space-y-6">
                   <div>
                     <span className="text-[10px] font-mono uppercase tracking-widest text-[#888888] block mb-1">
-                      Atelier Location
+                      Studio Location
                     </span>
                     <div className="font-serif text-xl text-black">{studioDetails.name}</div>
                     <div className="text-sm text-[#555555] font-light mt-0.5">{studioDetails.location}</div>

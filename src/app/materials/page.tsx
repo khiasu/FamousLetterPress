@@ -77,7 +77,7 @@ export default function MaterialsPage() {
                 Substrates &amp; <em className="font-light">studio techniques.</em>
               </h1>
               <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
-                In letterpress, paper is not just a carrier for ink—it is half the design. Explore the cotton papers, foils, and finishing methods we use in our Nagaland atelier.
+                In letterpress, paper is not just a carrier for ink—it is half the design. Explore the cotton papers, foils, and finishing methods we use in our Nagaland studio.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link

@@ -69,7 +69,7 @@ export default function ChannelPartnersPage() {
               </h1>
               <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 We work alongside wedding planners, brand designers, event directors, and creative agencies across India and internationally.
-                Think of our Nagaland pressroom as your own private print atelier.
+                Think of our Nagaland pressroom as your own private print studio.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link
