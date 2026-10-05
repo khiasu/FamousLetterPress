@@ -82,7 +82,8 @@ export function HeroSection() {
     if (cards.length === 0) return;
 
     const spring = new Spring(0, 140, 22);
-    const getSpacing = () => cards[0].offsetWidth * 0.88;
+    // Non-overlapping track with a tailored 24px gap: completely eliminates z-index popping
+    const getSpacing = () => cards[0].offsetWidth + 24;
 
     let target = 0;
     let isDragging = false;
@@ -111,9 +112,13 @@ export function HeroSection() {
         diff -= m * Math.round(diff / m);
         const absDiff = Math.abs(diff);
 
-        const scale = absDiff < 1 ? 1 - absDiff * 0.16 : 0.84;
-        const opacity = absDiff < 1 ? 1 - absDiff * 0.28 : Math.max(0.2, 0.72 - (absDiff - 1) * 0.4);
-        const zIndex = 100 - Math.round(absDiff * 10);
+        // Smooth continuous cosine easing with zero threshold popping
+        const progress = Math.max(0, 1 - Math.min(1.2, absDiff));
+        const smoothProgress = Math.cos((1 - progress) * Math.PI) * 0.5 + 0.5;
+
+        const scale = 0.90 + 0.10 * smoothProgress;
+        const opacity = 0.45 + 0.55 * smoothProgress;
+        const zIndex = Math.max(1, Math.round(50 - absDiff * 10));
 
         card.style.transform = `translate3d(${diff * sp}px,0,0) scale(${scale})`;
         card.style.opacity = `${opacity}`;
@@ -248,19 +253,15 @@ export function HeroSection() {
   return (
     <section className="hero pt-28 md:pt-36 pb-16 overflow-hidden relative" aria-label="Famous Letterpress Hero">
       <div className="w">
-        <p className="text-[11.5px] sm:text-[12.5px] tracking-[0.26em] uppercase font-sans text-[#7b7566] mb-5 font-medium">
-          Luxury Letterpress &amp; Foil Wedding Invitations in India
-        </p>
-
         {/* Clean single-line headline */}
         <h1 className="d text-[clamp(48px,13vw,120px)] leading-[0.92] tracking-[-0.035em] pb-[0.06em]">
           Designers turned <i>printers.</i>
         </h1>
 
-        {/* Brand sub-sentence */}
-        <div className="grid gap-5 mt-8 max-w-[520px]">
+        {/* Brand studio descriptor & CTA */}
+        <div className="grid gap-5 mt-7 max-w-[560px]">
           <p className="text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed">
-            Keep scrolling and discover how we make your prints stand out.
+            Luxury Letterpress &amp; Foil Wedding Invitations in India
           </p>
           <div className="mt-1">
             <Link
@@ -275,7 +276,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── 6-Image Centered Focus Carousel (Less rectangular, visible adjacent cards) ── */}
+      {/* ── 6-Image Centered Focus Carousel (Silky continuous non-overlapping track) ── */}
       <div
         ref={crRef}
         className="cr w-full relative h-[clamp(280px,42vw,400px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
@@ -284,7 +285,7 @@ export function HeroSection() {
         {HERO_ITEMS.map((item, index) => (
           <div
             key={index}
-            className="cs absolute left-1/2 top-0 w-[min(76vw,540px)] h-full -ml-[min(38vw,270px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
+            className="cs absolute left-1/2 top-0 w-[min(74vw,520px)] h-full -ml-[min(37vw,260px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
           >
             <div className="ph absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
