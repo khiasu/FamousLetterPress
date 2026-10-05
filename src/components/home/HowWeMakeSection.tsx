@@ -254,9 +254,9 @@ export function HowWeMakeSection() {
         ))}
       </div>
 
-      {/* Dynamic Slide Caption — same pattern as hero */}
-      <div className="text-center mt-5 min-h-[50px] px-4 transition-opacity duration-300">
-        <div className="inline-block">
+      {/* Dynamic Slide Caption Under Carousel (Left-aligned flush with the card) */}
+      <div className="w-full max-w-[82vw] sm:max-w-[490px] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
+        <div className="block text-left">
           <h3 className="font-serif font-medium text-xl sm:text-2xl text-black tracking-tight">
             {activeItem.title}
           </h3>
@@ -264,12 +264,12 @@ export function HowWeMakeSection() {
             {activeItem.desc}
           </p>
         </div>
-      </div>
 
-      {/* Slide Counter */}
-      <p className="k text-center mt-3.5 tracking-[0.28em]">
-        {activeIndex + 1} / {m}
-      </p>
+        {/* Slide Counter — left-aligned */}
+        <p className="k text-left mt-3 tracking-[0.28em]">
+          0{activeIndex + 1} / 0{m}
+        </p>
+      </div>
     </section>
   );
 }
