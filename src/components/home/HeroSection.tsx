@@ -49,25 +49,6 @@ const HERO_ITEMS: HeroItem[] = [
   },
 ];
 
-// Spring physics simulation from user's prototype
-class Spring {
-  x: number;
-  v: number;
-  t: number;
-  k: number;
-  c: number;
-  constructor(x: number, k: number, c: number) {
-    this.x = x;
-    this.v = 0;
-    this.t = x;
-    this.k = k;
-    this.c = c;
-  }
-  step(d: number) {
-    this.v += (-this.k * (this.x - this.t) - this.c * this.v) * d;
-    this.x += this.v * d;
-  }
-}
 
 export function HeroSection() {
   const crRef = useRef<HTMLDivElement>(null);
@@ -81,12 +62,12 @@ export function HeroSection() {
     const cards = Array.from(cr.children) as HTMLElement[];
     if (cards.length === 0) return;
 
-    const spring = new Spring(0, 140, 22);
-    // Non-overlapping track with a reduced gap (8px mobile, 14px desktop) for clear small peek windows
+    const spring = { x: 0, v: 0 };
+    // Reduced gap (8px mobile, 16px desktop) for clear small peek windows
     const getSpacing = () => {
       const cardW = cards[0]?.offsetWidth || 320;
       const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-      return cardW + (isMobile ? 8 : 14);
+      return cardW + (isMobile ? 8 : 16);
     };
 
     let target = 0;
@@ -95,6 +76,7 @@ export function HeroSection() {
     let initialX = 0;
     let movedDistance = 0;
     let lastClientX = 0;
+    let latestPointerX = 0;
     let lastTime = 0;
     let releaseVelocity = 0;
 
@@ -102,6 +84,11 @@ export function HeroSection() {
     let animId: number;
     let lastAnimTime = performance.now();
     let lastActiveIdx = -1;
+
+    // Set static z-index once to avoid DOM compositor layer invalidations at 144Hz
+    cards.forEach((card) => {
+      card.style.zIndex = "10";
+    });
 
     const updateCards = () => {
       const sp = getSpacing();
@@ -122,11 +109,10 @@ export function HeroSection() {
 
         const scale = 0.90 + 0.10 * smoothProgress;
         const opacity = 0.45 + 0.55 * smoothProgress;
-        const zIndex = Math.max(1, Math.round(50 - absDiff * 10));
 
+        // GPU-only properties: transforms and opacity without zIndex reflows for native 144Hz smoothness
         card.style.transform = `translate3d(${diff * sp}px,0,0) scale(${scale})`;
         card.style.opacity = `${opacity}`;
-        card.style.zIndex = `${zIndex}`;
       });
     };
 
@@ -134,28 +120,33 @@ export function HeroSection() {
       const dt = Math.min((now - lastAnimTime) / 1000, 0.032);
       lastAnimTime = now;
 
-      spring.t = target;
-      // Step spring with real delta time
-      const subSteps = 3;
-      const subDt = dt / subSteps;
-      for (let k = 0; k < subSteps; k++) {
-        spring.step(subDt);
-      }
-
-      updateCards();
-
-      const isResting =
-        !isDragging &&
-        Math.abs(spring.v) < 0.0005 &&
-        Math.abs(spring.x - spring.t) < 0.0005;
-
-      if (isResting) {
-        spring.x = spring.t;
+      if (isDragging) {
+        const sp = getSpacing();
+        spring.x = initialX - (latestPointerX - startX) / sp;
         spring.v = 0;
         updateCards();
-        isRunning = false;
-      } else {
         animId = requestAnimationFrame(tick);
+      } else {
+        // High-precision implicit critically-damped spring (seamless at 60Hz, 120Hz, 144Hz)
+        const omega = 15;
+        const f = 1.0 + 2.0 * dt * omega;
+        const ooth = 1.0 / (f + dt * dt * omega * omega);
+        const delta = spring.x - target;
+        const v = spring.v;
+        spring.x = target + (f * delta + dt * v) * ooth;
+        spring.v = (v - dt * omega * omega * delta) * ooth;
+
+        updateCards();
+
+        const isResting = Math.abs(spring.v) < 0.0003 && Math.abs(spring.x - target) < 0.0003;
+        if (isResting) {
+          spring.x = target;
+          spring.v = 0;
+          updateCards();
+          isRunning = false;
+        } else {
+          animId = requestAnimationFrame(tick);
+        }
       }
     };
 
@@ -169,18 +160,12 @@ export function HeroSection() {
 
     const onPointerDown = (e: PointerEvent) => {
       isDragging = true;
-      startX = lastClientX = e.clientX;
+      startX = lastClientX = latestPointerX = e.clientX;
       initialX = spring.x;
       movedDistance = 0;
       releaseVelocity = 0;
       lastTime = performance.now();
-
-      // Pause free spring while dragging for direct 1:1 control
-      spring.v = 0;
-      if (isRunning) {
-        cancelAnimationFrame(animId);
-        isRunning = false;
-      }
+      requestTick();
     };
 
     const onPointerMove = (e: PointerEvent) => {
@@ -189,19 +174,15 @@ export function HeroSection() {
       const dt = now - lastTime;
       const dx = e.clientX - lastClientX;
 
-      if (dt > 8) {
+      if (dt > 6) {
         releaseVelocity = (dx / dt) * 1000; // px per second
         lastClientX = e.clientX;
         lastTime = now;
       }
 
       movedDistance = Math.max(movedDistance, Math.abs(e.clientX - startX));
-      const sp = getSpacing();
-
-      // Direct 1:1 fluid tracking with finger / mouse
-      spring.x = initialX - (e.clientX - startX) / sp;
-      spring.t = spring.x;
-      updateCards();
+      latestPointerX = e.clientX;
+      requestTick();
     };
 
     const onPointerUp = (e: PointerEvent) => {
@@ -232,7 +213,6 @@ export function HeroSection() {
         }
       }
 
-      // Smoothly snap to target with spring physics
       requestTick();
     };
 
@@ -284,16 +264,16 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── 6-Image Centered Focus Carousel (Restored picture-perfect ratio with reduced gap) ── */}
+      {/* ── 6-Image Centered Focus Carousel (Matched ~1.19:1 ratio across PC & mobile, native 144Hz fluid motion) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[clamp(270px,40vw,390px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[270px] sm:h-[420px] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Studio Work Showcase"
       >
         {HERO_ITEMS.map((item, index) => (
           <div
             key={index}
-            className="cs absolute left-1/2 top-0 w-[min(82vw,620px)] h-full -ml-[min(41vw,310px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
+            className="cs absolute left-1/2 top-0 w-[82vw] sm:w-[500px] h-full -ml-[41vw] sm:-ml-[250px] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-[transform,opacity] border border-[rgba(14,14,14,0.1)]"
           >
             <div className="ph absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -310,7 +290,7 @@ export function HeroSection() {
       </div>
 
       {/* Dynamic Slide Caption Under Carousel (Left-aligned flush with the card) */}
-      <div className="w-full max-w-[min(82vw,620px)] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
+      <div className="w-full max-w-[82vw] sm:max-w-[500px] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
         <Link href={activeItem.href} className="group block text-left">
           <h3 className="font-serif font-medium text-xl sm:text-2xl text-black tracking-tight group-hover:opacity-70 transition-opacity">
             {activeItem.title}
