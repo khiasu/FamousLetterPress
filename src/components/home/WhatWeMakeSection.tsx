@@ -356,7 +356,7 @@ export function WhatWeMakeSection() {
                     router.push(item.href);
                   }
                 }}
-                className="sc absolute left-1/2 top-[44%] sm:top-1/2 w-[84vw] sm:w-[360px] md:w-[390px] lg:w-[410px] h-[460px] sm:h-[490px] md:h-[515px] -ml-[42vw] sm:-ml-[180px] md:-ml-[195px] lg:-ml-[205px] -mt-[230px] sm:-mt-[245px] md:-mt-[257px] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left flex flex-col bg-[#FAF8F5] shadow-[0_22px_42px_-18px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.04)] text-black select-none overflow-hidden will-change-[transform,opacity] group"
+                className="sc absolute left-1/2 top-[45%] sm:top-1/2 w-[84vw] sm:w-[360px] md:w-[390px] lg:w-[410px] h-[505px] sm:h-[490px] md:h-[515px] -ml-[42vw] sm:-ml-[180px] md:-ml-[195px] lg:-ml-[205px] -mt-[252px] sm:-mt-[245px] md:-mt-[257px] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left flex flex-col bg-[#FAF8F5] shadow-[0_22px_42px_-18px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.04)] text-black select-none overflow-hidden will-change-[transform,opacity] group"
                 style={{
                   transformStyle: "preserve-3d",
                   backfaceVisibility: "hidden",
@@ -364,8 +364,8 @@ export function WhatWeMakeSection() {
                 }}
                 aria-label={`View ${item.title}`}
               >
-                {/* Squareish rectangle image leading towards square side (aspect 1.15:1, edge-to-edge) */}
-                <div className="w-full aspect-[1.15/1] relative overflow-hidden bg-[#F0ECE1] shrink-0 border-b border-[rgba(14,14,14,0.08)]">
+                {/* Square image on mobile, rectangular 1.15:1 on desktop */}
+                <div className="w-full aspect-square sm:aspect-[1.15/1] relative overflow-hidden bg-[#F0ECE1] shrink-0 border-b border-[rgba(14,14,14,0.08)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
