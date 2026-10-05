@@ -55,25 +55,6 @@ const WORK_ITEMS: WorkItem[] = [
   },
 ];
 
-class Spring {
-  x: number;
-  v: number;
-  t: number;
-  k: number;
-  c: number;
-  constructor(x: number, k: number, c: number) {
-    this.x = x;
-    this.v = 0;
-    this.t = x;
-    this.k = k;
-    this.c = c;
-  }
-  step(d: number) {
-    this.v += (-this.k * (this.x - this.t) - this.c * this.v) * d;
-    this.x += this.v * d;
-  }
-}
-
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
 export function WhatWeMakeSection() {
@@ -85,11 +66,6 @@ export function WhatWeMakeSection() {
 
   const n = WORK_ITEMS.length;
 
-  const handleCardClick = (href: string) => {
-    if (isDraggingRef.current) return;
-    router.push(href);
-  };
-
   useEffect(() => {
     const sec = sectionRef.current;
     const stage = stageRef.current;
@@ -98,17 +74,18 @@ export function WhatWeMakeSection() {
     const cards = Array.from(stage.querySelectorAll<HTMLElement>(".sc"));
     if (cards.length === 0) return;
 
-    // Smooth critically damped spring — silk-smooth, no oscillation
-    const spring = new Spring(0, 42, 16);
+    const spring = { x: 0, v: 0 };
     let targetProg = 0;
     let isPointerDown = false;
     let startX = 0;
+    let startY = 0;
     let startTarget = 0;
-    let moved = 0;
-    let lastTime = performance.now();
+    let isHorizontalSwipe = false;
+    let gestureDecided = false;
+
     let isRunning = false;
     let animId: number;
-    let isScrollLocked = false;
+    let lastAnimTime = performance.now();
     let lastActiveIdx = -1;
 
     const computeScrollProg = () => {
@@ -120,19 +97,10 @@ export function WhatWeMakeSection() {
 
     targetProg = computeScrollProg();
     spring.x = targetProg;
-    spring.t = targetProg;
-
-    const requestTick = () => {
-      if (!isRunning) {
-        isRunning = true;
-        lastTime = performance.now();
-        animId = requestAnimationFrame(tick);
-      }
-    };
 
     const updateCardsVisual = () => {
-      const cardWidth = cards[0]?.offsetWidth || 300;
-      const w = cardWidth * 0.86;
+      const cardWidth = cards[0]?.offsetWidth || 340;
+      const w = cardWidth * 0.85;
 
       const activeIdx = clamp(Math.round(spring.x), 0, n - 1);
       if (activeIdx !== lastActiveIdx) {
@@ -140,6 +108,11 @@ export function WhatWeMakeSection() {
         if (counterRef.current) {
           counterRef.current.textContent = `0${activeIdx + 1} / 0${n}`;
         }
+        // Update z-index only when active index shifts, preventing compositor thrashing on every frame
+        cards.forEach((c, i) => {
+          const diffFromActive = Math.abs(i - activeIdx);
+          c.style.zIndex = `${20 - Math.min(diffFromActive * 2, 18)}`;
+        });
       }
 
       for (let i = 0; i < n; i++) {
@@ -147,44 +120,44 @@ export function WhatWeMakeSection() {
         const d = i - spring.x;
         const a = Math.abs(d);
 
-        // Optimized 3D transform with depth and subtle perspective rotation
-        const tx = (d * w).toFixed(2);
-        const tz = (-a * 220).toFixed(2);
-        const ry = (-d * 36).toFixed(2);
-        const sc = (1 - a * 0.05).toFixed(3);
-        const op = clamp(1 - a * 0.55, 0.25, 1).toFixed(3);
-        const zi = 20 - Math.min(18, Math.round(a * 4));
+        // Frustum cull cards that are far away to drastically save GPU and CPU on mobile
+        if (a > 2.4) {
+          c.style.visibility = "hidden";
+          c.style.pointerEvents = "none";
+          continue;
+        }
+
+        c.style.visibility = "visible";
+        const tx = Math.round(d * w * 10) / 10;
+        const tz = Math.round(-a * 190);
+        const ry = Math.round(-d * 30 * 10) / 10;
+        const sc = Math.round((1 - Math.min(a * 0.06, 0.22)) * 1000) / 1000;
+        const op = Math.round(clamp(1 - a * 0.52, 0.22, 1) * 100) / 100;
 
         c.style.transform = `translate3d(${tx}px,0,${tz}px) rotateY(${ry}deg) scale(${sc})`;
-        c.style.opacity = op;
-        c.style.zIndex = `${zi}`;
-        // The active card is easily clickable, while background cards don't intercept clicks
-        c.style.pointerEvents = a < 0.6 ? "auto" : "none";
+        c.style.opacity = `${op}`;
+        c.style.pointerEvents = a < 0.55 ? "auto" : "none";
       }
     };
 
     const tick = (now: number) => {
-      const dt = Math.min((now - lastTime) / 1000, 0.05); // Clamp dt to prevent jumping
-      lastTime = now;
+      const dt = Math.min((now - lastAnimTime) / 1000, 0.032);
+      lastAnimTime = now;
 
-      spring.t = targetProg;
-      // Sub-step for smoother integration
-      const steps = 3;
-      const subDt = dt / steps;
-      for (let s = 0; s < steps; s++) {
-        spring.step(subDt);
-      }
+      // High-precision implicit critically-damped spring (seamless across 60Hz, 120Hz, 144Hz+)
+      const omega = 16;
+      const f = 1.0 + 2.0 * dt * omega;
+      const ooth = 1.0 / (f + dt * dt * omega * omega);
+      const delta = spring.x - targetProg;
+      const v = spring.v;
+      spring.x = targetProg + (f * delta + dt * v) * ooth;
+      spring.v = (v - dt * omega * omega * delta) * ooth;
 
       updateCardsVisual();
 
-      // Check if spring has reached rest
-      const isResting =
-        !isPointerDown &&
-        Math.abs(spring.v) < 0.001 &&
-        Math.abs(spring.x - spring.t) < 0.001;
-
+      const isResting = Math.abs(spring.v) < 0.0003 && Math.abs(spring.x - targetProg) < 0.0003;
       if (isResting) {
-        spring.x = spring.t;
+        spring.x = targetProg;
         spring.v = 0;
         updateCardsVisual();
         isRunning = false;
@@ -193,102 +166,83 @@ export function WhatWeMakeSection() {
       }
     };
 
-    let scrollTimeout: NodeJS.Timeout | null = null;
-
-    // Scroll listener: update spring and auto-snap when scrolling pauses
-    const onScroll = () => {
-      if (isPointerDown || isScrollLocked) return;
-      const rawProg = computeScrollProg();
-      targetProg = rawProg;
-      requestTick();
-
-      // Magnetic snap: when the user stops scrolling, lock to the nearest slide if scrolled past 50%
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        if (isPointerDown || isScrollLocked) return;
-        const rect = sec.getBoundingClientRect();
-        // Only snap when the section is actively in view and taking over the screen
-        if (rect.top <= 10 && rect.bottom >= window.innerHeight - 10) {
-          const nearestCard = Math.round(computeScrollProg());
-          const scrollableDist = rect.height - window.innerHeight;
-          if (scrollableDist > 0) {
-            const targetScrollY =
-              window.scrollY +
-              rect.top +
-              (nearestCard / (n - 1)) * scrollableDist;
-
-            // Only smooth-align if difference is notable
-            if (Math.abs(window.scrollY - targetScrollY) > 8) {
-              isScrollLocked = true;
-              targetProg = nearestCard;
-              window.scrollTo({ top: targetScrollY, behavior: "smooth" });
-              setTimeout(() => {
-                isScrollLocked = false;
-              }, 450);
-            }
-          }
-        }
-      }, 120);
+    const requestTick = () => {
+      if (!isRunning) {
+        isRunning = true;
+        lastAnimTime = performance.now();
+        animId = requestAnimationFrame(tick);
+      }
     };
 
-    // Passive scroll listener for maximum 120fps smoothness
+    // Scroll listener: directly tracks scroll progress without scroll-locking or page hijacking
+    const onScroll = () => {
+      if (isDraggingRef.current) return;
+      targetProg = computeScrollProg();
+      requestTick();
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Pointer events for smooth touch & mouse swipe
+    // Direction-aware gesture listeners: distinguishes vertical page scroll from horizontal card swipe
     const onPointerDown = (e: PointerEvent) => {
       isPointerDown = true;
       startX = e.clientX;
-      startTarget = targetProg;
-      moved = 0;
+      startY = e.clientY;
+      startTarget = spring.x;
+      isHorizontalSwipe = false;
+      gestureDecided = false;
       isDraggingRef.current = false;
-      requestTick();
     };
 
     const onPointerMove = (e: PointerEvent) => {
       if (!isPointerDown) return;
       const dx = e.clientX - startX;
-      moved = Math.max(moved, Math.abs(dx));
-      if (moved > 8) {
-        isDraggingRef.current = true;
+      const dy = e.clientY - startY;
+
+      if (!gestureDecided) {
+        const absX = Math.abs(dx);
+        const absY = Math.abs(dy);
+        if (absX > 8 || absY > 8) {
+          gestureDecided = true;
+          // Only take over as horizontal card drag if horizontal movement exceeds vertical
+          if (absX > absY) {
+            isHorizontalSwipe = true;
+            isDraggingRef.current = true;
+          }
+        }
       }
-      const cardWidth = cards[0]?.offsetWidth || 300;
-      // Sensitive, responsive swipe sensitivity
-      targetProg = clamp(startTarget - dx / (cardWidth * 0.75), 0, n - 1);
-      requestTick();
+
+      if (isHorizontalSwipe) {
+        const cardWidth = cards[0]?.offsetWidth || 340;
+        targetProg = clamp(startTarget - dx / (cardWidth * 0.75), 0, n - 1);
+        requestTick();
+      }
     };
 
     const onPointerUp = () => {
       if (!isPointerDown) return;
       isPointerDown = false;
 
-      if (moved > 8) {
-        setTimeout(() => {
-          isDraggingRef.current = false;
-        }, 150);
+      if (isHorizontalSwipe) {
+        isHorizontalSwipe = false;
+        targetProg = clamp(Math.round(targetProg), 0, n - 1);
+        requestTick();
 
-        // Snap to nearest card (>50% locks to next slide)
-        targetProg = Math.round(targetProg);
-
-        // Sync page scroll position to the current card so subsequent scroll is seamless
+        // Sync vertical scroll position cleanly when in the pinned section so subsequent vertical scrolling starts right from this card
         const rect = sec.getBoundingClientRect();
         const scrollableDist = rect.height - window.innerHeight;
-        if (scrollableDist > 0) {
+        if (scrollableDist > 0 && rect.top <= 0 && rect.bottom >= window.innerHeight) {
           const targetScrollY =
-            window.scrollY +
-            rect.top +
-            (targetProg / (n - 1)) * scrollableDist;
-
-          isScrollLocked = true;
+            window.scrollY + rect.top + (targetProg / (n - 1)) * scrollableDist;
           window.scrollTo({ top: targetScrollY, behavior: "instant" });
-          // Extended debounce for seamless handoff
-          setTimeout(() => {
-            isScrollLocked = false;
-          }, 200);
         }
+
+        setTimeout(() => {
+          isDraggingRef.current = false;
+        }, 120);
       } else {
         isDraggingRef.current = false;
       }
-      requestTick();
     };
 
     stage.addEventListener("pointerdown", onPointerDown, { passive: true });
@@ -296,47 +250,82 @@ export function WhatWeMakeSection() {
     window.addEventListener("pointerup", onPointerUp, { passive: true });
     window.addEventListener("pointercancel", onPointerUp, { passive: true });
 
-    // Initial render
+    const onResize = () => {
+      targetProg = computeScrollProg();
+      updateCardsVisual();
+      requestTick();
+    };
+    window.addEventListener("resize", onResize, { passive: true });
+
+    // Initial positioning
     updateCardsVisual();
     requestTick();
 
     return () => {
-      if (scrollTimeout) clearTimeout(scrollTimeout);
       cancelAnimationFrame(animId);
       window.removeEventListener("scroll", onScroll);
       stage.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("pointercancel", onPointerUp);
+      window.removeEventListener("resize", onResize);
     };
   }, [n]);
+
+  const handleCardClick = (index: number, href: string) => {
+    if (isDraggingRef.current) return;
+    const sec = sectionRef.current;
+    const activeIdx = Math.round(computeScrollProg());
+    if (index === activeIdx) {
+      router.push(href);
+    } else if (sec) {
+      // Direct jump to clicked card
+      const rect = sec.getBoundingClientRect();
+      const scrollableDist = rect.height - window.innerHeight;
+      if (scrollableDist > 0) {
+        const targetScrollY =
+          window.scrollY + rect.top + (index / (n - 1)) * scrollableDist;
+        window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+      }
+    }
+  };
+
+  const computeScrollProg = () => {
+    const sec = sectionRef.current;
+    if (!sec || typeof window === "undefined") return 0;
+    const rect = sec.getBoundingClientRect();
+    const scrollableDist = rect.height - window.innerHeight;
+    if (scrollableDist <= 0) return 0;
+    return clamp(-rect.top / scrollableDist, 0, 1) * (n - 1);
+  };
 
   return (
     <>
       <section
         ref={sectionRef}
         id="svc"
-        className="sv relative h-[420vh] bg-white select-none z-0"
+        className="sv relative h-[380vh] bg-white select-none z-0"
         aria-label="What We Make: 3D Rotating Cards"
         style={{
           contain: "paint layout",
           isolation: "isolate",
         }}
       >
-        <div className="svs sticky top-0 h-screen overflow-hidden flex flex-col pt-24 md:pt-28 pb-8 bg-white">
-          <div className="w svh flex justify-between items-end w-full mb-3">
+        <div className="svs sticky top-0 h-screen overflow-hidden flex flex-col pt-16 sm:pt-20 md:pt-24 pb-6 bg-white justify-between">
+          {/* Header */}
+          <div className="w svh flex justify-between items-end w-full mb-2">
             <div>
               <p className="k">What we make</p>
-              <h2 className="d text-[clamp(36px,9vw,64px)] mt-1.5 font-serif text-black leading-[0.95]">
+              <h2 className="d text-[clamp(34px,8vw,60px)] mt-1.5 font-serif text-black leading-[0.95]">
                 Our <i>work</i>
               </h2>
-              <p className="text-xs sm:text-sm text-[#444] font-light max-w-[46ch] leading-relaxed mt-2.5">
+              <p className="text-xs sm:text-sm text-[#555] font-light max-w-[46ch] leading-relaxed mt-2">
                 Our expertise lies in working with our clients to deliver transcending experiences and timeless products, find out more about how we can help you
               </p>
             </div>
             <p
               ref={counterRef}
-              className="k text-[10px] tracking-[0.28em] text-[#7b7566] select-none self-start sm:self-end shrink-0"
+              className="k text-[11px] tracking-[0.28em] text-[#7b7566] select-none self-start sm:self-end shrink-0"
             >
               01 / 0{n}
             </p>
@@ -345,10 +334,10 @@ export function WhatWeMakeSection() {
           {/* 3D Perspective Card Stage */}
           <div
             ref={stageRef}
-            className="svst relative flex-1 touch-pan-y cursor-grab active:cursor-grabbing mb-5"
+            className="svst relative flex-1 touch-pan-y cursor-grab active:cursor-grabbing w-full my-auto"
             style={{
-              perspective: "1200px",
-              perspectiveOrigin: "50% 42%",
+              perspective: "1100px",
+              perspectiveOrigin: "50% 48%",
               transformStyle: "preserve-3d",
               contain: "layout style",
             }}
@@ -356,7 +345,7 @@ export function WhatWeMakeSection() {
             {WORK_ITEMS.map((item, index) => (
               <div
                 key={index}
-                onClick={() => handleCardClick(item.href)}
+                onClick={() => handleCardClick(index, item.href)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
@@ -364,7 +353,7 @@ export function WhatWeMakeSection() {
                     router.push(item.href);
                   }
                 }}
-                className="sc absolute left-1/2 top-[44%] w-[min(72vw,360px)] h-[calc(min(72vw,360px)*1.38)] -mt-[calc(min(72vw,360px)*0.69)] -ml-[calc(min(72vw,360px)/2)] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left p-4 sm:p-5 flex flex-col bg-[#FAF8F5] shadow-[0_20px_35px_-20px_rgba(0,0,0,0.16),0_2px_4px_rgba(0,0,0,0.04)] text-black will-change-transform group transition-colors duration-200 hover:border-black/30 select-none"
+                className="sc absolute left-1/2 top-1/2 w-[86vw] sm:w-[420px] md:w-[460px] lg:w-[480px] h-[460px] sm:h-[500px] md:h-[530px] -ml-[43vw] sm:-ml-[210px] md:-ml-[230px] lg:-ml-[240px] -mt-[230px] sm:-mt-[250px] md:-mt-[265px] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left flex flex-col bg-[#FAF8F5] shadow-[0_22px_42px_-18px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.04)] text-black select-none overflow-hidden will-change-[transform,opacity] group"
                 style={{
                   transformStyle: "preserve-3d",
                   backfaceVisibility: "hidden",
@@ -372,25 +361,37 @@ export function WhatWeMakeSection() {
                 }}
                 aria-label={`View ${item.title}`}
               >
-                <div className="art relative flex-1 mb-3.5 overflow-hidden bg-[#F0ECE1] rounded-xs">
+                {/* Edge-to-edge full width/top image (no padding on card, fully imposed) */}
+                <div className="w-full relative h-[215px] sm:h-[255px] md:h-[275px] overflow-hidden bg-[#F0ECE1] shrink-0 border-b border-[rgba(14,14,14,0.08)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
                     alt={item.title}
                     draggable={false}
-                    className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-103"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-700 ease-out group-hover:scale-105"
                     loading={index < 3 ? "eager" : "lazy"}
+                    decoding="async"
                   />
                 </div>
-                <h3 className="font-serif font-medium text-[clamp(24px,6vw,30px)] leading-[1.05] tracking-[-0.02em]">
-                  {item.title}
-                </h3>
-                <p className="text-[12.5px] leading-[1.5] text-[#444] my-1.5 line-clamp-2">
-                  {item.desc}
-                </p>
-                <span className="ln self-start mt-1 text-[11px] font-mono uppercase tracking-[0.16em]">
-                  Explore {item.title} &rarr;
-                </span>
+
+                {/* Card body below image */}
+                <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between bg-[#FAF8F5]">
+                  <div>
+                    <h3 className="font-serif font-medium text-xl sm:text-2xl md:text-[25px] leading-[1.1] tracking-[-0.02em] text-black">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs sm:text-[13px] leading-relaxed text-[#555] font-light mt-2 line-clamp-2">
+                      {item.desc}
+                    </p>
+                  </div>
+
+                  {/* Explore button — matching 'Book a Consultation' rectangular black box design */}
+                  <div className="pt-3">
+                    <span className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 bg-black text-white group-hover:bg-[#222] transition-colors rounded-none text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm">
+                      Explore {item.title}
+                    </span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
