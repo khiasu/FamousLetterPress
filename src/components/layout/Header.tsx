@@ -205,21 +205,21 @@ export function Header({
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
           >
-            {/* 3-Line Animated Hamburger to X */}
-            <div className="w-4 h-3.5 relative flex flex-col justify-between items-center pointer-events-none">
+            {/* 3-Strip Descending Signal Tower Hamburger Toggle */}
+            <div className="w-4 h-3.5 relative flex flex-col justify-between items-end pointer-events-none">
               <span
-                className={`h-[1.5px] w-4 bg-black transition-all duration-300 origin-center ${
-                  isMenuOpen ? "rotate-45 translate-y-[5.5px]" : ""
+                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
+                  isMenuOpen ? "w-4 rotate-45 translate-y-[5.5px]" : "w-4"
                 }`}
               />
               <span
-                className={`h-[1.5px] w-4 bg-black transition-all duration-200 ${
-                  isMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
+                className={`h-[1.5px] bg-black transition-all duration-200 ${
+                  isMenuOpen ? "w-0 opacity-0 scale-x-0" : "w-2.5 opacity-100 group-hover:w-3"
                 }`}
               />
               <span
-                className={`h-[1.5px] w-4 bg-black transition-all duration-300 origin-center ${
-                  isMenuOpen ? "-rotate-45 -translate-y-[5.5px]" : ""
+                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
+                  isMenuOpen ? "w-4 -rotate-45 -translate-y-[5.5px]" : "w-1.5 group-hover:w-2"
                 }`}
               />
             </div>
