@@ -353,7 +353,7 @@ export function WhatWeMakeSection() {
                     router.push(item.href);
                   }
                 }}
-                className="sc absolute left-1/2 top-1/2 w-[86vw] sm:w-[420px] md:w-[460px] lg:w-[480px] h-[460px] sm:h-[500px] md:h-[530px] -ml-[43vw] sm:-ml-[210px] md:-ml-[230px] lg:-ml-[240px] -mt-[230px] sm:-mt-[250px] md:-mt-[265px] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left flex flex-col bg-[#FAF8F5] shadow-[0_22px_42px_-18px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.04)] text-black select-none overflow-hidden will-change-[transform,opacity] group"
+                className="sc absolute left-1/2 top-1/2 w-[84vw] sm:w-[360px] md:w-[390px] lg:w-[410px] h-[460px] sm:h-[490px] md:h-[515px] -ml-[42vw] sm:-ml-[180px] md:-ml-[195px] lg:-ml-[205px] -mt-[230px] sm:-mt-[245px] md:-mt-[257px] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left flex flex-col bg-[#FAF8F5] shadow-[0_22px_42px_-18px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.04)] text-black select-none overflow-hidden will-change-[transform,opacity] group"
                 style={{
                   transformStyle: "preserve-3d",
                   backfaceVisibility: "hidden",
@@ -361,8 +361,8 @@ export function WhatWeMakeSection() {
                 }}
                 aria-label={`View ${item.title}`}
               >
-                {/* Edge-to-edge full width/top image (no padding on card, fully imposed) */}
-                <div className="w-full relative h-[215px] sm:h-[255px] md:h-[275px] overflow-hidden bg-[#F0ECE1] shrink-0 border-b border-[rgba(14,14,14,0.08)]">
+                {/* Squareish rectangle image leading towards square side (aspect 1.15:1, edge-to-edge) */}
+                <div className="w-full aspect-[1.15/1] relative overflow-hidden bg-[#F0ECE1] shrink-0 border-b border-[rgba(14,14,14,0.08)]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.img}
@@ -374,20 +374,18 @@ export function WhatWeMakeSection() {
                   />
                 </div>
 
-                {/* Card body below image */}
-                <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between bg-[#FAF8F5]">
-                  <div>
-                    <h3 className="font-serif font-medium text-xl sm:text-2xl md:text-[25px] leading-[1.1] tracking-[-0.02em] text-black">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs sm:text-[13px] leading-relaxed text-[#555] font-light mt-2 line-clamp-2">
-                      {item.desc}
-                    </p>
-                  </div>
+                {/* Card body below image — tight, natural spacing without huge empty gap */}
+                <div className="p-4 sm:p-5 flex flex-col justify-start bg-[#FAF8F5]">
+                  <h3 className="font-serif font-medium text-xl sm:text-2xl leading-[1.1] tracking-[-0.02em] text-black">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-[13px] leading-relaxed text-[#555] font-light mt-1.5 line-clamp-2">
+                    {item.desc}
+                  </p>
 
-                  {/* Explore button — matching 'Book a Consultation' rectangular black box design */}
-                  <div className="pt-3">
-                    <span className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 bg-black text-white group-hover:bg-[#222] transition-colors rounded-none text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm">
+                  {/* Explore button — directly below description with compact margin */}
+                  <div className="mt-3.5 sm:mt-4">
+                    <span className="inline-flex items-center justify-center px-6 py-2.5 sm:py-3 bg-black text-white group-hover:bg-[#222] transition-colors rounded-none text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm">
                       Explore {item.title}
                     </span>
                   </div>
