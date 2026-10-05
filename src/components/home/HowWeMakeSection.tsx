@@ -217,7 +217,7 @@ export function HowWeMakeSection() {
       className="hw py-20 md:py-28 overflow-hidden border-b border-[rgba(14,14,14,0.08)] bg-white select-none"
       aria-label="How We Make"
     >
-      <div className="w mb-10">
+      <div className="w mb-[52px] sm:mb-10">
         <p className="k">How we make</p>
         <h2 className="d text-[clamp(36px,9vw,64px)] mt-1.5 font-serif text-black leading-[0.95]">
           Ink, <i>steel</i> &amp; cotton.
