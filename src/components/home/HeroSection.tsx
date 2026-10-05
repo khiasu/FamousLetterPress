@@ -232,7 +232,7 @@ export function HeroSection() {
   return (
     <section className="hero pt-28 md:pt-36 pb-16 overflow-hidden relative" aria-label="Famous Letterpress Hero">
       <div className="w">
-        <p className="k mb-6 tracking-[0.32em] text-[#7b7566]">
+        <p className="text-[11.5px] sm:text-[12.5px] tracking-[0.26em] uppercase font-sans text-[#7b7566] mb-5 font-medium">
           Luxury Letterpress &amp; Foil Wedding Invitations in India
         </p>
 
@@ -246,32 +246,29 @@ export function HeroSection() {
           <p className="text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed">
             Keep scrolling and discover how we make your prints stand out.
           </p>
-          <div className="flex flex-row items-center gap-3 sm:gap-6 mt-1 flex-nowrap">
+          <div className="mt-1">
             <Link
               href="https://wa.me/+918416099340"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn whitespace-nowrap shrink-0"
+              className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
             >
-              Book a consult
+              Book a Consultation
             </Link>
-            <a href="#svc" className="ln whitespace-nowrap shrink-0">
-              Explore our work
-            </a>
           </div>
         </div>
       </div>
 
-      {/* ── 6-Image Centered Focus Carousel with Spring Physics ── */}
+      {/* ── 6-Image Centered Focus Carousel (Wider Rectangular Ratio) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[clamp(280px,50vw,420px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[clamp(280px,46vw,440px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Studio Work Showcase"
       >
         {HERO_ITEMS.map((item, index) => (
           <div
             key={index}
-            className="cs absolute left-1/2 top-0 w-[min(74vw,440px)] h-full -ml-[min(37vw,220px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
+            className="cs absolute left-1/2 top-0 w-[min(88vw,700px)] h-full -ml-[min(44vw,350px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
           >
             <div className="ph absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
