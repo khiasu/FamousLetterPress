@@ -276,16 +276,16 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── 6-Image Centered Focus Carousel (Silky continuous non-overlapping track) ── */}
+      {/* ── 6-Image Centered Focus Carousel (Widescreen rectangular ratio with clear side cards) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[clamp(280px,42vw,400px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[clamp(270px,40vw,390px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Studio Work Showcase"
       >
         {HERO_ITEMS.map((item, index) => (
           <div
             key={index}
-            className="cs absolute left-1/2 top-0 w-[min(74vw,520px)] h-full -ml-[min(37vw,260px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
+            className="cs absolute left-1/2 top-0 w-[min(82vw,620px)] h-full -ml-[min(41vw,310px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
           >
             <div className="ph absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
