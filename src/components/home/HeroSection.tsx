@@ -63,11 +63,14 @@ export function HeroSection() {
     if (cards.length === 0) return;
 
     const spring = { x: 0, v: 0 };
-    // Reduced gap (8px mobile, 16px desktop) for clear small peek windows
+
+    // Precise physical gap formula: cardW * ((1 + scale) / 2) + desiredGap
+    // With adjacent scale 0.88, ((1 + 0.88) / 2) = 0.94
+    // Leaves exactly a noticeable 12px gap on mobile and 22px gap on desktop
     const getSpacing = () => {
       const cardW = cards[0]?.offsetWidth || 320;
       const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-      return cardW + (isMobile ? 8 : 16);
+      return cardW * 0.94 + (isMobile ? 12 : 22);
     };
 
     let target = 0;
@@ -107,7 +110,7 @@ export function HeroSection() {
         const progress = Math.max(0, 1 - Math.min(1.2, absDiff));
         const smoothProgress = Math.cos((1 - progress) * Math.PI) * 0.5 + 0.5;
 
-        const scale = 0.90 + 0.10 * smoothProgress;
+        const scale = 0.88 + 0.12 * smoothProgress;
         const opacity = 0.45 + 0.55 * smoothProgress;
 
         // GPU-only properties: transforms and opacity without zIndex reflows for native 144Hz smoothness
@@ -264,16 +267,16 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── 6-Image Centered Focus Carousel (Matched ~1.19:1 ratio across PC & mobile, native 144Hz fluid motion) ── */}
+      {/* ── 6-Image Centered Focus Carousel (Matched HowWeMake layout and spacing) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[270px] sm:h-[420px] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[270px] sm:h-[410px] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Studio Work Showcase"
       >
         {HERO_ITEMS.map((item, index) => (
           <div
             key={index}
-            className="cs absolute left-1/2 top-0 w-[82vw] sm:w-[500px] h-full -ml-[41vw] sm:-ml-[250px] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-[transform,opacity] border border-[rgba(14,14,14,0.1)]"
+            className="cs absolute left-1/2 top-0 w-[82vw] sm:w-[490px] h-full -ml-[41vw] sm:-ml-[245px] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-[transform,opacity] border border-[rgba(14,14,14,0.1)]"
           >
             <div className="ph absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -290,7 +293,7 @@ export function HeroSection() {
       </div>
 
       {/* Dynamic Slide Caption Under Carousel (Left-aligned flush with the card) */}
-      <div className="w-full max-w-[82vw] sm:max-w-[500px] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
+      <div className="w-full max-w-[82vw] sm:max-w-[490px] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
         <Link href={activeItem.href} className="group block text-left">
           <h3 className="font-serif font-medium text-xl sm:text-2xl text-black tracking-tight group-hover:opacity-70 transition-opacity">
             {activeItem.title}

@@ -38,13 +38,6 @@ export function HowWeMakeSection() {
     if (cards.length === 0) return;
 
     const spring = { x: 0, v: 0 };
-    // Exact same gap as Hero carousel (8px mobile, 16px desktop)
-    const getSpacing = () => {
-      const cardW = cards[0]?.offsetWidth || 320;
-      const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-      return cardW + (isMobile ? 8 : 16);
-    };
-
     let target = 0;
     let isDragging = false;
     let startX = 0;
@@ -60,7 +53,16 @@ export function HowWeMakeSection() {
     let lastAnimTime = performance.now();
     let lastActiveIdx = -1;
 
-    // Set static z-index once to avoid DOM compositor layer invalidations at 144Hz
+    // Precise physical gap formula: cardW * ((1 + scale) / 2) + desiredGap
+    // With adjacent scale 0.88, ((1 + 0.88) / 2) = 0.94
+    // Leaves exactly a noticeable 12px gap on mobile and 22px gap on desktop
+    const getSpacing = () => {
+      const cardW = cards[0]?.offsetWidth || 320;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+      return cardW * 0.94 + (isMobile ? 12 : 22);
+    };
+
+    // Static z-index setup to eliminate compositor reflows
     cards.forEach((card) => {
       card.style.zIndex = "10";
     });
@@ -78,14 +80,13 @@ export function HowWeMakeSection() {
         diff -= m * Math.round(diff / m);
         const absDiff = Math.abs(diff);
 
-        // Exact Hero continuous cosine easing with zero threshold popping
+        // Smooth continuous cosine easing with zero threshold popping
         const progress = Math.max(0, 1 - Math.min(1.2, absDiff));
         const smoothProgress = Math.cos((1 - progress) * Math.PI) * 0.5 + 0.5;
 
-        const scale = 0.90 + 0.10 * smoothProgress;
+        const scale = 0.88 + 0.12 * smoothProgress;
         const opacity = 0.45 + 0.55 * smoothProgress;
 
-        // GPU-only transforms and opacity without zIndex reflows for native 144Hz smoothness
         card.style.transform = `translate3d(${diff * sp}px,0,0) scale(${scale})`;
         card.style.opacity = `${opacity}`;
       });
@@ -187,7 +188,6 @@ export function HowWeMakeSection() {
       requestTick();
     };
 
-    // Manual swipe only — auto-scroll is disabled per request
     cr.addEventListener("pointerdown", onPointerDown, { passive: true });
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("pointerup", onPointerUp, { passive: true });
@@ -197,6 +197,7 @@ export function HowWeMakeSection() {
     window.addEventListener("resize", onResize, { passive: true });
 
     updateCards();
+    requestTick();
 
     return () => {
       cancelAnimationFrame(animId);
@@ -228,16 +229,16 @@ export function HowWeMakeSection() {
         </p>
       </div>
 
-      {/* ── 4-Image Centered Focus Carousel (Exact Hero ratio ~1.19:1 & animation engine) ── */}
+      {/* ── 4-Image Centered Focus Carousel (Wider rectangular proportions with controlled, noticeable gap) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[270px] sm:h-[420px] touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[270px] sm:h-[410px] touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Craft Process Showcase"
       >
         {TECHNIQUES.map((tech, index) => (
           <div
             key={index}
-            className="hmc absolute left-1/2 top-0 w-[82vw] sm:w-[500px] h-full -ml-[41vw] sm:-ml-[250px] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-[transform,opacity] border border-[rgba(14,14,14,0.1)]"
+            className="hmc absolute left-1/2 top-0 w-[82vw] sm:w-[490px] h-full -ml-[41vw] sm:-ml-[245px] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-[transform,opacity] border border-[rgba(14,14,14,0.1)]"
           >
             <div className="absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -253,9 +254,9 @@ export function HowWeMakeSection() {
         ))}
       </div>
 
-      {/* Dynamic Slide Caption Under Carousel (Matched to Hero layout & alignment) */}
-      <div className="w-full max-w-[82vw] sm:max-w-[500px] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
-        <div className="text-left">
+      {/* Dynamic Slide Caption — same pattern as hero */}
+      <div className="text-center mt-5 min-h-[50px] px-4 transition-opacity duration-300">
+        <div className="inline-block">
           <h3 className="font-serif font-medium text-xl sm:text-2xl text-black tracking-tight">
             {activeItem.title}
           </h3>
@@ -263,12 +264,12 @@ export function HowWeMakeSection() {
             {activeItem.desc}
           </p>
         </div>
-
-        {/* Slide Counter — left-aligned */}
-        <p className="k text-left mt-3 tracking-[0.28em]">
-          0{activeIndex + 1} / 0{m}
-        </p>
       </div>
+
+      {/* Slide Counter */}
+      <p className="k text-center mt-3.5 tracking-[0.28em]">
+        {activeIndex + 1} / {m}
+      </p>
     </section>
   );
 }
