@@ -252,27 +252,27 @@ export function Header({
                     {/* Dropdown Trigger Header */}
                     <button
                       onClick={() => toggleSection(group.id)}
-                      className="w-full flex items-center justify-between px-3 py-3 text-left rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer group select-none"
+                      className="w-full flex items-center justify-between px-3 py-2.5 text-left rounded-xl hover:bg-[#FAF8F5] transition-colors cursor-pointer group select-none"
                       aria-expanded={isExpanded}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="text-[11px] font-mono font-bold tracking-wider text-black">
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-[10px] font-mono tracking-widest text-[#777]">
                           {group.num}
                         </span>
-                        <span className="text-[17px] sm:text-[17.5px] font-bold font-serif text-black tracking-[-0.01em]">
+                        <span className="text-[15.5px] font-medium font-serif text-[#1a1a1a] group-hover:text-black">
                           {group.title}
                         </span>
                       </div>
 
                       {/* Dropdown Arrow Indicator */}
                       <svg
-                        className={`w-4 h-4 text-black transition-transform duration-200 ${
+                        className={`w-3.5 h-3.5 text-[#666] group-hover:text-black transition-transform duration-200 ${
                           isExpanded ? "rotate-180" : ""
                         }`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        strokeWidth={2.4}
+                        strokeWidth={1.8}
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                       </svg>
@@ -280,18 +280,18 @@ export function Header({
 
                     {/* Collapsible Dropdown Content */}
                     {isExpanded && (
-                      <div className="pl-9 pr-3 pt-1 pb-2.5 space-y-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                      <div className="pl-8 pr-3 pt-0.5 pb-2 space-y-0.5 animate-in fade-in slide-in-from-top-1 duration-150">
                         {group.links.map((link) => (
                           <Link
                             key={link.href + link.label}
                             href={link.href}
                             onClick={closeMenu}
-                            className="flex items-center justify-between py-2 px-2.5 rounded-lg text-[13.5px] font-medium text-[#111] hover:text-black hover:font-semibold hover:bg-[#FAF7F2] transition-all group"
+                            className="flex items-center justify-between py-1.5 px-2 rounded-lg text-[13px] text-[#444] hover:text-black hover:bg-[#FAF8F5] transition-all group"
                           >
                             <span className="group-hover:translate-x-0.5 transition-transform">
                               {link.label}
                             </span>
-                            <span className="text-[13px] font-bold text-black transition-transform opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5">
+                            <span className="text-[11px] text-[#aaa] group-hover:text-black transition-colors opacity-0 group-hover:opacity-100">
                               &rarr;
                             </span>
                           </Link>
@@ -325,7 +325,7 @@ export function Header({
                 })}
               </div>
 
-              <span className="text-[10.5px] font-mono font-bold tracking-wider text-black">
+              <span className="text-[10px] font-mono tracking-wider text-[#777]">
                 &copy; 2026 Famous Letterpress
               </span>
             </div>
