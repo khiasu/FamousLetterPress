@@ -59,7 +59,7 @@ export function Footer() {
               <img
                 src="/assets/logo.png"
                 alt="Famous Letterpress Seal"
-                className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full border border-[rgba(14,14,14,0.16)] p-0.5 bg-white transition-transform duration-300 group-hover:scale-105"
+                className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full transition-transform duration-300 group-hover:scale-105"
               />
               <div className="flex flex-col leading-none">
                 <span
@@ -70,9 +70,6 @@ export function Footer() {
                   }}
                 >
                   Famous Letterpress
-                </span>
-                <span className="text-[9px] uppercase tracking-[0.26em] text-[#7b7566] font-sans mt-1.5 font-medium">
-                  Handcrafted in Nagaland
                 </span>
               </div>
             </Link>

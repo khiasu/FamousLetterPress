@@ -5,9 +5,10 @@ import Link from "next/link";
 import { SearchModal } from "@/components/ui/SearchModal";
 import { SOCIAL_PROFILES } from "@/components/ui/SocialIcons";
 
-/* ── Menu Architecture with exact prototype categories & numbers ── */
+/* ── Menu Architecture: Dropdown based categories ── */
 const menuGroups = [
   {
+    id: "what-we-make",
     num: "01",
     title: "What we make",
     links: [
@@ -18,6 +19,7 @@ const menuGroups = [
     ],
   },
   {
+    id: "how-we-make-it",
     num: "02",
     title: "How we make it",
     links: [
@@ -28,6 +30,7 @@ const menuGroups = [
     ],
   },
   {
+    id: "who-we-make-it-for",
     num: "03",
     title: "Who we make it for",
     links: [
@@ -37,11 +40,22 @@ const menuGroups = [
     ],
   },
   {
+    id: "sample-kits",
     num: "04",
     title: "Sample Kits & Packages",
     links: [
       { label: "Wedding Sample Box (₹1,500)", href: "/weddings/wedding-sample-kit" },
       { label: "Design Templates & Curated Suites", href: "/packages" },
+    ],
+  },
+  {
+    id: "help-info",
+    num: "05",
+    title: "Help & Inquiries",
+    links: [
+      { label: "Frequently Asked Questions", href: "/faq" },
+      { label: "Contact & Studio Location", href: "/contact" },
+      { label: "Start a Project / Inquire", href: "/start-a-project" },
     ],
   },
 ];
@@ -61,6 +75,17 @@ export function Header({
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  // Default open first section in the dropdown menu
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    "what-we-make": true,
+  });
+
+  const toggleSection = (id: string) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   useEffect(() => {
     let lastScrollY = window.scrollY || 0;
@@ -73,10 +98,8 @@ export function Header({
       if (isMenuOpen || currentScrollY < 50) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down -> slide out to top
         setIsVisible(false);
       } else if (currentScrollY < lastScrollY) {
-        // Scrolling up -> slide in from top
         setIsVisible(true);
       }
 
@@ -87,24 +110,20 @@ export function Header({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMenuOpen]);
 
-  useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
-
-  // Global search shortcut (⌘K / Ctrl+K)
+  // Global search shortcut (⌘K / Ctrl+K) and Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setIsSearchOpen((prev) => !prev);
       }
+      if (e.key === "Escape" && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isMenuOpen]);
 
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
@@ -120,7 +139,7 @@ export function Header({
         </div>
       )}
 
-      {/* ── Fixed Studio Header with Scroll Slide In/Out ── */}
+      {/* ── Fixed Studio Header ── */}
       <header
         id="hd"
         className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 sm:px-14 md:px-16 py-3 transition-all duration-300 ease-out will-change-transform ${
@@ -131,10 +150,10 @@ export function Header({
             : "bg-white border-b border-[rgba(14,14,14,0.08)]"
         }`}
       >
-        {/* Authentic Famous Letterpress Logo & Wordmark */}
+        {/* Authentic Famous Letterpress Logo & Wordmark (No white border, no subtitle) */}
         <Link
           href="/"
-          className="flex items-center gap-3.5 sm:gap-4 select-none group pl-1 sm:pl-2"
+          className="flex items-center gap-3 sm:gap-3.5 select-none group pl-1 sm:pl-2"
           onClick={closeMenu}
           aria-label="Famous Letterpress — Home"
         >
@@ -142,7 +161,7 @@ export function Header({
           <img
             src={logoUrl || "/assets/logo.png"}
             alt="Famous Letterpress Seal Logo"
-            className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full border border-[rgba(14,14,14,0.14)] p-0.5 group-hover:scale-105 transition-transform bg-[#faf8f4]"
+            className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full group-hover:scale-105 transition-transform"
           />
           <div className="flex flex-col justify-center leading-none">
             <span
@@ -153,26 +172,23 @@ export function Header({
             >
               Famous Letterpress
             </span>
-            <span className="text-[8.5px] uppercase tracking-[0.26em] text-[var(--mute)] mt-1 font-sans">
-              Handcrafted in Nagaland
-            </span>
           </div>
         </Link>
 
-        {/* Right Nav Actions: Simple Rounded Search Icon with Text, Book a Consult & Icon-Only Toggle */}
-        <div className="flex items-center gap-3 sm:gap-5">
-          {/* Simple Rounded Search Pill with "Search" Text Inside */}
+        {/* Right Nav Actions: Clean Search Icon + 3-Strip Menu Toggle */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Minimal Icon-Only Search Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-1.5 text-xs text-[#222] hover:text-black transition-all rounded-full border border-[rgba(14,14,14,0.2)] hover:border-black bg-white cursor-pointer group shadow-2xs"
+            className="p-2 text-black hover:opacity-60 transition-opacity cursor-pointer flex items-center justify-center rounded-full"
             aria-label="Search Famous Letterpress"
           >
             <svg
-              className="w-3.5 h-3.5 text-black group-hover:scale-105 transition-transform"
+              className="w-4.5 h-4.5 text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={1.8}
+              strokeWidth={1.9}
             >
               <path
                 strokeLinecap="round"
@@ -180,40 +196,30 @@ export function Header({
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-            <span className="font-sans text-[11px] tracking-[0.14em] uppercase text-black font-medium">
-              Search
-            </span>
           </button>
 
-          {/* Book a consult link */}
-          <Link
-            href="/start-a-project"
-            className="hidden sm:inline-flex items-center text-[10.5px] uppercase tracking-[0.22em] text-[#0e0e0e] hover:opacity-60 transition-opacity font-medium"
-          >
-            Book a consult
-          </Link>
-
-          {/* Icon-Only Clean Toggle Button (Stays in exact position, animated X mark) */}
+          {/* 3-Strip Hamburger Toggle Button */}
           <button
             className="w-10 h-10 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white active:scale-95 transition-all flex items-center justify-center cursor-pointer select-none group shadow-2xs z-[70]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
           >
-            {/* Morphing 2-Bar Animated X Architectural Lines with hover response */}
+            {/* 3-Line Animated Hamburger to X */}
             <div className="w-4 h-3.5 relative flex flex-col justify-between items-center pointer-events-none">
               <span
-                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
-                  isMenuOpen
-                    ? "w-4 rotate-45 translate-y-[6px] group-hover:scale-110"
-                    : "w-4 group-hover:scale-105"
+                className={`h-[1.5px] w-4 bg-black transition-all duration-300 origin-center ${
+                  isMenuOpen ? "rotate-45 translate-y-[5.5px]" : ""
                 }`}
               />
               <span
-                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
-                  isMenuOpen
-                    ? "w-4 -rotate-45 -translate-y-[6px] group-hover:scale-110"
-                    : "w-2.5 self-start group-hover:w-4"
+                className={`h-[1.5px] w-4 bg-black transition-all duration-200 ${
+                  isMenuOpen ? "opacity-0 scale-x-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`h-[1.5px] w-4 bg-black transition-all duration-300 origin-center ${
+                  isMenuOpen ? "-rotate-45 -translate-y-[5.5px]" : ""
                 }`}
               />
             </div>
@@ -221,142 +227,86 @@ export function Header({
         </div>
       </header>
 
-      {/* ── Standalone 100svh Zero-Scroll Menu Screen ── */}
-      <div
-        className={`menu-standalone ${isMenuOpen ? "open" : ""}`}
-        aria-hidden={!isMenuOpen}
-      >
-        <div className="h-full flex flex-col justify-between px-6 sm:px-14 md:px-16 py-3.5 max-w-[1400px] mx-auto w-full">
-          {/* Top Row: Logo & Close Trigger in exact same navbar alignment */}
-          <div className="flex justify-between items-center pb-3 border-b border-[rgba(14,14,14,0.1)]">
-            <Link
-              href="/"
-              className="flex items-center gap-3.5 sm:gap-4 select-none group pl-1 sm:pl-2"
-              onClick={closeMenu}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={logoUrl || "/assets/logo.png"}
-                alt="Famous Letterpress Seal"
-                className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-full border border-[rgba(14,14,14,0.14)] p-0.5 bg-white"
-              />
-              <div className="flex flex-col justify-center leading-none">
-                <span
-                  className="font-serif text-lg sm:text-xl md:text-2xl font-semibold tracking-[-0.01em] text-[#0e0e0e]"
-                  style={{
-                    fontFamily: "var(--font-cormorant-garamond), 'Cormorant Garamond', 'Bodoni Moda', serif",
-                  }}
-                >
-                  Famous Letterpress
-                </span>
-                <span className="text-[8.5px] uppercase tracking-[0.26em] text-[var(--mute)] mt-1 font-sans">
-                  Handcrafted in Nagaland
-                </span>
-              </div>
-            </Link>
+      {/* ── Dropdown Menu (Simple White BG with Dropdown Based Options) ── */}
+      {isMenuOpen && (
+        <>
+          {/* Subtle click-outside backdrop */}
+          <div
+            className="fixed inset-0 z-40 bg-black/15 backdrop-blur-[2px] transition-opacity"
+            onClick={closeMenu}
+            aria-hidden="true"
+          />
 
-            {/* Same position close button matching toggle geometry */}
-            <button
-              onClick={closeMenu}
-              className="w-10 h-10 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white hover:bg-black text-black hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-2xs group active:scale-95"
-              aria-label="Close navigation menu"
-            >
-              <div className="w-4 h-4 relative flex items-center justify-center pointer-events-none">
-                <span className="absolute h-[1.5px] w-4 bg-current rotate-45 transition-transform duration-300 group-hover:scale-110" />
-                <span className="absolute h-[1.5px] w-4 bg-current -rotate-45 transition-transform duration-300 group-hover:scale-110" />
-              </div>
-            </button>
-          </div>
-
-          {/* Desktop 4-Column Layout (Fits 100% in viewport without scrolling) */}
-          <div className="hidden lg:grid grid-cols-4 gap-8 my-auto py-4">
-            {menuGroups.map((group, idx) => (
-              <div
-                key={group.num}
-                className="menu-stagger flex flex-col justify-start border-l border-[rgba(14,14,14,0.1)] pl-6"
-                style={{ "--stagger-i": idx } as React.CSSProperties}
-              >
-                <div className="flex items-baseline gap-2.5 mb-5">
-                  <span className="text-[11px] font-mono tracking-widest text-[var(--mute)]">
-                    {group.num}
-                  </span>
-                  <h3 className="font-serif text-2xl font-medium text-black tracking-tight">
-                    {group.title}
-                  </h3>
-                </div>
-
-                <ul className="space-y-3">
-                  {group.links.map((link) => (
-                    <li key={link.href + link.label}>
-                      <Link
-                        href={link.href}
-                        onClick={closeMenu}
-                        className="group inline-flex items-center gap-2 text-[14.5px] text-[#3b372e] hover:text-black transition-all"
-                      >
-                        <span className="w-1.5 h-[1px] bg-black opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <span className="group-hover:translate-x-1 transition-transform">
-                          {link.label}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile / Tablet Compact Layout (Fits 100% in viewport without scrolling) */}
-          <div className="lg:hidden flex flex-col justify-center my-auto py-2 space-y-4">
-            {menuGroups.map((group, idx) => (
-              <div
-                key={group.num}
-                className="menu-stagger border-b border-[rgba(14,14,14,0.08)] pb-3"
-                style={{ "--stagger-i": idx } as React.CSSProperties}
-              >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-[9.5px] font-mono tracking-widest text-[var(--mute)]">
-                    {group.num}
-                  </span>
-                  <h4 className="font-serif text-lg font-medium text-black">
-                    {group.title}
-                  </h4>
-                </div>
-
-                <div className="flex flex-wrap gap-x-4 gap-y-1 pl-4">
-                  {group.links.map((link) => (
-                    <Link
-                      key={link.href + link.label}
-                      href={link.href}
-                      onClick={closeMenu}
-                      className="text-[13px] text-[#4a463c] hover:text-black transition-colors"
+          {/* Clean White Dropdown Menu Panel */}
+          <div
+            className="fixed top-[62px] right-4 sm:right-10 md:right-16 z-50 w-[calc(100vw-32px)] sm:w-[390px] max-h-[calc(100vh-80px)] bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15),0_2px_8px_rgba(0,0,0,0.06)] border border-[rgba(14,14,14,0.1)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200"
+            role="dialog"
+            aria-label="Navigation Menu"
+          >
+            {/* Dropdown Options List */}
+            <div className="overflow-y-auto divide-y divide-[rgba(14,14,14,0.06)] py-2 px-3">
+              {menuGroups.map((group) => {
+                const isExpanded = !!expandedSections[group.id];
+                return (
+                  <div key={group.id} className="py-1">
+                    {/* Dropdown Trigger Header */}
+                    <button
+                      onClick={() => toggleSection(group.id)}
+                      className="w-full flex items-center justify-between px-3 py-2.5 text-left rounded-xl hover:bg-[#FAF8F5] transition-colors cursor-pointer group select-none"
+                      aria-expanded={isExpanded}
                     >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-[10px] font-mono tracking-widest text-[#888]">
+                          {group.num}
+                        </span>
+                        <span className="text-[14.5px] font-medium font-serif text-[#0e0e0e] group-hover:text-black">
+                          {group.title}
+                        </span>
+                      </div>
 
-            {/* Mobile Quick Search Button */}
-            <button
-              onClick={() => {
-                closeMenu();
-                setIsSearchOpen(true);
-              }}
-              className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg border border-[rgba(14,14,14,0.15)] bg-white text-xs text-[#555] hover:text-black transition-all cursor-pointer"
-            >
-              <span className="font-sans">Search invitations, papers, kits...</span>
-              <kbd className="text-[9px] font-mono px-1.5 py-0.5 bg-[#f5f2eb] rounded border border-[#ddd]">
-                ⌘K
-              </kbd>
-            </button>
-          </div>
+                      {/* Dropdown Arrow Indicator */}
+                      <svg
+                        className={`w-3.5 h-3.5 text-[#777] group-hover:text-black transition-transform duration-200 ${
+                          isExpanded ? "rotate-180" : ""
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
 
-          {/* Bottom Coordinates Bar (No scroll required) */}
-          <div className="pt-4 border-t border-[rgba(14,14,14,0.1)] flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--mute)]">
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-              {/* Black & White Social Icons matching UI */}
-              <div className="flex items-center gap-3.5 text-black">
+                    {/* Collapsible Dropdown Content */}
+                    {isExpanded && (
+                      <div className="pl-8 pr-3 pt-1 pb-2 space-y-1.5 animate-in fade-in slide-in-from-top-1 duration-150">
+                        {group.links.map((link) => (
+                          <Link
+                            key={link.href + link.label}
+                            href={link.href}
+                            onClick={closeMenu}
+                            className="flex items-center justify-between py-1.5 px-2 rounded-lg text-[13px] text-[#4a463c] hover:text-black hover:bg-[#FAF8F5] transition-all group"
+                          >
+                            <span className="group-hover:translate-x-0.5 transition-transform">
+                              {link.label}
+                            </span>
+                            <span className="text-[11px] text-[#aaa] group-hover:text-black transition-colors opacity-0 group-hover:opacity-100">
+                              &rarr;
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Menu Bottom Bar with Socials & Studio Details */}
+            <div className="border-t border-[rgba(14,14,14,0.08)] bg-[#FCFAF7] px-5 py-3.5 flex items-center justify-between gap-3 text-xs text-[#777]">
+              {/* Monochrome Social Icons */}
+              <div className="flex items-center gap-3 text-black">
                 {SOCIAL_PROFILES.map((social) => {
                   const Icon = social.icon;
                   return (
@@ -367,43 +317,21 @@ export function Header({
                       rel="noopener noreferrer"
                       aria-label={social.label}
                       title={social.label}
-                      className="text-black hover:opacity-65 transition-opacity flex items-center justify-center cursor-pointer"
+                      className="text-black hover:opacity-60 transition-opacity flex items-center justify-center cursor-pointer"
                     >
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-4 h-4" />
                     </a>
                   );
                 })}
               </div>
 
-              <div className="h-3 w-[1px] bg-[rgba(14,14,14,0.15)] hidden sm:block" />
-
-              <div className="flex items-center gap-4 sm:gap-5 font-mono text-[10.5px] uppercase tracking-widest">
-                <Link
-                  href="/faq"
-                  onClick={closeMenu}
-                  className="hover:text-black transition-colors"
-                >
-                  FAQs
-                </Link>
-                <Link
-                  href="/contact"
-                  onClick={closeMenu}
-                  className="hover:text-black transition-colors"
-                >
-                  Contact
-                </Link>
-              </div>
+              <span className="text-[10px] font-mono tracking-wider text-[#888]">
+                &copy; 2026 Famous Letterpress
+              </span>
             </div>
-
-            <p className="text-[10.5px] font-mono tracking-wider">
-              &copy; 2026 Famous Letterpress &middot; Nagaland, India
-            </p>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 }
-
-
-

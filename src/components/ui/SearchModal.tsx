@@ -11,37 +11,43 @@ export interface NavigationTarget {
   keywords: string[];
 }
 
-const SITE_NAVIGATION_TARGETS: NavigationTarget[] = [
-  // Core services & pages
-  { id: "weddings", title: "Wedding Invitations", section: "Services", href: "/our-work/wedding-invites", keywords: ["wedding", "invite", "invitations", "marriage", "suite", "bride", "foil"] },
-  { id: "wedding-stationery", title: "Wedding Stationery Suites", section: "Services", href: "/weddings/wedding-stationery", keywords: ["stationery", "rsvp", "save the date", "event card", "menu", "envelope"] },
-  { id: "early-bride", title: "Early Bride Consultation", section: "Services", href: "/weddings/early-bride", keywords: ["early bride", "consult", "booking", "custom"] },
-  { id: "business-cards", title: "Business Cards", section: "Services", href: "/our-work/business-cards", keywords: ["business", "visiting card", "executive", "cards", "corporate", "edge gilding"] },
-  { id: "personalised-stationery", title: "Personalised Stationery", section: "Services", href: "/personalised-stationery", keywords: ["personalised", "notecard", "letterhead", "monogram", "correspondence"] },
-  { id: "sample-wedding", title: "Wedding Sample Kit (₹1,500)", section: "Sample Kits", href: "/weddings/wedding-sample-kit", keywords: ["sample", "kit", "box", "wedding sample", "swatch", "paper"] },
+const DEFAULT_TOP_PAGES: NavigationTarget[] = [
+  {
+    id: "weddings",
+    title: "Wedding Invitations & Suites",
+    section: "What We Make",
+    href: "/our-work/wedding-invites",
+    keywords: ["wedding", "invite", "invitations", "marriage", "suite", "bride", "foil"],
+  },
+  {
+    id: "business-cards",
+    title: "Cards + Letterheads",
+    section: "What We Make",
+    href: "/our-work/business-cards",
+    keywords: ["business", "visiting card", "executive", "cards", "corporate", "letterheads"],
+  },
+  {
+    id: "sample-wedding",
+    title: "Wedding Sample Kit (₹1,500)",
+    section: "Sample Kits",
+    href: "/weddings/wedding-sample-kit",
+    keywords: ["sample", "kit", "box", "wedding sample", "swatch", "paper"],
+  },
+];
 
-  { id: "our-work", title: "Our Work & Portfolio", section: "Explore", href: "/our-work", keywords: ["work", "portfolio", "archive", "projects", "gallery", "commissions"] },
-  { id: "work-wedding-invites", title: "Our Work: Wedding Invites", section: "Our Work", href: "/our-work/wedding-invites", keywords: ["wedding invites", "wedding invitations", "suite", "marriage", "cards"] },
-  { id: "work-envelopes", title: "Our Work: Envelopes & Liners", section: "Our Work", href: "/our-work/envelopes", keywords: ["envelopes", "liners", "euro flap", "addressing"] },
-  { id: "work-seal-stickers", title: "Our Work: Seal Stickers & Wax Seals", section: "Our Work", href: "/our-work/seal-stickers", keywords: ["seal stickers", "wax seals", "cotton seals", "crests"] },
-  { id: "work-business-cards", title: "Our Work: Business Cards", section: "Our Work", href: "/our-work/business-cards", keywords: ["business cards", "visiting cards", "corporate cards"] },
-  { id: "work-certificates", title: "Our Work: Archival Certificates", section: "Our Work", href: "/our-work/certificates", keywords: ["certificates", "diplomas", "archival", "degrees", "awards"] },
-  { id: "work-design-illustration", title: "Our Work: Design & Illustration", section: "Our Work", href: "/our-work/design-illustration", keywords: ["design", "illustration", "calligraphy", "artwork", "monogram"] },
-  { id: "work-custom-works", title: "Our Work: Custom Works & Coasters", section: "Our Work", href: "/our-work/custom-works", keywords: ["custom works", "coasters", "notebooks", "packaging", "bespoke"] },
-  { id: "process", title: "Letterpress Craft & Process", section: "Explore", href: "/process", keywords: ["process", "letterpress", "the bite", "heidelberg", "relief", "technique", "craft"] },
-  { id: "materials", title: "Cotton Papers & Foils", section: "Explore", href: "/materials", keywords: ["materials", "paper", "cotton", "300gsm", "600gsm", "900gsm", "foil", "deboss"] },
-  { id: "packages", title: "Packages & Design Suites", section: "Explore", href: "/packages", keywords: ["packages", "pricing", "bundles", "designs", "templates"] },
-  { id: "channel-partners", title: "Channel Partners & Trade", section: "Studio", href: "/channel-partners", keywords: ["partner", "trade", "designer", "planner", "collaborate", "b2b"] },
-  { id: "about", title: "About Studio & Story", section: "Studio", href: "/about", keywords: ["about", "story", "studio", "nagaland", "dimapur", "founders", "heritage"] },
-  { id: "faq", title: "Frequently Asked Questions", section: "Help", href: "/faq", keywords: ["faq", "questions", "help", "timeline", "pricing", "delivery", "moq"] },
-  { id: "contact", title: "Contact & Studio Location", section: "Help", href: "/contact", keywords: ["contact", "email", "phone", "whatsapp", "address", "visit"] },
-  { id: "start-a-project", title: "Start a Project / Inquire", section: "Action", href: "/start-a-project", keywords: ["start", "order", "inquiry", "quote", "book"] },
-  // Specific Page Anchor Sections
-  { id: "home-faq", title: "Home FAQ Section", section: "Sections", href: "/#faq", keywords: ["faq section", "common questions", "home faq"] },
-  { id: "home-work", title: "Home 3D Cards / What We Make", section: "Sections", href: "/#svc", keywords: ["3d cards", "carousel", "what we make"] },
-  { id: "home-how", title: "Home How We Make Section", section: "Sections", href: "/#how-we-make", keywords: ["how we make", "craft", "press"] },
-  { id: "home-who", title: "Home Who We Make For Section", section: "Sections", href: "/#who-we-make-for", keywords: ["who we make for", "clients", "couples"] },
-  { id: "home-instagram", title: "Home Instagram Presswork", section: "Sections", href: "/#instagram", keywords: ["instagram", "presswork", "reels", "video"] },
+const ALL_SEARCH_TARGETS: NavigationTarget[] = [
+  ...DEFAULT_TOP_PAGES,
+  { id: "personalised-stationery", title: "Personalised Stationery", section: "What We Make", href: "/personalised-stationery", keywords: ["stationery", "notecard", "monogram", "correspondence"] },
+  { id: "seal-stickers", title: "Wax Seals & Embellishments", section: "What We Make", href: "/our-work/seal-stickers", keywords: ["wax seals", "seals", "embellishments", "cotton seals", "crests"] },
+  { id: "cotton-paper", title: "Cotton & Handmade Paper", section: "How We Make It", href: "/materials", keywords: ["materials", "paper", "cotton", "handmade", "swatch"] },
+  { id: "letterpress-craft", title: "Letterpress Craft & Bite", section: "How We Make It", href: "/process", keywords: ["process", "craft", "bite", "heidelberg", "relief", "printing"] },
+  { id: "hot-foil", title: "Hot Foil & Emboss", section: "How We Make It", href: "/process", keywords: ["foil", "emboss", "gold foil", "deboss"] },
+  { id: "about-studio", title: "Our Story & Studio", section: "About", href: "/about", keywords: ["story", "studio", "about", "founders", "heritage"] },
+  { id: "packages", title: "Design Templates & Curated Suites", section: "Packages", href: "/packages", keywords: ["packages", "templates", "pricing", "suites"] },
+  { id: "channel-partners", title: "Channel Partners & Designers", section: "Who We Make It For", href: "/channel-partners", keywords: ["partner", "designer", "trade", "b2b", "agency"] },
+  { id: "faq", title: "Frequently Asked Questions", section: "Help", href: "/faq", keywords: ["faq", "help", "questions", "timelines", "pricing"] },
+  { id: "contact", title: "Contact & Consult", section: "Help", href: "/contact", keywords: ["contact", "consult", "location", "email", "phone", "whatsapp"] },
+  { id: "start-a-project", title: "Start a Project", section: "Action", href: "/start-a-project", keywords: ["inquire", "order", "quote", "start"] },
 ];
 
 interface SearchModalProps {
@@ -53,17 +59,16 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Reset query and focus input on open
+  // Focus input and lock scroll on open
   useEffect(() => {
     if (isOpen) {
       setQuery("");
       setSelectedIndex(0);
       const timer = setTimeout(() => {
         inputRef.current?.focus();
-      }, 40);
+      }, 50);
       document.body.style.overflow = "hidden";
       return () => {
         clearTimeout(timer);
@@ -72,7 +77,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
   }, [isOpen]);
 
-  // Global keydown (Escape)
+  // Global escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -83,22 +88,21 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Instant fast search filter
-  const results = useMemo(() => {
+  // Top 3 results: either default 3 pages or top 3 matching search results
+  const displayedResults = useMemo(() => {
     const q = query.toLowerCase().trim();
     if (!q) {
-      // Default top quick navigation destinations
-      return SITE_NAVIGATION_TARGETS.slice(0, 7);
+      return DEFAULT_TOP_PAGES.slice(0, 3);
     }
-    return SITE_NAVIGATION_TARGETS.filter((item) => {
+    // Filter and strictly return top 3 most relevant results
+    return ALL_SEARCH_TARGETS.filter((item) => {
       const titleMatch = item.title.toLowerCase().includes(q);
       const sectionMatch = item.section.toLowerCase().includes(q);
-      const keywordMatch = item.keywords.some((k) => k.includes(q));
+      const keywordMatch = item.keywords.some((k) => k.toLowerCase().includes(q));
       return titleMatch || sectionMatch || keywordMatch;
-    }).slice(0, 8);
+    }).slice(0, 3);
   }, [query]);
 
-  // Reset selected index on query change
   useEffect(() => {
     setSelectedIndex(0);
   }, [query]);
@@ -109,50 +113,39 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (displayedResults.length === 0) return;
+
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : 0));
+      setSelectedIndex((prev) => (prev < displayedResults.length - 1 ? prev + 1 : 0));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : Math.max(0, results.length - 1)));
-    } else if (e.key === "Enter" && results[selectedIndex]) {
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : displayedResults.length - 1));
+    } else if (e.key === "Enter" && displayedResults[selectedIndex]) {
       e.preventDefault();
-      navigateTo(results[selectedIndex].href);
+      navigateTo(displayedResults[selectedIndex].href);
     }
   };
-
-  // Scroll active item into view
-  useEffect(() => {
-    if (listRef.current) {
-      const activeEl = listRef.current.children[selectedIndex] as HTMLElement;
-      if (activeEl) {
-        activeEl.scrollIntoView({ block: "nearest" });
-      }
-    }
-  }, [selectedIndex]);
 
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 px-4 bg-black/40 backdrop-blur-xs transition-opacity duration-200"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-5 sm:pt-7 px-4 bg-black/20 backdrop-blur-[2px] transition-all duration-200"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Quick Search"
     >
-      {/* Small Minimal Capsule Container */}
+      {/* Translucent Dynamic Island Capsule */}
       <div
-        className="w-full max-w-[480px] bg-white rounded-2xl shadow-2xl border border-[rgba(14,14,14,0.12)] overflow-hidden transition-all duration-200"
-        style={{
-          boxShadow: "0 20px 45px -10px rgba(0,0,0,0.22), 0 2px 6px rgba(0,0,0,0.06)",
-        }}
+        className="w-full max-w-[420px] bg-white/85 backdrop-blur-xl border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.16),0_2px_8px_rgba(0,0,0,0.06)] rounded-[24px] overflow-hidden transition-all duration-200 animate-in fade-in zoom-in-95"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Minimal Capsule Search Input Bar */}
-        <div className="flex items-center gap-3 px-4 py-3 bg-[#FAF8F5] border-b border-[rgba(14,14,14,0.08)]">
+        {/* Capsule Search Bar */}
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-black/[0.07]">
           <svg
-            className="w-4 h-4 text-[#777] shrink-0"
+            className="w-4 h-4 text-black/60 shrink-0"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -167,8 +160,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleInputKeyDown}
-            placeholder="Search pages or jump to section..."
-            className="w-full bg-transparent text-sm text-[#111] placeholder-[#888] font-sans outline-none focus:ring-0 tracking-tight"
+            placeholder="Search pages or suites..."
+            className="w-full bg-transparent text-[13.5px] text-[#0e0e0e] placeholder:text-[#888] font-sans outline-none tracking-tight"
             autoComplete="off"
             spellCheck={false}
           />
@@ -180,8 +173,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 setQuery("");
                 inputRef.current?.focus();
               }}
-              className="w-5 h-5 flex items-center justify-center rounded-full text-[#888] hover:text-black hover:bg-black/5 text-xs transition-colors cursor-pointer shrink-0"
-              aria-label="Clear search query"
+              className="w-5 h-5 flex items-center justify-center rounded-full text-[#666] hover:text-black text-xs transition-colors cursor-pointer shrink-0"
+              aria-label="Clear query"
             >
               &times;
             </button>
@@ -190,55 +183,65 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="text-[10px] font-mono uppercase tracking-widest text-[#888] hover:text-black transition-colors shrink-0 px-1 py-0.5 border border-[#E0DBD0] rounded-xs bg-white"
+            className="text-[9.5px] font-mono uppercase tracking-wider text-[#666] hover:text-black transition-colors shrink-0 px-1.5 py-0.5 border border-black/10 rounded-full bg-white/70"
             aria-label="Close search"
           >
-            ESC
+            esc
           </button>
         </div>
 
-        {/* Fast Responsive Results List */}
-        <div ref={listRef} className="max-h-[320px] overflow-y-auto divide-y divide-[rgba(14,14,14,0.04)] p-1.5">
-          {results.length > 0 ? (
-            results.map((item, idx) => {
-              const isSelected = idx === selectedIndex;
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => navigateTo(item.href)}
-                  onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer transition-colors ${
-                    isSelected ? "bg-black text-white" : "hover:bg-[#F5F2EB] text-[#111]"
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <span
-                      className={`text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded-xs shrink-0 ${
-                        isSelected ? "bg-white/20 text-white" : "bg-[#EAE5D9] text-[#666]"
-                      }`}
-                    >
-                      {item.section}
-                    </span>
-                    <span className="text-[13.5px] font-medium font-sans truncate tracking-[-0.01em]">
-                      {item.title}
-                    </span>
-                  </div>
+        {/* Top 3 Pages or Top 3 Results */}
+        <div className="p-2">
+          <div className="px-3 pt-1.5 pb-1 text-[9px] font-mono uppercase tracking-[0.2em] text-[#888]">
+            {query.trim() ? "Top 3 Results" : "Top 3 Pages"}
+          </div>
 
-                  <span
-                    className={`text-xs transition-transform shrink-0 ${
-                      isSelected ? "text-white translate-x-0.5" : "text-[#999]"
+          <div className="space-y-1">
+            {displayedResults.length > 0 ? (
+              displayedResults.map((item, idx) => {
+                const isSelected = idx === selectedIndex;
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => navigateTo(item.href)}
+                    onMouseEnter={() => setSelectedIndex(idx)}
+                    className={`flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer transition-colors duration-150 ${
+                      isSelected
+                        ? "bg-black text-white"
+                        : "hover:bg-black/5 text-[#111]"
                     }`}
                   >
-                    &rarr;
-                  </span>
-                </div>
-              );
-            })
-          ) : (
-            <div className="py-8 text-center text-xs text-[#888] font-light">
-              No matching pages or sections found.
-            </div>
-          )}
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <span
+                        className={`text-[8.5px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0 ${
+                          isSelected
+                            ? "bg-white/20 text-white"
+                            : "bg-black/5 text-[#666]"
+                        }`}
+                      >
+                        {item.section}
+                      </span>
+                      <span className="text-[13px] font-medium font-sans truncate tracking-tight">
+                        {item.title}
+                      </span>
+                    </div>
+
+                    <span
+                      className={`text-xs shrink-0 transition-transform ${
+                        isSelected ? "text-white translate-x-0.5" : "text-[#999]"
+                      }`}
+                    >
+                      &rarr;
+                    </span>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="py-6 text-center text-xs text-[#888] font-sans">
+                No matching results found.
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
