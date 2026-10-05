@@ -217,7 +217,7 @@ export function HowWeMakeSection() {
       className="hw py-20 md:py-28 overflow-hidden border-b border-[rgba(14,14,14,0.08)] bg-white select-none"
       aria-label="How We Make"
     >
-      <div className="w mb-[52px] sm:mb-10">
+      <div className="w">
         <p className="k">How we make</p>
         <h2 className="d text-[clamp(36px,9vw,64px)] mt-1.5 font-serif text-black leading-[0.95]">
           Ink, <i>steel</i> &amp; cotton.
@@ -232,7 +232,7 @@ export function HowWeMakeSection() {
       {/* ── 4-Image Centered Focus Carousel (Wider rectangular proportions with controlled, noticeable gap) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[270px] sm:h-[410px] touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[270px] sm:h-[410px] mt-8 sm:mt-0 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Craft Process Showcase"
       >
         {TECHNIQUES.map((tech, index) => (
