@@ -81,62 +81,22 @@ export function HeroSection() {
     const cards = Array.from(cr.children) as HTMLElement[];
     if (cards.length === 0) return;
 
-    const spring = new Spring(0, 80, 14);
+    const spring = new Spring(0, 140, 22);
+    const getSpacing = () => cards[0].offsetWidth * 0.88;
+
     let target = 0;
-    let isDragging = 0;
+    let isDragging = false;
     let startX = 0;
-    let lastX = 0;
-    let initialTarget = 0;
+    let initialX = 0;
     let movedDistance = 0;
-    let lastDelta = 0;
-
-    const getSpacing = () => cards[0].offsetWidth * 0.95;
-
-    const onPointerDown = (e: PointerEvent) => {
-      isDragging = 1;
-      startX = lastX = e.clientX;
-      initialTarget = target;
-      movedDistance = 0;
-      lastDelta = 0;
-    };
-
-    const onPointerMove = (e: PointerEvent) => {
-      if (!isDragging) return;
-      lastDelta = e.clientX - lastX;
-      lastX = e.clientX;
-      movedDistance = Math.max(movedDistance, Math.abs(e.clientX - startX));
-      target = initialTarget - (e.clientX - startX) / getSpacing();
-    };
-
-    const onPointerUp = (e: PointerEvent) => {
-      if (!isDragging) return;
-      isDragging = 0;
-      if (movedDistance > 6) {
-        target = Math.round(target - (lastDelta / getSpacing()) * 5);
-      } else {
-        const targetCard = (e.target as HTMLElement)?.closest(".cs") as HTMLElement;
-        if (targetCard) {
-          const idx = cards.indexOf(targetCard);
-          let diff = idx - spring.x;
-          diff -= m * Math.round(diff / m);
-          if (Math.abs(diff) > 0.5) {
-            target = Math.round(spring.x + diff);
-          }
-        }
-      }
-    };
-
+    let lastClientX = 0;
+    let lastTime = 0;
+    let releaseVelocity = 0;
 
     let isRunning = false;
     let animId: number;
+    let lastAnimTime = performance.now();
     let lastActiveIdx = -1;
-
-    const requestTick = () => {
-      if (!isRunning) {
-        isRunning = true;
-        animId = requestAnimationFrame(tick);
-      }
-    };
 
     const updateCards = () => {
       const sp = getSpacing();
@@ -151,8 +111,8 @@ export function HeroSection() {
         diff -= m * Math.round(diff / m);
         const absDiff = Math.abs(diff);
 
-        const scale = absDiff < 1 ? 1 - absDiff * 0.22 : 0.78;
-        const opacity = absDiff < 1 ? 1 - absDiff * 0.3 : Math.max(0, 0.7 - (absDiff - 1) * 0.55);
+        const scale = absDiff < 1 ? 1 - absDiff * 0.16 : 0.84;
+        const opacity = absDiff < 1 ? 1 - absDiff * 0.28 : Math.max(0.2, 0.72 - (absDiff - 1) * 0.4);
         const zIndex = 100 - Math.round(absDiff * 10);
 
         card.style.transform = `translate3d(${diff * sp}px,0,0) scale(${scale})`;
@@ -161,18 +121,24 @@ export function HeroSection() {
       });
     };
 
-    const tick = () => {
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastAnimTime) / 1000, 0.032);
+      lastAnimTime = now;
+
       spring.t = target;
-      for (let k = 0; k < 2; k++) {
-        spring.step(1 / 120);
+      // Step spring with real delta time
+      const subSteps = 3;
+      const subDt = dt / subSteps;
+      for (let k = 0; k < subSteps; k++) {
+        spring.step(subDt);
       }
 
       updateCards();
 
       const isResting =
         !isDragging &&
-        Math.abs(spring.v) < 0.001 &&
-        Math.abs(spring.x - spring.t) < 0.001;
+        Math.abs(spring.v) < 0.0005 &&
+        Math.abs(spring.x - spring.t) < 0.0005;
 
       if (isResting) {
         spring.x = spring.t;
@@ -184,48 +150,98 @@ export function HeroSection() {
       }
     };
 
-    // Auto-advance every 4.8 seconds
-    const interval = setInterval(() => {
-      const rect = cr.getBoundingClientRect();
-      if (!isDragging && !document.hidden && rect.bottom > 0 && rect.top < window.innerHeight) {
-        target = Math.round(target) + 1;
-        requestTick();
+    const requestTick = () => {
+      if (!isRunning) {
+        isRunning = true;
+        lastAnimTime = performance.now();
+        animId = requestAnimationFrame(tick);
       }
-    }, 4800);
+    };
 
-    const onPointerDownWithWakeup = (e: PointerEvent) => {
-      onPointerDown(e);
+    const onPointerDown = (e: PointerEvent) => {
+      isDragging = true;
+      startX = lastClientX = e.clientX;
+      initialX = spring.x;
+      movedDistance = 0;
+      releaseVelocity = 0;
+      lastTime = performance.now();
+
+      // Pause free spring while dragging for direct 1:1 control
+      spring.v = 0;
+      if (isRunning) {
+        cancelAnimationFrame(animId);
+        isRunning = false;
+      }
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging) return;
+      const now = performance.now();
+      const dt = now - lastTime;
+      const dx = e.clientX - lastClientX;
+
+      if (dt > 8) {
+        releaseVelocity = (dx / dt) * 1000; // px per second
+        lastClientX = e.clientX;
+        lastTime = now;
+      }
+
+      movedDistance = Math.max(movedDistance, Math.abs(e.clientX - startX));
+      const sp = getSpacing();
+
+      // Direct 1:1 fluid tracking with finger / mouse
+      spring.x = initialX - (e.clientX - startX) / sp;
+      spring.t = spring.x;
+      updateCards();
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const sp = getSpacing();
+
+      if (movedDistance > 8) {
+        // Evaluate flick or swipe distance
+        const flickCards = releaseVelocity / (sp * 2.2);
+        if (Math.abs(flickCards) > 0.3) {
+          // Intentional flick
+          target = flickCards > 0 ? Math.floor(spring.x) : Math.ceil(spring.x);
+        } else {
+          // Regular release: snap to nearest
+          target = Math.round(spring.x);
+        }
+      } else {
+        // Click on adjacent card advances directly to it
+        const targetCard = (e.target as HTMLElement)?.closest(".cs") as HTMLElement;
+        if (targetCard) {
+          const idx = cards.indexOf(targetCard);
+          let diff = idx - spring.x;
+          diff -= m * Math.round(diff / m);
+          if (Math.abs(diff) > 0.4) {
+            target = Math.round(spring.x + diff);
+          }
+        }
+      }
+
+      // Smoothly snap to target with spring physics
       requestTick();
     };
 
-    const onPointerMoveWithWakeup = (e: PointerEvent) => {
-      onPointerMove(e);
-      requestTick();
-    };
-
-    const onPointerUpWithWakeup = (e: PointerEvent) => {
-      onPointerUp(e);
-      requestTick();
-    };
-
-    cr.addEventListener("pointerdown", onPointerDownWithWakeup, { passive: true });
-    window.addEventListener("pointermove", onPointerMoveWithWakeup, { passive: true });
-    window.addEventListener("pointerup", onPointerUpWithWakeup, { passive: true });
-    window.addEventListener("pointercancel", onPointerUpWithWakeup, { passive: true });
+    cr.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerup", onPointerUp, { passive: true });
+    window.addEventListener("pointercancel", onPointerUp, { passive: true });
 
     updateCards();
-    requestTick();
 
     return () => {
       cancelAnimationFrame(animId);
-      clearInterval(interval);
-      cr.removeEventListener("pointerdown", onPointerDownWithWakeup);
-      window.removeEventListener("pointermove", onPointerMoveWithWakeup);
-      window.removeEventListener("pointerup", onPointerUpWithWakeup);
-      window.removeEventListener("pointercancel", onPointerUpWithWakeup);
+      cr.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerUp);
     };
   }, [m]);
-
 
   const activeItem = HERO_ITEMS[activeIndex];
 
@@ -259,16 +275,16 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── 6-Image Centered Focus Carousel (Wider Rectangular Ratio) ── */}
+      {/* ── 6-Image Centered Focus Carousel (Less rectangular, visible adjacent cards) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[clamp(280px,46vw,440px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[clamp(280px,42vw,400px)] mt-12 touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Studio Work Showcase"
       >
         {HERO_ITEMS.map((item, index) => (
           <div
             key={index}
-            className="cs absolute left-1/2 top-0 w-[min(88vw,700px)] h-full -ml-[min(44vw,350px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
+            className="cs absolute left-1/2 top-0 w-[min(76vw,540px)] h-full -ml-[min(38vw,270px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
           >
             <div className="ph absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
