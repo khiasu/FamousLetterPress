@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface WorkItem {
   title: string;
@@ -136,7 +137,7 @@ export function WhatWeMakeSection() {
 
         c.style.transform = `translate3d(${tx}px,0,${tz}px) rotateY(${ry}deg) scale(${sc})`;
         c.style.opacity = `${op}`;
-        c.style.pointerEvents = a < 0.55 ? "auto" : "none";
+        c.style.pointerEvents = "auto";
       }
     };
 
@@ -274,18 +275,20 @@ export function WhatWeMakeSection() {
 
   const handleCardClick = (index: number, href: string) => {
     if (isDraggingRef.current) return;
-    const sec = sectionRef.current;
-    const activeIdx = Math.round(computeScrollProg());
-    if (index === activeIdx) {
+    const diff = Math.abs(index - computeScrollProg());
+    if (diff < 0.75) {
       router.push(href);
-    } else if (sec) {
-      // Direct jump to clicked card
-      const rect = sec.getBoundingClientRect();
-      const scrollableDist = rect.height - window.innerHeight;
-      if (scrollableDist > 0) {
-        const targetScrollY =
-          window.scrollY + rect.top + (index / (n - 1)) * scrollableDist;
-        window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+    } else {
+      // Direct jump to clicked adjacent card
+      const sec = sectionRef.current;
+      if (sec) {
+        const rect = sec.getBoundingClientRect();
+        const scrollableDist = rect.height - window.innerHeight;
+        if (scrollableDist > 0) {
+          const targetScrollY =
+            window.scrollY + rect.top + (index / (n - 1)) * scrollableDist;
+          window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+        }
       }
     }
   };
@@ -383,11 +386,20 @@ export function WhatWeMakeSection() {
                     {item.desc}
                   </p>
 
-                  {/* Explore button — directly below description with compact margin */}
+                  {/* Explore button — always clickable to navigate directly to the page */}
                   <div className="mt-3.5 sm:mt-4">
-                    <span className="inline-flex items-center justify-center px-6 py-2.5 sm:py-3 bg-black text-white group-hover:bg-[#222] transition-colors rounded-none text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm">
+                    <Link
+                      href={item.href}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (isDraggingRef.current) {
+                          e.preventDefault();
+                        }
+                      }}
+                      className="inline-flex items-center justify-center px-6 py-2.5 sm:py-3 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm cursor-pointer relative z-20 pointer-events-auto"
+                    >
                       Explore {item.title}
-                    </span>
+                    </Link>
                   </div>
                 </div>
               </div>
