@@ -25,26 +25,6 @@ const TECHNIQUES = [
   },
 ];
 
-/* ── Spring physics — same engine as hero carousel ── */
-class Spring {
-  x: number;
-  v: number;
-  t: number;
-  k: number;
-  c: number;
-  constructor(x: number, k: number, c: number) {
-    this.x = x;
-    this.v = 0;
-    this.t = x;
-    this.k = k;
-    this.c = c;
-  }
-  step(d: number) {
-    this.v += (-this.k * (this.x - this.t) - this.c * this.v) * d;
-    this.x += this.v * d;
-  }
-}
-
 export function HowWeMakeSection() {
   const crRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -57,61 +37,35 @@ export function HowWeMakeSection() {
     const cards = Array.from(cr.children) as HTMLElement[];
     if (cards.length === 0) return;
 
-    const spring = new Spring(0, 80, 14);
+    const spring = { x: 0, v: 0 };
     let target = 0;
-    let isDragging = 0;
+    let isDragging = false;
     let startX = 0;
-    let lastX = 0;
-    let initialTarget = 0;
+    let initialX = 0;
     let movedDistance = 0;
-    let lastDelta = 0;
-
-    const getSpacing = () => cards[0].offsetWidth * 0.95;
-
-    const onPointerDown = (e: PointerEvent) => {
-      isDragging = 1;
-      startX = lastX = e.clientX;
-      initialTarget = target;
-      movedDistance = 0;
-      lastDelta = 0;
-    };
-
-    const onPointerMove = (e: PointerEvent) => {
-      if (!isDragging) return;
-      lastDelta = e.clientX - lastX;
-      lastX = e.clientX;
-      movedDistance = Math.max(movedDistance, Math.abs(e.clientX - startX));
-      target = initialTarget - (e.clientX - startX) / getSpacing();
-    };
-
-    const onPointerUp = (e: PointerEvent) => {
-      if (!isDragging) return;
-      isDragging = 0;
-      if (movedDistance > 6) {
-        target = Math.round(target - (lastDelta / getSpacing()) * 5);
-      } else {
-        const targetCard = (e.target as HTMLElement)?.closest(".hmc") as HTMLElement;
-        if (targetCard) {
-          const idx = cards.indexOf(targetCard);
-          let diff = idx - spring.x;
-          diff -= m * Math.round(diff / m);
-          if (Math.abs(diff) > 0.5) {
-            target = Math.round(spring.x + diff);
-          }
-        }
-      }
-    };
+    let lastClientX = 0;
+    let latestPointerX = 0;
+    let lastTime = 0;
+    let releaseVelocity = 0;
 
     let isRunning = false;
     let animId: number;
+    let lastAnimTime = performance.now();
     let lastActiveIdx = -1;
 
-    const requestTick = () => {
-      if (!isRunning) {
-        isRunning = true;
-        animId = requestAnimationFrame(tick);
-      }
+    // Precise physical gap formula: cardW * ((1 + scale) / 2) + desiredGap
+    // With adjacent scale 0.88, ((1 + 0.88) / 2) = 0.94
+    // Leaves exactly a noticeable 12px gap on mobile and 22px gap on desktop
+    const getSpacing = () => {
+      const cardW = cards[0]?.offsetWidth || 320;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+      return cardW * 0.94 + (isMobile ? 12 : 22);
     };
+
+    // Static z-index setup to eliminate compositor reflows
+    cards.forEach((card) => {
+      card.style.zIndex = "10";
+    });
 
     const updateCards = () => {
       const sp = getSpacing();
@@ -126,67 +80,130 @@ export function HowWeMakeSection() {
         diff -= m * Math.round(diff / m);
         const absDiff = Math.abs(diff);
 
-        const scale = absDiff < 1 ? 1 - absDiff * 0.22 : 0.78;
-        const opacity = absDiff < 1 ? 1 - absDiff * 0.3 : Math.max(0, 0.7 - (absDiff - 1) * 0.55);
-        const zIndex = 100 - Math.round(absDiff * 10);
+        // Smooth continuous cosine easing with zero threshold popping
+        const progress = Math.max(0, 1 - Math.min(1.2, absDiff));
+        const smoothProgress = Math.cos((1 - progress) * Math.PI) * 0.5 + 0.5;
+
+        const scale = 0.88 + 0.12 * smoothProgress;
+        const opacity = 0.45 + 0.55 * smoothProgress;
 
         card.style.transform = `translate3d(${diff * sp}px,0,0) scale(${scale})`;
         card.style.opacity = `${opacity}`;
-        card.style.zIndex = `${zIndex}`;
       });
     };
 
-    const tick = () => {
-      spring.t = target;
-      for (let k = 0; k < 2; k++) {
-        spring.step(1 / 120);
-      }
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastAnimTime) / 1000, 0.032);
+      lastAnimTime = now;
 
-      updateCards();
-
-      const isResting =
-        !isDragging &&
-        Math.abs(spring.v) < 0.001 &&
-        Math.abs(spring.x - spring.t) < 0.001;
-
-      if (isResting) {
-        spring.x = spring.t;
+      if (isDragging) {
+        const sp = getSpacing();
+        spring.x = initialX - (latestPointerX - startX) / sp;
         spring.v = 0;
         updateCards();
-        isRunning = false;
+        animId = requestAnimationFrame(tick);
       } else {
+        // High-precision implicit critically-damped spring (seamless at 60Hz, 120Hz, 144Hz)
+        const omega = 15;
+        const f = 1.0 + 2.0 * dt * omega;
+        const ooth = 1.0 / (f + dt * dt * omega * omega);
+        const delta = spring.x - target;
+        const v = spring.v;
+        spring.x = target + (f * delta + dt * v) * ooth;
+        spring.v = (v - dt * omega * omega * delta) * ooth;
+
+        updateCards();
+
+        const isResting = Math.abs(spring.v) < 0.0003 && Math.abs(spring.x - target) < 0.0003;
+        if (isResting) {
+          spring.x = target;
+          spring.v = 0;
+          updateCards();
+          isRunning = false;
+        } else {
+          animId = requestAnimationFrame(tick);
+        }
+      }
+    };
+
+    const requestTick = () => {
+      if (!isRunning) {
+        isRunning = true;
+        lastAnimTime = performance.now();
         animId = requestAnimationFrame(tick);
       }
     };
 
-    // Auto-advance every 5 seconds
+    const onPointerDown = (e: PointerEvent) => {
+      isDragging = true;
+      startX = lastClientX = latestPointerX = e.clientX;
+      initialX = spring.x;
+      movedDistance = 0;
+      releaseVelocity = 0;
+      lastTime = performance.now();
+      requestTick();
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging) return;
+      const now = performance.now();
+      const dt = now - lastTime;
+      const dx = e.clientX - lastClientX;
+
+      if (dt > 6) {
+        releaseVelocity = (dx / dt) * 1000;
+        lastClientX = e.clientX;
+        lastTime = now;
+      }
+
+      movedDistance = Math.max(movedDistance, Math.abs(e.clientX - startX));
+      latestPointerX = e.clientX;
+      requestTick();
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const sp = getSpacing();
+
+      if (movedDistance > 8) {
+        const flickCards = releaseVelocity / (sp * 2.2);
+        if (Math.abs(flickCards) > 0.3) {
+          target = flickCards > 0 ? Math.floor(spring.x) : Math.ceil(spring.x);
+        } else {
+          target = Math.round(spring.x);
+        }
+      } else {
+        const targetCard = (e.target as HTMLElement)?.closest(".hmc") as HTMLElement;
+        if (targetCard) {
+          const idx = cards.indexOf(targetCard);
+          let diff = idx - spring.x;
+          diff -= m * Math.round(diff / m);
+          if (Math.abs(diff) > 0.4) {
+            target = Math.round(spring.x + diff);
+          }
+        }
+      }
+
+      requestTick();
+    };
+
+    // Auto-advance timer (pauses when user interacts or tab is hidden)
     const interval = setInterval(() => {
       const rect = cr.getBoundingClientRect();
       if (!isDragging && !document.hidden && rect.bottom > 0 && rect.top < window.innerHeight) {
         target = Math.round(target) + 1;
         requestTick();
       }
-    }, 5000);
+    }, 6000);
 
-    const onPointerDownWithWakeup = (e: PointerEvent) => {
-      onPointerDown(e);
-      requestTick();
-    };
+    cr.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointerup", onPointerUp, { passive: true });
+    window.addEventListener("pointercancel", onPointerUp, { passive: true });
 
-    const onPointerMoveWithWakeup = (e: PointerEvent) => {
-      onPointerMove(e);
-      requestTick();
-    };
-
-    const onPointerUpWithWakeup = (e: PointerEvent) => {
-      onPointerUp(e);
-      requestTick();
-    };
-
-    cr.addEventListener("pointerdown", onPointerDownWithWakeup, { passive: true });
-    window.addEventListener("pointermove", onPointerMoveWithWakeup, { passive: true });
-    window.addEventListener("pointerup", onPointerUpWithWakeup, { passive: true });
-    window.addEventListener("pointercancel", onPointerUpWithWakeup, { passive: true });
+    const onResize = () => updateCards();
+    window.addEventListener("resize", onResize, { passive: true });
 
     updateCards();
     requestTick();
@@ -194,10 +211,11 @@ export function HowWeMakeSection() {
     return () => {
       cancelAnimationFrame(animId);
       clearInterval(interval);
-      cr.removeEventListener("pointerdown", onPointerDownWithWakeup);
-      window.removeEventListener("pointermove", onPointerMoveWithWakeup);
-      window.removeEventListener("pointerup", onPointerUpWithWakeup);
-      window.removeEventListener("pointercancel", onPointerUpWithWakeup);
+      cr.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerUp);
+      window.removeEventListener("resize", onResize);
     };
   }, [m]);
 
@@ -212,7 +230,7 @@ export function HowWeMakeSection() {
       <div className="w mb-10">
         <p className="k">How we make</p>
         <h2 className="d text-[clamp(36px,9vw,64px)] mt-1.5 font-serif text-black leading-[0.95]">
-          Ink, <i>steel</i> & cotton.
+          Ink, <i>steel</i> &amp; cotton.
         </h2>
         <p className="text-xs sm:text-sm text-[#444] font-light max-w-[46ch] leading-relaxed mt-2.5">
           From the first digital proof to the physical press run, every
@@ -221,16 +239,16 @@ export function HowWeMakeSection() {
         </p>
       </div>
 
-      {/* ── 4-Image Centered Focus Carousel — same style as hero ── */}
+      {/* ── 4-Image Centered Focus Carousel (Wider rectangular proportions with controlled, noticeable gap) ── */}
       <div
         ref={crRef}
-        className="cr w-full relative h-[clamp(280px,50vw,420px)] touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
+        className="cr w-full relative h-[270px] sm:h-[410px] touch-pan-y select-none cursor-grab active:cursor-grabbing overflow-hidden"
         aria-label="Craft Process Showcase"
       >
         {TECHNIQUES.map((tech, index) => (
           <div
             key={index}
-            className="hmc absolute left-1/2 top-0 w-[min(74vw,440px)] h-full -ml-[min(37vw,220px)] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-transform border border-[rgba(14,14,14,0.1)]"
+            className="hmc absolute left-1/2 top-0 w-[82vw] sm:w-[490px] h-full -ml-[41vw] sm:-ml-[245px] shadow-[0_20px_35px_-15px_rgba(0,0,0,0.18),0_2px_4px_rgba(0,0,0,0.06)] bg-white will-change-[transform,opacity] border border-[rgba(14,14,14,0.1)]"
           >
             <div className="absolute inset-0 overflow-hidden bg-[#F7F7F7]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
