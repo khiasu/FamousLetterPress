@@ -309,9 +309,9 @@ export function HeroSection() {
         ))}
       </div>
 
-      {/* Dynamic Slide Caption Under Carousel */}
-      <div className="text-center mt-5 min-h-[50px] px-4 transition-opacity duration-300">
-        <Link href={activeItem.href} className="group inline-block">
+      {/* Dynamic Slide Caption Under Carousel (Left-aligned flush with the card) */}
+      <div className="w-full max-w-[min(82vw,620px)] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
+        <Link href={activeItem.href} className="group block text-left">
           <h3 className="font-serif font-medium text-xl sm:text-2xl text-black tracking-tight group-hover:opacity-70 transition-opacity">
             {activeItem.title}
           </h3>
@@ -319,12 +319,12 @@ export function HeroSection() {
             {activeItem.sub}
           </p>
         </Link>
-      </div>
 
-      {/* Slide Counter — no "Swipe" text */}
-      <p className="k text-center mt-3.5 tracking-[0.28em]">
-        0{activeIndex + 1} / 0{m}
-      </p>
+        {/* Slide Counter — left-aligned */}
+        <p className="k text-left mt-3 tracking-[0.28em]">
+          0{activeIndex + 1} / 0{m}
+        </p>
+      </div>
     </section>
   );
 }
