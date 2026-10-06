@@ -91,107 +91,42 @@ const INSTAGRAM_ITEMS: InstagramPost[] = [
   },
 ];
 
-function ReelCard({
-  item,
-  isPlaying,
-  onTogglePlay,
-}: {
-  item: VideoPost;
-  isPlaying: boolean;
-  onTogglePlay: () => void;
-}) {
-  const [isMuted, setIsMuted] = useState(true);
+function ReelCard({ item }: { item: VideoPost }) {
   const [imgSrc, setImgSrc] = useState(item.image);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
 
   return (
-    <div className="relative aspect-[4/5] bg-[#111] border border-[#E5E5E5] overflow-hidden group select-none transition-all duration-300 hover:border-black/60 shadow-xs">
-      {isPlaying ? (
-        <div className="relative w-full h-full bg-black">
-          <video
-            ref={videoRef}
-            src={item.videoSrc}
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            className="w-full h-full object-cover"
-            onClick={onTogglePlay}
-          />
-          {/* Reel In-Video Controls */}
-          <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={toggleMute}
-              className="w-7 h-7 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center backdrop-blur-xs transition-colors cursor-pointer"
-              title={isMuted ? "Unmute" : "Mute"}
-              aria-label={isMuted ? "Unmute" : "Mute"}
-            >
-              {isMuted ? (
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-                </svg>
-              ) : (
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-                </svg>
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={onTogglePlay}
-              className="w-7 h-7 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center backdrop-blur-xs transition-colors cursor-pointer"
-              title="Pause"
-              aria-label="Pause"
-            >
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      ) : (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imgSrc}
-            alt={item.title}
-            onError={() => setImgSrc(item.fallbackImage)}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-          />
+    <a
+      href={item.instagramUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative aspect-[4/5] bg-[#111] border border-[#E5E5E5] overflow-hidden group select-none transition-all duration-300 hover:border-black/60 shadow-xs block cursor-pointer"
+      aria-label={`Watch ${item.title} on Instagram`}
+    >
+      {/* Thumbnail Image */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={imgSrc}
+        alt={item.title}
+        onError={() => setImgSrc(item.fallbackImage)}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        loading="lazy"
+      />
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
-          {/* Play Button Trigger */}
-          <button
-            type="button"
-            onClick={onTogglePlay}
-            className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer z-10"
-            aria-label={`Play Reel: ${item.title}`}
+      {/* Centered Play Button Indicator */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 text-black flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
+          <svg
+            className="w-4 h-4 sm:w-5 sm:h-5 translate-x-0.5 text-black"
+            fill="currentColor"
+            viewBox="0 0 24 24"
           >
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 text-black flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5 translate-x-0.5 text-black"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </button>
-        </>
-      )}
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      </div>
 
       {/* Bottom Title & Instagram Icon Link */}
       <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 flex items-end justify-between gap-2 z-10 pointer-events-none">
@@ -204,19 +139,15 @@ function ReelCard({
           </p>
         </div>
 
-        <a
-          href={item.instagramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="pointer-events-auto shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-90 hover:opacity-100 backdrop-blur-xs shadow-xs"
-          title="Open post on Instagram"
-          aria-label="Open post on Instagram"
+        <div
+          className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 group-hover:bg-white text-white group-hover:text-black flex items-center justify-center transition-all opacity-90 group-hover:opacity-100 backdrop-blur-xs shadow-xs"
+          title="Watch on Instagram"
+          aria-label="Watch on Instagram"
         >
           <InstagramIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-        </a>
+        </div>
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -345,12 +276,6 @@ function CarouselCard({ item }: { item: CarouselPost }) {
 }
 
 export function InstagramSection() {
-  const [playingId, setPlayingId] = useState<string | null>(null);
-
-  const togglePlay = (id: string) => {
-    setPlayingId((prev) => (prev === id ? null : id));
-  };
-
   return (
     <section
       id="instagram"
@@ -379,16 +304,11 @@ export function InstagramSection() {
           </a>
         </div>
 
-        {/* 4 Clean Boxes: 1 & 4 are Reels, 2 & 3 are Swipeable Carousels */}
+        {/* 4 Clean Boxes: 1 & 4 are Reels (open directly on Instagram), 2 & 3 are Swipeable Carousels */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {INSTAGRAM_ITEMS.map((item) =>
             item.type === "video" ? (
-              <ReelCard
-                key={item.id}
-                item={item}
-                isPlaying={playingId === item.id}
-                onTogglePlay={() => togglePlay(item.id)}
-              />
+              <ReelCard key={item.id} item={item} />
             ) : (
               <CarouselCard key={item.id} item={item} />
             )
