@@ -53,6 +53,13 @@ const TOP_FAQS: FAQItem[] = [
     answer:
       "Yes. Sample packs are available for purchase and can help couples understand the paper, printing techniques, and overall quality before committing to a full project.",
   },
+  {
+    id: "hfaq-7",
+    category: "Samples & Delivery",
+    question: "Does Famous Letterpress ship across India & internationally?",
+    answer:
+      "Yes. We ship wedding suites and bespoke stationery across all Indian cities and worldwide via reliable express couriers. Consultations, design proofing, and approvals are managed seamlessly online.",
+  },
 ];
 
 export function HomeFAQSection() {

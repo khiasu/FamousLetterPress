@@ -79,6 +79,25 @@ export function YouTubeIcon({ className = "w-7 h-6" }: { className?: string }) {
   );
 }
 
+// Location / Map Pin Icon: Matching stroke and fill style
+export function LocationIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
 export const SOCIAL_PROFILES = [
   {
     label: "Facebook",

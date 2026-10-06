@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { SOCIAL_PROFILES } from "@/components/ui/SocialIcons";
+import { SOCIAL_PROFILES, LocationIcon } from "@/components/ui/SocialIcons";
 
 const QUICK_LINKS = [
   { label: "Wedding Invitations", href: "/our-work/wedding-invites" },
@@ -69,7 +69,7 @@ export function Footer() {
                 Famous Letterpress
               </span>
               <span className="text-[10px] font-mono tracking-[0.24em] text-[#8A857D] uppercase mt-1">
-                Artisanal Pressroom &middot; India
+                Handcrafted in Nagaland
               </span>
             </div>
           </Link>
@@ -119,14 +119,19 @@ export function Footer() {
           ))}
         </ul>
 
-        {/* Bottom: Copyright + Address — single compact row */}
-        <div className="pt-6 border-t border-[rgba(14,14,14,0.08)] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11.5px] text-[#8A857D]">
-          <p>
-            &copy; {new Date().getFullYear()} Famous Letterpress. Handcrafted on 1950s Heidelberg platens in Nagaland, India.
-          </p>
-          <address className="not-italic">
-            House 42, Circular Road, Dimapur, Nagaland &mdash; 797112
-          </address>
+        {/* Bottom: Left-aligned Location Pin + Address redirecting to Google Maps */}
+        <div className="pt-6 border-t border-[rgba(14,14,14,0.08)] flex items-center text-[12px] sm:text-[12.5px] text-[#6E6961]">
+          <a
+            href="https://maps.google.com/?q=Famous+Letterpress+House+42+Circular+Road+Dimapur+Nagaland+797112"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 hover:text-black transition-colors group cursor-pointer"
+          >
+            <LocationIcon className="w-4 h-4 text-black shrink-0 transition-transform group-hover:scale-110" />
+            <address className="not-italic font-sans text-[12px] sm:text-[12.5px]">
+              House 42, Circular Road, Dimapur, Nagaland &mdash; 797112
+            </address>
+          </a>
         </div>
       </div>
     </footer>
