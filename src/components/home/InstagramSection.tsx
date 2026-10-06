@@ -24,6 +24,8 @@ interface CarouselPost extends BasePost {
 
 type InstagramPost = VideoPost | CarouselPost;
 
+// Fresh latest 4 posts from @famousletterpressindia
+// Slot 1: Reel, Slot 2: Swipeable Carousel, Slot 3: Swipeable Carousel, Slot 4: Reel
 const INSTAGRAM_ITEMS: InstagramPost[] = [
   {
     id: "sbi-bundi-cards",
@@ -57,6 +59,27 @@ const INSTAGRAM_ITEMS: InstagramPost[] = [
     instagramUrl: "https://www.instagram.com/p/Dd0knl5mfiV/",
   },
   {
+    id: "sbi-monogram-suite",
+    type: "carousel",
+    title: "Bespoke Monogram & Foil Suite",
+    caption: "Custom architectural illustrations, deep letterpress, and gold foil stamping crafted with intention across India.",
+    images: [
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/803369065_18624479605012675_1942226031610282700_nfull.webp",
+        fallback: "/assets/revamp/how-we-make/FMS_7617.jpg",
+      },
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/801439367_18624169576012675_3283184430096534971_nfull.webp",
+        fallback: "/assets/revamp/what-we-make/FMS_3781.jpg",
+      },
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/793028578_18622169794012675_3462288863797476305_nfull.webp",
+        fallback: "/assets/revamp/carousel/IMG_7600.jpg",
+      },
+    ],
+    instagramUrl: "https://www.instagram.com/p/DdG-ugEGT6s/",
+  },
+  {
     id: "sbi-bts-studio",
     type: "video",
     title: "Inside the Pressroom",
@@ -65,27 +88,6 @@ const INSTAGRAM_ITEMS: InstagramPost[] = [
     fallbackImage: "/assets/revamp/how-we-make/FMS_7401.jpg",
     videoSrc: "https://res.cloudinary.com/dpvjjohc0/video/upload/v1779259450/C52FD622-2E93-4C93-BE03-586F4F63FE25_n3mbgw.mp4",
     instagramUrl: "https://www.instagram.com/reel/Dd6sxoBhyZ8/",
-  },
-  {
-    id: "sbi-craftboat-cards",
-    type: "carousel",
-    title: "Handmade Cotton Stationery",
-    caption: "Collaboration with @craftboat on handmade cotton paper with rich blue letterpress impression and depth.",
-    images: [
-      {
-        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/814971387_18627486922012675_7888539480991517619_nfull.webp",
-        fallback: "/assets/revamp/how-we-make/FMS_7617.jpg",
-      },
-      {
-        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/817742303_18629502223012675_7909086917179831263_nfull.webp",
-        fallback: "/assets/revamp/what-we-make/FMS_3781.jpg",
-      },
-      {
-        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/825324486_18630939358012675_7074157530640345574_nfull.webp",
-        fallback: "/assets/revamp/carousel/IMG_7600.jpg",
-      },
-    ],
-    instagramUrl: "https://www.instagram.com/reel/Ddd_O4UBDKj/",
   },
 ];
 
@@ -191,17 +193,7 @@ function ReelCard({
         </>
       )}
 
-      {/* Top Badge: Reel */}
-      <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 pointer-events-none z-10">
-        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white/95 backdrop-blur-xs text-black text-[8.5px] sm:text-[9px] font-mono tracking-widest uppercase font-medium shadow-xs">
-          <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-          </svg>
-          Reel
-        </span>
-      </div>
-
-      {/* Bottom Title & Link */}
+      {/* Bottom Title & Instagram Icon Link */}
       <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 flex items-end justify-between gap-2 z-10 pointer-events-none">
         <div className="min-w-0 pr-1">
           <h3 className="font-serif text-sm sm:text-base text-white font-medium leading-snug line-clamp-1 drop-shadow-xs">
@@ -217,11 +209,11 @@ function ReelCard({
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="pointer-events-auto shrink-0 w-7 h-7 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-85 hover:opacity-100 backdrop-blur-xs text-xs"
+          className="pointer-events-auto shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-90 hover:opacity-100 backdrop-blur-xs shadow-xs"
           title="Open post on Instagram"
           aria-label="Open post on Instagram"
         >
-          <span aria-hidden="true">&rarr;</span>
+          <InstagramIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </a>
       </div>
     </div>
@@ -290,16 +282,6 @@ function CarouselCard({ item }: { item: CarouselPost }) {
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none" />
 
-      {/* Top Badge: Multi-image / Carousel Indicator */}
-      <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 pointer-events-none z-10 flex items-center gap-1.5">
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white/95 backdrop-blur-xs text-black text-[8.5px] sm:text-[9px] font-mono tracking-widest uppercase font-medium shadow-xs">
-          <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z" />
-          </svg>
-          {currentIndex + 1}/{item.images.length}
-        </span>
-      </div>
-
       {/* Left/Right Navigation Arrows */}
       <button
         type="button"
@@ -323,19 +305,19 @@ function CarouselCard({ item }: { item: CarouselPost }) {
         </svg>
       </button>
 
-      {/* Carousel Dots Indicator */}
+      {/* Subtle Dots Indicator */}
       <div className="absolute top-3 right-3 z-10 flex items-center gap-1 pointer-events-none">
         {item.images.map((_, dotIdx) => (
           <span
             key={dotIdx}
             className={`h-1.5 rounded-full transition-all duration-300 ${
-              dotIdx === currentIndex ? "w-4 bg-white" : "w-1.5 bg-white/50"
+              dotIdx === currentIndex ? "w-3.5 bg-white" : "w-1.5 bg-white/40"
             }`}
           />
         ))}
       </div>
 
-      {/* Bottom Title & Link */}
+      {/* Bottom Title & Instagram Icon Link */}
       <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 flex items-end justify-between gap-2 z-10 pointer-events-none">
         <div className="min-w-0 pr-1">
           <h3 className="font-serif text-sm sm:text-base text-white font-medium leading-snug line-clamp-1 drop-shadow-xs">
@@ -351,11 +333,11 @@ function CarouselCard({ item }: { item: CarouselPost }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="pointer-events-auto shrink-0 w-7 h-7 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-85 hover:opacity-100 backdrop-blur-xs text-xs"
+          className="pointer-events-auto shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-90 hover:opacity-100 backdrop-blur-xs shadow-xs"
           title="Open post on Instagram"
           aria-label="Open post on Instagram"
         >
-          <span aria-hidden="true">&rarr;</span>
+          <InstagramIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </a>
       </div>
     </div>
@@ -376,7 +358,7 @@ export function InstagramSection() {
       aria-label="From our Instagram"
     >
       <div className="w">
-        {/* Header with adjusted line-height */}
+        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div>
             <p className="k mb-3">In the Studio</p>
@@ -397,7 +379,7 @@ export function InstagramSection() {
           </a>
         </div>
 
-        {/* 4 Clean Boxes: 2x2 on Mobile, 4 Columns on Desktop */}
+        {/* 4 Clean Boxes: 1 & 4 are Reels, 2 & 3 are Swipeable Carousels */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {INSTAGRAM_ITEMS.map((item) =>
             item.type === "video" ? (
