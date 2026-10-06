@@ -5,12 +5,12 @@ import Link from "next/link";
 import { SOCIAL_PROFILES, LocationIcon } from "@/components/ui/SocialIcons";
 
 const QUICK_LINKS = [
-  { label: "Wedding Invitations", href: "/our-work/wedding-invites" },
+  { label: "Our Work", href: "/our-work" },
+  { label: "Wedding Invites", href: "/our-work/wedding-invites" },
   { label: "Business Cards", href: "/our-work/business-cards" },
   { label: "Our Process & Craft", href: "/process" },
   { label: "Order Sample Kit", href: "/weddings/wedding-sample-kit" },
-  { label: "Frequently Asked Questions", href: "/faq" },
-  { label: "Chat on WhatsApp", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about..." },
+  { label: "FAQs", href: "/faq" },
   { label: "Terms & Conditions", href: "/terms-conditions" },
   { label: "Privacy Policy", href: "/privacy-policy" },
 ];
