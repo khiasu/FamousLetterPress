@@ -45,9 +45,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 1 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 01
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 User Account, Password, and Security
               </h2>
@@ -58,9 +55,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 2 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 02
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Services Offered
               </h2>
@@ -71,9 +65,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 3 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 03
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Credit Card Details
               </h2>
@@ -87,9 +78,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 4 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 04
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Our Disclosure of Your Information
               </h2>
@@ -100,9 +88,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 5 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 05
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Pricing Information in Case of Sale by Company
               </h2>
@@ -119,9 +104,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 6 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 06
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Payment
               </h2>
@@ -132,9 +114,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 7 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 07
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Termination
               </h2>
@@ -145,9 +124,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 8 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 08
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Fraudulent &amp; Declined Transactions
               </h2>
@@ -161,9 +137,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 9 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 09
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Prohibited Uses of Our Website
               </h2>
@@ -184,9 +157,6 @@ export default function TermsConditionsPage() {
 
             {/* Section 10 */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 10
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Reviews, Feedback, Submissions
               </h2>

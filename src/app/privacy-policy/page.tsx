@@ -48,9 +48,6 @@ export default function PrivacyPolicyPage() {
 
             {/* General */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 01
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 General Provisions
               </h2>
@@ -64,9 +61,6 @@ export default function PrivacyPolicyPage() {
 
             {/* Website Contents */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 02
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Website Contents &amp; Intellectual Property
               </h2>
@@ -80,9 +74,6 @@ export default function PrivacyPolicyPage() {
 
             {/* User Comments, Feedback, Submissions */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 03
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 User Comments, Feedback, Postcards, and Other Submissions
               </h2>
@@ -107,9 +98,6 @@ export default function PrivacyPolicyPage() {
 
             {/* Communications */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 04
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Famous Letterpress Communications to You
               </h2>
@@ -120,9 +108,6 @@ export default function PrivacyPolicyPage() {
 
             {/* Product Information */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 05
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Product Information &amp; Dimensions
               </h2>
@@ -133,9 +118,6 @@ export default function PrivacyPolicyPage() {
 
             {/* External Links */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 06
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Links to Other Websites and Services
               </h2>
@@ -146,9 +128,6 @@ export default function PrivacyPolicyPage() {
 
             {/* Disclaimer */}
             <div className="space-y-3 bg-[#FAF8F5] border border-[rgba(14,14,14,0.08)] p-6 rounded-xs">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 07
-              </span>
               <h2 className="font-serif font-medium text-xl text-black">
                 Warranty &amp; Liability Disclaimer
               </h2>
@@ -159,9 +138,6 @@ export default function PrivacyPolicyPage() {
 
             {/* Inaccuracy Disclaimer */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 08
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Inaccuracy Disclaimer
               </h2>
@@ -172,9 +148,6 @@ export default function PrivacyPolicyPage() {
 
             {/* Waiver and Indemnification */}
             <div className="space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 09
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Waiver and Indemnification
               </h2>
@@ -188,9 +161,6 @@ export default function PrivacyPolicyPage() {
 
             {/* Governing Law */}
             <div className="border-t border-[rgba(14,14,14,0.08)] pt-8 space-y-3">
-              <span className="text-[10px] font-mono tracking-widest text-[#7b7566] uppercase">
-                Section 10
-              </span>
               <h2 className="font-serif font-medium text-2xl text-black">
                 Governing Law &amp; Jurisdiction
               </h2>

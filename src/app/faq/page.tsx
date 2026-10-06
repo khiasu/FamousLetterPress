@@ -51,9 +51,6 @@ export default function FAQPage() {
               <div key={sec.category} className="space-y-6">
                 <Reveal delay={secIdx * 0.08}>
                   <div className="border-b border-[#E5E5E5] pb-3 mb-6">
-                    <span className="text-[10px] font-mono tracking-widest text-[#888888] block mb-1">
-                      Section 0{secIdx + 1}
-                    </span>
                     <h2 className="text-xl md:text-2xl font-serif text-black">{sec.category}</h2>
                   </div>
                 </Reveal>
