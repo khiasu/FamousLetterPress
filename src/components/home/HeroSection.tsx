@@ -249,10 +249,26 @@ export function HeroSection() {
           Designers turned <i>printers.</i>
         </h1>
 
-        {/* Brand studio descriptor */}
-        <p className="mt-6 text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed max-w-[560px]">
-          Luxury Letterpress &amp; Foil Wedding Invitations in India
-        </p>
+        {/* Brand studio descriptor & Desktop CTAs */}
+        <div className="grid gap-5 mt-7 max-w-[560px]">
+          <p className="text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed">
+            Luxury Letterpress &amp; Foil Wedding Invitations in India
+          </p>
+          <div className="hidden sm:flex flex-wrap items-center gap-5 sm:gap-6 mt-1">
+            <Link
+              href="/start-a-project"
+              className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+            >
+              Start a Project
+            </Link>
+            <Link
+              href="/our-work/wedding-invites#early-bride"
+              className="ln text-[11px] sm:text-xs tracking-[0.22em]"
+            >
+              Book a Consultation
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* ── 6-Image Centered Focus Carousel (Matched HowWeMake layout and spacing) ── */}
@@ -296,17 +312,17 @@ export function HeroSection() {
           0{activeIndex + 1} / 0{m}
         </p>
 
-        {/* Action CTAs: Start a Project + Book a Consultation */}
-        <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-5 sm:gap-6">
+        {/* Mobile-only CTAs below carousel */}
+        <div className="mt-6 flex sm:hidden flex-wrap items-center gap-4">
           <Link
             href="/start-a-project"
-            className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+            className="inline-flex items-center justify-center px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[10.5px] uppercase tracking-[0.2em] font-sans font-medium whitespace-nowrap shadow-sm"
           >
             Start a Project
           </Link>
           <Link
             href="/our-work/wedding-invites#early-bride"
-            className="ln text-[11px] sm:text-xs tracking-[0.22em]"
+            className="ln text-[10.5px] tracking-[0.2em]"
           >
             Book a Consultation
           </Link>
