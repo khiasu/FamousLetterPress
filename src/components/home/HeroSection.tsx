@@ -254,16 +254,16 @@ export function HeroSection() {
           <p className="text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed">
             Luxury Letterpress &amp; Foil Wedding Invitations in India
           </p>
-          <div className="hidden sm:flex flex-wrap items-center gap-5 sm:gap-6 mt-1">
+          <div className="hidden sm:flex items-center gap-6 mt-1 flex-nowrap">
             <Link
               href="/start-a-project"
-              className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+              className="ln text-[11px] sm:text-xs tracking-[0.22em] whitespace-nowrap"
             >
-              Start a Project
+              Start a project
             </Link>
             <Link
               href="/our-work/wedding-invites#early-bride"
-              className="ln text-[11px] sm:text-xs tracking-[0.22em]"
+              className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
             >
               Book a Consultation
             </Link>
@@ -312,17 +312,17 @@ export function HeroSection() {
           0{activeIndex + 1} / 0{m}
         </p>
 
-        {/* Mobile-only CTAs below carousel */}
-        <div className="mt-6 flex sm:hidden flex-wrap items-center gap-4">
+        {/* Mobile-only CTAs below carousel (Single line side-by-side) */}
+        <div className="mt-6 flex sm:hidden items-center justify-start gap-4 flex-nowrap">
           <Link
             href="/start-a-project"
-            className="inline-flex items-center justify-center px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[10.5px] uppercase tracking-[0.2em] font-sans font-medium whitespace-nowrap shadow-sm"
+            className="ln text-[10px] tracking-[0.16em] whitespace-nowrap shrink-0"
           >
-            Start a Project
+            Start a project
           </Link>
           <Link
             href="/our-work/wedding-invites#early-bride"
-            className="ln text-[10.5px] tracking-[0.2em]"
+            className="inline-flex items-center justify-center px-4 py-3 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[10px] uppercase tracking-[0.16em] font-sans font-medium whitespace-nowrap shadow-sm shrink-0"
           >
             Book a Consultation
           </Link>
