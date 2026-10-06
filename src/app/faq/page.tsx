@@ -23,7 +23,7 @@ export default function FAQPage() {
     <div className="bg-white min-h-screen">
       {/* ── Header ── */}
       <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-[#E5E5E5]">
-        <div className="container-wide">
+        <div className="w">
           <Reveal>
             <div className="max-w-3xl">
               <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
@@ -45,7 +45,7 @@ export default function FAQPage() {
 
       {/* ── Categorized FAQs ── */}
       <section className="section bg-white">
-        <div className="container-wide max-w-4xl">
+        <div className="w">
           <div className="space-y-16">
             {faqSections.map((sec, secIdx) => (
               <div key={sec.category} className="space-y-6">
@@ -76,7 +76,7 @@ export default function FAQPage() {
 
       {/* ── Still Have Questions CTA ── */}
       <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
-        <div className="container-narrow">
+        <div className="w">
           <Reveal>
             <p className="eyebrow text-[#888888] mb-3">Direct Studio Support</p>
             <h2 className="text-black mb-4">
