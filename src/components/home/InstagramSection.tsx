@@ -3,8 +3,6 @@
 import { useState, useRef, TouchEvent } from "react";
 import { InstagramIcon } from "@/components/ui/SocialIcons";
 
-type PostType = "video" | "carousel";
-
 interface BasePost {
   id: string;
   title: string;
@@ -15,65 +13,93 @@ interface BasePost {
 interface VideoPost extends BasePost {
   type: "video";
   image: string;
+  fallbackImage: string;
   videoSrc: string;
 }
 
 interface CarouselPost extends BasePost {
   type: "carousel";
-  images: string[];
+  images: { src: string; fallback: string }[];
 }
 
 type InstagramPost = VideoPost | CarouselPost;
 
 const INSTAGRAM_ITEMS: InstagramPost[] = [
   {
-    id: "reel-bite",
+    id: "sbi-bundi-cards",
     type: "video",
-    title: "The Mechanical Bite",
-    caption: "1950s Heidelberg platen biting into 600gsm tree-free cotton board.",
-    image: "/assets/revamp/how-we-make/FMS_7401.jpg",
+    title: "Bundi Silica Cotton Cards",
+    caption: "Letterpress business cards for Bundi Silica Exports, printed on Heritage cotton paper with a three-colour impression.",
+    image: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/831641542_18631954183012675_7963117517378612610_nfull.webp",
+    fallbackImage: "/assets/revamp/what-we-make/FMS_3462.jpg",
     videoSrc: "https://res.cloudinary.com/dpvjjohc0/video/upload/v1779259450/C52FD622-2E93-4C93-BE03-586F4F63FE25_n3mbgw.mp4",
-    instagramUrl: "https://www.instagram.com/famousletterpressindia/",
+    instagramUrl: "https://www.instagram.com/reel/Dd_c8z_Bj6e/",
   },
   {
-    id: "post-wedding-suite",
+    id: "sbi-goa-wedding",
     type: "carousel",
-    title: "The Florentine Suite",
-    caption: "Bespoke gold foil wedding stationery with handmade envelope liners.",
+    title: "Perseus & Palpasa Wedding Suite",
+    caption: "A bespoke wedding suite for Goa featuring letterpress, gold foil stamping, and custom illustrated envelope liners.",
     images: [
-      "/assets/revamp/carousel/FMS_7392.jpg",
-      "/assets/revamp/carousel/FMS_7358.jpg",
-      "/assets/revamp/carousel/FMS_4040.jpg",
-      "/assets/revamp/carousel/IMG_7600.jpg",
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/825324056_18630562795012675_2483239915729227612_nfull.webp",
+        fallback: "/assets/revamp/carousel/FMS_7392.jpg",
+      },
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/825324013_18630563137012675_7848829352747119854_nfull.webp",
+        fallback: "/assets/revamp/carousel/FMS_7358.jpg",
+      },
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/825324160_18630563161012675_5734393003336708737_nfull.webp",
+        fallback: "/assets/revamp/carousel/FMS_4040.jpg",
+      },
     ],
-    instagramUrl: "https://www.instagram.com/famousletterpressindia/",
+    instagramUrl: "https://www.instagram.com/p/Dd0knl5mfiV/",
   },
   {
-    id: "reel-inks",
+    id: "sbi-bts-studio",
     type: "video",
-    title: "Hand-Mixed Mineral Inks",
-    caption: "Oil pigments blended on marble to match bespoke Pantone shades.",
-    image: "/assets/revamp/how-we-make/FMS_6500.jpg",
+    title: "Inside the Pressroom",
+    caption: "A little look into what happens behind the scenes at Famous Letterpress. Paper, ink, machines, and hands.",
+    image: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/825324682_18631320820012675_506872712113647835_nfull.webp",
+    fallbackImage: "/assets/revamp/how-we-make/FMS_7401.jpg",
     videoSrc: "https://res.cloudinary.com/dpvjjohc0/video/upload/v1779259450/C52FD622-2E93-4C93-BE03-586F4F63FE25_n3mbgw.mp4",
-    instagramUrl: "https://www.instagram.com/famousletterpressindia/",
+    instagramUrl: "https://www.instagram.com/reel/Dd6sxoBhyZ8/",
   },
   {
-    id: "post-business-cards",
+    id: "sbi-craftboat-cards",
     type: "carousel",
-    title: "Cotton Business Cards",
-    caption: "Sculpted blind deboss and beveled gold foil edge gilding.",
+    title: "Handmade Cotton Stationery",
+    caption: "Collaboration with @craftboat on handmade cotton paper with rich blue letterpress impression and depth.",
     images: [
-      "/assets/revamp/what-we-make/FMS_3462.jpg",
-      "/assets/revamp/how-we-make/FMS_7617.jpg",
-      "/assets/revamp/what-we-make/FMS_3781.jpg",
-      "/assets/revamp/what-we-make/FMS_4039.jpg",
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/814971387_18627486922012675_7888539480991517619_nfull.webp",
+        fallback: "/assets/revamp/how-we-make/FMS_7617.jpg",
+      },
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/817742303_18629502223012675_7909086917179831263_nfull.webp",
+        fallback: "/assets/revamp/what-we-make/FMS_3781.jpg",
+      },
+      {
+        src: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/825324486_18630939358012675_7074157530640345574_nfull.webp",
+        fallback: "/assets/revamp/carousel/IMG_7600.jpg",
+      },
     ],
-    instagramUrl: "https://www.instagram.com/famousletterpressindia/",
+    instagramUrl: "https://www.instagram.com/reel/Ddd_O4UBDKj/",
   },
 ];
 
-function ReelCard({ item, isPlaying, onTogglePlay }: { item: VideoPost; isPlaying: boolean; onTogglePlay: () => void }) {
+function ReelCard({
+  item,
+  isPlaying,
+  onTogglePlay,
+}: {
+  item: VideoPost;
+  isPlaying: boolean;
+  onTogglePlay: () => void;
+}) {
   const [isMuted, setIsMuted] = useState(true);
+  const [imgSrc, setImgSrc] = useState(item.image);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const toggleMute = (e: React.MouseEvent) => {
@@ -85,7 +111,7 @@ function ReelCard({ item, isPlaying, onTogglePlay }: { item: VideoPost; isPlayin
   };
 
   return (
-    <div className="relative aspect-[4/5] bg-[#111] border border-[#E5E5E5] overflow-hidden group select-none transition-all duration-300 hover:border-black/60">
+    <div className="relative aspect-[4/5] bg-[#111] border border-[#E5E5E5] overflow-hidden group select-none transition-all duration-300 hover:border-black/60 shadow-xs">
       {isPlaying ? (
         <div className="relative w-full h-full bg-black">
           <video
@@ -135,8 +161,9 @@ function ReelCard({ item, isPlaying, onTogglePlay }: { item: VideoPost; isPlayin
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={item.image}
+            src={imgSrc}
             alt={item.title}
+            onError={() => setImgSrc(item.fallbackImage)}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
@@ -149,7 +176,7 @@ function ReelCard({ item, isPlaying, onTogglePlay }: { item: VideoPost; isPlayin
             type="button"
             onClick={onTogglePlay}
             className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer z-10"
-            aria-label={`Play ${item.title}`}
+            aria-label={`Play Reel: ${item.title}`}
           >
             <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 text-black flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
               <svg
@@ -191,8 +218,8 @@ function ReelCard({ item, isPlaying, onTogglePlay }: { item: VideoPost; isPlayin
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
           className="pointer-events-auto shrink-0 w-7 h-7 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-85 hover:opacity-100 backdrop-blur-xs text-xs"
-          title="View on Instagram"
-          aria-label="View on Instagram"
+          title="Open post on Instagram"
+          aria-label="Open post on Instagram"
         >
           <span aria-hidden="true">&rarr;</span>
         </a>
@@ -232,7 +259,7 @@ function CarouselCard({ item }: { item: CarouselPost }) {
 
   return (
     <div
-      className="relative aspect-[4/5] bg-[#F7F7F7] border border-[#E5E5E5] overflow-hidden group select-none transition-all duration-300 hover:border-black/60"
+      className="relative aspect-[4/5] bg-[#F7F7F7] border border-[#E5E5E5] overflow-hidden group select-none transition-all duration-300 hover:border-black/60 shadow-xs"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -241,12 +268,18 @@ function CarouselCard({ item }: { item: CarouselPost }) {
         className="flex w-full h-full transition-transform duration-500 ease-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {item.images.map((img, idx) => (
+        {item.images.map((imgObj, idx) => (
           <div key={idx} className="w-full h-full shrink-0 relative bg-[#F4F4F4]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={img}
+              src={imgObj.src}
               alt={`${item.title} - photo ${idx + 1}`}
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src !== imgObj.fallback) {
+                  target.src = imgObj.fallback;
+                }
+              }}
               className="w-full h-full object-cover"
               loading="lazy"
             />
@@ -267,7 +300,7 @@ function CarouselCard({ item }: { item: CarouselPost }) {
         </span>
       </div>
 
-      {/* Left/Right Navigation Arrows (Visible on hover on desktop, always accessible via tap/swipe) */}
+      {/* Left/Right Navigation Arrows */}
       <button
         type="button"
         onClick={handlePrev}
@@ -319,8 +352,8 @@ function CarouselCard({ item }: { item: CarouselPost }) {
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
           className="pointer-events-auto shrink-0 w-7 h-7 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all opacity-85 hover:opacity-100 backdrop-blur-xs text-xs"
-          title="View on Instagram"
-          aria-label="View on Instagram"
+          title="Open post on Instagram"
+          aria-label="Open post on Instagram"
         >
           <span aria-hidden="true">&rarr;</span>
         </a>
@@ -343,7 +376,7 @@ export function InstagramSection() {
       aria-label="From our Instagram"
     >
       <div className="w">
-        {/* Header with adjusted line-height to prevent letter clash between 'y' and 'i' */}
+        {/* Header with adjusted line-height */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div>
             <p className="k mb-3">In the Studio</p>
