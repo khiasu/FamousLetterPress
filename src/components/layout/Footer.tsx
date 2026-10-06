@@ -27,7 +27,6 @@ export function Footer() {
       const rect = footer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // When footer starts coming into the viewport
       if (rect.top <= windowHeight - 40) {
         setIsVisible(true);
       } else {
@@ -44,42 +43,38 @@ export function Footer() {
   return (
     <footer
       ref={footerRef}
-      className={`relative bg-[#C8C3BC] border-t-2 border-[#B5B0A8] text-[#0e0e0e] transition-all duration-700 ease-out will-change-transform ${
+      className={`relative bg-[#EDE8E0] text-[#0e0e0e] transition-all duration-700 ease-out will-change-transform ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-40 translate-y-8"
       }`}
       role="contentinfo"
     >
-      <div className="max-w-[1100px] mx-auto px-6 sm:px-10 md:px-14 pt-10 sm:pt-14 pb-12 sm:pb-16">
-        {/* Top: Brand Header with Logo + Social Handles */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-[rgba(14,14,14,0.12)]">
-          {/* Brand Identity with Circular Seal Logo and clean spacing */}
-          <div className="pl-1 sm:pl-2">
-            <Link href="/" className="inline-flex items-center gap-3.5 sm:gap-4 group select-none">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/logo.png"
-                alt="Famous Letterpress Seal"
-                className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="flex flex-col leading-none">
-                <span
-                  className="font-serif text-2xl sm:text-[25px] font-semibold tracking-[-0.015em] text-[#0e0e0e]"
-                  style={{
-                    fontFamily:
-                      "var(--font-cormorant-garamond), 'Cormorant Garamond', 'Bodoni Moda', serif",
-                  }}
-                >
-                  Famous Letterpress
-                </span>
-                <span className="text-[10px] font-mono tracking-[0.24em] text-[#5A5550] uppercase mt-1">
-                  Artisanal Pressroom &middot; India
-                </span>
-              </div>
-            </Link>
-          </div>
+      <div className="max-w-[1100px] mx-auto px-6 sm:px-10 md:px-14 py-10 sm:py-14">
+        {/* Top: Brand + Social — single row */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 mb-8">
+          <Link href="/" className="inline-flex items-center gap-3.5 sm:gap-4 group select-none">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/logo.png"
+              alt="Famous Letterpress Seal"
+              className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="flex flex-col leading-none">
+              <span
+                className="font-serif text-2xl sm:text-[25px] font-semibold tracking-[-0.015em] text-[#0e0e0e]"
+                style={{
+                  fontFamily:
+                    "var(--font-cormorant-garamond), 'Cormorant Garamond', 'Bodoni Moda', serif",
+                }}
+              >
+                Famous Letterpress
+              </span>
+              <span className="text-[10px] font-mono tracking-[0.24em] text-[#8A857D] uppercase mt-1">
+                Artisanal Pressroom &middot; India
+              </span>
+            </div>
+          </Link>
 
-          {/* Social Icons — Facebook, Instagram, Pinterest, YouTube */}
-          <div className="flex items-center gap-4 pl-1 sm:pl-0 sm:pr-2 text-black">
+          <div className="flex items-center gap-4 text-black">
             {SOCIAL_PROFILES.map((social) => {
               const Icon = social.icon;
               return (
@@ -99,53 +94,28 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Middle: Quick Links Grid */}
-        <div className="pt-8 pl-1 sm:pl-2">
-          <h4 className="text-[11px] uppercase tracking-[0.2em] font-mono font-medium text-[#3A3530] mb-5">
-            Quick Links
-          </h4>
+        {/* Quick Links Grid */}
+        <ul className="grid grid-cols-2 sm:grid-cols-4 gap-y-3 gap-x-6 mb-8">
+          {QUICK_LINKS.map((link) => (
+            <li key={link.label}>
+              <Link
+                href={link.href}
+                className="text-[13px] text-[#555] hover:text-black transition-colors block leading-snug"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-4 gap-x-6 pb-2">
-            {QUICK_LINKS.map((link) => (
-              <li key={link.label}>
-                {"external" in link && link.external ? (
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[13.5px] text-[#3A3530] hover:text-black transition-colors block leading-snug"
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className="text-[13.5px] text-[#3A3530] hover:text-black transition-colors block leading-snug"
-                  >
-                    {link.label}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Studio Address */}
-        <div className="pt-8 pb-8 pl-1 sm:pl-2 border-t border-[rgba(14,14,14,0.12)] mt-6">
-          <h4 className="text-[11px] uppercase tracking-[0.2em] font-mono font-medium text-[#3A3530] mb-3">
-            Studio
-          </h4>
-          <address className="not-italic text-[13.5px] text-[#3A3530] leading-relaxed">
-            House 42, Circular Road<br />
-            Dimapur, Nagaland — 797112, India
-          </address>
-        </div>
-
-        {/* Bottom: Copyright */}
-        <div className="pt-6 border-t border-[rgba(14,14,14,0.12)] pl-1 sm:pl-2">
-          <p className="text-xs text-[#5A5550] font-light">
+        {/* Bottom: Copyright + Address — single compact row */}
+        <div className="pt-6 border-t border-[rgba(14,14,14,0.08)] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11.5px] text-[#8A857D]">
+          <p>
             &copy; {new Date().getFullYear()} Famous Letterpress. Handcrafted on 1950s Heidelberg platens in Nagaland, India.
           </p>
+          <address className="not-italic">
+            House 42, Circular Road, Dimapur, Nagaland &mdash; 797112
+          </address>
         </div>
       </div>
     </footer>
