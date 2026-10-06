@@ -69,27 +69,16 @@ export function HomeFAQSection() {
       aria-label="Frequently Asked Questions"
     >
       <div className="w">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div>
-            <p className="k mb-3">Common Questions</p>
-            <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1] font-serif text-black tracking-tight">
-              Frequently asked <i>questions.</i>
-            </h2>
-          </div>
-
-          <div className="shrink-0">
-            <Link
-              href="/faq"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
-            >
-              <span>View all FAQs</span>
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div>
+        {/* Section Header */}
+        <div className="mb-10 sm:mb-12">
+          <p className="k mb-3">Common Questions</p>
+          <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1] font-serif text-black tracking-tight">
+            Frequently asked <i>questions.</i>
+          </h2>
         </div>
 
-        {/* Clean Accordion */}
-        <div className="max-w-4xl border-t border-[#E5E5E5]">
+        {/* Full-width Accordion */}
+        <div className="w-full border-t border-[#E5E5E5]">
           {TOP_FAQS.map((faq) => {
             const isOpen = openId === faq.id;
             return (
@@ -107,13 +96,26 @@ export function HomeFAQSection() {
                     {faq.question}
                   </h3>
 
+                  {/* Geometrically centered + to × indicator */}
                   <span
-                    className={`w-8 h-8 rounded-full border border-[#D5D5D5] flex items-center justify-center text-base font-light text-black transition-all duration-300 shrink-0 select-none group-hover:border-black ${
-                      isOpen ? "rotate-45 bg-black text-white border-black" : "rotate-0 bg-transparent"
+                    className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 shrink-0 select-none ${
+                      isOpen
+                        ? "rotate-45 bg-black text-white border-black shadow-xs"
+                        : "rotate-0 bg-transparent text-black border-[#D5D5D5] group-hover:border-black"
                     }`}
                     aria-hidden="true"
                   >
-                    +
+                    <svg
+                      className="w-3.5 h-3.5 stroke-current"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <path
+                        d="M7 1.75V12.25M1.75 7H12.25"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </span>
                 </button>
 
@@ -133,18 +135,26 @@ export function HomeFAQSection() {
           })}
         </div>
 
-        {/* Bottom Contact / Link note */}
-        <div className="mt-12 pt-6 border-t border-[#EAEAEA] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-[#666]">
-          <p className="font-light">
+        {/* Bottom Actions: View all FAQs + Contact */}
+        <div className="mt-12 pt-8 border-t border-[#EAEAEA] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <p className="text-xs sm:text-sm text-[#555] font-light">
             Have a custom timeline or bespoke commission inquiry?
           </p>
-          <div>
+
+          <div className="flex flex-wrap items-center gap-6">
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
+            >
+              <span>View all FAQs</span>
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
             >
-              <span>Contact our studio</span>
-              <span aria-hidden="true">&rarr;</span>
+              Contact our studio
             </Link>
           </div>
         </div>
