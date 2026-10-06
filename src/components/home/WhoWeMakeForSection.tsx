@@ -6,9 +6,8 @@ const AUDIENCES = [
     title: "Couples",
     description:
       "Wedding invitations, RSVP suites, and day-of stationery designed to be treasured long after your celebration. We collaborate from initial moodboard to final hand assembly.",
-    cta: "Start couple consultation",
-    href: "https://wa.me/+918416099340?text=I%20am%20a%20couple%20looking%20for%20wedding%20invitations",
-    external: true,
+    cta: "Book a Consultation",
+    href: "/our-work/wedding-invites#early-bride",
     img: "/assets/revamp/carousel/FMS_7392.jpg",
   },
   {
@@ -18,7 +17,6 @@ const AUDIENCES = [
       "Trade collaboration for wedding planners, graphic designers, and art directors. Send us print-ready artwork or let our studio team assist with formulation, paper selection, and die making.",
     cta: "Join partner program",
     href: "/channel-partners",
-    external: false,
     img: "/assets/revamp/how-we-make/FMS_7401.jpg",
   },
   {
@@ -28,7 +26,6 @@ const AUDIENCES = [
       "Uncompromising executive cards, luxury packaging sleeves, certificates, and bespoke letterheads for discerning brands seeking physical authority and tactile distinction.",
     cta: "Inquire B2B",
     href: "/our-work/business-cards",
-    external: false,
     img: "/assets/revamp/what-we-make/FMS_3781.jpg",
   },
 ];
@@ -57,7 +54,7 @@ export function WhoWeMakeForSection() {
           {AUDIENCES.map((audience) => (
             <div
               key={audience.title}
-              className="group border border-[#E5E5E5] bg-white transition-all duration-300 hover:border-black"
+              className="group border border-[#E5E5E5] bg-white transition-all duration-300 hover:border-black flex flex-col"
             >
               {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden bg-[#F7F7F7]">
@@ -70,27 +67,23 @@ export function WhoWeMakeForSection() {
               </div>
 
               {/* Content */}
-              <div className="p-5 sm:p-6">
-                <h3 className="font-serif font-medium text-2xl text-black tracking-tight mb-3">
-                  {audience.title}
-                </h3>
-                <p className="text-[13px] text-[#3b372e] font-light leading-relaxed mb-5">
-                  {audience.description}
-                </p>
-                {audience.external ? (
-                  <a
+              <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
+                <div>
+                  <h3 className="font-serif font-medium text-2xl text-black tracking-tight mb-3">
+                    {audience.title}
+                  </h3>
+                  <p className="text-[13px] text-[#3b372e] font-light leading-relaxed mb-6">
+                    {audience.description}
+                  </p>
+                </div>
+                <div>
+                  <Link
                     href={audience.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ln inline-block"
+                    className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
                   >
                     {audience.cta}
-                  </a>
-                ) : (
-                  <Link href={audience.href} className="ln inline-block">
-                    {audience.cta}
                   </Link>
-                )}
+                </div>
               </div>
             </div>
           ))}

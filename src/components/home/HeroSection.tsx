@@ -256,9 +256,7 @@ export function HeroSection() {
           </p>
           <div className="mt-1">
             <Link
-              href="https://wa.me/+918416099340"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/our-work/wedding-invites#early-bride"
               className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
             >
               Book a Consultation

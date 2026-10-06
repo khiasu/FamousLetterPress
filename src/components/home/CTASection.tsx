@@ -12,14 +12,12 @@ export function CTASection() {
           Tell us about your day, your brand, or your bespoke idea. We reply with material recommendations, estimates, and complimentary mockups within 24 hours.
         </p>
         <div className="flex flex-wrap items-center gap-6">
-          <a
-            className="btn"
-            href="https://wa.me/+918416099340"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/our-work/wedding-invites#early-bride"
+            className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
           >
-            Book a consult
-          </a>
+            Book a Consultation
+          </Link>
           <Link href="/start-a-project" className="ln">
             Start a project
           </Link>
