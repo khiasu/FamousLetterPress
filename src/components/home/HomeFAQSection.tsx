@@ -143,7 +143,7 @@ export function HomeFAQSection() {
         </div>
 
         {/* Bottom Actions: View all FAQs + Contact */}
-        <div className="mt-12 pt-8 border-t border-[#EAEAEA] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div className="pt-7 sm:pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <p className="text-xs sm:text-sm text-[#555] font-light">
             Have a custom timeline or bespoke commission inquiry?
           </p>
