@@ -296,11 +296,17 @@ export function HeroSection() {
           0{activeIndex + 1} / 0{m}
         </p>
 
-        {/* Primary CTA moved directly after the carousel & caption */}
-        <div className="mt-7 sm:mt-8">
+        {/* Action CTAs: Start a Project + Book a Consultation */}
+        <div className="mt-7 sm:mt-8 flex flex-wrap items-center gap-5 sm:gap-6">
+          <Link
+            href="/start-a-project"
+            className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+          >
+            Start a Project
+          </Link>
           <Link
             href="/our-work/wedding-invites#early-bride"
-            className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+            className="ln text-[11px] sm:text-xs tracking-[0.22em]"
           >
             Book a Consultation
           </Link>
