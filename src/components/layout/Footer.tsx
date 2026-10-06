@@ -43,7 +43,7 @@ export function Footer() {
   return (
     <footer
       ref={footerRef}
-      className={`relative bg-[#EDE8E0] text-[#0e0e0e] transition-all duration-700 ease-out will-change-transform ${
+      className={`relative bg-[#ECECEC] text-[#0e0e0e] transition-all duration-700 ease-out will-change-transform ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-40 translate-y-8"
       }`}
       role="contentinfo"
