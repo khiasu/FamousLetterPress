@@ -249,20 +249,10 @@ export function HeroSection() {
           Designers turned <i>printers.</i>
         </h1>
 
-        {/* Brand studio descriptor & CTA */}
-        <div className="grid gap-5 mt-7 max-w-[560px]">
-          <p className="text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed">
-            Luxury Letterpress &amp; Foil Wedding Invitations in India
-          </p>
-          <div className="mt-1">
-            <Link
-              href="/our-work/wedding-invites#early-bride"
-              className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
-            >
-              Book a Consultation
-            </Link>
-          </div>
-        </div>
+        {/* Brand studio descriptor */}
+        <p className="mt-6 text-[#555] text-sm sm:text-base font-light tracking-wide leading-relaxed max-w-[560px]">
+          Luxury Letterpress &amp; Foil Wedding Invitations in India
+        </p>
       </div>
 
       {/* ── 6-Image Centered Focus Carousel (Matched HowWeMake layout and spacing) ── */}
@@ -290,7 +280,7 @@ export function HeroSection() {
         ))}
       </div>
 
-      {/* Dynamic Slide Caption Under Carousel (Left-aligned flush with the card) */}
+      {/* Dynamic Slide Caption & Action Under Carousel (Left-aligned flush with the card) */}
       <div className="w-full max-w-[82vw] sm:max-w-[490px] mx-auto mt-5 px-2 sm:px-0 text-left transition-opacity duration-300">
         <Link href={activeItem.href} className="group block text-left">
           <h3 className="font-serif font-medium text-xl sm:text-2xl text-black tracking-tight group-hover:opacity-70 transition-opacity">
@@ -305,6 +295,16 @@ export function HeroSection() {
         <p className="k text-left mt-3 tracking-[0.28em]">
           0{activeIndex + 1} / 0{m}
         </p>
+
+        {/* Primary CTA moved directly after the carousel & caption */}
+        <div className="mt-7 sm:mt-8">
+          <Link
+            href="/our-work/wedding-invites#early-bride"
+            className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+          >
+            Book a Consultation
+          </Link>
+        </div>
       </div>
     </section>
   );
