@@ -198,28 +198,28 @@ export function Header({
             </svg>
           </button>
 
-          {/* 3-Strip Hamburger Toggle Button */}
+          {/* 3-Strip Right-Aligned Staggered Hamburger Toggle Button (No circle border) */}
           <button
-            className="w-10 h-10 rounded-full border border-[rgba(14,14,14,0.18)] hover:border-black bg-white active:scale-95 transition-all flex items-center justify-center cursor-pointer select-none group shadow-2xs z-[70]"
+            className="p-2 hover:opacity-60 active:scale-95 transition-all flex items-center justify-center cursor-pointer select-none group z-[70]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
           >
-            {/* 3-Strip Descending Signal Tower Hamburger Toggle */}
-            <div className="w-4 h-3.5 relative flex flex-col justify-between items-end pointer-events-none">
+            {/* 3-Strip Inverted Right-Aligned Staggered Hamburger Toggle */}
+            <div className="w-5 h-4 relative flex flex-col justify-between items-end pointer-events-none">
               <span
-                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
-                  isMenuOpen ? "w-4 rotate-45 translate-y-[5.5px]" : "w-4"
+                className={`h-[2px] bg-black rounded-full transition-all duration-300 origin-center ${
+                  isMenuOpen ? "w-5 rotate-45 translate-y-[7px]" : "w-5"
                 }`}
               />
               <span
-                className={`h-[1.5px] bg-black transition-all duration-200 ${
-                  isMenuOpen ? "w-0 opacity-0 scale-x-0" : "w-2.5 opacity-100 group-hover:w-3"
+                className={`h-[2px] bg-black rounded-full transition-all duration-200 ${
+                  isMenuOpen ? "w-0 opacity-0 scale-x-0" : "w-3.5 opacity-100 group-hover:w-4"
                 }`}
               />
               <span
-                className={`h-[1.5px] bg-black transition-all duration-300 origin-center ${
-                  isMenuOpen ? "w-4 -rotate-45 -translate-y-[5.5px]" : "w-1.5 group-hover:w-2"
+                className={`h-[2px] bg-black rounded-full transition-all duration-300 origin-center ${
+                  isMenuOpen ? "w-5 -rotate-45 -translate-y-[7px]" : "w-2 group-hover:w-2.5"
                 }`}
               />
             </div>
