@@ -127,7 +127,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Name & Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Your Name *
             </label>
             <input
@@ -141,7 +141,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Email Address *
             </label>
             <input
@@ -159,7 +159,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Phone & City */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Phone / WhatsApp
             </label>
             <input
@@ -172,7 +172,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               City / Location
             </label>
             <input
@@ -189,7 +189,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Service & Quantity */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Service Needed
             </label>
             <select
@@ -206,7 +206,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             </select>
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Estimated Quantity
             </label>
             <input
@@ -223,7 +223,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
         {/* Timeline & Budget */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Target Delivery Date / Month
             </label>
             <input
@@ -236,7 +236,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
             />
           </div>
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Estimated Budget (Optional)
             </label>
             <input
@@ -252,7 +252,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
 
         {/* Message */}
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+          <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
             Project Description / Message *
           </label>
           <textarea
@@ -268,7 +268,7 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
 
         {/* Preferred Contact Method */}
         <div>
-          <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-2 font-sans">
+          <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-2 font-sans">
             Preferred Contact Method
           </label>
           <div className="flex gap-6">

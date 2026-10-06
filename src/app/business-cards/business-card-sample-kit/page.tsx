@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { getCMSSampleKits } from "@/lib/cms/store";
 import { SampleKitCheckout } from "@/components/shop/SampleKitCheckout";
+import { SampleKitGallery } from "@/components/shop/SampleKitGallery";
+import { SampleKitInclusionsAccordion } from "@/components/shop/SampleKitInclusionsAccordion";
 
 export const metadata: Metadata = {
   title: "Order Letterpress Business Card Sample Kit | Famous Letterpress",
@@ -13,26 +15,28 @@ export const metadata: Metadata = {
 export default function BusinessCardSampleKitPage() {
   const kits = getCMSSampleKits();
   const kit = kits["business-card-sample-kit"];
+  const allImages = Array.from(
+    new Set([kit.featuredImage, ...(kit.galleryImages || [])].filter(Boolean))
+  );
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen text-black select-none">
       {/* Header */}
-      <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-[#E5E5E5]">
+      <section className="pt-24 pb-8 md:pt-32 md:pb-10 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.18em] uppercase text-[#7b7566] font-mono">
                 <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
                 <Link href="/our-work/business-cards" className="hover:text-black transition-colors">Business Cards</Link>
                 <span>/</span>
-                <span className="text-black">Sample Kit</span>
+                <span className="text-black font-medium">Sample Kit</span>
               </div>
-              <p className="eyebrow mb-2">Tactile Assessment</p>
-              <h1 className="text-black mb-4 font-serif">
-                {kit.name}
+              <h1 className="d text-[clamp(36px,7.5vw,68px)] leading-[1.0] mt-2 mb-4 font-serif text-black">
+                Business Card <i>Sample Kit</i>
               </h1>
-              <p className="text-base md:text-lg text-[#555555] max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg text-[#555] max-w-2xl font-light leading-relaxed">
                 {kit.tagline}
               </p>
             </div>
@@ -41,37 +45,14 @@ export default function BusinessCardSampleKitPage() {
       </section>
 
       {/* Main Content & Checkout Form */}
-      <section className="section bg-white">
+      <section className="py-8 md:py-12 bg-white">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Kit Details & Inclusions */}
             <div className="lg:col-span-7 space-y-8">
-              {/* Product Visual Showcase */}
+              {/* Product Visual Showcase - Swipeable with dots and clickable thumbnail grid */}
               <Reveal>
-                <div className="overflow-hidden bg-[#F7F7F7] border border-[#E5E5E5]">
-                  <div className="aspect-[16/10] relative overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={kit.featuredImage}
-                      alt={kit.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  {kit.galleryImages && kit.galleryImages.length > 0 && (
-                    <div className="grid grid-cols-4 gap-2 p-3 bg-white border-t border-[#E5E5E5]">
-                      {kit.galleryImages.map((img, i) => (
-                        <div key={i} className="aspect-square overflow-hidden border border-[#E5E5E5]">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={img}
-                            alt={`${kit.name} detail ${i + 1}`}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <SampleKitGallery images={allImages} title={kit.name} />
               </Reveal>
 
               <Reveal delay={0.05}>
@@ -81,17 +62,11 @@ export default function BusinessCardSampleKitPage() {
                     {kit.description}
                   </p>
 
-                  <div className="pt-6 border-t border-[#E5E5E5]">
-                    <h3 className="text-lg text-black mb-4 font-serif">Sample Kit Box Inclusions</h3>
-                    <ul className="space-y-3">
-                      {kit.includedItems.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-[#555555]">
-                          <span className="w-1.5 h-1.5 rounded-full bg-black mt-2 shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <SampleKitInclusionsAccordion
+                    items={kit.includedItems}
+                    title="What's Inside the Box"
+                    defaultOpen={false}
+                  />
                 </div>
               </Reveal>
 

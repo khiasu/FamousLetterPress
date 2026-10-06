@@ -146,10 +146,10 @@ export function EarlyBrideForm() {
       <div className="space-y-8">
         {/* Section 1: Couple & Celebration */}
         <div>
-          <p className="eyebrow mb-4">01. The Celebration</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold text-black mb-3 font-sans">01. The Celebration</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Couple Names *
               </label>
               <input
@@ -162,7 +162,7 @@ export function EarlyBrideForm() {
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Wedding Date / Month *
               </label>
               <input
@@ -175,7 +175,7 @@ export function EarlyBrideForm() {
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Wedding Location / Venue City
               </label>
               <input
@@ -191,8 +191,8 @@ export function EarlyBrideForm() {
 
         {/* Section 2: Stationery Scope */}
         <div>
-          <p className="eyebrow mb-2">02. Anticipated Pieces</p>
-          <p className="text-xs text-[#888888] mb-4">Select all that you may require:</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold text-black mb-2 font-sans">02. Anticipated Pieces</p>
+          <p className="text-xs text-[#666666] mb-4 font-sans">Select all that you may require:</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {stationeryOptions.map((opt) => {
               const checked = formData.stationeryNeeds.includes(opt);
@@ -225,10 +225,10 @@ export function EarlyBrideForm() {
 
         {/* Section 3: Design Status & Notes */}
         <div>
-          <p className="eyebrow mb-4">03. Design & Aesthetic Direction</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold text-black mb-3 font-sans">03. Design &amp; Aesthetic Direction</p>
           <div className="space-y-4">
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Design Status
               </label>
               <select
@@ -246,7 +246,7 @@ export function EarlyBrideForm() {
             </div>
 
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Aesthetic Vision / Notes (Optional)
               </label>
               <textarea
@@ -262,10 +262,10 @@ export function EarlyBrideForm() {
 
         {/* Section 4: Contact Details */}
         <div>
-          <p className="eyebrow mb-4">04. Your Contact Details</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] font-semibold text-black mb-3 font-sans">04. Your Contact Details</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Email Address *
               </label>
               <input
@@ -278,7 +278,7 @@ export function EarlyBrideForm() {
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Phone / WhatsApp Number *
               </label>
               <input
@@ -291,7 +291,7 @@ export function EarlyBrideForm() {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Preferred Contact Method
               </label>
               <div className="flex gap-6 mt-1">

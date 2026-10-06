@@ -205,10 +205,12 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
         )}
 
         <div className="space-y-4">
-          <p className="eyebrow mb-2">1. Recipient Details</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-black mb-2 font-sans">
+            1. Recipient Details
+          </p>
 
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Full Name *
             </label>
             <input
@@ -224,7 +226,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Email Address *
               </label>
               <input
@@ -238,7 +240,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Phone / WhatsApp *
               </label>
               <input
@@ -253,10 +255,12 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
             </div>
           </div>
 
-          <p className="eyebrow pt-3 mb-2">2. Shipping Address (India)</p>
+          <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-black pt-3 mb-2 font-sans">
+            2. Shipping Address (India)
+          </p>
 
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Address Line 1 *
             </label>
             <input
@@ -271,7 +275,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
           </div>
 
           <div>
-            <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+            <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Address Line 2 (Optional)
             </label>
             <input
@@ -286,7 +290,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 City *
               </label>
               <input
@@ -300,7 +304,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 State *
               </label>
               <input
@@ -314,7 +318,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
               />
             </div>
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-[#555555] mb-1 font-sans">
+              <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
                 Postal Code *
               </label>
               <input
