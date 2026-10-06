@@ -64,6 +64,8 @@ export function WhatWeMakeSection() {
   const stageRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLParagraphElement>(null);
   const isDraggingRef = useRef(false);
+  const setMobileTargetRef = useRef<((idx: number) => void) | null>(null);
+  const currentProgRef = useRef(0);
 
   const n = WORK_ITEMS.length;
 
@@ -75,6 +77,8 @@ export function WhatWeMakeSection() {
     const cards = Array.from(stage.querySelectorAll<HTMLElement>(".sc"));
     if (cards.length === 0) return;
 
+    const isMobile = () => typeof window !== "undefined" && window.innerWidth < 768;
+
     const spring = { x: 0, v: 0 };
     let targetProg = 0;
     let isPointerDown = false;
@@ -83,33 +87,43 @@ export function WhatWeMakeSection() {
     let startTarget = 0;
     let isHorizontalSwipe = false;
     let gestureDecided = false;
+    let lastClientX = 0;
+    let lastTime = 0;
+    let releaseVelocity = 0;
 
     let isRunning = false;
     let animId: number;
     let lastAnimTime = performance.now();
     let lastActiveIdx = -1;
 
-    const computeScrollProg = () => {
+    const computeDesktopScrollProg = () => {
       const rect = sec.getBoundingClientRect();
       const scrollableDist = rect.height - window.innerHeight;
       if (scrollableDist <= 0) return 0;
       return clamp(-rect.top / scrollableDist, 0, 1) * (n - 1);
     };
 
-    targetProg = computeScrollProg();
+    targetProg = isMobile() ? 0 : computeDesktopScrollProg();
     spring.x = targetProg;
+    currentProgRef.current = targetProg;
+
+    setMobileTargetRef.current = (idx: number) => {
+      targetProg = clamp(idx, 0, n - 1);
+      requestTick();
+    };
 
     const updateCardsVisual = () => {
       const cardWidth = cards[0]?.offsetWidth || 340;
       const w = cardWidth * 0.85;
 
       const activeIdx = clamp(Math.round(spring.x), 0, n - 1);
+      currentProgRef.current = spring.x;
+
       if (activeIdx !== lastActiveIdx) {
         lastActiveIdx = activeIdx;
         if (counterRef.current) {
           counterRef.current.textContent = `0${activeIdx + 1} / 0${n}`;
         }
-        // Update z-index only when active index shifts, preventing compositor thrashing on every frame
         cards.forEach((c, i) => {
           const diffFromActive = Math.abs(i - activeIdx);
           c.style.zIndex = `${20 - Math.min(diffFromActive * 2, 18)}`;
@@ -121,7 +135,7 @@ export function WhatWeMakeSection() {
         const d = i - spring.x;
         const a = Math.abs(d);
 
-        // Frustum cull cards that are far away to drastically save GPU and CPU on mobile
+        // Frustum culling
         if (a > 2.4) {
           c.style.visibility = "hidden";
           c.style.pointerEvents = "none";
@@ -145,7 +159,6 @@ export function WhatWeMakeSection() {
       const dt = Math.min((now - lastAnimTime) / 1000, 0.032);
       lastAnimTime = now;
 
-      // High-precision implicit critically-damped spring (seamless across 60Hz, 120Hz, 144Hz+)
       const omega = 16;
       const f = 1.0 + 2.0 * dt * omega;
       const ooth = 1.0 / (f + dt * dt * omega * omega);
@@ -175,37 +188,49 @@ export function WhatWeMakeSection() {
       }
     };
 
-    // Scroll listener: directly tracks scroll progress without scroll-locking or page hijacking
+    // PC/Desktop scroll listener: only active on desktop screens (>=768px)
     const onScroll = () => {
       if (isDraggingRef.current) return;
-      targetProg = computeScrollProg();
+      if (isMobile()) return; // On mobile, do not hijack vertical scroll
+      targetProg = computeDesktopScrollProg();
       requestTick();
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Direction-aware gesture listeners: distinguishes vertical page scroll from horizontal card swipe
+    // Direction-aware touch & swipe gesture listeners
     const onPointerDown = (e: PointerEvent) => {
       isPointerDown = true;
-      startX = e.clientX;
+      startX = lastClientX = e.clientX;
       startY = e.clientY;
       startTarget = spring.x;
       isHorizontalSwipe = false;
       gestureDecided = false;
       isDraggingRef.current = false;
+      releaseVelocity = 0;
+      lastTime = performance.now();
     };
 
     const onPointerMove = (e: PointerEvent) => {
       if (!isPointerDown) return;
+      const now = performance.now();
+      const dt = now - lastTime;
+      const dxFromLast = e.clientX - lastClientX;
+      if (dt > 6) {
+        releaseVelocity = (dxFromLast / dt) * 1000;
+        lastClientX = e.clientX;
+        lastTime = now;
+      }
+
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
 
       if (!gestureDecided) {
         const absX = Math.abs(dx);
         const absY = Math.abs(dy);
-        if (absX > 8 || absY > 8) {
+        if (absX > 7 || absY > 7) {
           gestureDecided = true;
-          // Only take over as horizontal card drag if horizontal movement exceeds vertical
+          // Only lock onto horizontal swipe if user moved horizontally more than vertically
           if (absX > absY) {
             isHorizontalSwipe = true;
             isDraggingRef.current = true;
@@ -226,16 +251,25 @@ export function WhatWeMakeSection() {
 
       if (isHorizontalSwipe) {
         isHorizontalSwipe = false;
-        targetProg = clamp(Math.round(targetProg), 0, n - 1);
+        const cardWidth = cards[0]?.offsetWidth || 340;
+        const flickCards = releaseVelocity / (cardWidth * 1.5);
+        if (Math.abs(flickCards) > 0.35) {
+          targetProg = flickCards < 0 ? Math.ceil(targetProg) : Math.floor(targetProg);
+        } else {
+          targetProg = Math.round(targetProg);
+        }
+        targetProg = clamp(targetProg, 0, n - 1);
         requestTick();
 
-        // Sync vertical scroll position cleanly when in the pinned section so subsequent vertical scrolling starts right from this card
-        const rect = sec.getBoundingClientRect();
-        const scrollableDist = rect.height - window.innerHeight;
-        if (scrollableDist > 0 && rect.top <= 0 && rect.bottom >= window.innerHeight) {
-          const targetScrollY =
-            window.scrollY + rect.top + (targetProg / (n - 1)) * scrollableDist;
-          window.scrollTo({ top: targetScrollY, behavior: "instant" });
+        // On desktop only: sync vertical scroll position
+        if (!isMobile()) {
+          const rect = sec.getBoundingClientRect();
+          const scrollableDist = rect.height - window.innerHeight;
+          if (scrollableDist > 0 && rect.top <= 0 && rect.bottom >= window.innerHeight) {
+            const targetScrollY =
+              window.scrollY + rect.top + (targetProg / (n - 1)) * scrollableDist;
+            window.scrollTo({ top: targetScrollY, behavior: "instant" });
+          }
         }
 
         setTimeout(() => {
@@ -252,7 +286,9 @@ export function WhatWeMakeSection() {
     window.addEventListener("pointercancel", onPointerUp, { passive: true });
 
     const onResize = () => {
-      targetProg = computeScrollProg();
+      if (!isMobile()) {
+        targetProg = computeDesktopScrollProg();
+      }
       updateCardsVisual();
       requestTick();
     };
@@ -275,25 +311,31 @@ export function WhatWeMakeSection() {
 
   const handleCardClick = (index: number, href: string) => {
     if (isDraggingRef.current) return;
-    const diff = Math.abs(index - computeScrollProg());
-    if (diff < 0.75) {
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const currentProg = isMobile ? currentProgRef.current : computeDesktopScrollProg();
+    const diff = Math.abs(index - currentProg);
+    
+    if (diff < 0.65) {
       router.push(href);
     } else {
-      // Direct jump to clicked adjacent card
-      const sec = sectionRef.current;
-      if (sec) {
-        const rect = sec.getBoundingClientRect();
-        const scrollableDist = rect.height - window.innerHeight;
-        if (scrollableDist > 0) {
-          const targetScrollY =
-            window.scrollY + rect.top + (index / (n - 1)) * scrollableDist;
-          window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+      if (isMobile && setMobileTargetRef.current) {
+        setMobileTargetRef.current(index);
+      } else {
+        const sec = sectionRef.current;
+        if (sec) {
+          const rect = sec.getBoundingClientRect();
+          const scrollableDist = rect.height - window.innerHeight;
+          if (scrollableDist > 0) {
+            const targetScrollY =
+              window.scrollY + rect.top + (index / (n - 1)) * scrollableDist;
+            window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+          }
         }
       }
     }
   };
 
-  const computeScrollProg = () => {
+  const computeDesktopScrollProg = () => {
     const sec = sectionRef.current;
     if (!sec || typeof window === "undefined") return 0;
     const rect = sec.getBoundingClientRect();
@@ -307,16 +349,16 @@ export function WhatWeMakeSection() {
       <section
         ref={sectionRef}
         id="svc"
-        className="sv relative h-[380vh] bg-white select-none z-0"
+        className="sv relative h-auto py-14 sm:py-20 md:py-0 md:h-[380vh] bg-white select-none z-0"
         aria-label="What We Make: 3D Rotating Cards"
         style={{
           contain: "paint layout",
           isolation: "isolate",
         }}
       >
-        <div className="svs sticky top-0 h-screen overflow-hidden flex flex-col pt-14 sm:pt-20 md:pt-24 pb-6 bg-white justify-between">
+        <div className="svs relative md:sticky md:top-0 h-auto md:h-screen overflow-visible md:overflow-hidden flex flex-col pt-0 sm:pt-14 md:pt-24 pb-6 bg-white justify-between">
           {/* Header */}
-          <div className="w svh flex justify-between items-end w-full mb-2">
+          <div className="w svh flex justify-between items-end w-full mb-4 sm:mb-2">
             <div>
               <p className="k">What we make</p>
               <h2 className="d text-[clamp(34px,8vw,60px)] mt-1.5 font-serif text-black leading-[0.95]">
@@ -337,7 +379,7 @@ export function WhatWeMakeSection() {
           {/* 3D Perspective Card Stage */}
           <div
             ref={stageRef}
-            className="svst relative flex-1 touch-pan-y cursor-grab active:cursor-grabbing w-full my-auto"
+            className="svst relative h-[530px] sm:h-[550px] md:h-auto md:flex-1 touch-pan-y cursor-grab active:cursor-grabbing w-full my-auto"
             style={{
               perspective: "1100px",
               perspectiveOrigin: "50% 46%",
