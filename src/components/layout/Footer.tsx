@@ -44,26 +44,26 @@ export function Footer() {
   return (
     <footer
       ref={footerRef}
-      className={`relative bg-[#FAF7F2] border-t-2 border-[#E5E0D5] text-[#0e0e0e] transition-all duration-700 ease-out will-change-transform ${
+      className={`relative bg-[#0B0B0B] border-t border-[#222222] text-white transition-all duration-700 ease-out will-change-transform ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-40 translate-y-8"
       }`}
       role="contentinfo"
     >
-      <div className="max-w-[1100px] mx-auto px-6 sm:px-10 md:px-14 pt-10 sm:pt-14 pb-12 sm:pb-16">
+      <div className="w pt-12 sm:pt-16 pb-12 sm:pb-16">
         {/* Top: Brand Header with Logo + Social Handles */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-[rgba(14,14,14,0.09)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-10 border-b border-[#1F1F1F]">
           {/* Brand Identity with Circular Seal Logo and clean spacing */}
-          <div className="pl-1 sm:pl-2">
+          <div>
             <Link href="/" className="inline-flex items-center gap-3.5 sm:gap-4 group select-none">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/logo.png"
                 alt="Famous Letterpress Seal"
-                className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full transition-transform duration-300 group-hover:scale-105"
+                className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-full brightness-110 contrast-125 transition-transform duration-300 group-hover:scale-105"
               />
               <div className="flex flex-col leading-none">
                 <span
-                  className="font-serif text-2xl sm:text-[25px] font-semibold tracking-[-0.015em] text-[#0e0e0e]"
+                  className="font-serif text-2xl sm:text-[25px] font-semibold tracking-[-0.015em] text-white"
                   style={{
                     fontFamily:
                       "var(--font-cormorant-garamond), 'Cormorant Garamond', 'Bodoni Moda', serif",
@@ -71,12 +71,15 @@ export function Footer() {
                 >
                   Famous Letterpress
                 </span>
+                <span className="text-[10px] font-mono tracking-[0.24em] text-[#888888] uppercase mt-1">
+                  Artisanal Pressroom &middot; India
+                </span>
               </div>
             </Link>
           </div>
 
-          {/* Social Icons — Facebook, Instagram, YouTube matching screenshot */}
-          <div className="flex items-center gap-4 pl-1 sm:pl-0 sm:pr-2 text-black">
+          {/* Social Icons — Facebook, Instagram, YouTube */}
+          <div className="flex items-center gap-4 text-white">
             {SOCIAL_PROFILES.map((social) => {
               const Icon = social.icon;
               return (
@@ -87,22 +90,22 @@ export function Footer() {
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   title={social.label}
-                  className="text-black hover:opacity-65 transition-opacity flex items-center justify-center cursor-pointer"
+                  className="w-9 h-9 rounded-full bg-[#171717] hover:bg-white text-white hover:text-black flex items-center justify-center transition-all cursor-pointer border border-[#262626] hover:border-white"
                 >
-                  <Icon className="w-6 h-6" />
+                  <Icon className="w-4 h-4" />
                 </a>
               );
             })}
           </div>
         </div>
 
-        {/* Middle: Streamlined Quick Links Grid (Core Critical Pages) */}
-        <div className="pt-8 pl-1 sm:pl-2">
-          <h4 className="text-[11px] uppercase tracking-[0.2em] font-mono font-medium text-black mb-5">
-            Quick Links
+        {/* Middle: Streamlined Quick Links Grid */}
+        <div className="pt-10 pb-10 border-b border-[#1F1F1F]">
+          <h4 className="text-[10.5px] uppercase tracking-[0.24em] font-mono font-medium text-[#777777] mb-6">
+            Explore &middot; Studio Links
           </h4>
 
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-4 gap-x-6 pb-2">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-4 gap-x-8">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
                 {"external" in link && link.external ? (
@@ -110,14 +113,14 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13.5px] text-[#444] hover:text-black transition-colors block leading-snug"
+                    className="text-[13.5px] text-[#A0A0A0] hover:text-white transition-colors block leading-snug font-light"
                   >
                     {link.label}
                   </a>
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-[13.5px] text-[#444] hover:text-black transition-colors block leading-snug"
+                    className="text-[13.5px] text-[#A0A0A0] hover:text-white transition-colors block leading-snug font-light"
                   >
                     {link.label}
                   </Link>
@@ -125,6 +128,16 @@ export function Footer() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Bottom: Studio Colophon & Rights */}
+        <div className="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-[#666666] font-light">
+          <p>
+            &copy; {new Date().getFullYear()} Famous Letterpress. Handcrafted on 1950s Heidelberg platens in Nagaland, India.
+          </p>
+          <p className="font-mono text-[10px] tracking-widest uppercase text-[#555555]">
+            Bespoke Wedding Suites &middot; Luxury Stationery
+          </p>
         </div>
       </div>
     </footer>
