@@ -86,8 +86,8 @@ const INSTAGRAM_ITEMS: InstagramPost[] = [
     caption: "A little look into what happens behind the scenes at Famous Letterpress. Paper, ink, machines, and hands.",
     image: "https://famousletterpress.com/wp-content/uploads/sb-instagram-feed-images/825324682_18631320820012675_506872712113647835_nfull.webp",
     fallbackImage: "/assets/revamp/how-we-make/FMS_7401.jpg",
-    videoSrc: "https://res.cloudinary.com/dpvjjohc0/video/upload/v1779259450/C52FD622-2E93-4C93-BE03-586F4F63FE25_n3mbgw.mp4",
-    instagramUrl: "https://www.instagram.com/reel/Dd6sxoBhyZ8/",
+    videoSrc: "",
+    instagramUrl: "https://www.instagram.com/reel/DdJd_BgT7Q8/",
   },
 ];
 
