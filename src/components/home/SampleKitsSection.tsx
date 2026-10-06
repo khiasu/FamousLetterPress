@@ -2,7 +2,6 @@ import Link from "next/link";
 
 const KITS = [
   {
-    eyebrow: "Bespoke Wedding Collection",
     title: "The Wedding Sample Box",
     price: "₹1,500",
     credit: "100% Credited on order",
@@ -12,7 +11,6 @@ const KITS = [
     detailHref: "/weddings/wedding-sample-kit",
   },
   {
-    eyebrow: "Executive & Corporate",
     title: "Business Card Sample Kit",
     price: "₹1,000",
     credit: "100% Credited on order",
@@ -67,9 +65,6 @@ export function SampleKitsSection() {
 
               {/* Content */}
               <div className="p-5 sm:p-7 flex flex-col flex-1">
-                <p className="k text-[9px] mb-2 tracking-[0.28em]">
-                  {kit.eyebrow}
-                </p>
                 <h3 className="font-serif font-medium text-2xl sm:text-3xl text-black tracking-tight mb-2">
                   {kit.title}
                 </h3>
@@ -85,7 +80,10 @@ export function SampleKitsSection() {
 
                 {/* Dual CTAs: View Details + Order */}
                 <div className="flex items-center gap-5 mt-auto">
-                  <Link href={kit.detailHref} className="btn">
+                  <Link
+                    href={kit.detailHref}
+                    className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                  >
                     Order kit
                   </Link>
                   <Link href={kit.detailHref} className="ln">
