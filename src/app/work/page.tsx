@@ -70,12 +70,14 @@ export default function WorkPage() {
             >
               Submit Project Details
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about..."
+              target="_blank"
+              rel="noopener noreferrer"
               className="ln"
             >
               Contact Studio &rarr;
-            </Link>
+            </a>
           </div>
         </div>
       </section>

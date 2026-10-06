@@ -54,7 +54,7 @@ const menuGroups = [
     title: "Help & Inquiries",
     links: [
       { label: "Frequently Asked Questions", href: "/faq" },
-      { label: "Contact & Studio Location", href: "/contact" },
+      { label: "Chat on WhatsApp", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", external: true },
       { label: "Start a Project / Inquire", href: "/start-a-project" },
     ],
   },
@@ -281,21 +281,42 @@ export function Header({
                     {/* Collapsible Dropdown Content */}
                     {isExpanded && (
                       <div className="pl-8 pr-3 pt-0.5 pb-2 space-y-0.5 animate-in fade-in slide-in-from-top-1 duration-150">
-                        {group.links.map((link) => (
-                          <Link
-                            key={link.href + link.label}
-                            href={link.href}
-                            onClick={closeMenu}
-                            className="flex items-center justify-between py-1.5 px-2 rounded-lg text-[13px] text-[#444] hover:text-black hover:bg-[#FAF8F5] transition-all group"
-                          >
-                            <span className="group-hover:translate-x-0.5 transition-transform">
-                              {link.label}
-                            </span>
-                            <span className="text-[11px] text-[#aaa] group-hover:text-black transition-colors opacity-0 group-hover:opacity-100">
-                              &rarr;
-                            </span>
-                          </Link>
-                        ))}
+                        {group.links.map((link) => {
+                          const isExt = link.external || link.href.startsWith("http");
+                          const linkContent = (
+                            <>
+                              <span className="group-hover:translate-x-0.5 transition-transform">
+                                {link.label}
+                              </span>
+                              <span className="text-[11px] text-[#aaa] group-hover:text-black transition-colors opacity-0 group-hover:opacity-100">
+                                &rarr;
+                              </span>
+                            </>
+                          );
+                          const className = "flex items-center justify-between py-1.5 px-2 rounded-lg text-[13px] text-[#444] hover:text-black hover:bg-[#FAF8F5] transition-all group";
+
+                          return isExt ? (
+                            <a
+                              key={link.href + link.label}
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={closeMenu}
+                              className={className}
+                            >
+                              {linkContent}
+                            </a>
+                          ) : (
+                            <Link
+                              key={link.href + link.label}
+                              href={link.href}
+                              onClick={closeMenu}
+                              className={className}
+                            >
+                              {linkContent}
+                            </Link>
+                          );
+                        })}
                       </div>
                     )}
                   </div>

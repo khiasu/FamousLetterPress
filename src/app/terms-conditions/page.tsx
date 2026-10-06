@@ -198,9 +198,14 @@ export default function TermsConditionsPage() {
             Our team is available to assist you with order inquiries, proofs, custom quotes, and legal disclosures.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-4">
-            <Link href="/contact" className="btn">
-              Contact Us
-            </Link>
+            <a
+              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20regarding%20terms..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+            >
+              Contact Us on WhatsApp
+            </a>
             <Link href="/privacy-policy" className="ln">
               View Privacy Policy &rarr;
             </Link>

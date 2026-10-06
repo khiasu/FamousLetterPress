@@ -155,9 +155,14 @@ export default function EnvelopesPage() {
             <Link href="/start-a-project" className="btn">
               Request Envelope Quote
             </Link>
-            <Link href="/contact" className="ln">
+            <a
+              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20custom%20envelopes..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ln"
+            >
               Inquire With Studio &rarr;
-            </Link>
+            </a>
           </div>
         </div>
       </section>

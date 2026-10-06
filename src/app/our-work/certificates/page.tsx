@@ -135,9 +135,14 @@ export default function CertificatesPage() {
             <Link href="/start-a-project" className="btn">
               Inquire for Institution
             </Link>
-            <Link href="/contact" className="ln">
+            <a
+              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20certificates..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ln"
+            >
               Speak With Our Pressmen &rarr;
-            </Link>
+            </a>
           </div>
         </div>
       </section>

@@ -155,9 +155,14 @@ export default function DesignIllustrationPage() {
             <Link href="/start-a-project" className="btn">
               Commission Artwork
             </Link>
-            <Link href="/contact" className="ln">
+            <a
+              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20design%20and%20illustration..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ln"
+            >
               Talk to Our Designers &rarr;
-            </Link>
+            </a>
           </div>
         </div>
       </section>

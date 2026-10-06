@@ -10,7 +10,7 @@ const QUICK_LINKS = [
   { label: "Our Process & Craft", href: "/process" },
   { label: "Order Sample Kit", href: "/weddings/wedding-sample-kit" },
   { label: "Frequently Asked Questions", href: "/faq" },
-  { label: "Contact & Consult", href: "/contact" },
+  { label: "Chat on WhatsApp", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about..." },
   { label: "Terms & Conditions", href: "/terms-conditions" },
   { label: "Privacy Policy", href: "/privacy-policy" },
 ];
@@ -98,12 +98,23 @@ export function Footer() {
         <ul className="grid grid-cols-2 sm:grid-cols-4 gap-y-3 gap-x-6 mb-8">
           {QUICK_LINKS.map((link) => (
             <li key={link.label}>
-              <Link
-                href={link.href}
-                className="text-[13px] text-[#555] hover:text-black transition-colors block leading-snug"
-              >
-                {link.label}
-              </Link>
+              {link.href.startsWith("http") ? (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-[#555] hover:text-black transition-colors block leading-snug"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  href={link.href}
+                  className="text-[13px] text-[#555] hover:text-black transition-colors block leading-snug"
+                >
+                  {link.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

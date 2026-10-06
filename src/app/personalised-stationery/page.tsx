@@ -59,12 +59,14 @@ export default function PersonalisedStationeryPage() {
                 >
                   Commission Stationery
                 </Link>
-                <Link
-                  href="/contact"
+                <a
+                  href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20personalised%20stationery..."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/40 transition-colors"
                 >
                   Speak With Studio
-                </Link>
+                </a>
               </div>
             </div>
           </Reveal>

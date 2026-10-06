@@ -51,7 +51,7 @@ const ALL_SEARCH_TARGETS: NavigationTarget[] = [
   { id: "packages", title: "Design Templates & Curated Suites", category: "Packages", href: "/packages", keywords: ["packages", "templates", "pricing", "suites"] },
   { id: "channel-partners", title: "Channel Partners & Designers", category: "Who we make it for", href: "/channel-partners", keywords: ["partner", "designer", "trade", "b2b", "agency"] },
   { id: "faq", title: "Frequently Asked Questions", category: "Help", href: "/faq", keywords: ["faq", "help", "questions", "timelines", "pricing"] },
-  { id: "contact", title: "Contact & Studio Location", category: "Help", href: "/contact", keywords: ["contact", "consult", "location", "email", "phone", "whatsapp"] },
+  { id: "contact", title: "Chat with Studio on WhatsApp", category: "Help", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", keywords: ["contact", "consult", "location", "email", "phone", "whatsapp", "chat"] },
   { id: "start-a-project", title: "Start a Project / Inquire", category: "Action", href: "/start-a-project", keywords: ["inquire", "order", "quote", "start"] },
 ];
 
@@ -113,7 +113,11 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
   const navigateTo = (href: string) => {
     onClose();
-    router.push(href);
+    if (href.startsWith("http")) {
+      window.open(href, "_blank", "noopener,noreferrer");
+    } else {
+      router.push(href);
+    }
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

@@ -183,9 +183,14 @@ export default function PrivacyPolicyPage() {
             Reach out to our studio team directly for any clarifications regarding privacy, client files, or ordering procedures.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-4">
-            <Link href="/contact" className="btn">
-              Contact Studio
-            </Link>
+            <a
+              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20regarding%20privacy..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+            >
+              Contact Studio on WhatsApp
+            </a>
             <Link href="/terms-conditions" className="ln">
               View Terms &amp; Conditions &rarr;
             </Link>

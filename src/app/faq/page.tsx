@@ -83,12 +83,14 @@ export default function FAQPage() {
               Reach out directly to our pressroom team on WhatsApp or send us an email. We are always glad to assist.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
+              <a
+                href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20about..."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
               >
-                Contact Studio
-              </Link>
+                Chat on WhatsApp
+              </a>
               <Link
                 href="/start-a-project"
                 className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
