@@ -17,10 +17,15 @@ interface StartProjectPageProps {
 async function FormContainer({ searchParams }: { searchParams: Promise<{ service?: string; type?: string }> }) {
   const resolvedParams = await searchParams;
   const serviceParam = resolvedParams.service;
-  let defaultService = "Wedding Stationery";
+  let defaultService = "Wedding Invites";
 
+  if (serviceParam === "wedding-invites" || serviceParam === "wedding-stationery") defaultService = "Wedding Invites";
   if (serviceParam === "business-cards") defaultService = "Business Cards";
-  if (serviceParam === "personalised-stationery") defaultService = "Personalised Stationery";
+  if (serviceParam === "seal-stickers") defaultService = "Seal Stickers";
+  if (serviceParam === "envelopes") defaultService = "Envelopes";
+  if (serviceParam === "certificates") defaultService = "Certificates";
+  if (serviceParam === "design-illustration") defaultService = "Design & Illustration";
+  if (serviceParam === "custom-works" || serviceParam === "personalised-stationery") defaultService = "Custom Works";
 
   return <ProjectForm initialService={defaultService} initialType={resolvedParams.type} />;
 }

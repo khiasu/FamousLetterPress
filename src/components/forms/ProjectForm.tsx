@@ -8,7 +8,7 @@ interface ProjectFormProps {
   initialType?: string;
 }
 
-export function ProjectForm({ initialService = "Wedding Stationery", initialType }: ProjectFormProps) {
+export function ProjectForm({ initialService = "Wedding Invites", initialType }: ProjectFormProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -198,11 +198,13 @@ export function ProjectForm({ initialService = "Wedding Stationery", initialType
               onChange={handleChange}
               className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-xs text-black focus:outline-none focus:border-black transition-colors"
             >
-              <option value="Wedding Stationery">Wedding Stationery / Suites</option>
-              <option value="Business Cards">Luxury Letterpress Business Cards</option>
-              <option value="Personalised Stationery">Personalised / Monogram Stationery</option>
-              <option value="Channel Partnership">Trade / Channel Partnership</option>
-              <option value="Custom Project">Other Bespoke Print Project</option>
+              <option value="Wedding Invites">Wedding Invites</option>
+              <option value="Business Cards">Business Cards</option>
+              <option value="Seal Stickers">Seal Stickers</option>
+              <option value="Envelopes">Envelopes</option>
+              <option value="Certificates">Certificates</option>
+              <option value="Design & Illustration">Design & Illustration</option>
+              <option value="Custom Works">Custom Works</option>
             </select>
           </div>
           <div>
