@@ -52,7 +52,7 @@ export function SampleKitsSection() {
             >
               {/* Image — clickable to detail page */}
               <Link
-                href={kit.detailHref}
+                href={`${kit.detailHref}#gallery`}
                 className="relative aspect-[16/11] overflow-hidden bg-[#F7F7F7] block"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -81,12 +81,12 @@ export function SampleKitsSection() {
                 {/* Dual CTAs: View Details + Order */}
                 <div className="flex items-center gap-5 mt-auto">
                   <Link
-                    href={kit.detailHref}
+                    href={`${kit.detailHref}#order-form`}
                     className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
                   >
                     Order kit
                   </Link>
-                  <Link href={kit.detailHref} className="ln">
+                  <Link href={`${kit.detailHref}#gallery`} className="ln">
                     View details
                   </Link>
                 </div>

@@ -62,10 +62,10 @@ export function SampleKitGallery({ images, title }: SampleKitGalleryProps) {
   };
 
   return (
-    <div className="overflow-hidden bg-[#F7F7F7] border border-[#E5E5E5] select-none">
+    <div className="-mx-[22px] sm:mx-0 overflow-hidden bg-[#F7F7F7] border-y sm:border border-[#E5E5E5] select-none">
       {/* Main Swipeable Showcase Viewport */}
       <div
-        className="aspect-[16/10] sm:aspect-[16/11] relative overflow-hidden bg-[#EFEFEF] group touch-pan-y"
+        className="aspect-square sm:aspect-[16/11] relative overflow-hidden bg-[#EFEFEF] group touch-pan-y"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -146,8 +146,8 @@ export function SampleKitGallery({ images, title }: SampleKitGalleryProps) {
 
       {/* Bottom Thumbnail Images Grid — Clickable to reveal in main screen */}
       {images.length > 1 && (
-        <div className="p-3 bg-white border-t border-[#E5E5E5]">
-          <div className="grid grid-cols-5 gap-2 sm:gap-2.5">
+        <div className="p-2 sm:p-3 bg-white border-t border-[#E5E5E5]">
+          <div className="grid grid-cols-5 gap-1.5 sm:gap-2.5">
             {images.map((img, i) => {
               const isActive = i === currentIndex;
               return (

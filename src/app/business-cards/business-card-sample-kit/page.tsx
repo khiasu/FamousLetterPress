@@ -49,7 +49,7 @@ export default function BusinessCardSampleKitPage() {
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Kit Details & Inclusions */}
-            <div className="lg:col-span-7 space-y-8">
+            <div id="gallery" className="lg:col-span-7 space-y-8 scroll-mt-28">
               {/* Product Visual Showcase - Swipeable with dots and clickable thumbnail grid */}
               <Reveal>
                 <SampleKitGallery images={allImages} title={kit.name} />
@@ -82,7 +82,7 @@ export default function BusinessCardSampleKitPage() {
             </div>
 
             {/* Right Column: Sticky Razorpay Checkout */}
-            <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <div id="order-form" className="lg:col-span-5 lg:sticky lg:top-28 scroll-mt-28">
               <Reveal delay={0.15}>
                 <SampleKitCheckout kit={kit} />
               </Reveal>
