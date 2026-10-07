@@ -358,7 +358,7 @@ export function WhatWeMakeSection() {
       >
         <div className="svs relative md:sticky md:top-0 h-auto md:h-screen overflow-visible md:overflow-hidden flex flex-col pt-0 sm:pt-14 md:pt-24 pb-6 bg-white justify-between">
           {/* Header */}
-          <div className="w svh flex justify-between items-end w-full mb-4 sm:mb-2">
+          <div className="w svh flex justify-between items-end w-full mb-6 sm:mb-2">
             <div>
               <p className="k">What we make</p>
               <h2 className="d text-[clamp(34px,8vw,60px)] mt-1.5 font-serif text-black leading-[0.95]">
@@ -379,7 +379,7 @@ export function WhatWeMakeSection() {
           {/* 3D Perspective Card Stage */}
           <div
             ref={stageRef}
-            className="svst relative h-[530px] sm:h-[550px] md:h-auto md:flex-1 touch-pan-y cursor-grab active:cursor-grabbing w-full my-auto"
+            className="svst relative h-[540px] sm:h-[550px] md:h-auto md:flex-1 touch-pan-y cursor-grab active:cursor-grabbing w-full my-auto mt-4 sm:mt-0"
             style={{
               perspective: "1100px",
               perspectiveOrigin: "50% 46%",
@@ -398,7 +398,7 @@ export function WhatWeMakeSection() {
                     router.push(item.href);
                   }
                 }}
-                className="sc absolute left-1/2 top-[45%] sm:top-1/2 w-[84vw] sm:w-[360px] md:w-[390px] lg:w-[410px] h-[505px] sm:h-[490px] md:h-[515px] -ml-[42vw] sm:-ml-[180px] md:-ml-[195px] lg:-ml-[205px] -mt-[252px] sm:-mt-[245px] md:-mt-[257px] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left flex flex-col bg-[#FAF8F5] shadow-[0_22px_42px_-18px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.04)] text-black select-none overflow-hidden will-change-[transform,opacity] group"
+                className="sc absolute left-1/2 top-[50%] sm:top-1/2 w-[84vw] sm:w-[360px] md:w-[390px] lg:w-[410px] h-[505px] sm:h-[490px] md:h-[515px] -ml-[42vw] sm:-ml-[180px] md:-ml-[195px] lg:-ml-[205px] -mt-[252px] sm:-mt-[245px] md:-mt-[257px] border border-[rgba(14,14,14,0.12)] cursor-pointer text-left flex flex-col bg-[#FAF8F5] shadow-[0_22px_42px_-18px_rgba(0,0,0,0.18),0_2px_6px_rgba(0,0,0,0.04)] text-black select-none overflow-hidden will-change-[transform,opacity] group"
                 style={{
                   transformStyle: "preserve-3d",
                   backfaceVisibility: "hidden",
