@@ -10,51 +10,44 @@ export const metadata: Metadata = {
 
 const fullProcessSteps = [
   {
-    step: "01",
     title: "Discovery & Sample Kit",
-    subtitle: "Tangible exploration",
-    desc: "Every great project begins with paper in your hands. We encourage ordering our Wedding or Business Card Sample Kit so you can feel 600gsm cotton board, examine foil tones, and evaluate relief depth.",
+    subtitle: "Tangible Paper Exploration",
+    desc: "Every great project begins with paper in your hands. We encourage ordering our Wedding or Business Card Sample Kit so you can feel 600gsm cotton board, examine foil tones, and evaluate relief depth under natural light.",
     timeline: "Days 1–3",
   },
   {
-    step: "02",
     title: "Consultation & Scope",
-    subtitle: "Defining your vision",
-    desc: "Share your date, quantities, aesthetic direction, and budget through our Early Bride form or project brief. We discuss typography, print passes, and paper stock options.",
+    subtitle: "Defining Vision & Specifications",
+    desc: "Share your date, quantities, aesthetic direction, and budget through our Early Bride form or project brief. We discuss typography, print passes, and paper stock options to formulate your bespoke production schedule.",
     timeline: "1–2 Days",
   },
   {
-    step: "03",
     title: "Design & Architectural Proofing",
-    subtitle: "Precision layout drafting",
-    desc: "Whether you supply print-ready artwork or commission our in-house designers, we produce 1:1 scale proofs detailing ink Pantones, foil placements, margins, and paper sizing.",
+    subtitle: "Precision Layout Drafting",
+    desc: "Whether you supply print-ready artwork or commission our in-house designers, we produce 1:1 scale digital proofs detailing ink Pantones, foil placements, margins, and paper sizing for strict aesthetic approval.",
     timeline: "3–7 Days",
   },
   {
-    step: "04",
     title: "Final Sign-off & Plate Making",
-    subtitle: "Translating digital to physical",
+    subtitle: "Translating Digital to Physical",
     desc: "Once you approve the proof in writing, high-resolution magnesium or photopolymer relief plates are exposed and chemically etched for each individual color and foil pass.",
     timeline: "2–4 Days",
   },
   {
-    step: "05",
     title: "Hand-Mixed Inks & Presswork",
-    subtitle: "The mechanical bite",
+    subtitle: "The Mechanical Impression",
     desc: "Inks are hand-mixed using mineral pigments. The press operator adjusts packing, registers the plates to microscopic accuracy, and hand-feeds each sheet of cotton stock on our vintage platen press.",
     timeline: "7–14 Days",
   },
   {
-    step: "06",
     title: "Artisanal Finishing & Quality Inspection",
-    subtitle: "Hand-applied details",
+    subtitle: "Hand-Applied Embellishments",
     desc: "Cards undergo trimming, edge gilding, bevel painting, wax sealing, and envelope lining. Every single sheet is individually inspected under studio lighting; any imperfect sheet is discarded.",
     timeline: "2–4 Days",
   },
   {
-    step: "07",
     title: "Archival Packaging & Insured Delivery",
-    subtitle: "Safe arrival at your door",
+    subtitle: "Safe Arrival at Your Door",
     desc: "Suites are carefully boxed in moisture-resistant archival presentation boxes and dispatched via express courier with full tracking across India or worldwide.",
     timeline: "3–5 Days transit",
   },
@@ -62,37 +55,36 @@ const fullProcessSteps = [
 
 export default function ProcessPage() {
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen text-black select-none">
       {/* ── Header ── */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-20 border-b border-[#E5E5E5]">
+      <section className="pt-24 pb-12 md:pt-32 md:pb-16 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.18em] uppercase text-[#7b7566] font-mono">
                 <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-black">Process</span>
+                <span className="text-black font-medium">Our Process</span>
               </div>
-              <p className="eyebrow mb-2">Step by Step</p>
-              <h1 className="text-black mt-2 mb-6 font-serif">
-                From raw cotton to{" "}
-                <em className="font-light">cast-iron impression.</em>
+              <p className="k mb-2">Seven Stages of Traditional Presswork</p>
+              <h1 className="d text-[clamp(38px,7.5vw,72px)] leading-[0.98] mt-2 mb-6 font-serif text-black">
+                From raw cotton to <i>cast-iron impression.</i>
               </h1>
-              <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
-                Letterpress printing is a deliberate, meditative craft. Here is how your stationery journeys from conceptual design in Nagaland to the finished heirlooms in your hands.
+              <p className="text-base sm:text-lg text-[#555] max-w-2xl font-light leading-relaxed mb-8">
+                Letterpress printing is a deliberate, meditative craft. Here is how your stationery journeys from conceptual design in our Nagaland studio to the finished heirlooms in your hands.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                 <Link
                   href="/start-a-project"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
+                  className="inline-flex items-center justify-center px-7 sm:px-8 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
                 >
-                  Start Your Project
+                  Start a project
                 </Link>
                 <Link
                   href="/weddings/wedding-sample-kit"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/40 transition-colors"
+                  className="ln"
                 >
-                  Order Sample Kit First
+                  Order Sample Kit First &rarr;
                 </Link>
               </div>
             </div>
@@ -101,34 +93,26 @@ export default function ProcessPage() {
       </section>
 
       {/* ── Step by Step Timeline ── */}
-      <section className="section bg-white" aria-label="Production Steps">
+      <section className="py-14 md:py-20 bg-white" aria-label="Production Steps">
         <div className="container-wide">
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-3xl mx-auto space-y-6 md:space-y-8">
             {fullProcessSteps.map((item, idx) => (
-              <Reveal key={item.step} delay={idx * 0.06}>
-                <div className="bg-white border border-[#E5E5E5] p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 items-start">
-                  <div className="shrink-0 flex items-center gap-3">
-                    <span className="font-mono text-2xl text-black font-light">
-                      {item.step}
+              <Reveal key={item.title} delay={idx * 0.05}>
+                <div className="bg-white border border-[#E5E5E5] p-6 sm:p-8 md:p-10 transition-all duration-300 hover:border-black/30 hover:shadow-[0_12px_28px_-16px_rgba(0,0,0,0.08)]">
+                  <div className="flex items-center justify-between gap-4 mb-2">
+                    <p className="k text-[10px] text-[#7b7566]">{item.subtitle}</p>
+                    <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#7b7566]">
+                      {item.timeline}
                     </span>
-                    <div className="h-px w-8 bg-border-hairline hidden md:block" />
                   </div>
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-                      <h2 className="text-xl md:text-2xl font-serif text-black">
-                        {item.title}
-                      </h2>
-                      <span className="text-[10px] font-mono tracking-wider uppercase text-[#888888] px-2.5 py-1 bg-white border border-[#E5E5E5]">
-                        {item.timeline}
-                      </span>
-                    </div>
-                    <p className="text-xs uppercase tracking-wider text-[#888888] font-sans mb-3">
-                      {item.subtitle}
-                    </p>
-                    <p className="text-xs md:text-sm text-[#555555] leading-relaxed font-light">
-                      {item.desc}
-                    </p>
-                  </div>
+
+                  <h2 className="font-serif font-medium text-2xl sm:text-3xl text-black tracking-tight mb-3">
+                    {item.title}
+                  </h2>
+
+                  <p className="text-xs sm:text-sm text-[#555] leading-relaxed font-light">
+                    {item.desc}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -136,29 +120,30 @@ export default function ProcessPage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
-        <div className="container-narrow">
+      {/* ── Bottom CTA ── */}
+      <section className="py-20 md:py-28 bg-white text-black text-center border-t border-[#E5E5E5]">
+        <div className="max-w-2xl mx-auto px-6">
           <Reveal>
-            <p className="eyebrow text-[#888888] mb-3">Ready to Begin?</p>
-            <h2 className="text-black mb-4">
-              Let&apos;s start your <em className="font-light">production run.</em>
+            <p className="k mb-2">Ready to Begin?</p>
+            <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1.05] font-serif text-black mb-4">
+              Let&apos;s start your <i>production run.</i>
             </h2>
-            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
-              Reach out with your wedding date, artwork, or corporate card inquiry. We reply within 24 hours.
+            <p className="text-sm sm:text-base text-[#555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
+              Reach out with your wedding date, artwork, or corporate card inquiry. We reply promptly within 24 hours.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8">
               <Link
                 href="/start-a-project"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
               >
                 Start a Commission
               </Link>
               <Link
                 href="/our-work/wedding-invites#early-bride"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
               >
-                Early Bride Form
+                <span>Early Bride Consultation</span>
+                <span aria-hidden="true">&rarr;</span>
               </Link>
             </div>
           </Reveal>
