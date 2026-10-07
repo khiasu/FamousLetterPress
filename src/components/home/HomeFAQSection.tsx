@@ -53,13 +53,6 @@ const TOP_FAQS: FAQItem[] = [
     answer:
       "Yes. Sample packs are available for purchase and can help couples understand the paper, printing techniques, and overall quality before committing to a full project.",
   },
-  {
-    id: "hfaq-7",
-    category: "Samples & Delivery",
-    question: "Does Famous Letterpress ship across India & internationally?",
-    answer:
-      "Yes. We ship wedding suites and bespoke stationery across all Indian cities and worldwide via reliable express couriers. Consultations, design proofing, and approvals are managed seamlessly online.",
-  },
 ];
 
 export function HomeFAQSection() {
@@ -86,15 +79,12 @@ export function HomeFAQSection() {
 
         {/* Full-width Accordion */}
         <div className="w-full border-t border-[#E5E5E5]">
-          {TOP_FAQS.map((faq, idx) => {
+          {TOP_FAQS.map((faq) => {
             const isOpen = openId === faq.id;
-            const isLast = idx === TOP_FAQS.length - 1;
             return (
               <div
                 key={faq.id}
-                className={`border-b border-[#E5E5E5] transition-colors ${
-                  isLast ? "hidden sm:block" : ""
-                }`}
+                className="border-b border-[#E5E5E5] transition-colors"
               >
                 <button
                   type="button"
@@ -145,26 +135,26 @@ export function HomeFAQSection() {
           })}
         </div>
 
-        {/* Bottom Actions: View all FAQs (1st on mobile) -> Timeline inquiry (2nd on mobile) -> Contact CTA (3rd on mobile) */}
-        <div className="pt-7 sm:pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-6">
-          <p className="text-xs sm:text-sm text-[#555] font-light order-2 sm:order-1 pt-1 sm:pt-0">
-            Have a custom timeline or bespoke commission inquiry?
-          </p>
+        {/* Bottom Actions: Left-aligned sequence (View all FAQs -> Timeline inquiry -> Contact our studio) */}
+        <div className="pt-8 sm:pt-10 flex flex-col items-start gap-6">
+          <Link
+            href="/faq"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
+          >
+            <span>View all FAQs</span>
+            <span aria-hidden="true">&rarr;</span>
+          </Link>
 
-          <div className="contents sm:flex sm:items-center sm:gap-6 sm:order-2">
-            <Link
-              href="/faq"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5 self-start order-1 sm:order-none"
-            >
-              <span>View all FAQs</span>
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
+          <div className="flex flex-col items-start gap-3.5 pt-1">
+            <p className="text-xs sm:text-sm text-[#555] font-light">
+              Have a custom timeline or bespoke commission inquiry?
+            </p>
 
             <a
               href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about..."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm order-3 sm:order-none text-center"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm text-center"
             >
               Contact our studio
             </a>
