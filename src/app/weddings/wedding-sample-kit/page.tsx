@@ -45,7 +45,7 @@ export default function WeddingSampleKitPage() {
       </section>
 
       {/* Main Content & Checkout Form */}
-      <section className="py-8 md:py-12 bg-white">
+      <section className="pt-0 pb-8 md:py-12 bg-white">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Kit Details & Inclusions */}
