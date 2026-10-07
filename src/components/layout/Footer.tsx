@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SOCIAL_PROFILES, LocationIcon } from "@/components/ui/SocialIcons";
 
 const QUICK_LINKS = [
-  { label: "Our Work", href: "/our-work" },
+  { label: "Our Work", href: "/#svc" },
   { label: "Wedding Invites", href: "/our-work/wedding-invites" },
   { label: "Business Cards", href: "/our-work/business-cards" },
   { label: "Our Process & Craft", href: "/process" },
