@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const KITS = [
   {
@@ -22,6 +25,18 @@ const KITS = [
 ];
 
 export function SampleKitsSection() {
+  const router = useRouter();
+
+  const handleDetailClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      e.preventDefault();
+      router.push(href);
+    }
+  };
+
   return (
     <section
       id="sample-kits"
@@ -53,6 +68,7 @@ export function SampleKitsSection() {
               {/* Image — clickable to detail page */}
               <Link
                 href={`${kit.detailHref}#gallery`}
+                onClick={(e) => handleDetailClick(e, kit.detailHref)}
                 className="relative aspect-[16/11] overflow-hidden bg-[#F7F7F7] block"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -86,7 +102,11 @@ export function SampleKitsSection() {
                   >
                     Order kit
                   </Link>
-                  <Link href={`${kit.detailHref}#gallery`} className="ln">
+                  <Link
+                    href={`${kit.detailHref}#gallery`}
+                    onClick={(e) => handleDetailClick(e, kit.detailHref)}
+                    className="ln"
+                  >
                     View details
                   </Link>
                 </div>

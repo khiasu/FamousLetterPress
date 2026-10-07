@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, TouchEvent } from "react";
+import { useState, useRef, useEffect, TouchEvent } from "react";
 
 interface SampleKitGalleryProps {
   images: string[];
@@ -12,6 +12,17 @@ export function SampleKitGallery({ images, title }: SampleKitGalleryProps) {
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const isSwiping = useRef(false);
+
+  useEffect(() => {
+    // On mobile devices, ensure viewing details shows the top start section with title visible
+    if (
+      typeof window !== "undefined" &&
+      window.innerWidth < 768 &&
+      window.location.hash === "#gallery"
+    ) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, []);
 
   if (!images || images.length === 0) {
     return null;
