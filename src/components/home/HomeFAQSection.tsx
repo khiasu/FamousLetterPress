@@ -86,12 +86,15 @@ export function HomeFAQSection() {
 
         {/* Full-width Accordion */}
         <div className="w-full border-t border-[#E5E5E5]">
-          {TOP_FAQS.map((faq) => {
+          {TOP_FAQS.map((faq, idx) => {
             const isOpen = openId === faq.id;
+            const isLast = idx === TOP_FAQS.length - 1;
             return (
               <div
                 key={faq.id}
-                className="border-b border-[#E5E5E5] transition-colors"
+                className={`border-b border-[#E5E5E5] transition-colors ${
+                  isLast ? "hidden sm:block" : ""
+                }`}
               >
                 <button
                   type="button"
@@ -142,16 +145,16 @@ export function HomeFAQSection() {
           })}
         </div>
 
-        {/* Bottom Actions: View all FAQs + Contact */}
-        <div className="pt-7 sm:pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-          <p className="text-xs sm:text-sm text-[#555] font-light">
+        {/* Bottom Actions: View all FAQs (1st on mobile) -> Timeline inquiry (2nd on mobile) -> Contact CTA (3rd on mobile) */}
+        <div className="pt-7 sm:pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-6">
+          <p className="text-xs sm:text-sm text-[#555] font-light order-2 sm:order-1 pt-1 sm:pt-0">
             Have a custom timeline or bespoke commission inquiry?
           </p>
 
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="contents sm:flex sm:items-center sm:gap-6 sm:order-2">
             <Link
               href="/faq"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5 self-start order-1 sm:order-none"
             >
               <span>View all FAQs</span>
               <span aria-hidden="true">&rarr;</span>
@@ -161,7 +164,7 @@ export function HomeFAQSection() {
               href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about..."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm order-3 sm:order-none text-center"
             >
               Contact our studio
             </a>
