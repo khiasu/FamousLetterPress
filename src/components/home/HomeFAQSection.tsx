@@ -135,8 +135,8 @@ export function HomeFAQSection() {
           })}
         </div>
 
-        {/* Bottom Actions: Left-aligned sequence (View all FAQs -> Timeline inquiry -> Contact our studio) */}
-        <div className="pt-8 sm:pt-10 flex flex-col items-start gap-6">
+        {/* Bottom Action: View all FAQs */}
+        <div className="pt-8 sm:pt-10 flex items-center justify-start">
           <Link
             href="/faq"
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
@@ -144,21 +144,6 @@ export function HomeFAQSection() {
             <span>View all FAQs</span>
             <span aria-hidden="true">&rarr;</span>
           </Link>
-
-          <div className="flex flex-col items-start gap-3.5 pt-1">
-            <p className="text-xs sm:text-sm text-[#555] font-light">
-              Have a custom timeline or bespoke commission inquiry?
-            </p>
-
-            <a
-              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about..."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm text-center"
-            >
-              Contact our studio
-            </a>
-          </div>
         </div>
       </div>
     </section>
