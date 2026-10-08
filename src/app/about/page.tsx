@@ -35,16 +35,22 @@ export default function AboutPage() {
         <div className="container-wide">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.18em] uppercase text-[#7b7566] font-mono">
                 <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-black">Our Story</span>
+                <span className="text-black font-medium">Our Story</span>
               </div>
-              <p className="eyebrow mb-2">Heritage &amp; Craft</p>
-              <h1 className="text-black mt-2 mb-6 font-serif">
-                Designers turned printers,{" "}
-                <em className="font-light">rooted in Nagaland.</em>
-              </h1>
+              <div className="flex items-start sm:items-center gap-4 sm:gap-6 mt-3 mb-6">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/logo.png"
+                  alt="Famous Letterpress Seal Logo"
+                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain rounded-full shrink-0 shadow-xs border border-[rgba(14,14,14,0.08)] p-1 bg-white"
+                />
+                <h1 className="d text-[clamp(36px,7vw,70px)] leading-[0.98] font-serif text-black">
+                  Designers turned printers, <i>rooted in Nagaland.</i>
+                </h1>
+              </div>
               <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 Famous Letterpress was born from an unyielding devotion to typography and tactile paper. In an increasingly disposable digital landscape, we believe the printed word should carry substance, texture, and permanent emotional weight.
               </p>
@@ -94,9 +100,8 @@ export default function AboutPage() {
 
               <Reveal delay={0.15}>
                 <div className="bg-white border border-[#E5E5E5] p-8">
-                  <p className="eyebrow mb-2">Our Physical Workshop</p>
                   <h3 className="font-serif text-2xl text-black mb-4">
-                    The Machinery of Mindful Craft
+                    Our Physical Workshop
                   </h3>
                   <p className="text-xs md:text-sm text-[#555555] leading-relaxed mb-6 font-light">
                     Our workshop houses vintage Heidelberg platen presses and cylinder proof presses. These machines, engineered with immense cast-iron precision, apply thousands of pounds of pressure per square inch to create an indelible deboss into soft cotton board.
@@ -104,11 +109,39 @@ export default function AboutPage() {
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#E5E5E5] text-xs font-sans">
                     <div>
                       <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Studio Location</span>
-                      <span className="font-medium text-black mt-0.5 block">Dimapur, Nagaland, India</span>
+                      <span className="font-medium text-black mt-0.5 block">#415, Near Riverbelt Colony, Dimapur, Nagaland</span>
                     </div>
                     <div>
                       <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Founding Heritage</span>
                       <span className="font-medium text-black mt-0.5 block">Est. 2008 · Akanito</span>
+                    </div>
+                  </div>
+
+                  {/* Embedded Google Map */}
+                  <div className="mt-6 pt-5 border-t border-[#E5E5E5]">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Workshop Location Map</span>
+                      <a
+                        href="https://maps.google.com/?q=Famous+Letterpress+Dimapur+Nagaland"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] tracking-[0.14em] uppercase text-black hover:underline font-mono"
+                      >
+                        Open in Google Maps &rarr;
+                      </a>
+                    </div>
+                    <div className="aspect-[16/10] sm:aspect-[16/9] w-full border border-[#E5E5E5] overflow-hidden bg-[#FAF8F5]">
+                      <iframe
+                        title="Famous Letterpress Workshop Google Map Location"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57187.9734157155!2d93.6841!3d25.9064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374601b69f688005%3A0xe54e38bf3e12c1b4!2sDimapur%2C%20Nagaland!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen={false}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
+                      />
                     </div>
                   </div>
                 </div>

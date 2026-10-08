@@ -14,22 +14,22 @@ export interface NavigationTarget {
 const POPULAR_SEARCHES: NavigationTarget[] = [
   {
     id: "weddings",
-    title: "Wedding Invitations & Suites",
+    title: "Wedding Invites",
     category: "What we make",
     href: "/our-work/wedding-invites",
-    keywords: ["wedding", "invite", "invitations", "marriage", "suite", "bride", "foil"],
+    keywords: ["wedding", "invite", "invitations", "marriage", "suite", "bride", "foil", "save the date"],
   },
   {
     id: "business-cards",
-    title: "Cards + Letterheads",
+    title: "Business Cards",
     category: "What we make",
     href: "/our-work/business-cards",
     keywords: ["business", "visiting card", "executive", "cards", "corporate", "letterheads"],
   },
   {
     id: "sample-wedding",
-    title: "Order Wedding Sample Kit (₹1,500)",
-    category: "Sample kits",
+    title: "Wedding Sample Kit",
+    category: "Sample Kits",
     href: "/weddings/wedding-sample-kit",
     keywords: ["sample", "kit", "box", "wedding sample", "swatch", "paper"],
   },
@@ -44,14 +44,20 @@ const POPULAR_SEARCHES: NavigationTarget[] = [
 
 const ALL_SEARCH_TARGETS: NavigationTarget[] = [
   ...POPULAR_SEARCHES,
-  { id: "personalised-stationery", title: "Personalised Stationery", category: "What we make", href: "/personalised-stationery", keywords: ["stationery", "notecard", "monogram", "correspondence"] },
-  { id: "seal-stickers", title: "Wax Seals & Embellishments", category: "What we make", href: "/our-work/seal-stickers", keywords: ["wax seals", "seals", "embellishments", "cotton seals", "crests"] },
-  { id: "about-studio", title: "Our Story & Studio", category: "About", href: "/about", keywords: ["story", "studio", "about", "founders", "heritage"] },
-  { id: "packages", title: "Design Templates & Curated Suites", category: "Packages", href: "/packages", keywords: ["packages", "templates", "pricing", "suites"] },
+  { id: "seal-stickers", title: "Seal Stickers", category: "What we make", href: "/our-work/seal-stickers", keywords: ["seal stickers", "wax seals", "seals", "embellishments", "cotton seals", "crests"] },
+  { id: "envelopes", title: "Envelopes", category: "What we make", href: "/our-work/envelopes", keywords: ["envelopes", "euro flap", "bespoke envelopes", "liners"] },
+  { id: "certificates", title: "Certificates", category: "What we make", href: "/our-work/certificates", keywords: ["certificates", "archival certificates", "diplomas", "awards"] },
+  { id: "design-illustration", title: "Design & Illustration", category: "What we make", href: "/our-work/design-illustration", keywords: ["design", "illustration", "custom artwork", "monogram"] },
+  { id: "custom-works", title: "Custom Works", category: "What we make", href: "/our-work/custom-works", keywords: ["custom", "works", "commissions", "coasters", "notebooks"] },
+  { id: "sample-business", title: "Business Card Sample Kit", category: "Sample Kits", href: "/business-cards/business-card-sample-kit", keywords: ["sample", "kit", "business kit", "cards sample", "paper kit"] },
+  { id: "about-studio", title: "Our Story & Studio", category: "About", href: "/about", keywords: ["story", "studio", "about", "founders", "heritage", "nagaland", "dimapur"] },
+  { id: "faq", title: "FAQs", category: "Help & Queries", href: "/faq", keywords: ["faq", "help", "questions", "timelines", "pricing", "queries"] },
+  { id: "terms-conditions", title: "T&Cs", category: "Legal", href: "/terms-conditions", keywords: ["terms", "conditions", "t&cs", "legal", "client agreement"] },
+  { id: "privacy-policy", title: "Privacy Policy", category: "Legal", href: "/privacy-policy", keywords: ["privacy", "policy", "legal", "data"] },
+  { id: "contact-whatsapp", title: "Contact Studio on WhatsApp", category: "Help & Queries", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", keywords: ["contact", "consult", "whatsapp", "chat", "message"] },
+  { id: "start-a-project", title: "Start a Project / Inquire", category: "Help & Queries", href: "/start-a-project", keywords: ["inquire", "order", "quote", "start", "brief"] },
+  { id: "early-bride", title: "Early Bride Consultation", category: "Help & Queries", href: "/our-work/wedding-invites#early-bride", keywords: ["early bride", "consultation", "wedding consultation", "bride"] },
   { id: "channel-partners", title: "Channel Partners & Designers", category: "Who we make it for", href: "/channel-partners", keywords: ["partner", "designer", "trade", "b2b", "agency"] },
-  { id: "faq", title: "Frequently Asked Questions", category: "Help", href: "/faq", keywords: ["faq", "help", "questions", "timelines", "pricing"] },
-  { id: "contact", title: "Chat with Studio on WhatsApp", category: "Help", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", keywords: ["contact", "consult", "location", "email", "phone", "whatsapp", "chat"] },
-  { id: "start-a-project", title: "Start a Project / Inquire", category: "Action", href: "/start-a-project", keywords: ["inquire", "order", "quote", "start"] },
 ];
 
 interface SearchModalProps {
@@ -103,7 +109,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
       const categoryMatch = item.category.toLowerCase().includes(q);
       const keywordMatch = item.keywords.some((k) => k.toLowerCase().includes(q));
       return titleMatch || categoryMatch || keywordMatch;
-    }).slice(0, 5);
+    }).slice(0, 8);
   }, [query]);
 
   useEffect(() => {

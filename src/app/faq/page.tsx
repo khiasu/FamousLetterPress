@@ -26,14 +26,13 @@ export default function FAQPage() {
         <div className="w">
           <Reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.16em] uppercase text-[#888888] font-sans">
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.18em] uppercase text-[#7b7566] font-mono">
                 <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
-                <span className="text-black">FAQ</span>
+                <span className="text-black font-medium">FAQ</span>
               </div>
-              <p className="eyebrow mb-2">Help &amp; Clarity</p>
-              <h1 className="text-black mt-2 mb-6 font-serif">
-                Frequently Asked <em className="font-light">Questions</em>
+              <h1 className="d text-[clamp(40px,8vw,80px)] leading-[0.98] mt-2 mb-6 font-serif text-black">
+                Frequently Asked <i>Questions.</i>
               </h1>
               <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 Clear answers regarding our printing techniques, cotton papers, proofing workflows, turnaround times, and delivery across India and internationally.
@@ -90,7 +89,7 @@ export default function FAQPage() {
                   rel="noopener noreferrer"
                   className="btn"
                 >
-                  Chat on WhatsApp
+                  Contact Studio on WhatsApp
                 </a>
                 <Link
                   href="/start-a-project"

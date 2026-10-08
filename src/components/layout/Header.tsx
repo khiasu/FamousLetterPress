@@ -12,10 +12,13 @@ const menuGroups = [
     num: "01",
     title: "What we make",
     links: [
-      { label: "Wedding Invites & Suites", href: "/our-work/wedding-invites" },
-      { label: "Cards + Letterheads", href: "/our-work/business-cards" },
-      { label: "Personalised Stationery", href: "/personalised-stationery" },
-      { label: "Wax Seals & Embellishments", href: "/our-work/seal-stickers" },
+      { label: "Wedding Invites", href: "/our-work/wedding-invites" },
+      { label: "Business Cards", href: "/our-work/business-cards" },
+      { label: "Seal Stickers", href: "/our-work/seal-stickers" },
+      { label: "Envelopes", href: "/our-work/envelopes" },
+      { label: "Certificates", href: "/our-work/certificates" },
+      { label: "Design & Illustration", href: "/our-work/design-illustration" },
+      { label: "Custom Works", href: "/our-work/custom-works" },
     ],
   },
   {
@@ -40,20 +43,22 @@ const menuGroups = [
   {
     id: "sample-kits",
     num: "04",
-    title: "Sample Kits & Packages",
+    title: "Sample Kits",
     links: [
-      { label: "Wedding Sample Box (₹1,500)", href: "/weddings/wedding-sample-kit" },
-      { label: "Design Templates & Curated Suites", href: "/packages" },
+      { label: "Wedding Sample Kit", href: "/weddings/wedding-sample-kit" },
+      { label: "Business Card Sample Kit", href: "/business-cards/business-card-sample-kit" },
     ],
   },
   {
     id: "help-info",
     num: "05",
-    title: "Help & Inquiries",
+    title: "Help & Queries",
     links: [
-      { label: "Frequently Asked Questions", href: "/faq" },
-      { label: "Chat on WhatsApp", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", external: true },
+      { label: "Contact Studio on WhatsApp", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", external: true },
+      { label: "FAQs", href: "/faq" },
+      { label: "T&Cs", href: "/terms-conditions" },
       { label: "Start a Project / Inquire", href: "/start-a-project" },
+      { label: "Early Bride Consultation", href: "/our-work/wedding-invites#early-bride" },
     ],
   },
 ];

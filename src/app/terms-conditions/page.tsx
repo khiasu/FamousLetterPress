@@ -21,7 +21,6 @@ export default function TermsConditionsPage() {
               <span>/</span>
               <span className="text-black font-medium">Terms &amp; Conditions</span>
             </div>
-            <p className="k mb-2">Legal &bull; Client Agreement &amp; Studio Policies</p>
             <h1 className="d text-[clamp(36px,7.5vw,72px)] leading-[1.0] mt-2 mb-6 font-serif text-black">
               Terms &amp; <i>Conditions.</i>
             </h1>
@@ -205,7 +204,7 @@ export default function TermsConditionsPage() {
                 rel="noopener noreferrer"
                 className="btn"
               >
-                Contact Us on WhatsApp
+                Contact Studio on WhatsApp
               </a>
               <Link href="/privacy-policy" className="ln">
                 View Privacy Policy &rarr;

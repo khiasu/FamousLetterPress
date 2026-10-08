@@ -21,7 +21,6 @@ export default function PrivacyPolicyPage() {
               <span>/</span>
               <span className="text-black font-medium">Privacy Policy</span>
             </div>
-            <p className="k mb-2">Legal &bull; Privacy &amp; Intellectual Property Protection</p>
             <h1 className="d text-[clamp(36px,7.5vw,72px)] leading-[1.0] mt-2 mb-6 font-serif text-black">
               Privacy <i>Policy.</i>
             </h1>

@@ -9,9 +9,9 @@ const QUICK_LINKS = [
   { label: "Wedding Invites", href: "/our-work/wedding-invites" },
   { label: "Business Cards", href: "/our-work/business-cards" },
   { label: "Process, Materials & Craft", href: "/craft" },
-  { label: "Early Bride Consultation", href: "/our-work/wedding-invites#early-bride" },
+  { label: "Our Story & Studio", href: "/about" },
   { label: "FAQs", href: "/faq" },
-  { label: "Terms & Conditions", href: "/terms-conditions" },
+  { label: "T&Cs", href: "/terms-conditions" },
   { label: "Privacy Policy", href: "/privacy-policy" },
 ];
 
