@@ -277,9 +277,9 @@ export function WorkGalleryCarousel({
         ))}
       </div>
 
-      {/* ── Centered Dynamic Counter & Progress Rail Bar ── */}
-      <div className="container-wide mt-6 flex flex-col items-center">
-        <div className="mb-3 text-center">
+      {/* ── Dynamic Counter & Progress Rail Bar (Left Aligned to Container Padding) ── */}
+      <div className="container-wide mt-6">
+        <div className="mb-3 text-left">
           <span className="font-mono text-xs text-[#7b7566] tracking-[0.22em] uppercase font-medium">
             {p2(currentIndex + 1)} / {p2(total)}
           </span>

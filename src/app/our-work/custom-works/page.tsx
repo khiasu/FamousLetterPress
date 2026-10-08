@@ -86,7 +86,6 @@ export default function CustomWorksPage() {
               <span>/</span>
               <span className="text-black font-medium">Custom Works</span>
             </div>
-            <p className="k mb-2">Category 07 &bull; Special Artisanal Commissions</p>
             <h1 className="d text-[clamp(36px,7.5vw,72px)] leading-[1.0] mt-2 mb-6 font-serif text-black">
               Custom <i>Works.</i>
             </h1>

@@ -86,7 +86,6 @@ export default function DesignIllustrationPage() {
               <span>/</span>
               <span className="text-black font-medium">Design & Illustrations</span>
             </div>
-            <p className="k mb-2">Category 06 &bull; In-House Design & Artwork</p>
             <h1 className="d text-[clamp(36px,7.5vw,72px)] leading-[1.0] mt-2 mb-6 font-serif text-black">
               Design & <i>Illustrations.</i>
             </h1>
