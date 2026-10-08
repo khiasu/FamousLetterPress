@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Reveal } from "@/components/ui/Reveal";
+import { WorkGalleryCarousel } from "@/components/ui/WorkGalleryCarousel";
 
 export const metadata: Metadata = {
   title: "Luxury Letterpress Business Cards | Famous Letterpress",
@@ -126,42 +128,18 @@ export default function BusinessCardsWorkPage() {
         </div>
       </section>
 
-      {/* ── Client Cards Grid ── */}
-      <section className="py-16 md:py-24" aria-label="Selected Business Cards">
-        <div className="w">
-          <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
-              Our Clients Archive
-            </span>
-            <span className="text-xs text-[#888] font-light">
-              300–540 GSM Wild Ivory Cotton Blends
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-            {CLIENT_CARDS.map((card) => (
-              <div
-                key={card.client}
-                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-4 sm:p-5 flex flex-col rounded-xs transition-all duration-300 hover:border-black/35 hover:-translate-y-1 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={card.img}
-                    alt={card.client}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="font-serif font-medium text-lg text-black mb-1">
-                  {card.client}
-                </h3>
-                <p className="text-[11.5px] text-[#666] font-light leading-relaxed">
-                  {card.specs}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* ── Client Cards Carousel Showcase ── */}
+      <section className="py-14 md:py-20 bg-white" aria-label="Selected Business Cards">
+        <Reveal>
+          <WorkGalleryCarousel
+            items={CLIENT_CARDS.map((card) => ({
+              title: card.client,
+              desc: card.specs,
+              img: card.img,
+            }))}
+            categoryTitle="Our Clients Archive • 300–540 GSM Wild Ivory"
+          />
+        </Reveal>
       </section>
 
       {/* ── Finishes & Tactile Options ── */}
@@ -201,25 +179,24 @@ export default function BusinessCardsWorkPage() {
       </section>
 
       {/* ── Bottom CTA ── */}
-      <section className="py-20 md:py-28 text-center bg-white">
-        <div className="max-w-2xl mx-auto px-6">
-          <p className="k mb-2">Corporate & Identity Commissions</p>
-          <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
-            Command attention with every <i>handshake.</i>
-          </h2>
-          <p className="text-sm sm:text-base text-[#555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-            Choose from single or multi-color letterpress, edge gilding, debossing, and custom die cuts. We provide digital proofs and paper guidance within 24 hours.
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-            <Link href="/start-a-project" className="btn">
-              Request Price
-            </Link>
-            <Link href="/business-cards/business-card-sample-kit" className="btn bg-transparent text-black border border-black hover:bg-black hover:text-white">
-              Order Sample Kit
-            </Link>
-            <Link href="/our-work" className="ln">
-              &larr; Back to Our Work
-            </Link>
+      <section className="py-20 md:py-28 bg-white border-t border-[#E5E5E5]">
+        <div className="container-wide">
+          <div className="max-w-2xl">
+            <p className="k mb-2">Corporate & Identity Commissions</p>
+            <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+              Command attention with every <i>handshake.</i>
+            </h2>
+            <p className="text-sm sm:text-base text-[#555] mb-8 font-light leading-relaxed">
+              Choose from single or multi-color letterpress, edge gilding, debossing, and custom die cuts. We provide digital proofs and paper guidance within 24 hours.
+            </p>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <Link href="/start-a-project" className="btn">
+                Request Price
+              </Link>
+              <Link href="/business-cards/business-card-sample-kit" className="ln">
+                Order Sample Kit &rarr;
+              </Link>
+            </div>
           </div>
         </div>
       </section>

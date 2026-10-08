@@ -82,7 +82,7 @@ export function EarlyBrideForm() {
 
   if (successData) {
     return (
-      <div className="bg-white border border-[#E5E5E5] p-8 md:p-12 text-center max-w-2xl mx-auto shadow-[0_12px_32px_-16px_rgba(0,0,0,0.08)]">
+      <div className="bg-white border border-[#E5E5E5] p-8 md:p-12 w-full text-center shadow-[0_12px_32px_-16px_rgba(0,0,0,0.08)]">
         <div className="w-12 h-12 bg-black text-white rounded-none flex items-center justify-center mx-auto mb-4">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
@@ -117,7 +117,7 @@ export function EarlyBrideForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-[#E5E5E5] p-8 md:p-12 max-w-3xl mx-auto shadow-[0_12px_32px_-16px_rgba(0,0,0,0.08)]">
+    <form onSubmit={handleSubmit} className="bg-white border border-[#E5E5E5] p-8 md:p-12 lg:p-14 w-full shadow-[0_12px_32px_-16px_rgba(0,0,0,0.08)]">
       {/* Honeypot hidden input */}
       <input
         type="text"
@@ -146,8 +146,8 @@ export function EarlyBrideForm() {
         {/* Section 1: Couple & Celebration */}
         <div>
           <p className="text-[11px] uppercase tracking-[0.2em] font-semibold text-black mb-3 font-sans">01. The Celebration</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="sm:col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="sm:col-span-2 lg:col-span-1">
               <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1.5 font-sans">
                 Couple Names *
               </label>
@@ -192,7 +192,7 @@ export function EarlyBrideForm() {
         <div>
           <p className="text-[11px] uppercase tracking-[0.2em] font-semibold text-black mb-2 font-sans">02. Anticipated Pieces</p>
           <p className="text-xs text-[#666] mb-4 font-sans">Select all that you may require:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
             {stationeryOptions.map((opt) => {
               const checked = formData.stationeryNeeds.includes(opt);
               return (
@@ -262,7 +262,7 @@ export function EarlyBrideForm() {
         {/* Section 4: Contact Details */}
         <div>
           <p className="text-[11px] uppercase tracking-[0.2em] font-semibold text-black mb-3 font-sans">04. Your Contact Details</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1.5 font-sans">
                 Email Address *
@@ -289,11 +289,11 @@ export function EarlyBrideForm() {
                 className="w-full bg-[#FAF8F5] border border-[#E5E5E5] px-3.5 py-2.5 text-sm text-black focus:outline-none focus:border-black focus:bg-white transition-colors"
               />
             </div>
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-2 lg:col-span-1">
               <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1.5 font-sans">
                 Preferred Contact Method
               </label>
-              <div className="flex gap-6 mt-1">
+              <div className="flex gap-6 mt-2.5">
                 {(["WhatsApp", "Email", "Phone"] as const).map((method) => (
                   <label key={method} className="flex items-center gap-2 text-xs text-black cursor-pointer font-sans">
                     <input
@@ -313,16 +313,16 @@ export function EarlyBrideForm() {
         </div>
       </div>
 
-      <div className="mt-10 pt-6 border-t border-[#E5E5E5]">
+      <div className="mt-10 pt-6 border-t border-[#E5E5E5] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-4 text-[11px] sm:text-xs tracking-[0.22em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-sans font-medium rounded-none cursor-pointer shadow-sm"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 text-[11px] sm:text-xs tracking-[0.22em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-sans font-medium rounded-none cursor-pointer shadow-sm"
         >
           {isLoading ? "Submitting Consultation..." : "Submit Early Bride Consultation"}
         </button>
-        <p className="text-[11px] text-[#888] text-center mt-3 font-sans">
-          We respect your privacy. No spam, ever. We strictly use your details to review and discuss your bespoke stationery.
+        <p className="text-[11px] text-[#888] font-sans">
+          We respect your privacy. No spam, ever.
         </p>
       </div>
     </form>

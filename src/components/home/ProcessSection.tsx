@@ -28,7 +28,7 @@ export function ProcessSection() {
   return (
     <section className="section bg-ivory" aria-label="Our process">
       <div className="container-wide">
-        <div className="text-center mb-16">
+        <div className="mb-16">
           <Reveal>
             <p className="eyebrow text-taupe mb-4">How We Work</p>
           </Reveal>
@@ -40,7 +40,7 @@ export function ProcessSection() {
           </Reveal>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {steps.map((step, index) => (
             <Reveal key={step.number} delay={0.15 + index * 0.1}>
               <div className="relative">
@@ -61,9 +61,9 @@ export function ProcessSection() {
         </div>
 
         <Reveal delay={0.5}>
-          <div className="text-center mt-14">
-            <Button href="/process" variant="ghost">
-              See the full process →
+          <div className="mt-14">
+            <Button href="/craft" variant="ghost">
+              See the full process &amp; craft →
             </Button>
           </div>
         </Reveal>

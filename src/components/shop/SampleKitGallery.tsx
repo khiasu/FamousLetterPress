@@ -76,7 +76,7 @@ export function SampleKitGallery({ images, title }: SampleKitGalleryProps) {
     <div className="-mx-[22px] sm:mx-0 overflow-hidden bg-[#F7F7F7] border-b sm:border border-[#E5E5E5] select-none">
       {/* Main Swipeable Showcase Viewport */}
       <div
-        className="aspect-square sm:aspect-[16/11] relative overflow-hidden bg-[#EFEFEF] group touch-pan-y"
+        className="aspect-square sm:aspect-[16/11] relative overflow-hidden bg-[#EFEFEF] group touch-auto"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

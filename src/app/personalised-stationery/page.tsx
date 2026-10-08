@@ -118,15 +118,15 @@ export default function PersonalisedStationeryPage() {
       {pieces.length > 0 && (
         <section className="section bg-white" aria-label="Selected Commissions">
           <div className="container-wide">
-            <div className="text-center max-w-lg mx-auto mb-12">
+            <div className="max-w-lg mb-12">
               <Reveal>
-                <p className="eyebrow mb-2">Selected Suite</p>
-                <h2 className="mb-4 font-serif">
-                  Bespoke Monogram <em className="font-light">Commission</em>
+                <p className="k mb-2">Selected Suite</p>
+                <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+                  Bespoke Monogram <i>Commission</i>
                 </h2>
               </Reveal>
             </div>
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl">
               {pieces.map((piece) => (
                 <Reveal key={piece.id}>
                   <div className="bg-white border border-[#E5E5E5] overflow-hidden group h-full flex flex-col justify-between">
@@ -139,7 +139,7 @@ export default function PersonalisedStationeryPage() {
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                         />
                       </div>
-                      <div className="p-6 text-center">
+                      <div className="p-6 text-left">
                         <span className="font-mono text-[10px] uppercase tracking-widest text-[#888888] mb-2 block">
                           {piece.paperStock}
                         </span>
@@ -150,7 +150,7 @@ export default function PersonalisedStationeryPage() {
                       </div>
                     </div>
                     <div className="p-6 pt-0">
-                      <div className="flex flex-wrap justify-center gap-1.5 pt-4 border-t border-[#E5E5E5]">
+                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[#E5E5E5]">
                         {piece.techniques.map((t) => (
                           <span key={t} className="text-[10px] bg-white border border-[#E5E5E5] px-2.5 py-1 text-black font-sans tracking-wide">
                             {t}
@@ -167,31 +167,33 @@ export default function PersonalisedStationeryPage() {
       )}
 
       {/* ── CTA ── */}
-      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
-        <div className="container-narrow">
+      <section className="section-lg bg-white text-black border-t border-[#E5E5E5]">
+        <div className="container-wide">
           <Reveal>
-            <p className="eyebrow text-[#888888] mb-3">Commission Your Suite</p>
-            <h2 className="text-black mb-4">
-              Start your personal <em className="font-light">writing collection.</em>
-            </h2>
-            <p className="text-sm md:text-base text-[#555555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-              Share your monogram ideas or correspondence needs. Our studio will prepare paper recommendations and typographic layouts.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/start-a-project?service=personalised-stationery"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
-              >
-                Start a Stationery Enquiry
-              </Link>
-              <a
-                href="https://wa.me/919366012345"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
-              >
-                Contact via WhatsApp
-              </a>
+            <div className="max-w-2xl">
+              <p className="k mb-2">Commission Your Suite</p>
+              <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1.05] font-serif text-black mb-4">
+                Start your personal <i>writing collection.</i>
+              </h2>
+              <p className="text-sm md:text-base text-[#555] mb-8 font-light leading-relaxed">
+                Share your monogram ideas or correspondence needs. Our studio will prepare paper recommendations and typographic layouts.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <Link
+                  href="/start-a-project?service=personalised-stationery"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                >
+                  Start a Stationery Enquiry
+                </Link>
+                <a
+                  href="https://wa.me/919366012345"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ln"
+                >
+                  Contact via WhatsApp &rarr;
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>

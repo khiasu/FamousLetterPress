@@ -188,27 +188,29 @@ export default function TermsConditionsPage() {
       </section>
 
       {/* ── Bottom Navigation ── */}
-      <section className="py-16 md:py-20 text-center border-t border-[rgba(14,14,14,0.08)] bg-white">
-        <div className="max-w-xl mx-auto px-6">
-          <p className="k mb-2">Famous Letterpress Studio</p>
-          <h2 className="d text-[clamp(28px,5vw,44px)] leading-[1.05] font-serif text-black mb-4">
-            Questions regarding our <i>terms?</i>
-          </h2>
-          <p className="text-xs sm:text-sm text-[#555] max-w-md mx-auto mb-6 font-light leading-relaxed">
-            Our team is available to assist you with order inquiries, proofs, custom quotes, and legal disclosures.
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-4">
-            <a
-              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20regarding%20terms..."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-            >
-              Contact Us on WhatsApp
-            </a>
-            <Link href="/privacy-policy" className="ln">
-              View Privacy Policy &rarr;
-            </Link>
+      <section className="py-16 md:py-20 border-t border-[rgba(14,14,14,0.08)] bg-white">
+        <div className="container-wide">
+          <div className="max-w-xl">
+            <p className="k mb-2">Famous Letterpress Studio</p>
+            <h2 className="d text-[clamp(28px,5vw,44px)] leading-[1.05] font-serif text-black mb-4">
+              Questions regarding our <i>terms?</i>
+            </h2>
+            <p className="text-xs sm:text-sm text-[#555] mb-6 font-light leading-relaxed">
+              Our team is available to assist you with order inquiries, proofs, custom quotes, and legal disclosures.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20regarding%20terms..."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn"
+              >
+                Contact Us on WhatsApp
+              </a>
+              <Link href="/privacy-policy" className="ln">
+                View Privacy Policy &rarr;
+              </Link>
+            </div>
           </div>
         </div>
       </section>

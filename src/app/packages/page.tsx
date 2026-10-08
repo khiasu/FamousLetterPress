@@ -233,29 +233,31 @@ export default function PackagesPage() {
       </section>
 
       {/* ── Bottom CTA ── */}
-      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
-        <div className="container-narrow">
+      <section className="section-lg bg-white text-black border-t border-[#E5E5E5]">
+        <div className="container-wide">
           <Reveal>
-            <p className="eyebrow text-[#888888] mb-3">Questions &amp; Quotes</p>
-            <h2 className="text-black mb-4">
-              Not sure which package <em className="font-light">fits your wedding?</em>
-            </h2>
-            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
-              Order our Wedding Sample Kit to feel the paper and foil variations in person, or chat with our founder to review guest counts and ballpark budgets.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/weddings/wedding-sample-kit"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
-              >
-                Order Sample Kit (₹1,500)
-              </Link>
-              <Link
-                href="/our-work/wedding-invites#early-bride"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
-              >
-                Book a Consultation
-              </Link>
+            <div className="max-w-2xl">
+              <p className="k mb-2">Questions &amp; Quotes</p>
+              <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1.05] font-serif text-black mb-4">
+                Not sure which package <i>fits your wedding?</i>
+              </h2>
+              <p className="text-sm md:text-base text-[#555] mb-8 leading-relaxed font-light">
+                Order our Wedding Sample Kit to feel the paper and foil variations in person, or chat with our founder to review guest counts and ballpark budgets.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <Link
+                  href="/weddings/wedding-sample-kit"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                >
+                  Order Sample Kit (₹1,500)
+                </Link>
+                <Link
+                  href="/our-work/wedding-invites#early-bride"
+                  className="ln"
+                >
+                  Book a Consultation &rarr;
+                </Link>
+              </div>
             </div>
           </Reveal>
         </div>

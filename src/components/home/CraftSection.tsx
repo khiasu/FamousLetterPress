@@ -61,11 +61,11 @@ export function CraftSection() {
 
             <Reveal delay={0.5}>
               <Button
-                href="/materials"
+                href="/craft"
                 variant="outline"
                 className="!border-ivory/20 !text-ivory hover:!bg-ivory/5"
               >
-                Explore materials →
+                Explore materials &amp; craft →
               </Button>
             </Reveal>
           </div>

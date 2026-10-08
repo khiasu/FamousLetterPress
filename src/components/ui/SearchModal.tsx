@@ -34,11 +34,11 @@ const POPULAR_SEARCHES: NavigationTarget[] = [
     keywords: ["sample", "kit", "box", "wedding sample", "swatch", "paper"],
   },
   {
-    id: "letterpress-craft",
-    title: "Letterpress Craft & Process",
+    id: "process-craft-materials",
+    title: "Process, Materials & Craft",
     category: "How we make it",
-    href: "/process",
-    keywords: ["process", "craft", "bite", "heidelberg", "relief", "printing", "foil", "emboss"],
+    href: "/craft",
+    keywords: ["process", "craft", "materials", "paper", "cotton", "bite", "heidelberg", "relief", "printing", "foil", "emboss", "swatch"],
   },
 ];
 
@@ -46,7 +46,6 @@ const ALL_SEARCH_TARGETS: NavigationTarget[] = [
   ...POPULAR_SEARCHES,
   { id: "personalised-stationery", title: "Personalised Stationery", category: "What we make", href: "/personalised-stationery", keywords: ["stationery", "notecard", "monogram", "correspondence"] },
   { id: "seal-stickers", title: "Wax Seals & Embellishments", category: "What we make", href: "/our-work/seal-stickers", keywords: ["wax seals", "seals", "embellishments", "cotton seals", "crests"] },
-  { id: "cotton-paper", title: "Cotton & Handmade Paper", category: "How we make it", href: "/materials", keywords: ["materials", "paper", "cotton", "handmade", "swatch"] },
   { id: "about-studio", title: "Our Story & Studio", category: "About", href: "/about", keywords: ["story", "studio", "about", "founders", "heritage"] },
   { id: "packages", title: "Design Templates & Curated Suites", category: "Packages", href: "/packages", keywords: ["packages", "templates", "pricing", "suites"] },
   { id: "channel-partners", title: "Channel Partners & Designers", category: "Who we make it for", href: "/channel-partners", keywords: ["partner", "designer", "trade", "b2b", "agency"] },

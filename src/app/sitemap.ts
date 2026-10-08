@@ -21,8 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/personalised-stationery",
     "/channel-partners",
     "/about",
-    "/process",
-    "/materials",
+    "/craft",
     "/faq",
     "/start-a-project",
   ];

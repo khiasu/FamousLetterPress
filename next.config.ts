@@ -19,6 +19,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // ── Process, Materials & Craft Unified Route ──
+      {
+        source: "/process",
+        destination: "/craft",
+        permanent: true,
+      },
+      {
+        source: "/materials",
+        destination: "/craft",
+        permanent: true,
+      },
+
       // ── Sample Kit Legacy URLs (WooCommerce & Campaign Landing Pages) ──
       {
         source: "/product/wedding-sample-kit",
@@ -264,7 +276,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/our-process",
-        destination: "/process",
+        destination: "/craft",
         permanent: true,
       },
       {
@@ -289,17 +301,17 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/what-is-letterperess",
-        destination: "/process",
+        destination: "/craft",
         permanent: true,
       },
       {
         source: "/journal",
-        destination: "/process",
+        destination: "/craft",
         permanent: true,
       },
       {
         source: "/journal/:path*",
-        destination: "/process",
+        destination: "/craft",
         permanent: true,
       },
     ];

@@ -23,9 +23,7 @@ const menuGroups = [
     num: "02",
     title: "How we make it",
     links: [
-      { label: "Cotton & Handmade Paper", href: "/materials" },
-      { label: "Letterpress Craft & Bite", href: "/process" },
-      { label: "Hot Foil & Emboss", href: "/process" },
+      { label: "Our Process, Materials & Craft", href: "/craft" },
       { label: "Our Story & Studio", href: "/about" },
     ],
   },
@@ -142,7 +140,7 @@ export function Header({
       {/* ── Fixed Studio Header ── */}
       <header
         id="hd"
-        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 sm:px-14 md:px-16 py-3 transition-all duration-300 ease-out will-change-transform ${
+        className={`fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 md:px-12 lg:px-16 py-3 transition-all duration-300 ease-out will-change-transform ${
           isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
         } ${
           isScrolled

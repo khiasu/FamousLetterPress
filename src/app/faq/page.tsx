@@ -72,31 +72,33 @@ export default function FAQPage() {
       </section>
 
       {/* ── Still Have Questions CTA ── */}
-      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
-        <div className="w">
+      <section className="section-lg bg-white text-black border-t border-[#E5E5E5]">
+        <div className="container-wide">
           <Reveal>
-            <p className="eyebrow text-[#888888] mb-3">Direct Studio Support</p>
-            <h2 className="text-black mb-4">
-              Still have a specific question?
-            </h2>
-            <p className="text-sm md:text-base text-[#555555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-              Reach out directly to our pressroom team on WhatsApp or send us an email. We are always glad to assist.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20about..."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
-              >
-                Chat on WhatsApp
-              </a>
-              <Link
-                href="/start-a-project"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
-              >
-                Start a Project
-              </Link>
+            <div className="max-w-2xl">
+              <p className="k mb-2">Direct Studio Support</p>
+              <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1.05] font-serif text-black mb-4">
+                Still have a <i>specific question?</i>
+              </h2>
+              <p className="text-sm md:text-base text-[#555] mb-8 font-light leading-relaxed">
+                Reach out directly to our pressroom team on WhatsApp or send us an email. We are always glad to assist.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <a
+                  href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20about..."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                >
+                  Chat on WhatsApp
+                </a>
+                <Link
+                  href="/start-a-project"
+                  className="ln"
+                >
+                  Start a Project &rarr;
+                </Link>
+              </div>
             </div>
           </Reveal>
         </div>

@@ -37,8 +37,8 @@ export default function StartAProjectPage({ searchParams }: StartProjectPageProp
       <section className="pt-28 pb-12 md:pt-36 md:pb-16 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
-            <div className="max-w-2xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-2 mb-4 text-[10px] tracking-[0.18em] uppercase text-[#7b7566] font-mono">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 mb-4 text-[10px] tracking-[0.18em] uppercase text-[#7b7566] font-mono">
                 <Link href="/" className="hover:text-black transition-colors">Home</Link>
                 <span>/</span>
                 <span className="text-black font-medium">Start a Project</span>
@@ -46,7 +46,7 @@ export default function StartAProjectPage({ searchParams }: StartProjectPageProp
               <h1 className="d text-[clamp(36px,7.5vw,68px)] leading-[1.0] mt-2 mb-4 font-serif text-black">
                 Start a <i>Commission</i>
               </h1>
-              <p className="text-base sm:text-lg text-[#555] max-w-xl mx-auto font-light leading-relaxed">
+              <p className="text-base sm:text-lg text-[#555] font-light leading-relaxed">
                 Whether you have an upcoming wedding celebration, need executive identity cards, or are planning bespoke personal stationery, our studio is ready to bring it to life.
               </p>
             </div>

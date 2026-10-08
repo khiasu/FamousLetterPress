@@ -93,11 +93,11 @@ export default function ChannelPartnersPage() {
       {/* ── Who We Collaborate With ── */}
       <section className="section bg-white" aria-label="Creative Disciplines">
         <div className="container-wide">
-          <div className="text-center max-w-xl mx-auto mb-16">
+          <div className="max-w-xl mb-16">
             <Reveal>
-              <p className="eyebrow mb-2">Trade Network</p>
-              <h2 className="mb-4">
-                Built for <em className="font-light">creative professionals</em>
+              <p className="k mb-2">Trade Network</p>
+              <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+                Built for <i>creative professionals</i>
               </h2>
             </Reveal>
           </div>
@@ -130,13 +130,13 @@ export default function ChannelPartnersPage() {
       {/* ── Collaboration Workflow ── */}
       <section className="section bg-white" aria-label="Trade Workflow">
         <div className="container-wide">
-          <div className="text-center max-w-xl mx-auto mb-16">
+          <div className="max-w-xl mb-16">
             <Reveal>
-              <p className="eyebrow mb-2">Partnership Process</p>
-              <h2 className="mb-4">
-                How we work <em className="font-light">together</em>
+              <p className="k mb-2">Partnership Process</p>
+              <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+                How we work <i>together</i>
               </h2>
-              <p className="text-xs md:text-sm text-[#555555] leading-relaxed">
+              <p className="text-xs md:text-sm text-[#555555] leading-relaxed font-light">
                 From wholesale trade pricing to direct client drop-shipping under plain packaging.
               </p>
             </Reveal>
@@ -159,31 +159,33 @@ export default function ChannelPartnersPage() {
       </section>
 
       {/* ── Direct Trade Inquiry CTA ── */}
-      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
-        <div className="container-narrow">
+      <section className="section-lg bg-white text-black border-t border-[#E5E5E5]">
+        <div className="container-wide">
           <Reveal>
-            <p className="eyebrow text-[#888888] mb-3">Partner With Us</p>
-            <h2 className="text-black mb-4">
-              Bring letterpress craft to <em className="font-light">your clients.</em>
-            </h2>
-            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
-              We offer trade discounts, custom sample boxes, and prioritized press turnarounds for registered partners. Reach out to set up your account.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/start-a-project?type=partner"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
-              >
-                Register as a Trade Partner
-              </Link>
-              <a
-                href="https://wa.me/919366012345"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
-              >
-                Chat on WhatsApp
-              </a>
+            <div className="max-w-2xl">
+              <p className="k mb-2">Partner With Us</p>
+              <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1.05] font-serif text-black mb-4">
+                Bring letterpress craft to <i>your clients.</i>
+              </h2>
+              <p className="text-sm md:text-base text-[#555] mb-8 leading-relaxed font-light">
+                We offer trade discounts, custom sample boxes, and prioritized press turnarounds for registered partners. Reach out to set up your account.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <Link
+                  href="/start-a-project?type=partner"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                >
+                  Register as a Trade Partner
+                </Link>
+                <a
+                  href="https://wa.me/919366012345"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ln"
+                >
+                  Chat on WhatsApp &rarr;
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>

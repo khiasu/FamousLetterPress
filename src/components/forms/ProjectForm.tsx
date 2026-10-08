@@ -66,15 +66,15 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
 
   if (submittedRef) {
     return (
-      <div className="bg-white border border-[#E5E5E5] p-8 md:p-12 text-center max-w-xl mx-auto">
-        <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="bg-white border border-[#E5E5E5] p-8 md:p-12 w-full text-center">
+        <div className="w-12 h-12 bg-black text-white rounded-none flex items-center justify-center mx-auto mb-4">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
         <p className="eyebrow mb-2">Enquiry Received</p>
         <h2 className="text-2xl md:text-3xl text-black mb-3 font-serif">Thank you for contacting us</h2>
-        <p className="text-sm text-[#555555] mb-8 font-light leading-relaxed">
+        <p className="text-sm text-[#555555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
           Your project reference is <strong className="text-black font-mono">{submittedRef}</strong>.
           We will review your specifications and contact you via{" "}
           <strong className="text-black">({formData.preferredContact})</strong> within 24 business hours.
@@ -82,13 +82,13 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors rounded-none"
           >
             Return to Home
           </Link>
           <Link
-            href="/work"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/30 transition-colors"
+            href="/our-work/wedding-invites"
+            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/30 transition-colors rounded-none"
           >
             View More Work
           </Link>
@@ -98,7 +98,7 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-[#E5E5E5] p-8 md:p-12 max-w-3xl mx-auto">
+    <form onSubmit={handleSubmit} className="bg-white border border-[#E5E5E5] p-8 md:p-12 lg:p-14 w-full">
       <input
         type="text"
         name="hpField"
@@ -291,15 +291,15 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-[#E5E5E5]">
+      <div className="mt-8 pt-6 border-t border-[#E5E5E5] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 text-[11px] tracking-[0.16em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-medium rounded-none shadow-sm"
         >
           {isLoading ? "Submitting Brief..." : "Submit Project Brief"}
         </button>
-        <p className="text-[11px] text-[#888888] text-center mt-3 font-sans">
+        <p className="text-[11px] text-[#888888] font-sans">
           We reply promptly within 24 hours. Your details are strictly confidential.
         </p>
       </div>

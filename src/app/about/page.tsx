@@ -121,11 +121,11 @@ export default function AboutPage() {
       {/* ── Studio Pillars ── */}
       <section className="section bg-white" aria-label="Core Pillars">
         <div className="container-wide">
-          <div className="text-center max-w-xl mx-auto mb-16">
+          <div className="max-w-xl mb-16">
             <Reveal>
-              <p className="eyebrow mb-2">What We Stand For</p>
-              <h2 className="mb-4">
-                The four pillars of <em className="font-light">our craft</em>
+              <p className="k mb-2">What We Stand For</p>
+              <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+                The four pillars of <i>our craft</i>
               </h2>
             </Reveal>
           </div>
@@ -147,29 +147,31 @@ export default function AboutPage() {
       </section>
 
       {/* ── Consultation CTA ── */}
-      <section className="section-lg bg-white text-black text-center border-t border-[#E5E5E5]">
-        <div className="container-narrow">
+      <section className="section-lg bg-white text-black border-t border-[#E5E5E5]">
+        <div className="container-wide">
           <Reveal>
-            <p className="eyebrow text-[#888888] mb-3">Work With Our Studio</p>
-            <h2 className="text-black mb-4">
-              Let&apos;s create something <em className="font-light">worth keeping forever.</em>
-            </h2>
-            <p className="text-sm md:text-base text-[#555555] mb-8 max-w-lg mx-auto leading-relaxed">
-              We welcome commissions for bespoke wedding invitations, luxury business cards, and custom stationery suites.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/start-a-project"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-neutral-800 transition-colors"
-              >
-                Start a Conversation
-              </Link>
-              <Link
-                href="/weddings/wedding-sample-kit"
-                className="inline-flex px-8 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors"
-              >
-                Order Sample Kit
-              </Link>
+            <div className="max-w-2xl">
+              <p className="k mb-2">Work With Our Studio</p>
+              <h2 className="d text-[clamp(32px,6vw,56px)] leading-[1.05] font-serif text-black mb-4">
+                Let&apos;s create something <i>worth keeping forever.</i>
+              </h2>
+              <p className="text-sm md:text-base text-[#555] mb-8 leading-relaxed font-light">
+                We welcome commissions for bespoke wedding invitations, luxury business cards, and custom stationery suites.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <Link
+                  href="/start-a-project"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                >
+                  Start a Conversation
+                </Link>
+                <Link
+                  href="/weddings/wedding-sample-kit"
+                  className="ln"
+                >
+                  Order Sample Kit &rarr;
+                </Link>
+              </div>
             </div>
           </Reveal>
         </div>

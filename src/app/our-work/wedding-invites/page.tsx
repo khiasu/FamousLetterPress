@@ -193,7 +193,7 @@ export default function WeddingInvitesPage() {
       <section id="early-bride" className="py-16 md:py-24 bg-white scroll-mt-20 border-b border-[#E5E5E5]">
         <div className="container-wide">
           <Reveal>
-            <div className="max-w-3xl mx-auto mb-12 text-center">
+            <div className="max-w-3xl mb-12">
               <p className="k mb-2">Dedicated Bespoke Service</p>
               <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
                 The Early Bride <i>Experience.</i>
@@ -211,29 +211,31 @@ export default function WeddingInvitesPage() {
       </section>
 
       {/* ── Bottom CTA & Quick Actions ── */}
-      <section className="py-20 md:py-28 text-center bg-[#FAF8F5]">
-        <div className="max-w-2xl mx-auto px-6">
+      <section className="py-20 md:py-28 bg-[#FAF8F5]">
+        <div className="container-wide">
           <Reveal>
-            <p className="k mb-2">Ready to Create Your Suite?</p>
-            <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
-              Let&rsquo;s craft something <i>unforgettable.</i>
-            </h2>
-            <p className="text-sm sm:text-base text-[#555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-              Share your wedding details or order our physical sample box to explore pure cotton letterpress in person.
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-              <a
-                href="#early-bride"
-                className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
-              >
-                Book a Consultation
-              </a>
-              <Link
-                href="/weddings/wedding-sample-kit"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-black text-black hover:bg-black hover:text-white transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
-              >
-                Order Sample Box (₹1,500)
-              </Link>
+            <div className="max-w-2xl">
+              <p className="k mb-2">Ready to Create Your Suite?</p>
+              <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+                Let&rsquo;s craft something <i>unforgettable.</i>
+              </h2>
+              <p className="text-sm sm:text-base text-[#555] mb-8 font-light leading-relaxed">
+                Share your wedding details or order our physical sample box to explore pure cotton letterpress in person.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                <a
+                  href="#early-bride"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                >
+                  Book a Consultation
+                </a>
+                <Link
+                  href="/weddings/wedding-sample-kit"
+                  className="ln"
+                >
+                  Order Sample Box (₹1,500) &rarr;
+                </Link>
+              </div>
             </div>
           </Reveal>
         </div>

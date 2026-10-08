@@ -2,17 +2,21 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 
-export interface WeddingItem {
+export interface GalleryItem {
   title: string;
   desc: string;
   img: string;
 }
 
-interface WeddingGalleryCarouselProps {
-  items: WeddingItem[];
+interface WorkGalleryCarouselProps {
+  items: GalleryItem[];
+  categoryTitle?: string;
 }
 
-export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
+export function WorkGalleryCarousel({
+  items,
+  categoryTitle = "Portfolio Gallery",
+}: WorkGalleryCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -30,9 +34,9 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
     if (!track) return;
     const maxScroll = track.scrollWidth - track.clientWidth;
     const currentScroll = track.scrollLeft;
-    
+
     // Find slide closest to viewport center
-    const slides = track.querySelectorAll<HTMLElement>(".wedding-slide");
+    const slides = track.querySelectorAll<HTMLElement>(".work-slide");
     const trackCenter = currentScroll + track.clientWidth / 2;
     let closestIdx = 0;
     let minDistance = Infinity;
@@ -69,14 +73,14 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
   const centerCard = (index: number) => {
     const track = trackRef.current;
     if (!track) return;
-    const slides = track.querySelectorAll<HTMLElement>(".wedding-slide");
+    const slides = track.querySelectorAll<HTMLElement>(".work-slide");
     const targetSlide = slides[index];
     if (!targetSlide) return;
 
     const trackWidth = track.clientWidth;
     const slideLeft = targetSlide.offsetLeft;
     const slideWidth = targetSlide.offsetWidth;
-    const targetScroll = slideLeft - (trackWidth / 2) + (slideWidth / 2);
+    const targetScroll = slideLeft - trackWidth / 2 + slideWidth / 2;
 
     track.scrollTo({
       left: Math.max(0, targetScroll),
@@ -87,7 +91,7 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
   const scrollByStep = (direction: "left" | "right") => {
     const track = trackRef.current;
     if (!track) return;
-    const slide = track.querySelector<HTMLElement>(".wedding-slide");
+    const slide = track.querySelector<HTMLElement>(".work-slide");
     const step = slide ? slide.offsetWidth + 24 : 450;
     track.scrollBy({
       left: direction === "right" ? step : -step,
@@ -95,9 +99,9 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
     });
   };
 
-  // Robust Desktop Drag Swipe using global window listeners
+  // Robust Desktop Drag Swipe
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.button !== 0) return; // Left click only
+    if (e.button !== 0) return;
     const track = trackRef.current;
     if (!track) return;
 
@@ -135,7 +139,6 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
       track.style.scrollSnapType = "x mandatory";
 
       if (hasMoved.current) {
-        // Snap to closest card smoothly
         updateProgressAndActive();
       }
     };
@@ -148,6 +151,7 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
     };
   }, [updateProgressAndActive]);
 
+  // Touch Swipe Gesture Detection for Mobile
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const isTouchSwiping = useRef(false);
@@ -181,7 +185,7 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
 
   const handleCardClick = (idx: number) => {
     if (hasMoved.current || isTouchSwiping.current) {
-      return; // Ignore clicks if user was actively swiping or dragging
+      return;
     }
     centerCard(idx);
   };
@@ -191,9 +195,9 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
   return (
     <div className="group/carousel relative">
       {/* ── Carousel Header ── */}
-      <div className="w mb-6">
+      <div className="container-wide mb-6">
         <div className="pb-4 border-b border-[#E5E5E5] text-[11px] tracking-[0.2em] uppercase font-mono">
-          <span className="text-black font-medium">Portfolio Gallery</span>
+          <span className="text-black font-medium">{categoryTitle}</span>
         </div>
       </div>
 
@@ -226,7 +230,7 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
         )}
       </div>
 
-      {/* ── Horizontal Scroll Track (Smooth Native Touch Swiping) ── */}
+      {/* ── Horizontal Scroll Track ── */}
       <div
         ref={trackRef}
         onMouseDown={handleMouseDown}
@@ -242,8 +246,8 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
       >
         {items.map((item, idx) => (
           <div
-            key={item.title}
-            className="wedding-slide shrink-0 w-[78vw] sm:w-[380px] md:w-[440px] lg:w-[480px] snap-start"
+            key={item.title + idx}
+            className="work-slide shrink-0 w-[78vw] sm:w-[380px] md:w-[440px] lg:w-[480px] snap-start"
           >
             <article
               onClick={() => handleCardClick(idx)}
@@ -253,7 +257,7 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={item.img}
-                alt={`${item.title} letterpress wedding invitation`}
+                alt={`${item.title} letterpress print`}
                 draggable={false}
                 loading={idx < 3 ? "eager" : "lazy"}
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] pointer-events-none"
@@ -274,7 +278,7 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
       </div>
 
       {/* ── Centered Dynamic Counter & Progress Rail Bar ── */}
-      <div className="w mt-6 flex flex-col items-center">
+      <div className="container-wide mt-6 flex flex-col items-center">
         <div className="mb-3 text-center">
           <span className="font-mono text-xs text-[#7b7566] tracking-[0.22em] uppercase font-medium">
             {p2(currentIndex + 1)} / {p2(total)}
@@ -292,4 +296,3 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
     </div>
   );
 }
-

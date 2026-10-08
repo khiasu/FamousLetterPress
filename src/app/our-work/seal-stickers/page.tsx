@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Reveal } from "@/components/ui/Reveal";
+import { WorkGalleryCarousel } from "@/components/ui/WorkGalleryCarousel";
 
 export const metadata: Metadata = {
   title: "Seal Stickers & Wax Seals | Famous Letterpress",
@@ -103,66 +105,40 @@ export default function SealStickersPage() {
         </div>
       </section>
 
-      {/* ── Gallery Showcase ── */}
-      <section className="py-16 md:py-24" aria-label="Seal Stickers Gallery">
-        <div className="w">
-          <div className="flex items-center justify-between mb-10 pb-4 border-b border-[rgba(14,14,14,0.08)]">
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#7b7566]">
-              Die-Cut Cotton Seals & Wax Seals
-            </span>
-            <span className="text-xs text-[#888] font-light">
-              Peel &bull; Stick &bull; Mess-Free
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {SEAL_GALLERY.map((item) => (
-              <div
-                key={item.title}
-                className="bg-[#FAF8F5] border border-[rgba(14,14,14,0.12)] p-4 sm:p-5 flex flex-col rounded-xs transition-all duration-300 hover:border-black/35 hover:-translate-y-1 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.06)] group"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden mb-4 bg-[#F0ECE1] rounded-xs">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="font-serif font-medium text-xl text-black mb-1.5">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-[#555] font-light leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* ── Seal Stickers Carousel Showcase ── */}
+      <section className="py-14 md:py-20 bg-white" aria-label="Seal Stickers Gallery">
+        <Reveal>
+          <WorkGalleryCarousel
+            items={SEAL_GALLERY}
+            categoryTitle="Die-Cut Cotton Seals & Wax Seals • Peel & Stick"
+          />
+        </Reveal>
       </section>
 
       {/* ── Bottom CTA ── */}
-      <section className="py-20 md:py-28 text-center border-t border-[rgba(14,14,14,0.08)]">
-        <div className="max-w-2xl mx-auto px-6">
-          <p className="k mb-2">Custom Seal Production</p>
-          <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
-            Custom crests, monograms & <i>motifs.</i>
-          </h2>
-          <p className="text-sm sm:text-base text-[#555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-            Send us your monogram or vector artwork, and we will engrave precision dies for your seal stickers or wax stamps.
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-            <Link href="/start-a-project" className="btn">
-              Order Custom Seals
-            </Link>
-            <a
-              href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20seal%20stickers..."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ln"
-            >
-              Contact Studio &rarr;
-            </a>
+      <section className="py-20 md:py-28 border-t border-[rgba(14,14,14,0.08)]">
+        <div className="container-wide">
+          <div className="max-w-2xl">
+            <p className="k mb-2">Custom Seal Production</p>
+            <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+              Custom crests, monograms & <i>motifs.</i>
+            </h2>
+            <p className="text-sm sm:text-base text-[#555] mb-8 font-light leading-relaxed">
+              Send us your monogram or vector artwork, and we will engrave precision dies for your seal stickers or wax stamps.
+            </p>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <Link href="/start-a-project" className="btn">
+                Order Custom Seals
+              </Link>
+              <a
+                href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20seal%20stickers..."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ln"
+              >
+                Contact Studio &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </section>
