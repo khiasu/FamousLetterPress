@@ -117,7 +117,6 @@ export default function CraftPage() {
                 <span>/</span>
                 <span className="text-black font-medium">Process, Materials &amp; Craft</span>
               </div>
-              <p className="k mb-2">Physical Craft &amp; Archival Substrates</p>
               <h1 className="d text-[clamp(38px,7.5vw,72px)] leading-[0.98] mt-2 mb-6 font-serif text-black">
                 From raw cotton to <i>cast-iron impression.</i>
               </h1>
@@ -148,7 +147,6 @@ export default function CraftPage() {
         <div className="container-wide">
           <div className="max-w-2xl mb-14">
             <Reveal>
-              <p className="k mb-2">01 / The Substrates</p>
               <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
                 Archival papers crafted for <i>heavy impression.</i>
               </h2>
@@ -175,7 +173,6 @@ export default function CraftPage() {
                       </div>
                     </div>
                     <div className={`lg:col-span-6 p-8 md:p-12 ${idx % 2 === 1 ? "lg:order-1" : "lg:order-2"}`}>
-                      <p className="k mb-2">{item.subtitle}</p>
                       <h3 className="text-2xl sm:text-3xl font-serif text-black mb-3">{item.title}</h3>
                       <p className="text-xs sm:text-sm text-[#555] leading-relaxed font-light mb-6">
                         {item.desc}
@@ -198,7 +195,6 @@ export default function CraftPage() {
         <div className="container-wide">
           <div className="max-w-2xl mb-14">
             <Reveal>
-              <p className="k mb-2">02 / The Seven Stages</p>
               <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
                 The journey of a <i>bespoke commission.</i>
               </h2>
@@ -212,15 +208,16 @@ export default function CraftPage() {
             {fullProcessSteps.map((item, idx) => (
               <Reveal key={item.title} delay={idx * 0.05}>
                 <div className="bg-white border border-[#E5E5E5] p-6 sm:p-8 md:p-10 transition-all duration-300 hover:border-black/30 hover:shadow-[0_12px_28px_-16px_rgba(0,0,0,0.08)]">
-                  <div className="flex items-center justify-between gap-4 mb-2">
-                    <p className="k text-[10px] text-[#7b7566]">{item.subtitle}</p>
+                  <div className="flex items-center justify-between gap-4 mb-3">
+                    <span className="text-[10px] font-mono tracking-widest text-[#888888] block">
+                      0{idx + 1}
+                    </span>
                     <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#7b7566]">
                       {item.timeline}
                     </span>
                   </div>
 
                   <h3 className="font-serif font-medium text-2xl sm:text-3xl text-black tracking-tight mb-3">
-                    <span className="font-mono text-sm text-[#888] font-normal mr-2">0{idx + 1}.</span>
                     {item.title}
                   </h3>
 
@@ -239,7 +236,6 @@ export default function CraftPage() {
         <div className="container-wide">
           <div className="max-w-2xl mb-14">
             <Reveal>
-              <p className="k mb-2">03 / Finishing Arts</p>
               <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
                 Six tactile <i>dimensions.</i>
               </h2>
@@ -284,13 +280,13 @@ export default function CraftPage() {
                   href="/weddings/wedding-sample-kit"
                   className="btn"
                 >
-                  Order Wedding Sample Kit (₹1,500)
+                  Order Sample Kit
                 </Link>
                 <Link
                   href="/our-work/wedding-invites#early-bride"
                   className="ln"
                 >
-                  Book Early Bride Consultation &rarr;
+                  Book Early Bride Consultation
                 </Link>
               </div>
             </div>
