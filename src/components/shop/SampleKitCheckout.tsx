@@ -166,13 +166,13 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/our-work/wedding-invites"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
+            className="btn"
           >
             Explore Wedding Services
           </Link>
           <Link
             href="/"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/30 transition-colors"
+            className="btn-out btn"
           >
             Return to Home
           </Link>
@@ -338,7 +338,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-4 text-[11px] tracking-[0.16em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-medium"
+            className="btn w-full disabled:opacity-50"
           >
             {isLoading ? "Preparing Order..." : `Proceed to Secure Payment · ₹${kit.price}`}
           </button>

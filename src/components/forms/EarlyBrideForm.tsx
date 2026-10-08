@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { CustomSelect } from "@/components/ui/CustomSelect";
 
 const stationeryOptions = [
   "Main Invitation Suite (Invite, RSVP, Details)",
@@ -101,13 +102,13 @@ export function EarlyBrideForm() {
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/weddings/wedding-sample-kit"
-            className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.2em] uppercase bg-black text-white hover:bg-[#222] transition-colors rounded-none font-medium"
+            className="btn"
           >
             Order Wedding Sample Kit
           </Link>
           <Link
             href="/"
-            className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.2em] uppercase border border-black text-black hover:bg-black hover:text-white transition-colors rounded-none font-medium"
+            className="btn-out btn"
           >
             Return to Homepage
           </Link>
@@ -230,18 +231,14 @@ export function EarlyBrideForm() {
               <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1.5 font-sans">
                 Design Status
               </label>
-              <select
+              <CustomSelect
+                name="designStatus"
                 value={formData.designStatus}
-                onChange={(e) => setFormData({ ...formData, designStatus: e.target.value })}
-                className="w-full bg-[#FAF8F5] border border-[#E5E5E5] px-3.5 py-2.5 text-xs text-black focus:outline-none focus:border-black focus:bg-white transition-colors"
-              >
-                <option value="">Please select design status...</option>
-                {designStatusOptions.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+                onChange={(val) => setFormData((prev) => ({ ...prev, designStatus: val }))}
+                options={designStatusOptions}
+                placeholder="Please select design status..."
+                bgMode="warm"
+              />
             </div>
 
             <div>
@@ -317,7 +314,7 @@ export function EarlyBrideForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 text-[11px] sm:text-xs tracking-[0.22em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-sans font-medium rounded-none cursor-pointer shadow-sm"
+          className="btn w-full sm:w-auto disabled:opacity-50"
         >
           {isLoading ? "Submitting Consultation..." : "Submit Early Bride Consultation"}
         </button>

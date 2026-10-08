@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { CustomSelect } from "@/components/ui/CustomSelect";
 
 interface ProjectFormProps {
   initialService?: string;
@@ -82,13 +83,13 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors rounded-none"
+            className="btn"
           >
             Return to Home
           </Link>
           <Link
             href="/our-work/wedding-invites"
-            className="inline-flex px-6 py-3 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/30 transition-colors rounded-none"
+            className="btn-out btn"
           >
             View More Work
           </Link>
@@ -192,20 +193,21 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
             <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
               Service Needed
             </label>
-            <select
+            <CustomSelect
               name="serviceNeeded"
               value={formData.serviceNeeded}
-              onChange={handleChange}
-              className="w-full bg-white border border-[#E5E5E5] px-3.5 py-2.5 text-xs text-black focus:outline-none focus:border-black transition-colors"
-            >
-              <option value="Wedding Invites">Wedding Invites</option>
-              <option value="Business Cards">Business Cards</option>
-              <option value="Seal Stickers">Seal Stickers</option>
-              <option value="Envelopes">Envelopes</option>
-              <option value="Certificates">Certificates</option>
-              <option value="Design & Illustration">Design & Illustration</option>
-              <option value="Custom Works">Custom Works</option>
-            </select>
+              onChange={(val) => setFormData((prev) => ({ ...prev, serviceNeeded: val }))}
+              options={[
+                "Wedding Invites",
+                "Business Cards",
+                "Seal Stickers",
+                "Envelopes",
+                "Certificates",
+                "Design & Illustration",
+                "Custom Works",
+              ]}
+              bgMode="white"
+            />
           </div>
           <div>
             <label className="block text-[11px] uppercase tracking-wider text-black font-medium mb-1 font-sans">
@@ -295,7 +297,7 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full sm:w-auto inline-flex items-center justify-center px-10 py-4 text-[11px] tracking-[0.16em] uppercase bg-black text-white hover:bg-[#222] transition-colors disabled:opacity-50 font-medium rounded-none shadow-sm"
+          className="btn w-full sm:w-auto disabled:opacity-50"
         >
           {isLoading ? "Submitting Brief..." : "Submit Project Brief"}
         </button>

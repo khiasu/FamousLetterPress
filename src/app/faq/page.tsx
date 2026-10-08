@@ -88,7 +88,7 @@ export default function FAQPage() {
                   href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20about..."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                  className="btn"
                 >
                   Chat on WhatsApp
                 </a>

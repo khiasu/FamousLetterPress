@@ -438,7 +438,7 @@ export function WhatWeMakeSection() {
                           e.preventDefault();
                         }
                       }}
-                      className="inline-flex items-center justify-center px-6 py-2.5 sm:py-3 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm cursor-pointer relative z-20 pointer-events-auto"
+                      className="btn cursor-pointer relative z-20 pointer-events-auto"
                     >
                       Explore {item.title}
                     </Link>

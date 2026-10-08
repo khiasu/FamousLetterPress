@@ -161,7 +161,7 @@ export default function AboutPage() {
               <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                 <Link
                   href="/start-a-project"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                  className="btn"
                 >
                   Start a Conversation
                 </Link>

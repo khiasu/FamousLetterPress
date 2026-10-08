@@ -257,7 +257,7 @@ export function HeroSection() {
           <div className="hidden sm:flex items-center gap-6 mt-1 flex-nowrap">
             <Link
               href="/our-work/wedding-invites#early-bride"
-              className="inline-flex items-center justify-center px-8 sm:px-9 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+              className="btn"
             >
               Book a Consultation
             </Link>
@@ -316,7 +316,7 @@ export function HeroSection() {
         <div className="mt-6 flex sm:hidden items-center justify-start gap-4 flex-nowrap">
           <Link
             href="/our-work/wedding-invites#early-bride"
-            className="inline-flex items-center justify-center px-4 py-3 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[10px] uppercase tracking-[0.16em] font-sans font-medium whitespace-nowrap shadow-sm shrink-0"
+            className="btn py-3 px-5 text-[10px] tracking-[0.18em] shrink-0"
           >
             Book a Consultation
           </Link>
