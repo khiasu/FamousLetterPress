@@ -119,7 +119,6 @@ export default function WeddingInvitesPage() {
                 <span>/</span>
                 <span className="text-black font-medium">Wedding Invites</span>
               </div>
-              <p className="k mb-2">Category 01 &bull; Handcrafted Wedding Stationery</p>
               <h1 className="d text-[clamp(40px,8vw,80px)] leading-[0.98] mt-2 mb-6 font-serif text-black">
                 Wedding <i>Invites.</i>
               </h1>
@@ -127,17 +126,11 @@ export default function WeddingInvitesPage() {
                 One of life&rsquo;s most special occasions deserves an equally extraordinary invitation. Handcrafted, custom and ready-made wedding stationery, personalised to make a lasting impression.
               </p>
               <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-                <Link
-                  href="/start-a-project?service=wedding-invites"
-                  className="inline-flex items-center justify-center px-7 sm:px-8 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
-                >
-                  Request Price
-                </Link>
                 <a
                   href="#early-bride"
-                  className="inline-flex items-center justify-center px-7 sm:px-8 py-3.5 bg-transparent border border-black text-black hover:bg-black hover:text-white transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
+                  className="inline-flex items-center justify-center px-7 sm:px-8 py-3.5 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
                 >
-                  Early Bride Consultation
+                  Book a Consultation
                 </a>
                 <Link
                   href="/weddings/wedding-sample-kit"
@@ -210,7 +203,7 @@ export default function WeddingInvitesPage() {
               </p>
             </div>
 
-            <div className="max-w-3xl mx-auto bg-white border border-[#E5E5E5] p-6 sm:p-10 md:p-12 shadow-[0_12px_32px_-16px_rgba(0,0,0,0.08)]">
+            <div className="w-full">
               <EarlyBrideForm />
             </div>
           </Reveal>
@@ -226,29 +219,21 @@ export default function WeddingInvitesPage() {
               Let&rsquo;s craft something <i>unforgettable.</i>
             </h2>
             <p className="text-sm sm:text-base text-[#555] max-w-lg mx-auto mb-8 font-light leading-relaxed">
-              Share your wedding details, order our physical sample box, or chat directly with our team.
+              Share your wedding details or order our physical sample box to explore pure cotton letterpress in person.
             </p>
             <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-              <Link
-                href="/start-a-project?service=wedding-invites"
+              <a
+                href="#early-bride"
                 className="inline-flex items-center justify-center px-8 py-4 bg-black text-white hover:bg-[#222] transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
               >
-                Request Custom Price
-              </Link>
+                Book a Consultation
+              </a>
               <Link
                 href="/weddings/wedding-sample-kit"
                 className="inline-flex items-center justify-center px-8 py-4 bg-transparent border border-black text-black hover:bg-black hover:text-white transition-colors rounded-none text-[11px] sm:text-xs uppercase tracking-[0.22em] font-sans font-medium whitespace-nowrap shadow-sm"
               >
                 Order Sample Box (₹1,500)
               </Link>
-              <a
-                href="https://wa.me/+918416099340"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ln"
-              >
-                WhatsApp Founder &rarr;
-              </a>
             </div>
           </Reveal>
         </div>

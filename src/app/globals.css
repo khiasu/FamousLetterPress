@@ -198,27 +198,65 @@ body {
   text-shadow: 0 1px 0 rgba(255,255,255,.95), 0 -1px 0 rgba(40,30,10,.28);
 }
 
-/* ── Utilities ── */
-.w {
-  padding: 0 22px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
+/* ── Utilities & Containers ── */
+.w,
 .container-wide {
+  width: 100%;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 22px;
   padding-right: 22px;
+}
+
+@media (min-width: 768px) {
+  .w,
+  .container-wide {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .w,
+  .container-wide {
+    max-width: 1320px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .w,
+  .container-wide {
+    max-width: 1440px;
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 }
 
 .container-narrow {
-  max-width: 1100px;
+  width: 100%;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 22px;
   padding-right: 22px;
+}
+
+@media (min-width: 768px) {
+  .container-narrow {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-narrow {
+    max-width: 1040px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
 }
 
 .section {
@@ -306,4 +344,33 @@ body {
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: calc(0.08s + var(--stagger-i, 0) * 0.05s);
 }
+
+/* ── Global Custom Form Dropdowns (Luxury Letterpress Aesthetic) ── */
+select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e0e0e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 13px 13px !important;
+  padding-right: 38px !important;
+  border-radius: 0px !important;
+  cursor: pointer;
+  font-family: var(--s), inherit;
+}
+
+select:focus {
+  border-color: #000000 !important;
+  outline: none !important;
+}
+
+select option {
+  background-color: #FFFFFF;
+  color: #0e0e0e;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: var(--s), inherit;
+}
+
 

@@ -6,7 +6,7 @@ export function CTASection() {
       <div className="w">
         <p className="k mb-6">Begin &middot; Consultation</p>
         <h2 className="d text-[clamp(46px,11vw,110px)] leading-[0.95] tracking-[-0.035em] my-6">
-          Let&rsquo;s figure it out <i>together.</i>
+          Let&rsquo;s figure it out <span className="sm:block"><i>together.</i></span>
         </h2>
         <p className="text-[#3b372e] text-base sm:text-lg max-w-[38ch] mb-10 leading-relaxed font-light">
           Tell us about your day, your brand, or your bespoke idea. We reply with material recommendations, estimates, and complimentary mockups within 24 hours.

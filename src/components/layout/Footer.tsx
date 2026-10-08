@@ -9,7 +9,7 @@ const QUICK_LINKS = [
   { label: "Wedding Invites", href: "/our-work/wedding-invites" },
   { label: "Business Cards", href: "/our-work/business-cards" },
   { label: "Our Process & Craft", href: "/process" },
-  { label: "Order Sample Kit", href: "/weddings/wedding-sample-kit" },
+  { label: "Early Bride Consultation", href: "/our-work/wedding-invites#early-bride" },
   { label: "FAQs", href: "/faq" },
   { label: "Terms & Conditions", href: "/terms-conditions" },
   { label: "Privacy Policy", href: "/privacy-policy" },
@@ -48,7 +48,7 @@ export function Footer() {
       }`}
       role="contentinfo"
     >
-      <div className="max-w-[1100px] mx-auto px-6 sm:px-10 md:px-14 py-10 sm:py-14">
+      <div className="container-wide py-10 sm:py-14">
         {/* Top: Brand + Social — single row */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 mb-8">
           <Link href="/" className="inline-flex items-center gap-3.5 sm:gap-4 group select-none">

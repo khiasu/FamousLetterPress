@@ -16,167 +16,232 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-  const moved = useRef(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
+  const isMouseDown = useRef(false);
+  const startX = useRef(0);
+  const scrollStartLeft = useRef(0);
+  const hasMoved = useRef(false);
   const total = items.length;
 
-  const updateProgress = useCallback(() => {
+  const updateProgressAndActive = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
     const maxScroll = track.scrollWidth - track.clientWidth;
-    const ratio = maxScroll > 0 ? track.scrollLeft / maxScroll : 0;
-    const idx = Math.min(total - 1, Math.max(0, Math.round(ratio * (total - 1))));
-    setCurrentIndex(idx);
+    const currentScroll = track.scrollLeft;
+    
+    // Find slide closest to viewport center
+    const slides = track.querySelectorAll<HTMLElement>(".wedding-slide");
+    const trackCenter = currentScroll + track.clientWidth / 2;
+    let closestIdx = 0;
+    let minDistance = Infinity;
+
+    slides.forEach((slide, idx) => {
+      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+      const distance = Math.abs(trackCenter - slideCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIdx = idx;
+      }
+    });
+
+    setCurrentIndex(closestIdx);
+    const ratio = maxScroll > 0 ? Math.min(1, Math.max(0, currentScroll / maxScroll)) : 0;
     setProgress(ratio);
-  }, [total]);
+    setCanScrollLeft(currentScroll > 10);
+    setCanScrollRight(currentScroll < maxScroll - 10);
+  }, []);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    updateProgress();
-    track.addEventListener("scroll", updateProgress, { passive: true });
-    return () => track.removeEventListener("scroll", updateProgress);
-  }, [updateProgress]);
+    updateProgressAndActive();
+    track.addEventListener("scroll", updateProgressAndActive, { passive: true });
+    window.addEventListener("resize", updateProgressAndActive);
+    return () => {
+      track.removeEventListener("scroll", updateProgressAndActive);
+      window.removeEventListener("resize", updateProgressAndActive);
+    };
+  }, [updateProgressAndActive]);
+
+  const centerCard = (index: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const slides = track.querySelectorAll<HTMLElement>(".wedding-slide");
+    const targetSlide = slides[index];
+    if (!targetSlide) return;
+
+    const trackWidth = track.clientWidth;
+    const slideLeft = targetSlide.offsetLeft;
+    const slideWidth = targetSlide.offsetWidth;
+    const targetScroll = slideLeft - (trackWidth / 2) + (slideWidth / 2);
+
+    track.scrollTo({
+      left: Math.max(0, targetScroll),
+      behavior: "smooth",
+    });
+  };
 
   const scrollByStep = (direction: "left" | "right") => {
     const track = trackRef.current;
     if (!track) return;
     const slide = track.querySelector<HTMLElement>(".wedding-slide");
-    const step = slide ? slide.offsetWidth + 20 : 380;
+    const step = slide ? slide.offsetWidth + 24 : 450;
     track.scrollBy({
       left: direction === "right" ? step : -step,
       behavior: "smooth",
     });
   };
 
+  // Robust Desktop Drag Swipe using global window listeners
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0) return; // Left click only
     const track = trackRef.current;
     if (!track) return;
-    isDragging.current = true;
-    moved.current = 0;
-    startX.current = e.pageX;
-    scrollLeft.current = track.scrollLeft;
+
+    isMouseDown.current = true;
+    hasMoved.current = false;
+    startX.current = e.clientX;
+    scrollStartLeft.current = track.scrollLeft;
+
     track.style.cursor = "grabbing";
-    track.style.scrollSnapType = "none";
+    track.style.userSelect = "none";
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    const track = trackRef.current;
-    if (!track) return;
-    e.preventDefault();
-    const x = e.pageX;
-    const walk = x - startX.current;
-    moved.current = Math.abs(walk);
-    track.scrollLeft = scrollLeft.current - walk;
-  };
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isMouseDown.current) return;
+      const track = trackRef.current;
+      if (!track) return;
 
-  const handleMouseUp = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.cursor = "grab";
-    track.style.scrollSnapType = "x mandatory";
+      const deltaX = e.clientX - startX.current;
+      if (Math.abs(deltaX) > 4) {
+        hasMoved.current = true;
+        track.style.scrollSnapType = "none";
+        track.scrollLeft = scrollStartLeft.current - deltaX;
+      }
+    };
 
-    const slide = track.querySelector<HTMLElement>(".wedding-slide");
-    const step = slide ? slide.offsetWidth + 20 : 380;
-    const target = Math.round(track.scrollLeft / step) * step;
-    track.scrollTo({ left: target, behavior: "smooth" });
+    const onMouseUp = () => {
+      if (!isMouseDown.current) return;
+      isMouseDown.current = false;
+      const track = trackRef.current;
+      if (!track) return;
+
+      track.style.cursor = "grab";
+      track.style.userSelect = "";
+      track.style.scrollSnapType = "x mandatory";
+
+      if (hasMoved.current) {
+        // Snap to closest card smoothly
+        updateProgressAndActive();
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+  }, [updateProgressAndActive]);
+
+  const handleCardClick = (idx: number) => {
+    if (hasMoved.current) {
+      return; // Ignore clicks if user was actively dragging
+    }
+    centerCard(idx);
   };
 
   const p2 = (n: number) => String(n).padStart(2, "0");
 
   return (
-    <div className="select-none">
-      {/* ── Carousel Header & Controls ── */}
+    <div className="group/carousel relative select-none">
+      {/* ── Carousel Header ── */}
       <div className="w mb-6">
-        <div className="flex items-center justify-between pb-4 border-b border-[#E5E5E5] text-[11px] tracking-[0.2em] uppercase font-mono text-[#7b7566]">
-          <div className="flex items-center gap-3">
-            <span>Portfolio Gallery</span>
-            <span className="hidden sm:inline text-[#bbb]">·</span>
-            <span className="hidden sm:inline text-[10px] text-[#888] font-light">
-              100% Cotton Paper
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-black font-medium">
-              {p2(currentIndex + 1)} / {p2(total)}
-            </span>
-            <div className="hidden sm:flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => scrollByStep("left")}
-                disabled={currentIndex === 0}
-                className="w-8 h-8 rounded-none border border-[#E5E5E5] flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-                aria-label="Previous invitation"
-              >
-                <svg className="w-3.5 h-3.5 stroke-current" fill="none" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollByStep("right")}
-                disabled={currentIndex === total - 1}
-                className="w-8 h-8 rounded-none border border-[#E5E5E5] flex items-center justify-center text-black hover:bg-black hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-                aria-label="Next invitation"
-              >
-                <svg className="w-3.5 h-3.5 stroke-current" fill="none" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
+        <div className="pb-4 border-b border-[#E5E5E5] text-[11px] tracking-[0.2em] uppercase font-mono">
+          <span className="text-black font-medium">Portfolio Gallery</span>
         </div>
+      </div>
+
+      {/* ── Floating Subtle Navigation Buttons on PC ── */}
+      <div className="hidden md:block">
+        {canScrollLeft && (
+          <button
+            type="button"
+            onClick={() => scrollByStep("left")}
+            className="absolute left-4 lg:left-8 top-[46%] -translate-y-1/2 z-30 w-12 h-12 bg-white/95 text-black hover:bg-black hover:text-white border border-[#E5E5E5] shadow-[0_8px_30px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-300 backdrop-blur-xs cursor-pointer active:scale-95"
+            aria-label="Previous image"
+          >
+            <svg className="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+        )}
+
+        {canScrollRight && (
+          <button
+            type="button"
+            onClick={() => scrollByStep("right")}
+            className="absolute right-4 lg:right-8 top-[46%] -translate-y-1/2 z-30 w-12 h-12 bg-white/95 text-black hover:bg-black hover:text-white border border-[#E5E5E5] shadow-[0_8px_30px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-300 backdrop-blur-xs cursor-pointer active:scale-95"
+            aria-label="Next image"
+          >
+            <svg className="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* ── Horizontal Scroll Track ── */}
       <div
         ref={trackRef}
         onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-[22px] md:px-12 scrollbar-none cursor-grab active:cursor-grabbing touch-pan-x"
+        className="flex items-start gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-[22px] md:px-12 py-2 scrollbar-none cursor-grab active:cursor-grabbing touch-pan-y"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}
       >
         {items.map((item, idx) => (
-          <article
+          <div
             key={item.title}
-            className="wedding-slide relative shrink-0 w-[78vw] sm:w-[380px] md:w-[440px] lg:w-[480px] aspect-[4/5] bg-[#FAF8F5] border border-[#E5E5E5] overflow-hidden snap-start group"
+            className="wedding-slide shrink-0 w-[78vw] sm:w-[380px] md:w-[440px] lg:w-[480px] snap-start"
           >
-            {/* Image with zoom effect on hover */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={item.img}
-              alt={`${item.title} letterpress wedding invitation`}
-              draggable={false}
-              loading={idx < 3 ? "eager" : "lazy"}
-              className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 pointer-events-none"
-            />
+            <article
+              onClick={() => handleCardClick(idx)}
+              className="relative aspect-[4/5] bg-[#FAF8F5] border border-[#E5E5E5] hover:border-black/40 overflow-hidden transition-colors duration-300 cursor-pointer group"
+            >
+              {/* Image with subtle hover zoom */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.img}
+                alt={`${item.title} letterpress wedding invitation`}
+                draggable={false}
+                loading={idx < 3 ? "eager" : "lazy"}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] pointer-events-none"
+              />
 
-            {/* Gradient Caption Overlay */}
-            <div className="absolute inset-x-0 bottom-0 pt-24 pb-6 px-5 sm:px-6 bg-gradient-to-t from-black/85 via-black/45 to-transparent text-white pointer-events-none flex flex-col justify-end">
-              <span className="text-[10px] font-mono tracking-widest text-white/70 uppercase mb-1">
-                {p2(idx + 1)} · Bespoke Suite
+              {/* Gradient Caption Overlay */}
+              <div className="absolute inset-x-0 bottom-0 pt-24 pb-6 px-5 sm:px-6 bg-gradient-to-t from-black/85 via-black/45 to-transparent text-white pointer-events-none flex flex-col justify-end">
+                <h3 className="font-serif font-medium text-xl sm:text-2xl md:text-3xl text-white leading-tight tracking-tight mb-1.5">
+                  {item.title}
+                </h3>
+                <p className="text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-16 opacity-90">
+                  {item.desc}
+                </p>
+              </div>
+            </article>
+
+            {/* 1/14 info below exact card left aligned */}
+            <div className="mt-3 text-left">
+              <span className="font-mono text-[11px] text-[#7b7566] tracking-[0.2em] uppercase font-medium">
+                {p2(idx + 1)} / {p2(total)}
               </span>
-              <h3 className="font-serif font-medium text-xl sm:text-2xl md:text-3xl text-white leading-tight tracking-tight mb-1.5">
-                {item.title}
-              </h3>
-              <p className="text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-16 opacity-90 transition-all duration-300">
-                {item.desc}
-              </p>
             </div>
-          </article>
+          </div>
         ))}
       </div>
 
@@ -194,3 +259,4 @@ export function WeddingGalleryCarousel({ items }: WeddingGalleryCarouselProps) {
     </div>
   );
 }
+
