@@ -212,17 +212,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/presonalized-stationery-page",
-        destination: "/personalised-stationery",
+        destination: "/our-work/custom-works",
         permanent: true,
       },
       {
         source: "/personalised-stationery-page-2",
-        destination: "/personalised-stationery",
+        destination: "/our-work/custom-works",
         permanent: true,
       },
       {
         source: "/personalised-stationery-landing-page",
-        destination: "/personalised-stationery",
+        destination: "/our-work/custom-works",
+        permanent: true,
+      },
+      {
+        source: "/personalised-stationery",
+        destination: "/our-work/custom-works",
         permanent: true,
       },
       {
@@ -261,17 +266,27 @@ const nextConfig: NextConfig = {
       // ── General Pages & FAQs ──
       {
         source: "/contact-us",
-        destination: "/contact",
+        destination: "/start-a-project",
+        permanent: true,
+      },
+      {
+        source: "/contact",
+        destination: "/start-a-project",
         permanent: true,
       },
       {
         source: "/portfolio",
-        destination: "/work",
+        destination: "/our-work/wedding-invites",
+        permanent: true,
+      },
+      {
+        source: "/work",
+        destination: "/our-work/wedding-invites",
         permanent: true,
       },
       {
         source: "/our-work",
-        destination: "/work",
+        destination: "/our-work/wedding-invites",
         permanent: true,
       },
       {
@@ -312,6 +327,43 @@ const nextConfig: NextConfig = {
       {
         source: "/journal/:path*",
         destination: "/craft",
+        permanent: true,
+      },
+      // ── Legacy WordPress Blog Posts & Case Studies ──
+      {
+        source: "/the-crafting-of-sai-makarandh-ramolas-wedding-invites",
+        destination: "/our-work/wedding-invites",
+        permanent: true,
+      },
+      {
+        source: "/the-crafting-of-naomi-and-ayings-wedding-invites",
+        destination: "/our-work/wedding-invites",
+        permanent: true,
+      },
+      {
+        source: "/the-crafting-of-tasneem-and-samuels-wedding-invites",
+        destination: "/our-work/wedding-invites",
+        permanent: true,
+      },
+      {
+        source: "/the-crafting-of-saesha-rohans-wedding-invites",
+        destination: "/our-work/wedding-invites",
+        permanent: true,
+      },
+      {
+        source: "/rasa-mayank-how-their-invites-were-made",
+        destination: "/our-work/wedding-invites",
+        permanent: true,
+      },
+      {
+        source: "/kanu-and-dhruv-wedding-invitations",
+        destination: "/our-work/wedding-invites",
+        permanent: true,
+      },
+      // ── Discontinued E-commerce Legacy Routes (Diwali, magnets, notebooks) ──
+      {
+        source: "/product/:path*",
+        destination: "/weddings/wedding-sample-kit",
         permanent: true,
       },
     ];
