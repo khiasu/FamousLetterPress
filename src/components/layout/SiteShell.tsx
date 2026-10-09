@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -19,13 +18,6 @@ export function SiteShell({
   announcementActive,
   announcementBarText,
 }: SiteShellProps) {
-  const pathname = usePathname();
-  const isAdmin = pathname?.startsWith("/admin");
-
-  if (isAdmin) {
-    return <div className="min-h-screen">{children}</div>;
-  }
-
   return (
     <>
       <JsonLd />

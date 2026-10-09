@@ -88,6 +88,16 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpaySignature: response.razorpay_signature,
+                kitName: data.kitName,
+                amount: data.amount,
+                customer: data.customer,
+                shippingAddress: [
+                  formData.addressLine1,
+                  formData.addressLine2,
+                  `${formData.city}, ${formData.state} - ${formData.postalCode}`,
+                ]
+                  .filter(Boolean)
+                  .join(", "),
               }),
             });
             const verifyData = await verifyRes.json();

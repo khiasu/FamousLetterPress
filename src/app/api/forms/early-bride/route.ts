@@ -51,21 +51,6 @@ export async function POST(request: Request) {
       .filter(Boolean)
       .join("\n");
 
-    // Persist consultation in CMS Store
-    import("@/lib/cms/store").then(({ addCMSLead }) => {
-      addCMSLead({
-        id: String(Date.now()),
-        ref: leadRef,
-        type: "Early Bride",
-        name: coupleNames,
-        email,
-        phone,
-        eventOrService,
-        status: "NEW",
-        notes: notesSummary,
-        date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-      });
-    }).catch((err) => console.error("CMS Early Bride lead logging error:", err));
 
     // Automated Gmail dispatch to studio
     import("@/lib/email").then(({ sendStudioEmail }) => {

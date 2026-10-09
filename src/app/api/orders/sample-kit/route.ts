@@ -61,27 +61,6 @@ export async function POST(request: Request) {
       }
     }
 
-    // Persist pending order to CMS Store
-    const fullAddress = [addressLine1, addressLine2, `${city}, ${state} - ${postalCode}`]
-      .filter(Boolean)
-      .join(", ");
-
-    import("@/lib/cms/store").then(({ addCMSOrder }) => {
-      addCMSOrder({
-        id: String(Date.now()),
-        orderNumber,
-        kitName: kit.name,
-        customerName,
-        customerEmail,
-        customerPhone,
-        shippingAddress: fullAddress,
-        amount,
-        paymentStatus: "PENDING",
-        fulfillmentStatus: "AWAITING_PACKING",
-        razorpayOrderId: razorpayOrderId || undefined,
-        createdAt: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-      });
-    }).catch((err) => console.error("CMS order logging error:", err));
 
     // Return order details for frontend checkout modal
     return NextResponse.json({

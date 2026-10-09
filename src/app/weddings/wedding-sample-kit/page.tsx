@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
-import { getCMSSampleKits } from "@/lib/cms/store";
+import { sampleKitsData } from "@/lib/data/sample-kits";
 import { SampleKitCheckout } from "@/components/shop/SampleKitCheckout";
 import { SampleKitGallery } from "@/components/shop/SampleKitGallery";
 import { SampleKitInclusionsAccordion } from "@/components/shop/SampleKitInclusionsAccordion";
@@ -13,8 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function WeddingSampleKitPage() {
-  const kits = getCMSSampleKits();
-  const kit = kits["wedding-sample-kit"];
+  const kit = sampleKitsData["wedding-sample-kit"];
   const allImages = Array.from(
     new Set([kit.featuredImage, ...(kit.galleryImages || [])].filter(Boolean))
   );

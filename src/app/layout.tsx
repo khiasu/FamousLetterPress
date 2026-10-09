@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/SiteShell";
-import { getCMSSettings } from "@/lib/cms/store";
+import { initialSiteSettings } from "@/lib/data/settings";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -45,7 +45,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings = getCMSSettings();
+  const settings = initialSiteSettings;
   return (
     <html
       lang="en"

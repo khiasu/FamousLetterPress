@@ -41,21 +41,6 @@ export async function POST(request: Request) {
       .filter(Boolean)
       .join(" · ");
 
-    // Persist lead in CMS Store
-    import("@/lib/cms/store").then(({ addCMSLead }) => {
-      addCMSLead({
-        id: String(Date.now()),
-        ref: leadRef,
-        type: "General Project",
-        name,
-        email,
-        phone: phone || "Not specified",
-        eventOrService,
-        status: "NEW",
-        notes: `[Contact via ${preferredContact || "WhatsApp"}]\n${message || "No additional message"}`,
-        date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-      });
-    }).catch((err) => console.error("CMS lead logging error:", err));
 
     // Automated Gmail dispatch to studio (matching WordPress CF7 behavior)
     import("@/lib/email").then(({ sendStudioEmail }) => {

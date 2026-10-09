@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { WhatsAppIcon } from "@/components/ui/SocialIcons";
-import { getCMSFAQs } from "@/lib/cms/store";
+import { initialFaqs } from "@/lib/data/faqs";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions | Famous Letterpress",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function FAQPage() {
-  const faqs = getCMSFAQs();
+  const faqs = initialFaqs;
   const categories = Array.from(new Set(faqs.map((f) => f.category)));
   const faqSections = categories.map((cat) => ({
     category: cat,
