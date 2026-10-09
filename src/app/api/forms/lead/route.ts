@@ -31,20 +31,31 @@ export async function POST(request: Request) {
 
     const leadRef = `PRJ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-    console.log("New Project Lead Received:", {
-      leadRef,
-      name,
-      email,
-      phone,
-      city,
-      serviceNeeded,
-      quantity,
-      timeline,
-      budget,
-      message,
-      preferredContact,
-      createdAt: new Date().toISOString(),
-    });
+    const eventOrService = [
+      serviceNeeded || "Bespoke Letterpress",
+      quantity ? `${quantity} qty` : null,
+      city ? `City: ${city}` : null,
+      budget ? `Budget: ${budget}` : null,
+      timeline ? `Timeline: ${timeline}` : null,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
+    // Persist lead in CMS Store
+    import("@/lib/cms/store").then(({ addCMSLead }) => {
+      addCMSLead({
+        id: String(Date.now()),
+        ref: leadRef,
+        type: "General Project",
+        name,
+        email,
+        phone: phone || "Not specified",
+        eventOrService,
+        status: "NEW",
+        notes: `[Contact via ${preferredContact || "WhatsApp"}]\n${message || "No additional message"}`,
+        date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      });
+    }).catch((err) => console.error("CMS lead logging error:", err));
 
     return NextResponse.json({
       success: true,

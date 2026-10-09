@@ -8,9 +8,19 @@ export async function GET() {
 
 export async function PUT(req: Request) {
   try {
-    const { id, status, notes } = await req.json();
+    const payload = await req.json();
     const store = readCMSStore();
 
+    if (Array.isArray(payload)) {
+      store.leads = payload;
+      const saved = writeCMSStore(store);
+      if (!saved) {
+        return NextResponse.json({ success: false, message: "Failed to persist" }, { status: 500 });
+      }
+      return NextResponse.json({ success: true, data: store.leads });
+    }
+
+    const { id, status, notes } = payload;
     const index = store.leads.findIndex((l: any) => l.id === id);
     if (index === -1) {
       return NextResponse.json({ success: false, message: "Lead not found" }, { status: 404 });

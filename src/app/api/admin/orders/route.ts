@@ -8,9 +8,19 @@ export async function GET() {
 
 export async function PUT(req: Request) {
   try {
-    const { id, fulfillmentStatus, trackingNumber } = await req.json();
+    const payload = await req.json();
     const store = readCMSStore();
 
+    if (Array.isArray(payload)) {
+      store.orders = payload;
+      const saved = writeCMSStore(store);
+      if (!saved) {
+        return NextResponse.json({ success: false, message: "Failed to persist" }, { status: 500 });
+      }
+      return NextResponse.json({ success: true, data: store.orders });
+    }
+
+    const { id, fulfillmentStatus, trackingNumber, paymentStatus } = payload;
     const index = store.orders.findIndex((o: any) => o.id === id);
     if (index === -1) {
       return NextResponse.json({ success: false, message: "Order not found" }, { status: 404 });
@@ -18,6 +28,7 @@ export async function PUT(req: Request) {
 
     if (fulfillmentStatus) store.orders[index].fulfillmentStatus = fulfillmentStatus;
     if (trackingNumber !== undefined) store.orders[index].trackingNumber = trackingNumber;
+    if (paymentStatus) store.orders[index].paymentStatus = paymentStatus;
 
     const saved = writeCMSStore(store);
     if (!saved) {

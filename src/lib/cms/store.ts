@@ -162,3 +162,40 @@ export function getCMSSettings(): StudioSiteSettings {
   return readCMSStore().settings;
 }
 
+export function addCMSLead(lead: any): boolean {
+  try {
+    const store = readCMSStore();
+    store.leads = [lead, ...store.leads];
+    return writeCMSStore(store);
+  } catch (err) {
+    console.error("Failed to add CMS lead:", err);
+    return false;
+  }
+}
+
+export function addCMSOrder(order: any): boolean {
+  try {
+    const store = readCMSStore();
+    store.orders = [order, ...store.orders];
+    return writeCMSStore(store);
+  } catch (err) {
+    console.error("Failed to add CMS order:", err);
+    return false;
+  }
+}
+
+export function updateCMSOrderStatus(orderNumber: string, updates: Partial<any>): boolean {
+  try {
+    const store = readCMSStore();
+    const idx = store.orders.findIndex((o: any) => o.orderNumber === orderNumber);
+    if (idx !== -1) {
+      store.orders[idx] = { ...store.orders[idx], ...updates };
+      return writeCMSStore(store);
+    }
+    return false;
+  } catch (err) {
+    console.error("Failed to update CMS order:", err);
+    return false;
+  }
+}
+

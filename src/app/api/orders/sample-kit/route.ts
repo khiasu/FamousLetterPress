@@ -26,9 +26,8 @@ export async function POST(request: Request) {
 
     let razorpayOrderId = null;
 
-    if (razorpayKeyId && razorpayKeySecret) {
+    if (razorpayKeyId && razorpayKeySecret && !razorpayKeyId.includes("placeholder")) {
       try {
-        // Dynamic import / basic auth order call
         const auth = Buffer.from(`${razorpayKeyId}:${razorpayKeySecret}`).toString("base64");
         const rzpResponse = await fetch("https://api.razorpay.com/v1/orders", {
           method: "POST",
@@ -37,13 +36,15 @@ export async function POST(request: Request) {
             Authorization: `Basic ${auth}`,
           },
           body: JSON.stringify({
-            amount: amount * 100, // Razorpay takes amount in paise
+            amount: amount * 100, // in paise
             currency: "INR",
             receipt: orderNumber,
             notes: {
               kitName: kit.name,
               customerEmail,
               customerPhone,
+              shippingCity: city,
+              shippingState: state,
             },
           }),
         });
@@ -51,11 +52,36 @@ export async function POST(request: Request) {
         if (rzpResponse.ok) {
           const rzpData = await rzpResponse.json();
           razorpayOrderId = rzpData.id;
+        } else {
+          const errData = await rzpResponse.json();
+          console.error("Razorpay order API error response:", errData);
         }
       } catch (err) {
-        console.error("Razorpay order creation fallback:", err);
+        console.error("Razorpay order creation network fallback:", err);
       }
     }
+
+    // Persist pending order to CMS Store
+    const fullAddress = [addressLine1, addressLine2, `${city}, ${state} - ${postalCode}`]
+      .filter(Boolean)
+      .join(", ");
+
+    import("@/lib/cms/store").then(({ addCMSOrder }) => {
+      addCMSOrder({
+        id: String(Date.now()),
+        orderNumber,
+        kitName: kit.name,
+        customerName,
+        customerEmail,
+        customerPhone,
+        shippingAddress: fullAddress,
+        amount,
+        paymentStatus: "PENDING",
+        fulfillmentStatus: "AWAITING_PACKING",
+        razorpayOrderId: razorpayOrderId || undefined,
+        createdAt: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      });
+    }).catch((err) => console.error("CMS order logging error:", err));
 
     // Return order details for frontend checkout modal
     return NextResponse.json({
@@ -65,7 +91,7 @@ export async function POST(request: Request) {
       amount,
       currency: "INR",
       razorpayOrderId: razorpayOrderId || `mock_rzp_${Date.now()}`,
-      razorpayKeyId: razorpayKeyId || "rzp_test_placeholder",
+      razorpayKeyId: razorpayKeyId || "",
       customer: {
         name: customerName,
         email: customerEmail,

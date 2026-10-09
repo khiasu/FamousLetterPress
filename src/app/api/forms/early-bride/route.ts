@@ -33,22 +33,39 @@ export async function POST(request: Request) {
 
     const leadRef = `EB-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-    // Log consultation lead for development / production storage
-    console.log("New Early Bride Consultation Received:", {
-      leadRef,
-      coupleNames,
-      email,
-      phone,
-      weddingDate,
-      weddingLocation,
-      estimatedGuestCount,
-      stationeryNeeds,
-      designStatus,
-      estimatedBudget,
-      aestheticVision,
-      preferredContact,
-      createdAt: new Date().toISOString(),
-    });
+    const eventOrService = [
+      weddingDate ? `Wedding Date: ${weddingDate}` : null,
+      weddingLocation ? `Location: ${weddingLocation}` : null,
+      estimatedGuestCount ? `${estimatedGuestCount} Guests` : null,
+      estimatedBudget ? `Budget: ${estimatedBudget}` : null,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
+    const notesSummary = [
+      stationeryNeeds && stationeryNeeds.length > 0 ? `Stationery: ${stationeryNeeds.join(", ")}` : null,
+      designStatus ? `Design Status: ${designStatus}` : null,
+      aestheticVision ? `Vision: ${aestheticVision}` : null,
+      preferredContact ? `Preferred Contact: ${preferredContact}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    // Persist consultation in CMS Store
+    import("@/lib/cms/store").then(({ addCMSLead }) => {
+      addCMSLead({
+        id: String(Date.now()),
+        ref: leadRef,
+        type: "Early Bride",
+        name: coupleNames,
+        email,
+        phone,
+        eventOrService,
+        status: "NEW",
+        notes: notesSummary,
+        date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      });
+    }).catch((err) => console.error("CMS Early Bride lead logging error:", err));
 
     return NextResponse.json({
       success: true,

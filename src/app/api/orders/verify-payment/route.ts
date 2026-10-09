@@ -19,7 +19,16 @@ export async function POST(request: Request) {
       }
     }
 
-    // In production with DB connected, mark Order status as PAID and log Payment record here.
+    // Mark Order status as PAID in CMS Store
+    if (orderNumber) {
+      import("@/lib/cms/store").then(({ updateCMSOrderStatus }) => {
+        updateCMSOrderStatus(orderNumber, {
+          paymentStatus: "PAID",
+          paymentId: razorpayPaymentId || undefined,
+        });
+      }).catch((err) => console.error("CMS update order error:", err));
+    }
+
     return NextResponse.json({
       success: true,
       message: "Payment successfully verified and order confirmed",
