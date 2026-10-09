@@ -95,7 +95,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center pt-16 border-t border-[#E5E5E5]">
             <div className="lg:col-span-5 space-y-6">
               <Reveal>
-                <p className="eyebrow mb-2">Nagaland Pressroom</p>
+                <p className="k mb-2">Nagaland Pressroom</p>
                 <h2 className="d text-[clamp(28px,5vw,46px)] leading-[1.05] font-serif text-black mb-4">
                   Our Physical <i>Workshop.</i>
                 </h2>
@@ -114,7 +114,8 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="pt-2">
+                {/* Desktop only: Open in Google Maps */}
+                <div className="pt-2 hidden lg:block">
                   <a
                     href="https://maps.google.com/?q=Famous+Letterpress+Dimapur+Nagaland"
                     target="_blank"
@@ -127,40 +128,41 @@ export default function AboutPage() {
               </Reveal>
             </div>
 
-            {/* Tactile Embossed Map Plate: seamless letterpress cotton paper impression */}
+            {/* Seamless Infused Map Slab (Straight edge, no curved border or white padding outline) */}
             <div className="lg:col-span-7">
               <Reveal delay={0.15}>
-                <div className="map-emboss-plate group">
-                  <div className="map-emboss-well aspect-[4/3] sm:aspect-[16/10]">
-                    <iframe
-                      title="Famous Letterpress Workshop Google Map Location"
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57187.9734157155!2d93.6841!3d25.9064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374601b69f688005%3A0xe54e38bf3e12c1b4!2sDimapur%2C%20Nagaland!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen={false}
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="w-full h-full grayscale-[80%] brightness-[1.03] contrast-[0.92] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 group-hover:opacity-100 opacity-90 transition-all duration-700 ease-out pointer-events-auto"
-                    />
+                <div className="map-infused-slab aspect-[4/3] sm:aspect-[16/10] w-full">
+                  <iframe
+                    title="Famous Letterpress Workshop Google Map Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57187.9734157155!2d93.6841!3d25.9064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374601b69f688005%3A0xe54e38bf3e12c1b4!2sDimapur%2C%20Nagaland!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full grayscale-[85%] brightness-[1.03] contrast-[0.92] hover:grayscale-[30%] transition-all duration-700 ease-out"
+                  />
 
-                    {/* Seamless edge dissolve vignette: melts sharp tile borders into white paper */}
-                    <div className="map-emboss-vignette" />
-                    <div className="map-emboss-ring" />
+                  {/* Seamless edge dissolve vignette: melts sharp map edges into white background */}
+                  <div className="map-infused-vignette" />
 
-                    {/* Editorial Pressroom Pill Badge */}
-                    <div className="absolute top-3.5 left-3.5 z-20 pointer-events-none flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-black/[0.05] shadow-[0_2px_8px_-2px_rgba(0,0,0,0.06)]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0e0e0e] animate-pulse" />
-                      <span className="font-mono text-[9px] tracking-widest text-[#444444] uppercase">
-                        Studio Pressroom &middot; Dimapur
-                      </span>
-                    </div>
-
-                    {/* Tactile Coordinate Stamp */}
-                    <div className="absolute bottom-3.5 right-3.5 z-20 pointer-events-none hidden sm:flex items-center px-2.5 py-1 rounded-full bg-white/85 backdrop-blur-md border border-black/[0.04] text-[9px] font-mono tracking-wider text-[#777777]">
-                      25.9064&deg; N, 93.6841&deg; E
-                    </div>
+                  {/* Minimal studio coordinate indicator */}
+                  <div className="absolute bottom-3.5 left-4 z-20 pointer-events-none hidden sm:block text-[9px] font-mono tracking-widest text-[#777777] uppercase">
+                    Studio Pressroom &middot; Dimapur &middot; 25.9064&deg; N, 93.6841&deg; E
                   </div>
+                </div>
+
+                {/* Mobile screens only: Open in Google Maps button right below the map box, left aligned */}
+                <div className="mt-4 block lg:hidden text-left">
+                  <a
+                    href="https://maps.google.com/?q=Famous+Letterpress+Dimapur+Nagaland"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ln inline-block text-xs"
+                  >
+                    OPEN IN GOOGLE MAPS
+                  </a>
                 </div>
               </Reveal>
             </div>
