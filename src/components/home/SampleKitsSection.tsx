@@ -100,14 +100,14 @@ export function SampleKitsSection() {
                     href={`${kit.detailHref}#order-form`}
                     className="btn"
                   >
-                    Order kit
+                    ORDER SAMPLE KIT
                   </Link>
                   <Link
                     href={`${kit.detailHref}#gallery`}
                     onClick={(e) => handleDetailClick(e, kit.detailHref)}
                     className="ln"
                   >
-                    View details
+                    VIEW DETAILS
                   </Link>
                 </div>
               </div>

@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/our-work/certificates",
     "/our-work/design-illustration",
     "/our-work/custom-works",
-    "/personalised-stationery",
     "/channel-partners",
     "/about",
     "/craft",

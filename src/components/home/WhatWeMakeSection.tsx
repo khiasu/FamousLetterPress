@@ -440,7 +440,7 @@ export function WhatWeMakeSection() {
                       }}
                       className="btn cursor-pointer relative z-20 pointer-events-auto"
                     >
-                      Explore {item.title}
+                      EXPLORE {item.title.toUpperCase()}
                     </Link>
                   </div>
                 </div>

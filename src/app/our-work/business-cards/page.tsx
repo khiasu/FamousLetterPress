@@ -117,10 +117,10 @@ export default function BusinessCardsWorkPage() {
             </p>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link href="/start-a-project" className="btn">
-                Request Price
+                REQUEST A PRICE
               </Link>
               <Link href="/business-cards/business-card-sample-kit" className="ln">
-                Order Card Sample Kit &rarr;
+                ORDER SAMPLE KIT
               </Link>
             </div>
           </div>
@@ -190,10 +190,10 @@ export default function BusinessCardsWorkPage() {
             </p>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link href="/start-a-project" className="btn">
-                Request Price
+                REQUEST A PRICE
               </Link>
               <Link href="/business-cards/business-card-sample-kit" className="ln">
-                Order Sample Kit &rarr;
+                ORDER SAMPLE KIT
               </Link>
             </div>
           </div>

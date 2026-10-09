@@ -32,51 +32,6 @@ const materialCategories = [
   },
 ];
 
-const fullProcessSteps = [
-  {
-    title: "Discovery & Sample Kit",
-    subtitle: "Tangible Paper Exploration",
-    desc: "Every great project begins with paper in your hands. We encourage ordering our Wedding or Business Card Sample Kit so you can feel 600gsm cotton board, examine foil tones, and evaluate relief depth under natural light.",
-    timeline: "Days 1–3",
-  },
-  {
-    title: "Consultation & Scope",
-    subtitle: "Defining Vision & Specifications",
-    desc: "Share your date, quantities, aesthetic direction, and budget through our Early Bride form or project brief. We discuss typography, print passes, and paper stock options to formulate your bespoke production schedule.",
-    timeline: "1–2 Days",
-  },
-  {
-    title: "Design & Architectural Proofing",
-    subtitle: "Precision Layout Drafting",
-    desc: "Whether you supply print-ready artwork or commission our in-house designers, we produce 1:1 scale digital proofs detailing ink Pantones, foil placements, margins, and paper sizing for strict aesthetic approval.",
-    timeline: "3–7 Days",
-  },
-  {
-    title: "Final Sign-off & Plate Making",
-    subtitle: "Translating Digital to Physical",
-    desc: "Once you approve the proof in writing, high-resolution magnesium or photopolymer relief plates are exposed and chemically etched for each individual color and foil pass.",
-    timeline: "2–4 Days",
-  },
-  {
-    title: "Hand-Mixed Inks & Presswork",
-    subtitle: "The Mechanical Impression",
-    desc: "Inks are hand-mixed using mineral pigments. The press operator adjusts packing, registers the plates to microscopic accuracy, and hand-feeds each sheet of cotton stock on our vintage platen press.",
-    timeline: "7–14 Days",
-  },
-  {
-    title: "Artisanal Finishing & Quality Inspection",
-    subtitle: "Hand-Applied Embellishments",
-    desc: "Cards undergo trimming, edge gilding, bevel painting, wax sealing, and envelope lining. Every single sheet is individually inspected under studio lighting; any imperfect sheet is discarded.",
-    timeline: "2–4 Days",
-  },
-  {
-    title: "Archival Packaging & Insured Delivery",
-    subtitle: "Safe Arrival at Your Door",
-    desc: "Suites are carefully boxed in moisture-resistant archival presentation boxes and dispatched via express courier with full tracking across India or worldwide.",
-    timeline: "3–5 Days transit",
-  },
-];
-
 const techniqueCategories = [
   {
     title: "Deep Letterpress Relief",
@@ -128,13 +83,13 @@ export default function CraftPage() {
                   href="/start-a-project"
                   className="btn"
                 >
-                  Start a Project
+                  REQUEST A PRICE
                 </Link>
                 <Link
                   href="/weddings/wedding-sample-kit"
                   className="ln"
                 >
-                  Order Sample Box First &rarr;
+                  ORDER SAMPLE KIT
                 </Link>
               </div>
             </div>
@@ -190,48 +145,7 @@ export default function CraftPage() {
         </div>
       </section>
 
-      {/* ── Section 2: Step-by-Step Production Process ── */}
-      <section className="py-16 md:py-24 bg-[#FAF8F5] border-b border-[#E5E5E5]" aria-label="Production Stages">
-        <div className="container-wide">
-          <div className="max-w-2xl mb-14">
-            <Reveal>
-              <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
-                The journey of a <i>bespoke commission.</i>
-              </h2>
-              <p className="text-sm sm:text-base text-[#555] font-light leading-relaxed">
-                From initial paper sampling in your hands to hand-feeding each sheet on our vintage presses in Nagaland.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="max-w-3xl space-y-6 md:space-y-8">
-            {fullProcessSteps.map((item, idx) => (
-              <Reveal key={item.title} delay={idx * 0.05}>
-                <div className="bg-white border border-[#E5E5E5] p-6 sm:p-8 md:p-10 transition-all duration-300 hover:border-black/30 hover:shadow-[0_12px_28px_-16px_rgba(0,0,0,0.08)]">
-                  <div className="flex items-center justify-between gap-4 mb-3">
-                    <span className="text-[10px] font-mono tracking-widest text-[#888888] block">
-                      0{idx + 1}
-                    </span>
-                    <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#7b7566]">
-                      {item.timeline}
-                    </span>
-                  </div>
-
-                  <h3 className="font-serif font-medium text-2xl sm:text-3xl text-black tracking-tight mb-3">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-[#555] leading-relaxed font-light">
-                    {item.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Section 3: Finishing Arts & Dimensional Techniques ── */}
+      {/* ── Section 2: Finishing Arts & Dimensional Techniques ── */}
       <section className="py-16 md:py-24 bg-white" aria-label="Finishing Arts">
         <div className="container-wide">
           <div className="max-w-2xl mb-14">
@@ -280,13 +194,13 @@ export default function CraftPage() {
                   href="/weddings/wedding-sample-kit"
                   className="btn"
                 >
-                  Order Sample Kit
+                  ORDER SAMPLE KIT
                 </Link>
                 <Link
                   href="/our-work/wedding-invites#early-bride"
                   className="ln"
                 >
-                  Book Early Bride Consultation
+                  BOOK A CONSULTATION
                 </Link>
               </div>
             </div>

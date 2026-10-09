@@ -259,13 +259,13 @@ export function HeroSection() {
               href="/our-work/wedding-invites#early-bride"
               className="btn"
             >
-              Book a Consultation
+              BOOK A CONSULTATION
             </Link>
             <Link
               href="/start-a-project"
               className="ln text-[11px] sm:text-xs tracking-[0.22em] whitespace-nowrap"
             >
-              Start a project
+              REQUEST A PRICE
             </Link>
           </div>
         </div>
@@ -318,13 +318,13 @@ export function HeroSection() {
             href="/our-work/wedding-invites#early-bride"
             className="btn py-3 px-5 text-[10px] tracking-[0.18em] shrink-0"
           >
-            Book a Consultation
+            BOOK A CONSULTATION
           </Link>
           <Link
             href="/start-a-project"
             className="ln text-[10px] tracking-[0.16em] whitespace-nowrap shrink-0"
           >
-            Start a project
+            REQUEST A PRICE
           </Link>
         </div>
       </div>

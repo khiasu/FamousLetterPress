@@ -299,7 +299,7 @@ export function ProjectForm({ initialService = "Wedding Invites", initialType }:
           disabled={isLoading}
           className="btn w-full sm:w-auto disabled:opacity-50"
         >
-          {isLoading ? "Submitting Brief..." : "Submit Project Brief"}
+          {isLoading ? "SUBMITTING BRIEF..." : "SUBMIT PROJECT BRIEF"}
         </button>
         <p className="text-[11px] text-[#888888] font-sans">
           We reply promptly within 24 hours. Your details are strictly confidential.

@@ -316,7 +316,7 @@ export function EarlyBrideForm() {
           disabled={isLoading}
           className="btn w-full sm:w-auto disabled:opacity-50"
         >
-          {isLoading ? "Submitting Consultation..." : "Submit Early Bride Consultation"}
+          {isLoading ? "SUBMITTING CONSULTATION..." : "SUBMIT EARLY BRIDE CONSULTATION"}
         </button>
         <p className="text-[11px] text-[#888] font-sans">
           We respect your privacy. No spam, ever.

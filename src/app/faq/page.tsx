@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 import { getCMSFAQs } from "@/lib/cms/store";
 
 export const metadata: Metadata = {
@@ -87,15 +88,16 @@ export default function FAQPage() {
                   href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20about..."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn"
+                  className="btn inline-flex items-center gap-2"
                 >
-                  Contact Studio on WhatsApp
+                  <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
+                  <span>CONTACT STUDIO</span>
                 </a>
                 <Link
                   href="/start-a-project"
                   className="ln"
                 >
-                  Start a Project &rarr;
+                  REQUEST A PRICE
                 </Link>
               </div>
             </div>

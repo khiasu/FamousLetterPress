@@ -16,10 +16,10 @@ export function CTASection() {
             href="/our-work/wedding-invites#early-bride"
             className="btn"
           >
-            Book a Consultation
+            BOOK A CONSULTATION
           </Link>
           <Link href="/start-a-project" className="ln">
-            Start a project
+            REQUEST A PRICE
           </Link>
         </div>
       </div>

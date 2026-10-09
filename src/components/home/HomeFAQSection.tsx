@@ -139,10 +139,9 @@ export function HomeFAQSection() {
         <div className="pt-8 sm:pt-10 flex items-center justify-start">
           <Link
             href="/faq"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-black hover:opacity-60 transition-opacity border-b border-black pb-0.5"
+            className="ln"
           >
-            <span>View all FAQs</span>
-            <span aria-hidden="true">&rarr;</span>
+            VIEW ALL FAQS
           </Link>
         </div>
       </div>

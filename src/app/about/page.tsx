@@ -40,17 +40,9 @@ export default function AboutPage() {
                 <span>/</span>
                 <span className="text-black font-medium">Our Story</span>
               </div>
-              <div className="flex items-start sm:items-center gap-4 sm:gap-6 mt-3 mb-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/assets/logo.png"
-                  alt="Famous Letterpress Seal Logo"
-                  className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain rounded-full shrink-0 shadow-xs border border-[rgba(14,14,14,0.08)] p-1 bg-white"
-                />
-                <h1 className="d text-[clamp(36px,7vw,70px)] leading-[0.98] font-serif text-black">
-                  Designers turned printers, <i>rooted in Nagaland.</i>
-                </h1>
-              </div>
+              <h1 className="d text-[clamp(36px,7vw,70px)] leading-[0.98] font-serif text-black mt-3 mb-6">
+                Designers turned printers, <i>rooted in Nagaland.</i>
+              </h1>
               <p className="text-base md:text-lg text-[#555555] max-w-2xl font-light leading-relaxed mb-8">
                 Famous Letterpress was born from an unyielding devotion to typography and tactile paper. In an increasingly disposable digital landscape, we believe the printed word should carry substance, texture, and permanent emotional weight.
               </p>
@@ -62,13 +54,12 @@ export default function AboutPage() {
       {/* ── Studio Narrative ── */}
       <section className="section bg-white" aria-label="Studio Journey">
         <div className="container-wide">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-20">
             <div className="lg:col-span-6 space-y-6">
               <Reveal>
                 <p className="eyebrow mb-2">The Journey Since 2008</p>
-                <h2 className="mb-6 font-serif">
-                  Where mechanical history meets{" "}
-                  <em className="font-light">modern editorial design.</em>
+                <h2 className="d text-[clamp(32px,6vw,54px)] leading-[1.05] font-serif text-black mb-4">
+                  Where mechanical history meets <i>modern editorial design.</i>
                 </h2>
                 <div className="space-y-4 text-sm md:text-base text-[#555555] font-light leading-relaxed">
                   <p>
@@ -84,7 +75,7 @@ export default function AboutPage() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6 space-y-6">
+            <div className="lg:col-span-6">
               <Reveal delay={0.1}>
                 <div className="overflow-hidden bg-[#F7F7F7] border border-[#E5E5E5]">
                   <div className="aspect-[16/10] relative overflow-hidden">
@@ -97,53 +88,60 @@ export default function AboutPage() {
                   </div>
                 </div>
               </Reveal>
+            </div>
+          </div>
 
+          {/* ── Physical Studio (Left) & Borderless Map (Right) ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center pt-16 border-t border-[#E5E5E5]">
+            <div className="lg:col-span-5 space-y-6">
+              <Reveal>
+                <p className="eyebrow mb-2">Nagaland Pressroom</p>
+                <h2 className="d text-[clamp(28px,5vw,46px)] leading-[1.05] font-serif text-black mb-4">
+                  Our Physical <i>Workshop.</i>
+                </h2>
+                <p className="text-sm md:text-base text-[#555555] font-light leading-relaxed mb-6">
+                  Our workshop houses vintage Heidelberg platen presses and cylinder proof presses. Engineered with immense cast-iron precision, they apply thousands of pounds of pressure per square inch to create an indelible deboss into soft cotton board.
+                </p>
+
+                <div className="grid grid-cols-2 gap-6 py-6 border-y border-[#E5E5E5] text-xs font-sans">
+                  <div>
+                    <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Studio Location</span>
+                    <span className="font-medium text-black mt-1 block leading-snug">#415, Near Riverbelt Colony, Dimapur, Nagaland &mdash; 797112</span>
+                  </div>
+                  <div>
+                    <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Founding Heritage</span>
+                    <span className="font-medium text-black mt-1 block">Est. 2008 &middot; Akanito</span>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <a
+                    href="https://maps.google.com/?q=Famous+Letterpress+Dimapur+Nagaland"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ln inline-block"
+                  >
+                    OPEN IN GOOGLE MAPS
+                  </a>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* Seamless, borderless map blended into background */}
+            <div className="lg:col-span-7">
               <Reveal delay={0.15}>
-                <div className="bg-white border border-[#E5E5E5] p-8">
-                  <h3 className="font-serif text-2xl text-black mb-4">
-                    Our Physical Workshop
-                  </h3>
-                  <p className="text-xs md:text-sm text-[#555555] leading-relaxed mb-6 font-light">
-                    Our workshop houses vintage Heidelberg platen presses and cylinder proof presses. These machines, engineered with immense cast-iron precision, apply thousands of pounds of pressure per square inch to create an indelible deboss into soft cotton board.
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#E5E5E5] text-xs font-sans">
-                    <div>
-                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Studio Location</span>
-                      <span className="font-medium text-black mt-0.5 block">#415, Near Riverbelt Colony, Dimapur, Nagaland</span>
-                    </div>
-                    <div>
-                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Founding Heritage</span>
-                      <span className="font-medium text-black mt-0.5 block">Est. 2008 · Akanito</span>
-                    </div>
-                  </div>
-
-                  {/* Embedded Google Map */}
-                  <div className="mt-6 pt-5 border-t border-[#E5E5E5]">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Workshop Location Map</span>
-                      <a
-                        href="https://maps.google.com/?q=Famous+Letterpress+Dimapur+Nagaland"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[10px] tracking-[0.14em] uppercase text-black hover:underline font-mono"
-                      >
-                        Open in Google Maps &rarr;
-                      </a>
-                    </div>
-                    <div className="aspect-[16/10] sm:aspect-[16/9] w-full border border-[#E5E5E5] overflow-hidden bg-[#FAF8F5]">
-                      <iframe
-                        title="Famous Letterpress Workshop Google Map Location"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57187.9734157155!2d93.6841!3d25.9064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374601b69f688005%3A0xe54e38bf3e12c1b4!2sDimapur%2C%20Nagaland!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0 }}
-                        allowFullScreen={false}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        className="w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
-                      />
-                    </div>
-                  </div>
+                <div className="w-full aspect-[4/3] sm:aspect-[16/10] bg-transparent">
+                  <iframe
+                    title="Famous Letterpress Workshop Google Map Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57187.9734157155!2d93.6841!3d25.9064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x374601b69f688005%3A0xe54e38bf3e12c1b4!2sDimapur%2C%20Nagaland!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full grayscale hover:grayscale-0 opacity-90 hover:opacity-100 transition-all duration-700 pointer-events-auto"
+                  />
                 </div>
               </Reveal>
             </div>
@@ -196,13 +194,13 @@ export default function AboutPage() {
                   href="/start-a-project"
                   className="btn"
                 >
-                  Start a Conversation
+                  REQUEST A PRICE
                 </Link>
                 <Link
                   href="/weddings/wedding-sample-kit"
                   className="ln"
                 >
-                  Order Sample Kit &rarr;
+                  ORDER SAMPLE KIT
                 </Link>
               </div>
             </div>

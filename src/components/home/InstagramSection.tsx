@@ -300,7 +300,6 @@ export function InstagramSection() {
           >
             <InstagramIcon className="w-4 h-4 shrink-0 text-black" />
             <span>@famousletterpressindia</span>
-            <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
 

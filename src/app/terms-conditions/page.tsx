@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | Famous Letterpress",
@@ -202,12 +203,13 @@ export default function TermsConditionsPage() {
                 href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20regarding%20terms..."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn"
+                className="btn inline-flex items-center gap-2"
               >
-                Contact Studio on WhatsApp
+                <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
+                <span>CONTACT STUDIO</span>
               </a>
               <Link href="/privacy-policy" className="ln">
-                View Privacy Policy &rarr;
+                VIEW PRIVACY POLICY
               </Link>
             </div>
           </div>

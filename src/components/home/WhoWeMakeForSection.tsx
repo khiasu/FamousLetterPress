@@ -6,7 +6,7 @@ const AUDIENCES = [
     title: "Couples",
     description:
       "Wedding invitations, RSVP suites, and day-of stationery designed to be treasured long after your celebration. We collaborate from initial moodboard to final hand assembly.",
-    cta: "Book a Consultation",
+    cta: "BOOK A CONSULTATION",
     href: "/our-work/wedding-invites#early-bride",
     img: "/assets/revamp/carousel/FMS_7392.jpg",
   },
@@ -15,7 +15,7 @@ const AUDIENCES = [
     title: "Designers & Planners",
     description:
       "Trade collaboration for wedding planners, graphic designers, and art directors. Send us print-ready artwork or let our studio team assist with formulation, paper selection, and die making.",
-    cta: "Join partner program",
+    cta: "JOIN PARTNER PROGRAM",
     href: "/channel-partners",
     img: "/assets/revamp/how-we-make/FMS_7401.jpg",
   },
@@ -24,7 +24,7 @@ const AUDIENCES = [
     title: "Brands & B2B",
     description:
       "Uncompromising executive cards, luxury packaging sleeves, certificates, and bespoke letterheads for discerning brands seeking physical authority and tactile distinction.",
-    cta: "Inquire B2B",
+    cta: "REQUEST A PRICE",
     href: "/our-work/business-cards",
     img: "/assets/revamp/what-we-make/FMS_3781.jpg",
   },

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { SearchModal } from "@/components/ui/SearchModal";
-import { SOCIAL_PROFILES } from "@/components/ui/SocialIcons";
+import { SOCIAL_PROFILES, WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 /* ── Menu Architecture: Dropdown based categories ── */
 const menuGroups = [
@@ -55,10 +55,10 @@ const menuGroups = [
     title: "Help & Queries",
     links: [
       { label: "Contact Studio on WhatsApp", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", external: true },
-      { label: "FAQs", href: "/faq" },
-      { label: "T&Cs", href: "/terms-conditions" },
       { label: "Start a Project / Inquire", href: "/start-a-project" },
       { label: "Early Bride Consultation", href: "/our-work/wedding-invites#early-bride" },
+      { label: "FAQs", href: "/faq" },
+      { label: "T&Cs", href: "/terms-conditions" },
     ],
   },
 ];
@@ -286,15 +286,12 @@ export function Header({
                       <div className="pl-8 pr-3 pt-0.5 pb-2 space-y-0.5 animate-in fade-in slide-in-from-top-1 duration-150">
                         {group.links.map((link) => {
                           const isExt = link.external || link.href.startsWith("http");
+                          const isWhatsApp = link.href.includes("wa.me");
                           const linkContent = (
-                            <>
-                              <span className="group-hover:translate-x-0.5 transition-transform">
-                                {link.label}
-                              </span>
-                              <span className="text-[11px] text-[#aaa] group-hover:text-black transition-colors opacity-0 group-hover:opacity-100">
-                                &rarr;
-                              </span>
-                            </>
+                            <span className="flex items-center gap-2 group-hover:translate-x-0.5 transition-transform">
+                              {isWhatsApp && <WhatsAppIcon className="w-3.5 h-3.5 fill-current shrink-0" />}
+                              <span>{link.label}</span>
+                            </span>
                           );
                           const className = "flex items-center justify-between py-1.5 px-2 rounded-lg text-[13px] text-[#444] hover:text-black hover:bg-[#FAF8F5] transition-all group";
 

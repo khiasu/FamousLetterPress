@@ -241,13 +241,6 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                       </span>
                     </div>
 
-                    <span
-                      className={`text-[12px] text-[#aaa] group-hover:text-black transition-all shrink-0 ${
-                        isSelected ? "translate-x-0.5 text-black" : ""
-                      }`}
-                    >
-                      &rarr;
-                    </span>
                   </div>
                 );
               })

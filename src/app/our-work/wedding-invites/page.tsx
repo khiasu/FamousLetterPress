@@ -130,13 +130,13 @@ export default function WeddingInvitesPage() {
                   href="#early-bride"
                   className="btn"
                 >
-                  Book a Consultation
+                  BOOK A CONSULTATION
                 </a>
                 <Link
                   href="/weddings/wedding-sample-kit"
                   className="ln"
                 >
-                  Order Sample Kit &rarr;
+                  ORDER SAMPLE KIT
                 </Link>
               </div>
             </div>
@@ -227,13 +227,13 @@ export default function WeddingInvitesPage() {
                   href="#early-bride"
                   className="btn"
                 >
-                  Book a Consultation
+                  BOOK A CONSULTATION
                 </a>
                 <Link
                   href="/weddings/wedding-sample-kit"
                   className="ln"
                 >
-                  Order Sample Box (₹1,500) &rarr;
+                  ORDER SAMPLE KIT
                 </Link>
               </div>
             </div>

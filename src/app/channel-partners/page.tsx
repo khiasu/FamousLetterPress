@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = {
   title: "Channel Partners & Creative Trade Collaboration | Famous Letterpress",
@@ -71,18 +72,18 @@ export default function ChannelPartnersPage() {
                 We work alongside wedding planners, brand designers, event directors, and creative agencies across India and internationally.
                 Think of our Nagaland pressroom as your own private print studio.
               </p>
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                 <Link
                   href="/start-a-project?type=partner"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase bg-black text-white hover:bg-[#222] transition-colors"
+                  className="btn"
                 >
-                  Apply for Trade Partnership
+                  APPLY FOR TRADE PARTNERSHIP
                 </Link>
                 <Link
                   href="/weddings/wedding-sample-kit"
-                  className="inline-flex px-7 py-3.5 text-[11px] tracking-[0.14em] uppercase border border-[#E5E5E5] text-black hover:border-black/40 transition-colors"
+                  className="ln"
                 >
-                  Order Studio Sample Kit
+                  ORDER SAMPLE KIT
                 </Link>
               </div>
             </div>
@@ -175,15 +176,16 @@ export default function ChannelPartnersPage() {
                   href="/start-a-project?type=partner"
                   className="btn"
                 >
-                  Register as a Trade Partner
+                  REGISTER AS A TRADE PARTNER
                 </Link>
                 <a
                   href="https://wa.me/919366012345"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ln"
+                  className="ln inline-flex items-center gap-2"
                 >
-                  Chat on WhatsApp &rarr;
+                  <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
+                  <span>CONTACT STUDIO</span>
                 </a>
               </div>
             </div>

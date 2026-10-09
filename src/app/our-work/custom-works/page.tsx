@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { WorkGalleryCarousel } from "@/components/ui/WorkGalleryCarousel";
+import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = {
   title: "Custom Works & Special Commissions | Famous Letterpress",
@@ -94,10 +95,10 @@ export default function CustomWorksPage() {
             </p>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link href="/start-a-project" className="btn">
-                Request Price
+                REQUEST A PRICE
               </Link>
               <Link href="/our-work" className="ln">
-                &larr; View All Work
+                VIEW ALL WORK
               </Link>
             </div>
           </div>
@@ -127,15 +128,16 @@ export default function CustomWorksPage() {
             </p>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link href="/start-a-project" className="btn">
-                Tell Us About Your Project
+                REQUEST A PRICE
               </Link>
               <a
                 href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20custom%20works..."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ln"
+                className="ln inline-flex items-center gap-2"
               >
-                Contact Studio &rarr;
+                <WhatsAppIcon className="w-3.5 h-3.5 fill-current" />
+                <span>CONTACT STUDIO</span>
               </a>
             </div>
           </div>

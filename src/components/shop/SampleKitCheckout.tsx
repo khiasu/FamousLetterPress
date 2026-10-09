@@ -168,13 +168,13 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
             href="/our-work/wedding-invites"
             className="btn"
           >
-            Explore Wedding Services
+            EXPLORE WEDDING SERVICES
           </Link>
           <Link
             href="/"
             className="btn-out btn"
           >
-            Return to Home
+            RETURN TO HOME
           </Link>
         </div>
       </div>
@@ -340,7 +340,7 @@ export function SampleKitCheckout({ kit }: SampleKitCheckoutProps) {
             disabled={isLoading}
             className="btn w-full disabled:opacity-50"
           >
-            {isLoading ? "Preparing Order..." : `Proceed to Secure Payment · ₹${kit.price}`}
+            {isLoading ? "PREPARING ORDER..." : `PROCEED TO SECURE PAYMENT · ₹${kit.price}`}
           </button>
 
           <div className="flex items-center justify-center gap-2 mt-4 text-[10px] text-[#888888] tracking-wide font-sans">
