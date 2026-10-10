@@ -111,7 +111,7 @@ export default function CertificatesPage() {
                 REQUEST A PRICE
               </Link>
               <a
-                href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20certificates..."
+                href="https://wa.me/918416099340?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about%20certificates..."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ln inline-flex items-center gap-2"

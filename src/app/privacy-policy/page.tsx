@@ -185,7 +185,7 @@ export default function PrivacyPolicyPage() {
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <a
-                href="https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20regarding%20privacy..."
+                href="https://wa.me/918416099340?text=Hello%20Famous%20Letterpress%2C%20I%20have%20a%20question%20regarding%20privacy..."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn inline-flex items-center gap-2"

@@ -165,7 +165,7 @@ export function ChannelPartnerForm() {
 
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://wa.me/919366012345?text=Hello%20Famous%20Letterpress%2C%20I%20just%20submitted%20a%20Trade%20Partner%20application%20with%20reference%20"
+            href="https://wa.me/918416099340?text=Hello%20Famous%20Letterpress%2C%20I%20just%20submitted%20a%20Trade%20Partner%20application%20with%20reference%20"
             target="_blank"
             rel="noopener noreferrer"
             className="btn inline-flex items-center gap-2"

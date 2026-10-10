@@ -12,7 +12,7 @@ export function JsonLd() {
         image: "https://famousletterpress.com/og-image.jpg",
         description:
           "India's boutique letterpress printing and stationery studio. Designers turned printers handcrafting bespoke wedding invitations, luxury business cards, and personalized cotton stationery in Nagaland, India.",
-        telephone: "+91-98628-00000",
+        telephone: "+91-84160-99340",
         email: "hello@famousletterpress.com",
         priceRange: "₹₹₹",
         address: {

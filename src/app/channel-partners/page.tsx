@@ -111,7 +111,7 @@ export default function ChannelPartnersPage() {
                   ORDER SWATCH ARCHIVE
                 </Link>
                 <a
-                  href="https://wa.me/919366012345"
+                  href="https://wa.me/918416099340"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ln inline-flex items-center gap-2"
@@ -261,7 +261,7 @@ export default function ChannelPartnersPage() {
               </p>
               <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                 <a
-                  href="https://wa.me/919366012345?text=Hello%20Famous%20Letterpress%2C%20I%20am%20a%20creative%20partner%20with%20an%20urgent%20letterpress%20project"
+                  href="https://wa.me/918416099340?text=Hello%20Famous%20Letterpress%2C%20I%20am%20a%20creative%20partner%20with%20an%20urgent%20letterpress%20project"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn inline-flex items-center gap-2"

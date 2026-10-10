@@ -54,7 +54,7 @@ const menuGroups = [
     num: "05",
     title: "Help & Queries",
     links: [
-      { label: "Contact Studio on WhatsApp", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", external: true },
+      { label: "Contact Studio on WhatsApp", href: "https://wa.me/918416099340?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", external: true },
       { label: "Start a Project / Inquire", href: "/start-a-project" },
       { label: "Early Bride Consultation", href: "/our-work/wedding-invites#early-bride" },
       { label: "FAQs", href: "/faq" },

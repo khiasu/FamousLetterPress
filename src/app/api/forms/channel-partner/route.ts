@@ -163,7 +163,7 @@ export async function POST(request: Request) {
         </div>
 
         <p style="font-size: 13.5px; line-height: 1.7; color: #333; margin-bottom: 24px;">
-          If you have an imminent press run or vector brief ready for immediate quotation, you can connect directly with our studio artisans via WhatsApp at <a href="https://wa.me/919366012345" style="color: #000; font-weight: 600; text-decoration: underline;">+91 93660 12345</a> or by replying directly to this email.
+          If you have an imminent press run or vector brief ready for immediate quotation, you can connect directly with our studio artisans via WhatsApp at <a href="https://wa.me/918416099340" style="color: #000; font-weight: 600; text-decoration: underline;">+91 84160 99340</a> or by replying directly to this email.
         </p>
 
         <div style="border-top: 1px solid #E5E5E5; padding-top: 20px; font-size: 12px; color: #777; line-height: 1.6;">

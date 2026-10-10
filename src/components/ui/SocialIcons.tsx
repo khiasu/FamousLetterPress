@@ -137,4 +137,10 @@ export const SOCIAL_PROFILES = [
     icon: YouTubeIcon,
     handle: "Famous Letterpress",
   },
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/918416099340",
+    icon: WhatsAppIcon,
+    handle: "+91 84160 99340",
+  },
 ];

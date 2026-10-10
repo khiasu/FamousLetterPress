@@ -54,7 +54,7 @@ const ALL_SEARCH_TARGETS: NavigationTarget[] = [
   { id: "faq", title: "FAQs", category: "Help & Queries", href: "/faq", keywords: ["faq", "help", "questions", "timelines", "pricing", "queries"] },
   { id: "terms-conditions", title: "T&Cs", category: "Legal", href: "/terms-conditions", keywords: ["terms", "conditions", "t&cs", "legal", "client agreement"] },
   { id: "privacy-policy", title: "Privacy Policy", category: "Legal", href: "/privacy-policy", keywords: ["privacy", "policy", "legal", "data"] },
-  { id: "contact-whatsapp", title: "Contact Studio on WhatsApp", category: "Help & Queries", href: "https://wa.me/919862800000?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", keywords: ["contact", "consult", "whatsapp", "chat", "message"] },
+  { id: "contact-whatsapp", title: "Contact Studio on WhatsApp", category: "Help & Queries", href: "https://wa.me/918416099340?text=Hello%20Famous%20Letterpress%2C%20I%20would%20like%20to%20enquire%20about...", keywords: ["contact", "consult", "whatsapp", "chat", "message"] },
   { id: "start-a-project", title: "Start a Project / Inquire", category: "Help & Queries", href: "/start-a-project", keywords: ["inquire", "order", "quote", "start", "brief"] },
   { id: "early-bride", title: "Early Bride Consultation", category: "Help & Queries", href: "/our-work/wedding-invites#early-bride", keywords: ["early bride", "consultation", "wedding consultation", "bride"] },
   { id: "channel-partners", title: "Channel Partners & Designers", category: "Who we make it for", href: "/channel-partners", keywords: ["partner", "designer", "trade", "b2b", "agency"] },
